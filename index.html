@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BLÅSVARTA SPÅR | Resultat & Matchcenter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --sirius-gold: #ffcc00;
+            --live-green: #00e676;
+            --rating-green: #10b981;
+            --bg-black: #0b0e14;
+            --card-bg: #131924;
+            --card-border: #222b3a;
+            --dropdown-bg: #1c2536;
+            --text-main: #ffffff;
+            --text-muted: #8b9bb4;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        /* FÖRHINDRAR HORISONTELL SCROLL PÅ MOBILER */
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden !important;
+            position: relative;
+        }
+
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg-black); 
+            color: var(--text-main); 
+            line-height: 1.4; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        /* HEADER & NAV */
+        header { 
+            background: #07090e; 
+            border-bottom: 2px solid var(--sirius-gold); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            width: 100%;
+        }
+        .header-container { 
+            width: 100%;
+            max-width: 1280px; 
+            margin: 0 auto; 
+            padding: 0.6rem 0.8rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            gap: 6px;
+        }
+        
+        .brand-logo { display: flex; align-items: center; gap: 8px; cursor: pointer; flex-shrink: 0; }
+        .logo-img { 
+            width: 34px; 
+            height: 34px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 1.5px solid var(--sirius-gold); 
+            flex-shrink: 0; 
+        }
+        .brand-title h1 { 
+            font-size: 0.88rem; 
+            font-weight: 900; 
+            color: var(--sirius-gold); 
+            white-space: nowrap; 
+            letter-spacing: 0.2px;
+        }
+
+        .nav-links { display: flex; gap: 4px; flex-shrink: 0; }
+        .nav-btn { 
+            background: #1a2233; 
+            border: 1px solid var(--card-border); 
+            color: #fff; 
+            padding: 6px 10px; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            font-size: 0.78rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+            transition: 0.2s;
+        }
+        .nav-btn:hover, .nav-btn.active { background: #0044cc; border-color: #0055ff; }
+
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 115%; 
+            right: 0; 
+            background-color: var(--dropdown-bg); 
+            min-width: 170px; 
+            box-shadow: 0px 8px 24px rgba(0,0,0,0.6); 
+            border: 1px solid var(--card-border); 
+            border-radius: 10px; 
+            z-index: 1001; 
+            padding: 6px 0; 
+        }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .dropdown-item { 
+            color: #fff; 
+            padding: 10px 14px; 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+        .dropdown-item:hover { background-color: #28354d; }
+
+        /* DATUMVÄLJARE */
+        .date-picker-bar {
+            background: #0d121c;
+            border-bottom: 1px solid var(--card-border);
+            padding: 0.5rem 0;
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .date-picker-bar::-webkit-scrollbar { display: none; }
+        .date-picker-container {
+            padding: 0 0.8rem;
+            display: inline-flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .date-item {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+        .date-item:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+        .date-item.active {
+            color: #000;
+            background: var(--sirius-gold);
+            border-color: var(--sirius-gold);
+            font-weight: 800;
+        }
+
+        /* MAIN CONTENT */
+        main { 
+            width: 100%;
+            max-width: 1280px; 
+            margin: 0 auto; 
+            padding: 0.8rem; 
+            flex: 1; 
+        }
+        .section-header { 
+            border-left: 3px solid var(--sirius-gold); 
+            padding-left: 8px; 
+            margin-bottom: 0.8rem; 
+        }
+        .section-header h2 { font-size: 1.1rem; font-weight: 900; letter-spacing: 0.3px; }
+        .section-header p { color: var(--text-muted); font-size: 0.72rem; }
+        
+        /* SPÅRVÄLJARE MOBIL */
+        .track-selector { 
+            display: flex; 
+            gap: 6px; 
+            margin-bottom: 1rem; 
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .track-selector::-webkit-scrollbar { display: none; }
+        .track-btn { 
+            background: #131924; 
+            border: 1px solid var(--card-border); 
+            color: var(--text-muted); 
+            padding: 5px 12px; 
+            border-radius: 16px; 
+            font-weight: 700; 
+            font-size: 0.75rem; 
+            cursor: pointer; 
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+        .track-btn:hover, .track-btn.active { background: #0044cc; color: #fff; border-color: #0055ff; }
+
+        /* MATCHKORT */
+        .matches-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; width: 100%; }
+        @media (min-width: 640px) {
+            .matches-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+        }
+
+        .match-card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--card-border); 
+            border-radius: 12px; 
+            padding: 0.8rem 0.9rem; 
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            width: 100%;
+        }
+        .match-card:active { border-color: var(--sirius-gold); transform: scale(0.99); }
+        .match-header { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--text-muted); margin-bottom: 0.6rem; font-weight: 700; }
+        .status-badge { background: #1a2233; color: var(--sirius-gold); font-weight: 800; padding: 2px 6px; border-radius: 10px; border: 1px solid #28354d; font-size: 0.65rem; }
+
+        .team-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 0.9rem; margin-bottom: 5px; align-items: center; }
+        .team-score { font-family: 'Roboto Mono', monospace; background: #0a0d14; padding: 1px 7px; border-radius: 5px; border: 1px solid #1c2536; font-size: 0.95rem; }
+        
+        /* SPELAR-FOOTER I MATCHKORTET */
+        .player-footer { 
+            border-top: 1px dashed #222d3d; 
+            padding-top: 8px; 
+            margin-top: 8px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        .player-info-group { display: flex; align-items: center; gap: 8px; }
+        .player-thumb-wrapper { position: relative; }
+        .player-thumb { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; background: #0a0d14; border: 1px solid var(--sirius-gold); }
+        .rating-badge { 
+            position: absolute; 
+            top: -3px; 
+            right: -5px; 
+            background: var(--rating-green); 
+            color: #fff; 
+            font-size: 0.6rem; 
+            font-weight: 900; 
+            padding: 1px 3px; 
+            border-radius: 6px; 
+            border: 1px solid #000;
+        }
+        .player-details h4 { color: var(--sirius-gold); font-weight: 800; font-size: 0.78rem; line-height: 1.1; }
+        .player-details span { color: var(--text-muted); font-size: 0.65rem; }
+        .player-quick-stats { text-align: right; font-size: 0.7rem; color: #fff; font-weight: 700; }
+        .player-quick-stats span { color: var(--text-muted); font-weight: 400; font-size: 0.65rem; }
+
+        /* MODAL / POPUP FÖR STATISTIK & SPELARPROFIL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            align-items: flex-end;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        @media (min-width: 640px) {
+            .modal-overlay { align-items: center; padding: 1rem; }
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: #111622;
+            border: 1px solid var(--card-border);
+            border-radius: 20px 20px 0 0;
+            width: 100%;
+            max-width: 440px;
+            padding: 1.2rem;
+            position: relative;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.8);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        @media (min-width: 640px) {
+            .modal-content { border-radius: 16px; }
+        }
+        .close-modal {
+            position: absolute;
+            top: 12px; right: 14px;
+            background: #1c2536;
+            border: none;
+            color: var(--text-muted);
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .modal-player-header { text-align: center; margin-bottom: 1rem; }
+        .modal-avatar-wrapper { position: relative; display: inline-block; margin-bottom: 6px; }
+        .modal-avatar { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--sirius-gold); object-fit: cover; background: #000; }
+        
+        .modal-section-title {
+            color: var(--sirius-gold);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 1rem 0 0.5rem 0;
+            font-weight: 800;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 4px;
+        }
+
+        .modal-stats-list { background: #0d121c; border-radius: 10px; padding: 0.6rem; border: 1px solid var(--card-border); }
+        .stat-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.78rem; }
+        .stat-item:last-child { border-bottom: none; }
+        .stat-item span { color: var(--text-muted); }
+        .stat-item strong { color: #fff; font-weight: 700; }
+
+        .external-btn {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 10px;
+            background: var(--sirius-gold);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+        .external-btn:hover { background: #e6b800; }
+
+        .share-x-btn {
+            width: 100%;
+            margin-top: 0.6rem;
+            padding: 10px;
+            background: #000000;
+            color: #ffffff;
+            border: 1px solid #333;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .share-x-btn:active { background: #111111; border-color: var(--sirius-gold); color: var(--sirius-gold); }
+
+        /* SPELARKORT (SPÅREN) */
+        .players-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; width: 100%; }
+        @media (min-width: 640px) {
+            .players-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+        }
+        .player-card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--card-border); 
+            border-radius: 12px; 
+            padding: 0.9rem; 
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .player-card:active { border-color: var(--sirius-gold); transform: scale(0.99); }
+        .player-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .player-avatar { 
+            width: 40px; 
+            height: 40px; 
+            background: #1a2233; 
+            border: 2px solid var(--sirius-gold); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: var(--sirius-gold); 
+            font-size: 0.9rem;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .player-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .empty-state { grid-column: 1 / -1; text-align: center; padding: 2.5rem 1rem; background: var(--card-bg); border: 1px dashed var(--card-border); border-radius: 12px; color: var(--text-muted); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="brand-logo" onclick="openResultsView()">
+                <img src="logo.png" alt="Blåsvarta Spår Logo" class="logo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/34/000000/ffcc00?text=BS';">
+                <div class="brand-title">
+                    <h1>BLÅSVARTA SPÅR</h1>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <button class="nav-btn active" id="nav-results" onclick="openResultsView()">
+                    Resultat
+                </button>
+                <div class="dropdown">
+                    <button class="nav-btn" id="nav-sparen">
+                        <i class="fa-solid fa-shoe-prints"></i> Spåren <i class="fa-solid fa-chevron-down" style="font-size: 0.6rem;"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item" onclick="selectTrackFromMenu('utland')"><i class="fa-solid fa-globe" style="color:#ffcc00"></i> Utlandsspåret</div>
+                        <div class="dropdown-item" onclick="selectTrackFromMenu('lane')"><i class="fa-solid fa-handshake" style="color:#00e676"></i> Lånespåret</div>
+                        <div class="dropdown-item" onclick="selectTrackFromMenu('sverige')"><i class="fa-solid fa-flag" style="color:#29b6f6"></i> Sverigespåret</div>
+                        <div class="dropdown-item" onclick="selectTrackFromMenu('all')"><i class="fa-solid fa-users"></i> Alla Spelare</div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- DATUMVÄLJARE -->
+    <div class="date-picker-bar" id="date-picker-bar">
+        <div class="date-picker-container" id="date-container"></div>
+    </div>
+
+    <main>
+        <div class="section-header">
+            <h2 id="view-title">RESULTAT & SCHEMA</h2>
+            <p id="view-desc">Klicka på ett matchkort eller spelarkort för detaljerad statistik</p>
+        </div>
+
+        <!-- SPÅRVÄLJARE FÖR RESULTAT -->
+        <div class="track-selector" id="track-selector">
+            <button class="track-btn active" id="track-btn-utland" onclick="setTrack('utland')"><i class="fa-solid fa-globe" style="color:#ffcc00"></i> Utlandsspåret</button>
+            <button class="track-btn" id="track-btn-lane" onclick="setTrack('lane')"><i class="fa-solid fa-handshake" style="color:#00e676"></i> Lånespåret</button>
+            <button class="track-btn" id="track-btn-sverige" onclick="setTrack('sverige')"><i class="fa-solid fa-flag" style="color:#29b6f6"></i> Sverigespåret</button>
+            <button class="track-btn" id="track-btn-all" onclick="setTrack('all')"><i class="fa-solid fa-users"></i> Alla</button>
+        </div>
+
+        <div id="content-area"></div>
+    </main>
+
+    <!-- POPUP / MODAL FÖR MATCH & SPELARPROFIL -->
+    <div class="modal-overlay" id="stats-modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-modal" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div id="modal-body-content">
+                <!-- Dynamiskt innehåll injiceras här -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const siteUrl = "https://dindoman.se";
+        const todayStr = new Date().toISOString().split('T')[0];
+        let selectedDate = todayStr;
+        let selectedTrack = 'utland';
+        let currentMode = 'results';
+
+        // CENTRAL SPELARDATABAS (Endast verifierad fakta + direktlänk till FotMob)
+        const masterPlayers = [
+            { 
+                id: '528409', name: 'Kerim Mrabti', team: 'AEK Larnaca', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallande mittfältare', league: 'Cyprus League (Cypern)',
+                age: 32, height: '175 cm', foot: 'Höger', contract: '31 maj 2028',
+                fotmobUrl: 'https://www.fotmob.com/sv/players/528409/kerim-mrabti'
+            },
+            { 
+                id: '1182391', name: 'Herman Sjögrell', team: 'FC Inter Turku', track: 'utland', trackName: 'Utlandsspåret', pos: 'Yttermittfältare', league: 'Veikkausliiga (Finland)',
+                age: 25, height: '183 cm', foot: 'Höger', contract: '-',
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1182391/herman-sjogrell'
+            },
+            { 
+                id: '619826', name: 'Aron Bjarnason', team: 'Breiðablik', track: 'utland', trackName: 'Utlandsspåret', pos: 'Yttermittfältare', league: 'Besta deildin (Island)',
+                age: 30, height: '182 cm', foot: 'Höger', contract: '-',
+                fotmobUrl: 'https://www.fotmob.com/sv/players/619826/aron-bjarnason'
+            },
+            { 
+                id: '919036', name: 'Wessam Abou Ali', team: 'Columbus Crew', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'MLS (USA)',
+                age: 27, height: '187 cm', foot: 'Höger', contract: '-',
+                fotmobUrl: 'https://www.fotmob.com/sv/players/919036/wessam-abou-ali'
+            },
+            { 
+                id: '1129082', name: 'Jamie Roche', team: 'Kortrijk', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'Jupiler Pro League (Belgien)',
+                age: 25, height: '186 cm', foot: 'Höger', contract: '-',
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1129082/jamie-roche'
+            },
+            { 
+                id: '', name: 'Jesper Nyholm', team: 'Muangthong United', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Thai League 1 (Thailand)',
+                age: 33, height: '185 cm', foot: 'Höger', contract: '-',
+                fotmobUrl: 'https://www.fotmob.com/sv/players/619826'
+            }
+        ];
+
+        // RIKTIGA MATCHDATA
+        // GitHub Pages kan inte köra en hemlig API-nyckel på serversidan.
+        // Lägg en JSON-feed på din egen endpoint och ange adressen här.
+        // Se README-blasvarta-data.md för format och säker konfiguration.
+        const MATCH_FEED_URL = "./data/matches.json"; // Exempel: "https://din-api.example.com/matches"
+
+        let playersData = [];
+        let feedState = "loading";
+        let feedError = "";
+
+        function normalizeMatch(raw) {
+            // Normaliserar JSON från din egen backend till sidans matchkort.
+            return {
+                player: raw.playerName || raw.player || "",
+                team: raw.playerTeam || raw.team || "",
+                playerId: String(raw.playerId || ""),
+                track: raw.track || "utland",
+                trackName: raw.trackName || "",
+                pos: raw.position || raw.pos || "",
+                league: raw.leagueName || raw.league || "",
+                matchDate: String(raw.matchDate || raw.date || "").slice(0, 10),
+                home: raw.homeTeam || raw.home || "",
+                away: raw.awayTeam || raw.away || "",
+                scoreHome: raw.homeScore ?? raw.scoreHome ?? null,
+                scoreAway: raw.awayScore ?? raw.scoreAway ?? null,
+                status: raw.status || "Okänd status",
+                rating: raw.rating ?? null,
+                mins: raw.minutesPlayed ?? raw.mins ?? null,
+                goals: raw.goals ?? null,
+                ass: raw.assists ?? raw.ass ?? null,
+                passes: raw.passes || null,
+                chances: raw.chancesCreated ?? raw.chances ?? null,
+                bigChances: raw.bigChancesCreated ?? raw.bigChances ?? null,
+                shotsTarget: raw.shotsOnTarget ?? raw.shotsTarget ?? null,
+                touches: raw.touches ?? null,
+                matchUrl: raw.matchUrl || ""
+            };
+        }
+
+        async function loadMatchFeed() {
+            if (!MATCH_FEED_URL) {
+                feedState = "unconfigured";
+                feedError = "Matchdatakällan är inte konfigurerad ännu.";
+                renderContent();
+                return;
+            }
+            feedState = "loading";
+            renderContent();
+            try {
+                const response = await fetch(MATCH_FEED_URL, {
+                    headers: { "Accept": "application/json" },
+                    cache: "no-store"
+                });
+                if (!response.ok) throw new Error("Datakällan svarade HTTP " + response.status);
+                const payload = await response.json();
+                const rows = Array.isArray(payload) ? payload : payload.matches;
+                if (!Array.isArray(rows)) throw new Error("JSON måste innehålla en matches-lista.");
+                playersData = rows.map(normalizeMatch).filter(m =>
+                    m.player && m.home && m.away && m.matchDate
+                );
+                feedState = "ready";
+                feedError = "";
+            } catch (error) {
+                feedState = "error";
+                feedError = "Kunde inte hämta matchdata. Kontrollera datakällan och försök igen.";
+                console.error("Blåsvarta Spår matchfeed:", error);
+            }
+            renderContent();
+        }
+
+        function displayStat(value, suffix = "") {
+            return value === null || value === undefined || value === "" ? "–" : `${value}${suffix}`;
+        }
+
+        function buildDatePicker() {
+            const container = document.getElementById('date-container');
+            container.innerHTML = "";
+            const days = [];
+            const baseDate = new Date();
+
+            for (let i = -7; i <= 7; i++) {
+                const d = new Date(baseDate);
+                d.setDate(baseDate.getDate() + i);
+                const isoDate = d.toISOString().split('T')[0];
+                let label = "";
+
+                if (isoDate === todayStr) label = "Idag";
+                else {
+                    const yesterday = new Date(baseDate);
+                    yesterday.setDate(baseDate.getDate() - 1);
+                    const tomorrow = new Date(baseDate);
+                    tomorrow.setDate(baseDate.getDate() + 1);
+
+                    if (isoDate === yesterday.toISOString().split('T')[0]) label = "Igår";
+                    else if (isoDate === tomorrow.toISOString().split('T')[0]) label = "Imorgon";
+                    else {
+                        label = `${d.toLocaleDateString('sv-SE', { weekday: 'short' })} ${String(d.getDate()).padStart(2, '0')}`;
+                    }
+                }
+
+                days.push({ isoDate, label });
+            }
+
+            days.forEach(day => {
+                const btn = document.createElement('button');
+                btn.className = `date-item ${day.isoDate === selectedDate ? 'active' : ''}`;
+                btn.innerHTML = day.label;
+                btn.onclick = () => {
+                    selectedDate = day.isoDate;
+                    document.querySelectorAll('.date-item').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderContent();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function openResultsView() {
+            currentMode = 'results';
+            document.getElementById('date-picker-bar').style.display = 'block';
+            document.getElementById('track-selector').style.display = 'flex';
+            document.getElementById('view-title').textContent = "RESULTAT & SCHEMA";
+            setActiveNav('nav-results');
+            renderContent();
+        }
+
+        function setTrack(track) {
+            selectedTrack = track;
+            document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`track-btn-${track}`)?.classList.add('active');
+            renderContent();
+        }
+
+        function selectTrackFromMenu(track) {
+            currentMode = 'profiles';
+            document.getElementById('date-picker-bar').style.display = 'none';
+            document.getElementById('track-selector').style.display = 'none';
+            document.getElementById('view-title').textContent = "EX-SIRIUS SPELARKORT";
+            setActiveNav('nav-sparen');
+            renderProfiles(track);
+        }
+
+        function renderResults() {
+            const area = document.getElementById('content-area');
+            area.className = "matches-grid";
+            area.innerHTML = "";
+
+            if (feedState !== "ready") {
+                const message = feedState === "loading"
+                    ? "Hämtar riktiga matchdata…"
+                    : feedState === "unconfigured"
+                        ? "Riktiga matchdata är inte inkopplade ännu. Lägg till en datakälla i MATCH_FEED_URL. Inga exempelresultat visas."
+                        : (feedError || "Matchdata kunde inte hämtas.");
+                area.innerHTML = `<div class="empty-state"><p>${message}</p><p style="margin-top:10px;">Spelarprofilerna finns kvar. Matchresultat och statistik visas först när de hämtats från en datakälla.</p><button class="nav-btn" style="margin:14px auto 0;" onclick="loadMatchFeed()">Försök igen</button></div>`;
+                return;
+            }
+
+            const filtered = playersData.filter(m =>
+                (selectedTrack === 'all' || m.track === selectedTrack) &&
+                m.matchDate === selectedDate
+            );
+
+            if (filtered.length === 0) {
+                area.innerHTML = `<div class="empty-state"><p>Inga matchdata hittades för ${selectedDate} i valt spår.</p><p style="margin-top:8px;">Det betyder inte nödvändigtvis att spelaren inte spelade; datakällans täckning kan variera.</p></div>`;
+                return;
+            }
+
+            filtered.sort((a,b) => a.player.localeCompare(b.player, 'sv')).forEach((m) => {
+                const imgUrl = m.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(m.playerId)}.png` : '';
+                const scoreHome = displayStat(m.scoreHome);
+                const scoreAway = displayStat(m.scoreAway);
+                const rating = displayStat(m.rating);
+                const mins = displayStat(m.mins, "'");
+                const goals = displayStat(m.goals);
+                const assists = displayStat(m.ass);
+
+                const card = document.createElement('div');
+                card.className = "match-card";
+                card.onclick = () => openMatchStatsModal(m);
+                card.innerHTML = `
+                    <div class="match-header">
+                        <span>${m.league || "Liga saknas"}</span>
+                        <span class="status-badge">${m.status || "Status saknas"}</span>
+                    </div>
+                    <div class="team-row"><span>${m.home}</span><span class="team-score">${scoreHome}</span></div>
+                    <div class="team-row"><span>${m.away}</span><span class="team-score">${scoreAway}</span></div>
+                    <div class="player-footer">
+                        <div class="player-info-group">
+                            <div class="player-thumb-wrapper">
+                                <img src="${imgUrl}" class="player-thumb" onerror="this.onerror=null; this.src='https://via.placeholder.com/30';">
+                                ${m.rating !== null ? `<span class="rating-badge">${rating}</span>` : ''}
+                            </div>
+                            <div class="player-details">
+                                <h4>${m.player}</h4>
+                                <span>${m.team || ""}</span>
+                            </div>
+                        </div>
+                        <div class="player-quick-stats">${mins} <span>min</span> | ${goals}G ${assists}A</div>
+                    </div>`;
+                area.appendChild(card);
+            });
+        }
+
+        function renderProfiles(track) {
+            const area = document.getElementById('content-area');
+            area.className = "players-grid";
+            area.innerHTML = "";
+
+            const filtered = track === 'all' ? masterPlayers : masterPlayers.filter(x => x.track === track);
+
+            filtered.sort((a,b) => a.name.localeCompare(b.name, 'sv')).forEach(p => {
+                const card = document.createElement('div');
+                card.className = "player-card";
+                card.onclick = () => openPlayerProfileModal(p);
+                card.innerHTML = `
+                    <div class="player-card-header">
+                        <div class="player-avatar">
+                            ${p.id ? `<img src="https://images.fotmob.com/image_resources/playerimages/${p.id}.png" alt="${p.name}" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\\'fa-solid fa-user\\'></i>';">` : `<i class="fa-solid fa-user"></i>`}
+                        </div>
+                        <div>
+                            <h3 style="color:#fff; font-size:0.9rem;">${p.name}</h3>
+                            <span style="color:var(--sirius-gold); font-size:0.75rem; font-weight:700;">${p.team}</span>
+                        </div>
+                    </div>
+                    <div style="font-size:0.75rem; color:var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 8px; margin-top: 8px;">
+                        <p style="margin-bottom: 2px;"><strong>Liga:</strong> ${p.league}</p>
+                        <p style="margin-bottom: 2px;"><strong>Position:</strong> ${p.pos}</p>
+                        <p><strong>Ålder:</strong> ${p.age} år</p>
+                    </div>
+                `;
+                area.appendChild(card);
+            });
+        }
+
+        // ÖPPNAR MATCHSTATISTIK & X-DELNING
+        function openMatchStatsModal(p) {
+            const avatarUrl = p.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(p.playerId)}.png` : '';
+            const stat = (label, value, suffix = "") =>
+                `<div class="stat-item"><span>${label}</span><strong>${displayStat(value, suffix)}</strong></div>`;
+
+            document.getElementById('modal-body-content').innerHTML = `
+                <div class="modal-player-header">
+                    <div class="modal-avatar-wrapper">
+                        <img class="modal-avatar" src="${avatarUrl}" onerror="this.src='https://via.placeholder.com/60';">
+                        ${p.rating !== null ? `<span class="modal-rating-badge">${displayStat(p.rating)}</span>` : ''}
+                    </div>
+                    <h3 style="color:#fff; font-size:1rem; font-weight:900;">${p.player}</h3>
+                    <p style="color:var(--sirius-gold); font-size:0.8rem; font-weight:700;">${p.team} ${p.pos ? '(' + p.pos + ')' : ''}</p>
+                    <p style="color:var(--text-muted); font-size:0.72rem; margin-top:4px;">${p.matchDate} · ${p.league}</p>
+                </div>
+                <div class="modal-section-title">Matchstatistik från datakällan</div>
+                <div class="modal-stats-list">
+                    ${stat("Slutresultat", `${displayStat(p.scoreHome)} – ${displayStat(p.scoreAway)}`)}
+                    ${stat("Spelade minuter", p.mins, p.mins === null ? "" : "'")}
+                    ${stat("Mål", p.goals)}
+                    ${stat("Assister", p.ass)}
+                    ${stat("Spelarbetyg", p.rating)}
+                    ${stat("Precisa passningar", p.passes)}
+                    ${stat("Skapade chanser", p.chances)}
+                    ${stat("Skapade stora chanser", p.bigChances)}
+                    ${stat("Skott på mål", p.shotsTarget)}
+                    ${stat("Bollkontakter", p.touches)}
+                </div>
+                ${p.matchUrl ? `<a class="external-btn" href="${p.matchUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Öppna match hos datakällan</a>` : ''}
+                <p style="color:var(--text-muted);font-size:0.65rem;margin-top:10px;">Ett streck betyder att uppgiften inte fanns i datakällan – den är inte uppskattad.</p>
+                <button class="share-x-btn" onclick="shareToXFromMatch(${JSON.stringify(p).replace(/</g, '\\u003c').replace(/"/g, '&quot;')})">
+                    <i class="fa-brands fa-x-twitter"></i> Dela matchrapport på X
+                </button>`;
+            document.getElementById('stats-modal').classList.add('active');
+        }
+
+        // ÖPPNAR VERIFIERAD SPELARPROFIL + FOTMOB LIVE-LÄNK
+        function openPlayerProfileModal(p) {
+            const avatarUrl = p.id ? `https://images.fotmob.com/image_resources/playerimages/${p.id}.png` : '';
+
+            document.getElementById('modal-body-content').innerHTML = `
+                <div class="modal-player-header">
+                    <div class="modal-avatar-wrapper">
+                        <img class="modal-avatar" src="${avatarUrl}" onerror="this.src='https://via.placeholder.com/60';">
+                    </div>
+                    <h3 style="color:#fff; font-size:1.1rem; font-weight:900;">${p.name}</h3>
+                    <p style="color:var(--sirius-gold); font-size:0.8rem; font-weight:700;">${p.team} • ${p.league}</p>
+                </div>
+
+                <div class="modal-section-title">Spelarinfo</div>
+                <div class="modal-stats-list">
+                    <div class="stat-item"><span>Ålder</span><strong>${p.age} år</strong></div>
+                    <div class="stat-item"><span>Position</span><strong>${p.pos}</strong></div>
+                    <div class="stat-item"><span>Längd</span><strong>${p.height}</strong></div>
+                    <div class="stat-item"><span>Fot</span><strong>${p.foot}</strong></div>
+                    <div class="stat-item"><span>Kontrakt till</span><strong>${p.contract}</strong></div>
+                </div>
+
+                <a href="${p.fotmobUrl}" target="_blank" class="external-btn">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Se live-stats & karriär på FotMob
+                </a>
+            `;
+
+            document.getElementById('stats-modal').classList.add('active');
+        }
+
+        function shareToXFromMatch(p) {
+            const text = `BLÅSVARTA SPÅR 🇸🇪
+------------------
+👤 ${p.player} (${p.team})
+⚽ ${p.home} ${displayStat(p.scoreHome)}–${displayStat(p.scoreAway)} ${p.away}
+⏱️ Spelade minuter: ${displayStat(p.mins, p.mins === null ? "" : "'")}
+⭐ Betyg: ${displayStat(p.rating)}
+📊 ${displayStat(p.goals)} mål | ${displayStat(p.ass)} assist
+
+Se resultat på Blåsvarta Spår:
+${siteUrl}
+
+#IKSirius #Utlandsspåret`;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+        }
+
+        function closeModal(e) {
+            document.getElementById('stats-modal').classList.remove('active');
+        }
+
+        function renderContent() { if (currentMode === 'results') renderResults(); }
+        function setActiveNav(navId) { document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')); document.getElementById(navId)?.classList.add('active'); }
+
+        window.onload = () => { buildDatePicker(); openResultsView(); loadMatchFeed(); };
+    </script>
+</body>
+</html>
