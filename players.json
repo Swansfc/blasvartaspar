@@ -1,0 +1,47 @@
+{
+  "players": [
+    {
+      "name": "Kerim Mrabti",
+      "team": "AEK Larnaca",
+      "track": "utland",
+      "trackName": "Utlandsspåret",
+      "position": "Anfallande mittfältare"
+    },
+    {
+      "name": "Herman Sjögrell",
+      "team": "FC Inter Turku",
+      "track": "utland",
+      "trackName": "Utlandsspåret",
+      "position": "Yttermittfältare"
+    },
+    {
+      "name": "Aron Bjarnason",
+      "team": "Breidablik",
+      "track": "utland",
+      "trackName": "Utlandsspåret",
+      "position": "Yttermittfältare"
+    },
+    {
+      "name": "Wessam Abou Ali",
+      "team": "Columbus Crew",
+      "track": "utland",
+      "trackName": "Utlandsspåret",
+      "position": "Anfallare"
+    },
+    {
+      "name": "Jamie Roche",
+      "team": "Kortrijk",
+      "track": "utland",
+      "trackName": "Utlandsspåret",
+      "position": "Mittfältare"
+    },
+    {
+      "name": "Jesper Nyholm",
+      "team": "Muangthong United",
+      "track": "utland",
+      "trackName": "Utlandsspåret",
+      "position": "Mittback"
+    }
+  ],
+  "note": "Kontrollera aktuella klubbuppgifter i players-listan innan första körningen; gamla klubbnamn ger ingen träff."
+}
