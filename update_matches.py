@@ -12,14 +12,14 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 OUT = Path(__file__).with_name("matches.json")
-DAYS_BACK = int(sys.argv[1]) if len(sys.argv) > 1 else 14
+DAYS_BACK = int(sys.argv[1]) if len(sys.argv) > 1 else 30
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 
 # Lägg till/ta bort spelare här. id = siffrorna i FotMob-länken.
 PLAYERS = [
     {"name": "Kerim Mrabti",    "id": "528409",  "track": "utland", "team": "AEK Larnaca"},
-    {"name": "Herman Sjögrell", "id": "1182391", "track": "utland", "team": "FC Inter Turku"},
+    {"name": "Herman Sjögrell", "id": "1177212", "track": "utland", "team": "FC Inter Turku"},
     {"name": "Aron Bjarnason",  "id": "474133",  "track": "utland", "team": "Breiðablik"},
     {"name": "Wessam Abou Ali", "id": "919036",  "track": "utland", "team": "Columbus Crew"},
     {"name": "Jamie Roche",     "id": "1129082", "track": "utland", "team": "Kortrijk"},
@@ -127,6 +127,10 @@ def main():
             print("  hoppar över spelaren (ingen data)")
             continue
         ok += 1
+        fm_name = data.get("name") or "?"
+        fm_team = (data.get("primaryTeam") or {}).get("teamName") or "?"
+        warn = "" if fm_name.lower() == p["name"].lower() else "   <-- OBS: NAMNET STÄMMER INTE, kontrollera ID"
+        print(f"  FotMob säger: {fm_name} ({fm_team}){warn}")
         recent = data.get("recentMatches") or []
         if isinstance(recent, dict):
             recent = recent.get("matches", [])
@@ -135,6 +139,12 @@ def main():
             print(f"  fält i matchlistan: {sorted(recent[0].keys())}")
         else:
             print(f"  inga recentMatches (nycklar i data: {sorted(data.keys())[:10]})")
+        if recent:
+            try:
+                print(f"  senaste match hos FotMob: {recent[0]['matchDate']['utcTime'][:10]}")
+                print(f"  ratingProps (första): {recent[0].get('ratingProps')}")
+            except Exception:
+                pass
         for r in recent:
             try:
                 utc = datetime.fromisoformat(
