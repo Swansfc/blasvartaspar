@@ -552,18 +552,14 @@
             }
         ];
 
-        // RIKTIGA MATCHDATA
-        // GitHub Pages kan inte köra en hemlig API-nyckel på serversidan.
-        // Lägg en JSON-feed på din egen endpoint och ange adressen här.
-        // Se README-blasvarta-data.md för format och säker konfiguration.
-        const MATCH_FEED_URL = "./data/matches.json"; // Exempel: "https://din-api.example.com/matches"
+        // RIKTIGA MATCHDATA - Läser direkt från matches.json i roten
+        const MATCH_FEED_URL = "matches.json";
 
         let playersData = [];
         let feedState = "loading";
         let feedError = "";
 
         function normalizeMatch(raw) {
-            // Normaliserar JSON från din egen backend till sidans matchkort.
             return {
                 player: raw.playerName || raw.player || "",
                 team: raw.playerTeam || raw.team || "",
@@ -857,7 +853,7 @@
                 </div>
                 <div class="modal-section-title">Matchstatistik från datakällan</div>
                 <div class="modal-stats-list">
-                    ${stat("Slutresultat", `${displayStat(p.scoreHome)} – ${displayStat(p.scoreAway)}`)}
+                    ${stat("Slutresultat", `${displayStat(p.scoreHome)} –${displayStat(p.scoreAway)}`)}
                     ${stat("Spelade minuter", p.mins, p.mins === null ? "" : "'")}
                     ${stat("Mål", p.goals)}
                     ${stat("Assister", p.ass)}
@@ -876,12 +872,6 @@
             document.getElementById('stats-modal').classList.add('active');
         }
 
-        // ÖPPNAR VERIFIERAD SPELARPROFIL + FOTMOB LIVE-LÄNK
-        // Karriär & övergångar. Lägg till på spelaren i masterPlayers, t.ex.:
-        // transfers: [ { date: '2024-07', from: 'IK Sirius', to: 'AEK Larnaca', fee: '1,2 M€' } ]
-        // Skriv "Lån", "Fri transfer" eller "Ej offentliggjort" när summa saknas.
-        // Karriär i Sirius. Lägg till på spelaren i masterPlayers:
-        // sirius: { source: {label, url}, seasons: [ { season: '2013', league: 'Ettan', apps: 23, goals: 2, assists: null } ] }
         function siriusHtml(p) {
             const s = p.sirius;
             const list = s?.seasons?.length ? s.seasons : (s?.total ? [{ season: s.total.years, league: '', apps: s.total.apps, goals: s.total.goals, assists: s.total.assists ?? null }] : []);
@@ -896,19 +886,21 @@
             const src = s.source ? ` Källa: <a href="${esc(s.source.url)}" target="_blank" rel="noopener" style="color:var(--sirius-gold);">${esc(s.source.label)}</a>.` : '';
             return `<div class="modal-section-title" style="margin-top:1rem;">Karriär i Sirius</div><div class="modal-stats-list">${row('Säsong', '', 'M', 'Mål', 'Ass', true)}${rows}${total}</div><p style="color:var(--text-muted);font-size:0.65rem;margin-top:6px;">Ligamatcher. M = matcher.${src}</p>`;
         }
+
         function seasonHtml(p) {
             const s = p.card?.season;
             if (!s || !s.apps) return '';
             const row = (l, v) => `<div class="stat-item"><span>${l}</span><strong>${displayStat(v)}</strong></div>`;
-            return `<div class="modal-section-title" style="margin-top:1rem;">Säsongen ${s.year}</div><div class="modal-stats-list">${row('Matcher (från start)', `${s.apps} (${s.starts})`)}${row('Minuter', s.minutes)}${row('Mål / assist', `${s.goals} / ${s.assists}`)}${row('Snittbetyg', s.rating)}${row('Gula / röda kort', `${s.yellow} / ${s.red}`)}</div>`;
+            return `<div class="modal-section-title" style="margin-top:1rem;">Säsongen ${s.year}</div><div class="modal-stats-list">${row('Matcher (från start)', `${s.apps} (${s.starts})`)}${row('Minuter', s.minutes)}${row('Mål / assist', `${s.goals} /${s.assists}`)}${row('Snittbetyg', s.rating)}${row('Gula / röda kort', `${s.yellow} /${s.red}`)}</div>`;
         }
-        // Källor: lägg till fotbolltransfersUrl / transfermarktUrl på spelaren i masterPlayers för fler länkar.
+
         function sourcesHtml(p) {
             const links = [['Fotbolltransfers', p.fotbolltransfersUrl], ['Transfermarkt', p.transfermarktUrl]].filter((l) => l[1]);
             const btns = links.map((l) => `<a href="${l[1]}" target="_blank" rel="noopener" class="external-btn" style="margin-top:8px;">Se på ${l[0]}</a>`).join('');
             const note = p.card ? `Statistik och övergångar: API-Football, hämtat ${new Date(p.card.fetchedAt).toLocaleDateString('sv-SE')}. ` : '';
             return `${btns}<p style="color:var(--text-muted);font-size:0.65rem;margin-top:10px;">${note}${p.contractSource ? `Kontrakt enligt <a href="${p.contractSource.url}" target="_blank" rel="noopener" style="color:var(--sirius-gold);">${p.contractSource.label}</a>.` : 'Ett streck vid kontrakt betyder att uppgiften saknas.'}</p>`;
         }
+
         function transfersHtml(p) {
             if (!Array.isArray(p.transfers) || p.transfers.length === 0) return '';
             const esc = (t) => String(t ?? '').replace(/[<>&"]/g, '');
@@ -978,7 +970,7 @@ ${siteUrl}
 
         async function loadCards() {
             try {
-                const res = await fetch('./data/players.json', { cache: 'no-store' });
+                const res = await fetch('matches.json', { cache: 'no-store' });
                 if (!res.ok) return;
                 const data = await res.json();
                 masterPlayers.forEach((p) => {
