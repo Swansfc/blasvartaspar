@@ -24,6 +24,7 @@ PLAYERS = [
     {"name": "Wessam Abou Ali", "id": "919036",  "track": "utland", "team": "Columbus Crew"},
     {"name": "Jamie Roche",     "id": "1129082", "track": "utland", "team": "Kortrijk"},
     {"name": "Jesper Nyholm",   "id": "619826",  "track": "utland", "team": "Muangthong United"},
+    {"name": "Tashreeq Matthews", "id": "982336", "track": "utland", "team": "Mamelodi Sundowns FC"},
 ]
 
 
