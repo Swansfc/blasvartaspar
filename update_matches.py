@@ -164,7 +164,7 @@ def main():
                 "away": opp if home_is_player else mine,
                 "scoreHome": r.get("homeScore"), "scoreAway": r.get("awayScore"),
                 "status": "Slut",
-                "rating": num((r.get("ratingProps") or {}).get("num") or r.get("rating")),
+                "rating": (num((r.get("ratingProps") or {}).get("rating")) or None),
                 "mins": r.get("minutesPlayed"), "goals": r.get("goals"), "ass": r.get("assists"),
                 "passes": None, "chances": None,
                 "matchUrl": ("https://www.fotmob.com" + r["matchPageUrl"]) if r.get("matchPageUrl") else "",
@@ -175,6 +175,8 @@ def main():
                 det = match_details(r["matchPageUrl"], p["id"])
                 if row["rating"] is not None:
                     det.pop("rating", None)
+                elif det.get("rating"):
+                    det["rating"] = round(det["rating"], 1)
                 row.update(det)
                 time.sleep(0.7)
             kept[(p["id"], row["matchId"])] = row
