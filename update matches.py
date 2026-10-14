@@ -1,0 +1,159 @@
+#!/usr/bin/env python3
+"""
+Hämtar senaste matcher för spelarna ni följer från FotMob och skriver matches.json
+i det format som index.html läser. Körs manuellt: python update_matches.py [dagar]
+
+Inga värden hittas på: saknas ett fält hos FotMob skrivs null (visas som "–").
+Bara Pythons standardbibliotek behövs.
+"""
+import json, re, sys, time, urllib.request
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+OUT = Path(__file__).with_name("matches.json")
+DAYS_BACK = int(sys.argv[1]) if len(sys.argv) > 1 else 14
+UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
+
+# Lägg till/ta bort spelare här. id = siffrorna i FotMob-länken.
+PLAYERS = [
+    {"name": "Kerim Mrabti",    "id": "528409",  "track": "utland", "team": "AEK Larnaca"},
+    {"name": "Herman Sjögrell", "id": "1182391", "track": "utland", "team": "FC Inter Turku"},
+    {"name": "Aron Bjarnason",  "id": "474133",  "track": "utland", "team": "Breiðablik"},
+    {"name": "Wessam Abou Ali", "id": "919036",  "track": "utland", "team": "Columbus Crew"},
+    {"name": "Jamie Roche",     "id": "1129082", "track": "utland", "team": "Kortrijk"},
+    {"name": "Jesper Nyholm",   "id": "619826",  "track": "utland", "team": "Muangthong United"},
+]
+
+
+def get(url, as_json=False):
+    req = urllib.request.Request(url, headers={
+        "User-Agent": UA, "Accept-Language": "sv-SE,sv;q=0.9,en;q=0.8",
+        "Accept": "application/json" if as_json else "text/html"})
+    with urllib.request.urlopen(req, timeout=25) as r:
+        body = r.read().decode("utf-8", "replace")
+    return json.loads(body) if as_json else body
+
+
+def next_data(html):
+    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', html, re.S)
+    if not m:
+        raise ValueError("hittade inte __NEXT_DATA__ (FotMob kan ha ändrat sidan eller blockerar)")
+    return json.loads(m.group(1))
+
+
+def player_data(pid):
+    try:
+        return next_data(get(f"https://www.fotmob.com/sv/players/{pid}"))["props"]["pageProps"]["data"]
+    except Exception as e:
+        print(f"  sidan misslyckades ({e}), provar API...")
+        return get(f"https://www.fotmob.com/api/playerData?id={pid}", as_json=True)
+
+
+def num(v):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+
+def match_details(match_url, pid):
+    """Extra statistik (passningar m.m.) från matchsidan. Best effort."""
+    out = {}
+    try:
+        d = next_data(get("https://www.fotmob.com" + match_url))
+        ps = d["props"]["pageProps"]["content"]["playerStats"].get(str(pid))
+        if not ps:
+            return out
+        found = {}
+        for grp in ps.get("stats", []):
+            for title, obj in (grp.get("stats") or {}).items():
+                found[title.lower()] = obj.get("stat") or {}
+        def val(*names):
+            for n in names:
+                if n in found:
+                    return found[n]
+            return None
+        p = val("accurate passes")
+        if p and p.get("value") is not None and p.get("total") is not None:
+            out["passes"] = f'{p["value"]}/{p["total"]}'
+        for key, names in {"chances": ("chances created",), "bigChances": ("big chances created",),
+                           "shotsTarget": ("shots on target",), "touches": ("touches",)}.items():
+            s = val(*names)
+            if s and s.get("value") is not None:
+                out[key] = s["value"]
+    except Exception as e:
+        print(f"    (ingen detaljstatistik: {e})")
+    return out
+
+
+def main():
+    cutoff = datetime.now(timezone.utc) - timedelta(days=DAYS_BACK)
+    old = {}
+    if OUT.exists():
+        try:
+            old = json.loads(OUT.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    kept = {(m["playerId"], m["matchId"]): m for m in old.get("matches", []) if m.get("matchId")}
+    ok = 0
+
+    for p in PLAYERS:
+        print(f'{p["name"]} ({p["id"]})')
+        try:
+            data = player_data(p["id"])
+        except Exception as e:
+            print(f"  FEL: {e}")
+            continue
+        ok += 1
+        recent = data.get("recentMatches") or []
+        if isinstance(recent, dict):
+            recent = recent.get("matches", [])
+        team = (data.get("primaryTeam") or {}).get("teamName") or p["team"]
+        for r in recent:
+            try:
+                utc = datetime.fromisoformat(
+                    (r.get("matchDate") or {}).get("utcTime", "").replace("Z", "+00:00"))
+            except ValueError:
+                continue
+            if utc < cutoff:
+                continue
+            home_is_player = bool(r.get("isHomeTeam"))
+            mine, opp = r.get("teamName", ""), r.get("opponentTeamName", "")
+            row = {
+                "matchId": str(r.get("id", "")),
+                "player": p["name"], "team": team, "playerId": p["id"], "track": p["track"],
+                "league": r.get("leagueName", ""),
+                "matchDate": utc.astimezone(ZoneInfo("Europe/Stockholm")).date().isoformat(),
+                "home": mine if home_is_player else opp,
+                "away": opp if home_is_player else mine,
+                "scoreHome": r.get("homeScore"), "scoreAway": r.get("awayScore"),
+                "status": "Slut",
+                "rating": num((r.get("ratingProps") or {}).get("num")),
+                "mins": r.get("minutesPlayed"), "goals": r.get("goals"), "ass": r.get("assists"),
+                "passes": None, "chances": None,
+                "matchUrl": ("https://www.fotmob.com" + r["matchPageUrl"]) if r.get("matchPageUrl") else "",
+            }
+            if r.get("onBench") and not row["mins"]:
+                row["status"] = "Slut (bänken)"
+            if r.get("matchPageUrl") and row["mins"]:
+                row.update(match_details(r["matchPageUrl"], p["id"]))
+                time.sleep(0.7)
+            kept[(p["id"], row["matchId"])] = row
+            print(f'  {row["matchDate"]} {row["home"]} {row["scoreHome"]}-{row["scoreAway"]} {row["away"]}'
+                  f' | betyg {row["rating"]} | {row["mins"]} min')
+        time.sleep(1)
+
+    if ok == 0:
+        sys.exit("Ingen spelare kunde hämtas - matches.json lämnas orörd.")
+
+    matches = sorted(kept.values(), key=lambda m: (m["matchDate"], m["player"]), reverse=True)
+    out = {"updated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+           "matches": matches, "players": old.get("players", {})}
+    OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"\nKlart: {len(matches)} matcher skrivna till {OUT.name}")
+
+
+if __name__ == "__main__":
+    main()
