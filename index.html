@@ -12,10 +12,10 @@
             --sirius-gold: #ffcc00;
             --live-green: #00e676;
             --rating-green: #10b981;
-            --bg-black: #0b0e14;
-            --card-bg: #131924;
-            --card-border: #222b3a;
-            --dropdown-bg: #1c2536;
+            --bg-black: #050914;
+            --card-bg: #0c1632;
+            --card-border: #1a2b55;
+            --dropdown-bg: #112049;
             --text-main: #ffffff;
             --text-muted: #8b9bb4;
         }
@@ -37,7 +37,10 @@
 
         body { 
             font-family: 'Montserrat', sans-serif; 
-            background-color: var(--bg-black); 
+            background-color: var(--bg-black);
+            background-image:
+                radial-gradient(ellipse 90% 45% at 50% 0%, rgba(20, 70, 190, 0.38), transparent 70%);
+            background-attachment: fixed;
             color: var(--text-main); 
             line-height: 1.4; 
             min-height: 100vh; 
@@ -47,7 +50,7 @@
 
         /* HEADER & NAV */
         header { 
-            background: #07090e; 
+            background: #040813; 
             border-bottom: 2px solid var(--sirius-gold); 
             position: sticky; 
             top: 0; 
@@ -58,7 +61,7 @@
             width: 100%;
             max-width: 1280px; 
             margin: 0 auto; 
-            padding: 0.6rem 0.8rem; 
+            padding: 1rem 0.8rem; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
@@ -66,6 +69,7 @@
         }
         
         .brand-logo { display: flex; align-items: center; gap: 8px; cursor: pointer; flex-shrink: 0; }
+        .logo-star { width: 40px; height: 40px; flex-shrink: 0; display: block; }
         .logo-img { 
             width: 34px; 
             height: 34px; 
@@ -74,24 +78,26 @@
             border: 1.5px solid var(--sirius-gold); 
             flex-shrink: 0; 
         }
+        .t-line { display: block; white-space: nowrap; }
         .brand-title h1 { 
-            font-size: 0.88rem; 
+            font-size: clamp(1rem, 4.4vw, 1.3rem); 
+            line-height: 1.05;
             font-weight: 900; 
             color: var(--sirius-gold); 
-            white-space: nowrap; 
+            white-space: normal; 
             letter-spacing: 0.2px;
         }
 
         .nav-links { display: flex; gap: 4px; flex-shrink: 0; }
         .nav-btn { 
-            background: #1a2233; 
+            background: #10204a; 
             border: 1px solid var(--card-border); 
             color: #fff; 
-            padding: 6px 10px; 
-            border-radius: 8px; 
+            padding: 9px clamp(8px, 2.6vw, 12px); 
+            border-radius: 10px; 
             font-weight: 700; 
             cursor: pointer; 
-            font-size: 0.78rem; 
+            font-size: clamp(0.78rem, 3.4vw, 0.9rem); 
             display: flex; 
             align-items: center; 
             gap: 4px; 
@@ -113,7 +119,7 @@
             z-index: 1001; 
             padding: 6px 0; 
         }
-        .dropdown:hover .dropdown-menu { display: block; }
+        .dropdown.open .dropdown-menu { display: block; }
         .dropdown-item { 
             color: #fff; 
             padding: 10px 14px; 
@@ -124,41 +130,34 @@
             align-items: center; 
             gap: 10px; 
         }
-        .dropdown-item:hover { background-color: #28354d; }
+        .dropdown-item:hover { background-color: #1b3170; }
 
         /* DATUMVÄLJARE */
         .date-picker-bar {
-            background: #0d121c;
+            background: #081230;
             border-bottom: 1px solid var(--card-border);
-            padding: 0.5rem 0;
+            padding: 0.5rem 0.4rem;
             width: 100%;
-            overflow-x: auto;
-            white-space: nowrap;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-        }
-        .date-picker-bar::-webkit-scrollbar { display: none; }
-        .date-picker-container {
-            padding: 0 0.8rem;
-            display: inline-flex;
-            gap: 6px;
+            display: flex;
             align-items: center;
+            gap: 4px;
         }
+        .date-picker-container { flex: 1; min-width: 0; display: flex; gap: 4px; }
         .date-item {
+            flex: 1;
+            min-width: 0;
             background: transparent;
             border: 1px solid transparent;
             color: var(--text-muted);
             font-family: inherit;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            padding: 5px 10px;
-            border-radius: 16px;
+            padding: 7px 2px;
+            border-radius: 14px;
             cursor: pointer;
+            text-align: center;
+            white-space: nowrap;
             transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            flex-shrink: 0;
         }
         .date-item:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
         .date-item.active {
@@ -167,6 +166,19 @@
             border-color: var(--sirius-gold);
             font-weight: 800;
         }
+        .date-arrow {
+            flex: 0 0 34px;
+            height: 34px;
+            background: transparent;
+            border: 0;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .date-arrow:hover { background: rgba(255, 204, 0, 0.14); }
+        .date-arrow svg { width: 20px; height: 20px; fill: var(--sirius-gold); }
 
         /* MAIN CONTENT */
         main { 
@@ -186,31 +198,26 @@
         
         /* SPÅRVÄLJARE MOBIL */
         .track-selector { 
-            display: flex; 
-            gap: 6px; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr;
+            gap: 8px; 
             margin-bottom: 1rem; 
             width: 100%;
-            overflow-x: auto;
-            white-space: nowrap;
-            padding-bottom: 4px;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
         }
-        .track-selector::-webkit-scrollbar { display: none; }
         .track-btn { 
-            background: #131924; 
+            background: #0c1632; 
             border: 1px solid var(--card-border); 
             color: var(--text-muted); 
-            padding: 5px 12px; 
-            border-radius: 16px; 
+            padding: 9px 12px; 
+            border-radius: 14px; 
             font-weight: 700; 
-            font-size: 0.75rem; 
+            font-size: 0.78rem; 
             cursor: pointer; 
             transition: 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            flex-shrink: 0;
+            justify-content: center;
+            gap: 6px;
         }
         .track-btn:hover, .track-btn.active { background: #0044cc; color: #fff; border-color: #0055ff; }
 
@@ -233,10 +240,10 @@
         }
         .match-card:active { border-color: var(--sirius-gold); transform: scale(0.99); }
         .match-header { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--text-muted); margin-bottom: 0.6rem; font-weight: 700; }
-        .status-badge { background: #1a2233; color: var(--sirius-gold); font-weight: 800; padding: 2px 6px; border-radius: 10px; border: 1px solid #28354d; font-size: 0.65rem; }
+        .status-badge { background: #10204a; color: var(--sirius-gold); font-weight: 800; padding: 2px 6px; border-radius: 10px; border: 1px solid #243e82; font-size: 0.65rem; }
 
         .team-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 0.9rem; margin-bottom: 5px; align-items: center; }
-        .team-score { font-family: 'Roboto Mono', monospace; background: #0a0d14; padding: 1px 7px; border-radius: 5px; border: 1px solid #1c2536; font-size: 0.95rem; }
+        .team-score { font-family: 'Roboto Mono', monospace; background: #050a1c; padding: 1px 7px; border-radius: 5px; border: 1px solid #1c2536; font-size: 0.95rem; }
         
         /* SPELAR-FOOTER I MATCHKORTET */
         .player-footer { 
@@ -249,7 +256,7 @@
         }
         .player-info-group { display: flex; align-items: center; gap: 8px; }
         .player-thumb-wrapper { position: relative; }
-        .player-thumb { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; background: #0a0d14; border: 1px solid var(--sirius-gold); }
+        .player-thumb { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; background: #050a1c; border: 1px solid var(--sirius-gold); }
         .rating-badge { 
             position: absolute; 
             top: -3px; 
@@ -274,24 +281,25 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.85);
             z-index: 2000;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
+            padding: 1rem 1rem 3rem;
             backdrop-filter: blur(4px);
         }
         @media (min-width: 640px) {
-            .modal-overlay { align-items: center; padding: 1rem; }
+            .modal-overlay { padding: 1rem; }
         }
         .modal-overlay.active { display: flex; }
         .modal-content {
-            background: #111622;
+            background: #0a1330;
             border: 1px solid var(--card-border);
-            border-radius: 20px 20px 0 0;
+            border-radius: 20px;
             width: 100%;
             max-width: 440px;
             padding: 1.2rem;
             position: relative;
-            box-shadow: 0 -5px 25px rgba(0,0,0,0.8);
-            max-height: 90vh;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.8);
+            max-height: 85vh;
             overflow-y: auto;
         }
         @media (min-width: 640px) {
@@ -300,7 +308,7 @@
         .close-modal {
             position: absolute;
             top: 12px; right: 14px;
-            background: #1c2536;
+            background: #112049;
             border: none;
             color: var(--text-muted);
             width: 28px; height: 28px;
@@ -325,7 +333,7 @@
             padding-bottom: 4px;
         }
 
-        .modal-stats-list { background: #0d121c; border-radius: 10px; padding: 0.6rem; border: 1px solid var(--card-border); }
+        .modal-stats-list { background: #081230; border-radius: 10px; padding: 0.6rem; border: 1px solid var(--card-border); }
         .stat-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.78rem; }
         .stat-item:last-child { border-bottom: none; }
         .stat-item span { color: var(--text-muted); }
@@ -389,7 +397,7 @@
         .player-avatar { 
             width: 40px; 
             height: 40px; 
-            background: #1a2233; 
+            background: #10204a; 
             border: 2px solid var(--sirius-gold); 
             border-radius: 50%; 
             display: flex; 
@@ -401,6 +409,20 @@
             flex-shrink: 0;
         }
         .player-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .studs { width: 1.75em; height: 1.75em; fill: var(--sirius-gold); flex-shrink: 0; }
+        .search-input { width: 100%; background: #081230; color: #fff; border: 1px solid var(--card-border); border-radius: 12px; padding: 0.85rem 1rem; font: 600 16px 'Montserrat', sans-serif; margin-bottom: 1rem; outline: none; }
+        .search-input:focus { border-color: var(--sirius-gold); }
+        .search-input::placeholder { color: var(--text-muted); font-weight: 400; }
+        .sirius-row { display: grid; grid-template-columns: 1fr 38px 38px 38px; gap: 6px; padding: 6px 0; border-bottom: 1px solid var(--card-border); font-size: 0.76rem; color: var(--text-muted); }
+        .sirius-row:last-child { border-bottom: 0; }
+        .sirius-row span + span { text-align: right; }
+        .sirius-row small { color: var(--sirius-gold); font-size: 0.65rem; }
+        .transfer-row { display: grid; grid-template-columns: 62px 1fr auto; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--card-border); font-size: 0.74rem; align-items: center; }
+        .transfer-row:last-child { border-bottom: 0; }
+        .transfer-date { color: var(--text-muted); }
+        .transfer-clubs { color: #fff; font-weight: 700; }
+        .transfer-clubs span { color: var(--sirius-gold); }
+        .transfer-fee { color: var(--sirius-gold); font-weight: 800; white-space: nowrap; }
         .empty-state { grid-column: 1 / -1; text-align: center; padding: 2.5rem 1rem; background: var(--card-bg); border: 1px dashed var(--card-border); border-radius: 12px; color: var(--text-muted); font-size: 0.85rem; }
     </style>
 </head>
@@ -408,25 +430,25 @@
 
     <header>
         <div class="header-container">
-            <div class="brand-logo" onclick="openResultsView()">
-                <img src="logo.png" alt="Blåsvarta Spår Logo" class="logo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/34/000000/ffcc00?text=BS';">
+            <div class="brand-logo" role="link" tabindex="0" aria-label="Till startsidan" onclick="goHome()" onkeydown="if(event.key==='Enter')goHome()">
+                <svg class="logo-star" viewBox="0 0 100 91" role="img" aria-label="Blåsvarta Spår"><polygon points="50.0,0.0 61.2,34.5 97.6,34.5 68.2,55.9 79.4,90.5 50.0,69.1 20.6,90.5 31.8,55.9 2.4,34.5 38.8,34.5" fill="#ffe119"/></svg>
                 <div class="brand-title">
-                    <h1>BLÅSVARTA SPÅR</h1>
+                    <h1><span class="t-line">BLÅSVARTA</span><span class="t-line">SPÅR</span></h1>
                 </div>
             </div>
             <nav class="nav-links">
-                <button class="nav-btn active" id="nav-results" onclick="openResultsView()">
+                <button class="nav-btn active" id="nav-results" onclick="goHome()">
                     Resultat
                 </button>
-                <div class="dropdown">
-                    <button class="nav-btn" id="nav-sparen">
-                        <i class="fa-solid fa-shoe-prints"></i> Spåren <i class="fa-solid fa-chevron-down" style="font-size: 0.6rem;"></i>
+                <div class="dropdown" id="spar-dropdown">
+                    <button class="nav-btn" id="nav-sparen" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown(event)">
+                        <svg class="studs" viewBox="0 0 24 24" aria-hidden="true"><g transform="translate(7.2 15.2) rotate(-14)"><circle cx="-2.3" cy="-4.6" r="1.35"/><circle cx="2.3" cy="-4.6" r="1.35"/><circle cx="-2.7" cy="-0.6" r="1.35"/><circle cx="2.7" cy="-0.6" r="1.35"/><circle cx="-1.5" cy="4.6" r="1.35"/><circle cx="1.5" cy="4.6" r="1.35"/></g><g transform="translate(16.8 8.8) rotate(14)"><circle cx="-2.3" cy="-4.6" r="1.35"/><circle cx="2.3" cy="-4.6" r="1.35"/><circle cx="-2.7" cy="-0.6" r="1.35"/><circle cx="2.7" cy="-0.6" r="1.35"/><circle cx="-1.5" cy="4.6" r="1.35"/><circle cx="1.5" cy="4.6" r="1.35"/></g></svg> Spåren <i class="fa-solid fa-chevron-down" style="font-size: 0.6rem;"></i>
                     </button>
                     <div class="dropdown-menu">
                         <div class="dropdown-item" onclick="selectTrackFromMenu('utland')"><i class="fa-solid fa-globe" style="color:#ffcc00"></i> Utlandsspåret</div>
                         <div class="dropdown-item" onclick="selectTrackFromMenu('lane')"><i class="fa-solid fa-handshake" style="color:#00e676"></i> Lånespåret</div>
                         <div class="dropdown-item" onclick="selectTrackFromMenu('sverige')"><i class="fa-solid fa-flag" style="color:#29b6f6"></i> Sverigespåret</div>
-                        <div class="dropdown-item" onclick="selectTrackFromMenu('all')"><i class="fa-solid fa-users"></i> Alla Spelare</div>
+                        <div class="dropdown-item" onclick="openSearchView()"><i class="fa-solid fa-magnifying-glass" style="color:#ffcc00"></i> Sök</div>
                     </div>
                 </div>
             </nav>
@@ -435,7 +457,9 @@
 
     <!-- DATUMVÄLJARE -->
     <div class="date-picker-bar" id="date-picker-bar">
+        <button class="date-arrow" onclick="shiftDates(-5)" aria-label="Tidigare datum"><svg viewBox="0 0 24 24"><path d="M15.5 4 7 12l8.5 8z"/></svg></button>
         <div class="date-picker-container" id="date-container"></div>
+        <button class="date-arrow" onclick="shiftDates(5)" aria-label="Senare datum"><svg viewBox="0 0 24 24"><path d="M8.5 4 17 12l-8.5 8z"/></svg></button>
     </div>
 
     <main>
@@ -449,7 +473,7 @@
             <button class="track-btn active" id="track-btn-utland" onclick="setTrack('utland')"><i class="fa-solid fa-globe" style="color:#ffcc00"></i> Utlandsspåret</button>
             <button class="track-btn" id="track-btn-lane" onclick="setTrack('lane')"><i class="fa-solid fa-handshake" style="color:#00e676"></i> Lånespåret</button>
             <button class="track-btn" id="track-btn-sverige" onclick="setTrack('sverige')"><i class="fa-solid fa-flag" style="color:#29b6f6"></i> Sverigespåret</button>
-            <button class="track-btn" id="track-btn-all" onclick="setTrack('all')"><i class="fa-solid fa-users"></i> Alla</button>
+            <button class="track-btn" id="track-btn-search" onclick="openSearchView()"><i class="fa-solid fa-magnifying-glass" style="color:#ffcc00"></i> Sök</button>
         </div>
 
         <div id="content-area"></div>
@@ -468,8 +492,11 @@
 
     <script>
         const siteUrl = "https://dindoman.se";
-        const todayStr = new Date().toISOString().split('T')[0];
+        function swedenToday() { return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm' }).format(new Date()); }
+        function addDays(iso, n) { const d = new Date(iso + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
+        let todayStr = swedenToday();
         let selectedDate = todayStr;
+        let dateOffset = 0;
         let selectedTrack = 'utland';
         let currentMode = 'results';
 
@@ -478,31 +505,49 @@
             { 
                 id: '528409', name: 'Kerim Mrabti', team: 'AEK Larnaca', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallande mittfältare', league: 'Cyprus League (Cypern)',
                 age: 32, height: '175 cm', foot: 'Höger', contract: '31 maj 2028',
+                sirius: { source: { label: 'LiveSoccerTV', url: 'https://www.livesoccertv.com/player/k-mrabti/184564/' }, seasons: [
+                    { season: '2013', league: 'Ettan', apps: 23, goals: 2, assists: null },
+                    { season: '2014', league: 'Superettan', apps: 23, goals: 3, assists: null }
+                ] },
                 fotmobUrl: 'https://www.fotmob.com/sv/players/528409/kerim-mrabti'
             },
             { 
                 id: '1182391', name: 'Herman Sjögrell', team: 'FC Inter Turku', track: 'utland', trackName: 'Utlandsspåret', pos: 'Yttermittfältare', league: 'Veikkausliiga (Finland)',
                 age: 25, height: '183 cm', foot: 'Höger', contract: '-',
+                sirius: { source: { label: 'FotbollDirekt', url: 'https://fotbolldirekt.se/?p=336982' }, total: { years: '2021–2025', apps: 43, goals: 1, assists: 4 } },
                 fotmobUrl: 'https://www.fotmob.com/sv/players/1182391/herman-sjogrell'
             },
             { 
-                id: '619826', name: 'Aron Bjarnason', team: 'Breiðablik', track: 'utland', trackName: 'Utlandsspåret', pos: 'Yttermittfältare', league: 'Besta deildin (Island)',
-                age: 30, height: '182 cm', foot: 'Höger', contract: '-',
-                fotmobUrl: 'https://www.fotmob.com/sv/players/619826/aron-bjarnason'
+                id: '474133', name: 'Aron Bjarnason', team: 'Breiðablik', track: 'utland', trackName: 'Utlandsspåret', pos: 'Yttermittfältare', league: 'Besta deildin (Island)',
+                age: 30, height: '182 cm', foot: 'Höger', contract: '16 nov 2027', contractSource: { label: 'Soccerway', url: 'https://se.soccerway.com/spelare/bjarnason-aron/Gf8eUSXq/transfers' },
+                sirius: { source: { label: 'StatsCrew', url: 'https://www.statscrew.com/worldfootball/stats/p-bjarnaro001' }, seasons: [
+                    { season: '2021', league: 'Allsvenskan', apps: 2, goals: 0, assists: 0 },
+                    { season: '2022', league: 'Allsvenskan', apps: 30, goals: 4, assists: 2 },
+                    { season: '2023', league: 'Allsvenskan', apps: 28, goals: 2, assists: null }
+                ] },
+                fotmobUrl: 'https://www.fotmob.com/sv/players/474133/aron-bjarnason'
             },
             { 
                 id: '919036', name: 'Wessam Abou Ali', team: 'Columbus Crew', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'MLS (USA)',
-                age: 27, height: '187 cm', foot: 'Höger', contract: '-',
+                age: 27, height: '187 cm', foot: 'Höger', contract: 'Säsongen 2027 (option 2028)', contractSource: { label: 'Columbus Crew', url: 'https://www.columbuscrew.com/news/columbus-crew-acquire-forward-wessam-abou-ali-as-a-designated-player' },
+                sirius: { source: { label: 'FotbollDirekt', url: 'https://fotbolldirekt.se/?p=7340' }, seasons: [
+                    { season: '2023', league: 'Allsvenskan', apps: 16, goals: 10, assists: 1 }
+                ] },
                 fotmobUrl: 'https://www.fotmob.com/sv/players/919036/wessam-abou-ali'
             },
             { 
                 id: '1129082', name: 'Jamie Roche', team: 'Kortrijk', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'Jupiler Pro League (Belgien)',
                 age: 25, height: '186 cm', foot: 'Höger', contract: '-',
+                sirius: { source: { label: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/Jamie_Roche' }, total: { years: '2020–2023', apps: 81, goals: 2 } },
                 fotmobUrl: 'https://www.fotmob.com/sv/players/1129082/jamie-roche'
             },
             { 
                 id: '', name: 'Jesper Nyholm', team: 'Muangthong United', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Thai League 1 (Thailand)',
-                age: 33, height: '185 cm', foot: 'Höger', contract: '-',
+                age: 33, height: '185 cm', foot: 'Höger', contract: '30 juni 2027', contractSource: { label: 'Fotbolltransfers', url: 'https://fotbolltransfers.com/spelare/jesper-nyholm/4329' },
+                sirius: { source: { label: 'Fotbolltransfers', url: 'https://fotbolltransfers.com/spelare/jesper-nyholm/4329' }, seasons: [
+                    { season: '2011', league: '', apps: 2, goals: 0, assists: 0 },
+                    { season: '2012', league: '', apps: 2, goals: 0, assists: null }
+                ] },
                 fotmobUrl: 'https://www.fotmob.com/sv/players/619826'
             }
         ];
@@ -542,6 +587,7 @@
                 bigChances: raw.bigChancesCreated ?? raw.bigChances ?? null,
                 shotsTarget: raw.shotsOnTarget ?? raw.shotsTarget ?? null,
                 touches: raw.touches ?? null,
+                photo: raw.photo || "",
                 matchUrl: raw.matchUrl || ""
             };
         }
@@ -584,63 +630,115 @@
         function buildDatePicker() {
             const container = document.getElementById('date-container');
             container.innerHTML = "";
-            const days = [];
-            const baseDate = new Date();
-
-            for (let i = -7; i <= 7; i++) {
-                const d = new Date(baseDate);
-                d.setDate(baseDate.getDate() + i);
-                const isoDate = d.toISOString().split('T')[0];
-                let label = "";
-
-                if (isoDate === todayStr) label = "Idag";
-                else {
-                    const yesterday = new Date(baseDate);
-                    yesterday.setDate(baseDate.getDate() - 1);
-                    const tomorrow = new Date(baseDate);
-                    tomorrow.setDate(baseDate.getDate() + 1);
-
-                    if (isoDate === yesterday.toISOString().split('T')[0]) label = "Igår";
-                    else if (isoDate === tomorrow.toISOString().split('T')[0]) label = "Imorgon";
-                    else {
-                        label = `${d.toLocaleDateString('sv-SE', { weekday: 'short' })} ${String(d.getDate()).padStart(2, '0')}`;
-                    }
-                }
-
-                days.push({ isoDate, label });
-            }
-
-            days.forEach(day => {
+            const center = addDays(todayStr, dateOffset);
+            for (let i = -2; i <= 2; i++) {
+                const iso = addDays(center, i);
+                let label;
+                if (iso === todayStr) label = "Idag";
+                else if (iso === addDays(todayStr, -1)) label = "Igår";
+                else if (iso === addDays(todayStr, 1)) label = "Imorgon";
+                else label = `${new Date(iso + 'T12:00:00Z').toLocaleDateString('sv-SE', { weekday: 'short', timeZone: 'UTC' })} ${iso.slice(8)}`;
                 const btn = document.createElement('button');
-                btn.className = `date-item ${day.isoDate === selectedDate ? 'active' : ''}`;
-                btn.innerHTML = day.label;
-                btn.onclick = () => {
-                    selectedDate = day.isoDate;
-                    document.querySelectorAll('.date-item').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    renderContent();
-                };
+                btn.className = `date-item ${iso === selectedDate ? 'active' : ''}`;
+                btn.textContent = label;
+                btn.onclick = () => { selectedDate = iso; buildDatePicker(); renderContent(); };
                 container.appendChild(btn);
-            });
+            }
+        }
+
+        function shiftDates(n) {
+            dateOffset += n;
+            selectedDate = addDays(todayStr, dateOffset);
+            buildDatePicker();
+            renderContent();
+        }
+
+        function goHome() {
+            closeModal();
+            closeDropdown();
+            goToday();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goToday() {
+            todayStr = swedenToday();
+            selectedDate = todayStr;
+            dateOffset = 0;
+            buildDatePicker();
+            openResultsView();
+        }
+
+        function syncTrackButtons() {
+            document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('active'));
+            if (currentMode === 'search') document.getElementById('track-btn-search')?.classList.add('active');
+            else document.getElementById(`track-btn-${selectedTrack}`)?.classList.add('active');
         }
 
         function openResultsView() {
             currentMode = 'results';
-            document.getElementById('date-picker-bar').style.display = 'block';
-            document.getElementById('track-selector').style.display = 'flex';
+            document.getElementById('date-picker-bar').style.display = 'flex';
+            document.getElementById('track-selector').style.display = 'grid';
             document.getElementById('view-title').textContent = "RESULTAT & SCHEMA";
+            document.getElementById('view-desc').textContent = "Klicka på ett matchkort eller spelarkort för detaljerad statistik";
             setActiveNav('nav-results');
+            syncTrackButtons();
             renderContent();
         }
 
         function setTrack(track) {
             selectedTrack = track;
-            document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(`track-btn-${track}`)?.classList.add('active');
+            if (currentMode !== 'results') { openResultsView(); return; }
+            syncTrackButtons();
             renderContent();
         }
 
+        function normalizeText(t) {
+            return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        }
+
+        function openSearchView() {
+            closeDropdown();
+            currentMode = 'search';
+            document.getElementById('date-picker-bar').style.display = 'none';
+            document.getElementById('track-selector').style.display = 'grid';
+            document.getElementById('view-title').textContent = "SÖK SPELARE";
+            document.getElementById('view-desc').textContent = "Sök på spelare eller lag";
+            setActiveNav('nav-sparen');
+            syncTrackButtons();
+            const area = document.getElementById('content-area');
+            area.className = "";
+            area.innerHTML = `<input type="search" id="player-search" class="search-input" placeholder="Sök spelare eller lag…" autocomplete="off" aria-label="Sök spelare"><div id="search-results" class="players-grid"></div>`;
+            const input = document.getElementById('player-search');
+            input.addEventListener('input', () => renderSearchResults(input.value));
+            renderSearchResults('');
+            input.focus();
+        }
+
+        function renderSearchResults(query) {
+            const q = normalizeText(query).trim();
+            const list = masterPlayers.filter(p => !q || normalizeText([p.name, p.team, p.league, p.pos, p.trackName].join(' ')).includes(q));
+            const target = document.getElementById('search-results');
+            if (list.length === 0) {
+                target.innerHTML = `<div class="empty-state"><p>Ingen spelare matchar "${query.replace(/[<>&"]/g, '')}".</p><p style="margin-top:8px;">Sökningen gäller spelarna som finns i listan.</p></div>`;
+                return;
+            }
+            renderProfiles(null, list, target);
+        }
+
+        function toggleDropdown(e) {
+            e.stopPropagation();
+            const open = document.getElementById('spar-dropdown').classList.toggle('open');
+            document.getElementById('nav-sparen').setAttribute('aria-expanded', open);
+        }
+        function closeDropdown() {
+            document.getElementById('spar-dropdown').classList.remove('open');
+            document.getElementById('nav-sparen').setAttribute('aria-expanded', 'false');
+        }
+        document.addEventListener('click', closeDropdown);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDropdown(); });
+
         function selectTrackFromMenu(track) {
+            closeDropdown();
             currentMode = 'profiles';
             document.getElementById('date-picker-bar').style.display = 'none';
             document.getElementById('track-selector').style.display = 'none';
@@ -675,7 +773,7 @@
             }
 
             filtered.sort((a,b) => a.player.localeCompare(b.player, 'sv')).forEach((m) => {
-                const imgUrl = m.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(m.playerId)}.png` : '';
+                const imgUrl = m.photo || (m.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(m.playerId)}.png` : '');
                 const scoreHome = displayStat(m.scoreHome);
                 const scoreAway = displayStat(m.scoreAway);
                 const rating = displayStat(m.rating);
@@ -710,12 +808,12 @@
             });
         }
 
-        function renderProfiles(track) {
-            const area = document.getElementById('content-area');
-            area.className = "players-grid";
+        function renderProfiles(track, list, target) {
+            const area = target || document.getElementById('content-area');
+            if (!target) area.className = "players-grid";
             area.innerHTML = "";
 
-            const filtered = track === 'all' ? masterPlayers : masterPlayers.filter(x => x.track === track);
+            const filtered = list ? list.slice() : (track === 'all' ? masterPlayers : masterPlayers.filter(x => x.track === track));
 
             filtered.sort((a,b) => a.name.localeCompare(b.name, 'sv')).forEach(p => {
                 const card = document.createElement('div');
@@ -743,7 +841,7 @@
 
         // ÖPPNAR MATCHSTATISTIK & X-DELNING
         function openMatchStatsModal(p) {
-            const avatarUrl = p.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(p.playerId)}.png` : '';
+            const avatarUrl = p.photo || (p.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(p.playerId)}.png` : '');
             const stat = (label, value, suffix = "") =>
                 `<div class="stat-item"><span>${label}</span><strong>${displayStat(value, suffix)}</strong></div>`;
 
@@ -779,6 +877,50 @@
         }
 
         // ÖPPNAR VERIFIERAD SPELARPROFIL + FOTMOB LIVE-LÄNK
+        // Karriär & övergångar. Lägg till på spelaren i masterPlayers, t.ex.:
+        // transfers: [ { date: '2024-07', from: 'IK Sirius', to: 'AEK Larnaca', fee: '1,2 M€' } ]
+        // Skriv "Lån", "Fri transfer" eller "Ej offentliggjort" när summa saknas.
+        // Karriär i Sirius. Lägg till på spelaren i masterPlayers:
+        // sirius: { source: {label, url}, seasons: [ { season: '2013', league: 'Ettan', apps: 23, goals: 2, assists: null } ] }
+        function siriusHtml(p) {
+            const s = p.sirius;
+            const list = s?.seasons?.length ? s.seasons : (s?.total ? [{ season: s.total.years, league: '', apps: s.total.apps, goals: s.total.goals, assists: s.total.assists ?? null }] : []);
+            if (!list.length) return '';
+            const esc = (x) => String(x ?? '').replace(/[<>&"]/g, '');
+            const n = (v) => (v === null || v === undefined ? '–' : v);
+            const sum = (k) => list.reduce((a, x) => a + (x[k] || 0), 0);
+            const hasAss = list.some((x) => x.assists !== null && x.assists !== undefined);
+            const row = (a, b, c, d, e, bold) => `<div class="sirius-row"${bold ? ' style="font-weight:800;color:#fff;"' : ''}><span>${a}${b ? ` <small>${b}</small>` : ''}</span><span>${c}</span><span>${d}</span><span>${e}</span></div>`;
+            const rows = list.map((x) => row(esc(x.season), esc(x.league), n(x.apps), n(x.goals), n(x.assists))).join('');
+            const total = list.length > 1 ? row('Totalt', '', sum('apps'), sum('goals'), hasAss ? sum('assists') : '–', true) : '';
+            const src = s.source ? ` Källa: <a href="${esc(s.source.url)}" target="_blank" rel="noopener" style="color:var(--sirius-gold);">${esc(s.source.label)}</a>.` : '';
+            return `<div class="modal-section-title" style="margin-top:1rem;">Karriär i Sirius</div><div class="modal-stats-list">${row('Säsong', '', 'M', 'Mål', 'Ass', true)}${rows}${total}</div><p style="color:var(--text-muted);font-size:0.65rem;margin-top:6px;">Ligamatcher. M = matcher.${src}</p>`;
+        }
+        function seasonHtml(p) {
+            const s = p.card?.season;
+            if (!s || !s.apps) return '';
+            const row = (l, v) => `<div class="stat-item"><span>${l}</span><strong>${displayStat(v)}</strong></div>`;
+            return `<div class="modal-section-title" style="margin-top:1rem;">Säsongen ${s.year}</div><div class="modal-stats-list">${row('Matcher (från start)', `${s.apps} (${s.starts})`)}${row('Minuter', s.minutes)}${row('Mål / assist', `${s.goals} / ${s.assists}`)}${row('Snittbetyg', s.rating)}${row('Gula / röda kort', `${s.yellow} / ${s.red}`)}</div>`;
+        }
+        // Källor: lägg till fotbolltransfersUrl / transfermarktUrl på spelaren i masterPlayers för fler länkar.
+        function sourcesHtml(p) {
+            const links = [['Fotbolltransfers', p.fotbolltransfersUrl], ['Transfermarkt', p.transfermarktUrl]].filter((l) => l[1]);
+            const btns = links.map((l) => `<a href="${l[1]}" target="_blank" rel="noopener" class="external-btn" style="margin-top:8px;">Se på ${l[0]}</a>`).join('');
+            const note = p.card ? `Statistik och övergångar: API-Football, hämtat ${new Date(p.card.fetchedAt).toLocaleDateString('sv-SE')}. ` : '';
+            return `${btns}<p style="color:var(--text-muted);font-size:0.65rem;margin-top:10px;">${note}${p.contractSource ? `Kontrakt enligt <a href="${p.contractSource.url}" target="_blank" rel="noopener" style="color:var(--sirius-gold);">${p.contractSource.label}</a>.` : 'Ett streck vid kontrakt betyder att uppgiften saknas.'}</p>`;
+        }
+        function transfersHtml(p) {
+            if (!Array.isArray(p.transfers) || p.transfers.length === 0) return '';
+            const esc = (t) => String(t ?? '').replace(/[<>&"]/g, '');
+            const rows = p.transfers.map(t => `
+                <div class="transfer-row">
+                    <div class="transfer-date">${esc(t.date)}</div>
+                    <div class="transfer-clubs">${esc(t.from)} <span>→</span> ${esc(t.to)}</div>
+                    <div class="transfer-fee">${esc(t.fee || '–')}</div>
+                </div>`).join('');
+            return `<div class="modal-section-title" style="margin-top:1rem;">Karriär & övergångar</div><div class="modal-stats-list">${rows}</div>`;
+        }
+
         function openPlayerProfileModal(p) {
             const avatarUrl = p.id ? `https://images.fotmob.com/image_resources/playerimages/${p.id}.png` : '';
 
@@ -795,10 +937,13 @@
                 <div class="modal-stats-list">
                     <div class="stat-item"><span>Ålder</span><strong>${p.age} år</strong></div>
                     <div class="stat-item"><span>Position</span><strong>${p.pos}</strong></div>
-                    <div class="stat-item"><span>Längd</span><strong>${p.height}</strong></div>
-                    <div class="stat-item"><span>Fot</span><strong>${p.foot}</strong></div>
                     <div class="stat-item"><span>Kontrakt till</span><strong>${p.contract}</strong></div>
                 </div>
+
+                ${siriusHtml(p)}
+                ${seasonHtml(p)}
+                ${transfersHtml(p)}
+                ${sourcesHtml(p)}
 
                 <a href="${p.fotmobUrl}" target="_blank" class="external-btn">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i> Se live-stats & karriär på FotMob
@@ -831,7 +976,23 @@ ${siteUrl}
         function renderContent() { if (currentMode === 'results') renderResults(); }
         function setActiveNav(navId) { document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')); document.getElementById(navId)?.classList.add('active'); }
 
-        window.onload = () => { buildDatePicker(); openResultsView(); loadMatchFeed(); };
+        async function loadCards() {
+            try {
+                const res = await fetch('./data/players.json', { cache: 'no-store' });
+                if (!res.ok) return;
+                const data = await res.json();
+                masterPlayers.forEach((p) => {
+                    const c = (data.players || {})[p.name];
+                    if (!c) return;
+                    p.card = c;
+                    if (c.team) p.team = c.team;
+                    if (c.birth) p.age = Math.floor((Date.now() - new Date(c.birth)) / 31557600000);
+                    if (c.transfers?.length) p.transfers = c.transfers;
+                    p.photo = `https://media.api-sports.io/football/players/${c.apiFootballId}.png`;
+                });
+            } catch (e) { /* kortdata saknas, använd inbyggd */ }
+        }
+        window.onload = () => { goToday(); loadMatchFeed(); loadCards(); };
     </script>
 </body>
 </html>
