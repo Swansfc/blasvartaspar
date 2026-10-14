@@ -44,11 +44,24 @@ def next_data(html):
 
 
 def player_data(pid):
+    """Provar sidan, sedan API:t. Returnerar dict eller None."""
     try:
-        return next_data(get(f"https://www.fotmob.com/sv/players/{pid}"))["props"]["pageProps"]["data"]
+        nd = next_data(get(f"https://www.fotmob.com/sv/players/{pid}"))
+        pp = (nd.get("props") or {}).get("pageProps") or {}
+        data = pp.get("data") or pp.get("playerData")
+        if isinstance(data, dict) and data:
+            return data
+        print(f"  sidan saknade spelardata (pageProps-nycklar: {list(pp.keys())[:8]})")
     except Exception as e:
-        print(f"  sidan misslyckades ({e}), provar API...")
-        return get(f"https://www.fotmob.com/api/playerData?id={pid}", as_json=True)
+        print(f"  sidan misslyckades ({e})")
+    try:
+        data = get(f"https://www.fotmob.com/api/playerData?id={pid}", as_json=True)
+        if isinstance(data, dict) and data:
+            return data
+        print("  API:t gav tomt svar")
+    except Exception as e:
+        print(f"  API:t misslyckades ({e})")
+    return None
 
 
 def num(v):
@@ -63,13 +76,14 @@ def match_details(match_url, pid):
     out = {}
     try:
         d = next_data(get("https://www.fotmob.com" + match_url))
-        ps = d["props"]["pageProps"]["content"]["playerStats"].get(str(pid))
+        content = ((d.get("props") or {}).get("pageProps") or {}).get("content") or {}
+        ps = (content.get("playerStats") or {}).get(str(pid))
         if not ps:
             return out
         found = {}
-        for grp in ps.get("stats", []):
-            for title, obj in (grp.get("stats") or {}).items():
-                found[title.lower()] = obj.get("stat") or {}
+        for grp in ps.get("stats") or []:
+            for title, obj in ((grp or {}).get("stats") or {}).items():
+                found[title.lower()] = ((obj or {}).get("stat")) or {}
         def val(*names):
             for n in names:
                 if n in found:
@@ -78,11 +92,14 @@ def match_details(match_url, pid):
         p = val("accurate passes")
         if p and p.get("value") is not None and p.get("total") is not None:
             out["passes"] = f'{p["value"]}/{p["total"]}'
+        r = val("fotmob rating")
+        if r and num(r.get("value")) is not None:
+            out["rating"] = num(r["value"])
         for key, names in {"chances": ("chances created",), "bigChances": ("big chances created",),
                            "shotsTarget": ("shots on target",), "touches": ("touches",)}.items():
-            s = val(*names)
-            if s and s.get("value") is not None:
-                out[key] = s["value"]
+            s_ = val(*names)
+            if s_ and s_.get("value") is not None:
+                out[key] = s_["value"]
     except Exception as e:
         print(f"    (ingen detaljstatistik: {e})")
     return out
@@ -106,11 +123,18 @@ def main():
         except Exception as e:
             print(f"  FEL: {e}")
             continue
+        if not data:
+            print("  hoppar över spelaren (ingen data)")
+            continue
         ok += 1
         recent = data.get("recentMatches") or []
         if isinstance(recent, dict):
             recent = recent.get("matches", [])
         team = (data.get("primaryTeam") or {}).get("teamName") or p["team"]
+        if recent:
+            print(f"  fält i matchlistan: {sorted(recent[0].keys())}")
+        else:
+            print(f"  inga recentMatches (nycklar i data: {sorted(data.keys())[:10]})")
         for r in recent:
             try:
                 utc = datetime.fromisoformat(
@@ -130,7 +154,7 @@ def main():
                 "away": opp if home_is_player else mine,
                 "scoreHome": r.get("homeScore"), "scoreAway": r.get("awayScore"),
                 "status": "Slut",
-                "rating": num((r.get("ratingProps") or {}).get("num")),
+                "rating": num((r.get("ratingProps") or {}).get("num") or r.get("rating")),
                 "mins": r.get("minutesPlayed"), "goals": r.get("goals"), "ass": r.get("assists"),
                 "passes": None, "chances": None,
                 "matchUrl": ("https://www.fotmob.com" + r["matchPageUrl"]) if r.get("matchPageUrl") else "",
@@ -138,7 +162,10 @@ def main():
             if r.get("onBench") and not row["mins"]:
                 row["status"] = "Slut (bänken)"
             if r.get("matchPageUrl") and row["mins"]:
-                row.update(match_details(r["matchPageUrl"], p["id"]))
+                det = match_details(r["matchPageUrl"], p["id"])
+                if row["rating"] is not None:
+                    det.pop("rating", None)
+                row.update(det)
                 time.sleep(0.7)
             kept[(p["id"], row["matchId"])] = row
             print(f'  {row["matchDate"]} {row["home"]} {row["scoreHome"]}-{row["scoreAway"]} {row["away"]}'
