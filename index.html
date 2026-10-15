@@ -142,7 +142,7 @@
             align-items: center;
             gap: 4px;
         }
-        .date-picker-container { flex: 1; min-width: 0; display: flex; gap: 4px; }
+        .date-picker-container { flex: 1; min-width: 0; display: flex; gap: 4px; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
         .date-item {
             flex: 1;
             min-width: 0;
@@ -462,9 +462,9 @@
 
     <!-- DATUMVÄLJARE -->
     <div class="date-picker-bar" id="date-picker-bar">
-        <button class="date-arrow" onclick="shiftDates(-5)" aria-label="Tidigare datum"><svg viewBox="0 0 24 24"><path d="M15.5 4 7 12l8.5 8z"/></svg></button>
+        <button class="date-arrow" onclick="shiftDates(-1)" aria-label="Tidigare datum"><svg viewBox="0 0 24 24"><path d="M15.5 4 7 12l8.5 8z"/></svg></button>
         <div class="date-picker-container" id="date-container"></div>
-        <button class="date-arrow" onclick="shiftDates(5)" aria-label="Senare datum"><svg viewBox="0 0 24 24"><path d="M8.5 4 17 12l-8.5 8z"/></svg></button>
+        <button class="date-arrow" onclick="shiftDates(1)" aria-label="Senare datum"><svg viewBox="0 0 24 24"><path d="M8.5 4 17 12l-8.5 8z"/></svg></button>
     </div>
 
     <main>
@@ -507,6 +507,34 @@
 
         // CENTRAL SPELARDATABAS (Endast verifierad fakta + direktlänk till FotMob)
         const masterPlayers = [
+            {
+                id: '1457824', name: 'Malcolm Jeng', team: 'FC Groningen (lån)', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Eredivisie (Nederländerna)',
+                verified: true, nat: 'Sverige', birth: '2005-03-09', born: '9 mars 2005', age: 21, height: '190 cm', foot: 'Vänster', contract: '30 juni 2027 (lån från Reims)',
+                sirius: { seasons: [
+                    { season: '2023', league: '', apps: 20, goals: 0, assists: 0 },
+                    { season: '2023/2024', league: '', apps: 2, goals: 0, assists: 0 },
+                    { season: '2024', league: '', apps: 30, goals: 0, assists: 1 },
+                    { season: '2024/2025', league: '', apps: 1, goals: 0, assists: 0 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'Reims', season: '2024/2025', apps: 4, goals: 0, assists: 0, rating: 6.3 },
+                        { club: 'Reims B', season: '2024/2025', apps: 1, goals: 0, assists: 0, rating: null },
+                        { club: 'Feyenoord', season: '2025/2026', apps: 2, goals: 0, assists: 0, rating: 6.9 }
+                    ],
+                    before: []
+                },
+                transfers: [
+                    { date: '2027-06-30', from: 'FC Groningen', to: 'Stade Reims', fee: 'Lånet slutar' },
+                    { date: '2026-07-30', from: 'Stade Reims', to: 'FC Groningen', fee: 'Lån' },
+                    { date: '2026-06-30', from: 'Feyenoord', to: 'Stade Reims', fee: 'Lånet slut' },
+                    { date: '2025-09-01', from: 'Stade Reims', to: 'Feyenoord', fee: 'Lån' },
+                    { date: '2025-01-12', from: 'Sirius', to: 'Stade Reims', fee: '2,5 mn €' },
+                    { date: '2023-01-01', from: 'Sirius U19', to: 'Sirius', fee: '' },
+                    { date: '2021-07-01', from: 'IFK Haninge U17', to: 'IK Sirius Jgd.', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1457824/malcolm-jeng'
+            },
             {
                 id: '961305', name: 'Benjamin Mbunga Kimpioka', team: 'Asteras Tripolis', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänsterytter', league: 'Super League (Grekland)',
                 verified: true, nat: 'Sverige, DR Kongo', birth: '2000-02-21', born: '21 feb 2000', age: 26, height: '185 cm', foot: 'Höger', contract: '30 juni 2028',
@@ -805,6 +833,7 @@
                 league: raw.leagueName || raw.league || "",
                 matchDate: String(raw.matchDate || raw.date || "").slice(0, 10),
                 kickoff: raw.kickoff || "",
+                teamOnly: !!raw.teamOnly,
                 home: raw.homeTeam || raw.home || "",
                 away: raw.awayTeam || raw.away || "",
                 scoreHome: raw.homeScore ?? raw.scoreHome ?? null,
@@ -876,6 +905,43 @@
                 btn.onclick = () => { selectedDate = iso; buildDatePicker(); renderContent(); };
                 container.appendChild(btn);
             }
+        }
+
+        // Svep i datumraden: en dag per fast sträcka, oberoende av fingrets hastighet
+        let swipeJustHappened = false;
+        function setupDateSwipe() {
+            const el = document.getElementById('date-container');
+            if (!el) return;
+            const STEP_PX = 56;
+            let startX = null, moved = false, pid = null;
+            el.addEventListener('pointerdown', (e) => {
+                startX = e.clientX; moved = false; pid = e.pointerId;
+            });
+            el.addEventListener('pointermove', (e) => {
+                if (startX === null || e.pointerId !== pid) return;
+                const dx = e.clientX - startX;
+                if (Math.abs(dx) < STEP_PX) return;
+                const steps = Math.trunc(Math.abs(dx) / STEP_PX);
+                const dir = dx > 0 ? -1 : 1;
+                startX += Math.sign(dx) * steps * STEP_PX;
+                moved = true;
+                shiftDates(dir * steps);
+            });
+            const end = () => {
+                if (moved) { swipeJustHappened = true; setTimeout(() => { swipeJustHappened = false; }, 60); }
+                startX = null; moved = false; pid = null;
+            };
+            el.addEventListener('pointerup', end);
+            el.addEventListener('pointercancel', end);
+            el.addEventListener('click', (e) => { if (swipeJustHappened) { e.stopPropagation(); e.preventDefault(); } }, true);
+        }
+        window.addEventListener('load', setupDateSwipe);
+
+        function jumpToDate(iso) {
+            selectedDate = iso;
+            dateOffset = Math.round((new Date(iso + 'T12:00:00Z') - new Date(todayStr + 'T12:00:00Z')) / 86400000);
+            buildDatePicker();
+            renderContent();
         }
 
         function shiftDates(n) {
@@ -1000,7 +1066,13 @@
             );
 
             if (filtered.length === 0) {
-                area.innerHTML = `<div class="empty-state"><p>Inga matchdata hittades för ${selectedDate} i valt spår.</p><p style="margin-top:8px;">Det betyder inte nödvändigtvis att spelaren inte spelade; datakällans täckning kan variera. Kommande matcher visas för de närmaste 14 dagarna.</p></div>`;
+                const dates = [...new Set(playersData.filter(m => selectedTrack === 'all' || m.track === selectedTrack).map(m => m.matchDate))].sort();
+                const prevD = dates.filter(d => d < selectedDate).pop();
+                const nextD = dates.find(d => d > selectedDate);
+                const fmt = (d) => new Date(d + 'T12:00:00Z').toLocaleDateString('sv-SE', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+                const jump = (d, label) => `<button class="nav-btn" style="margin:6px 4px;" onclick="jumpToDate('${d}')">${label}</button>`;
+                const jumps = (prevD || nextD) ? `<div style="margin-top:12px;">${prevD ? jump(prevD, '← Senaste: ' + fmt(prevD)) : ''}${nextD ? jump(nextD, 'Nästa: ' + fmt(nextD) + ' →') : ''}</div>` : '';
+                area.innerHTML = `<div class="empty-state"><p>Inga matchdata hittades för ${selectedDate} i valt spår.</p>${jumps}<p style="margin-top:8px;">Det betyder inte nödvändigtvis att spelaren inte spelade; datakällans täckning kan variera. Matcher visas 7 dagar bakåt och 7 dagar framåt.</p></div>`;
                 return;
             }
 
@@ -1035,7 +1107,7 @@
                                 <span>${m.team || ""}</span>
                             </div>
                         </div>
-                        <div class="player-quick-stats">${isUpcoming ? "Lagets match" : `${mins} <span>min</span> | ${goals}G ${assists}A`}</div>
+                        <div class="player-quick-stats">${(isUpcoming || m.teamOnly) ? "Lagets match" : `${mins} <span>min</span> | ${goals}G ${assists}A`}</div>
                     </div>`;
                 area.appendChild(card);
             });
@@ -1084,20 +1156,21 @@
                     <h3 style="color:#fff; font-size:1rem; font-weight:900;">${p.player}</h3>
                     <p style="color:var(--sirius-gold); font-size:0.8rem; font-weight:700;">${p.team}</p>
                 </div>
-                <div class="modal-section-title">Kommande match</div>
+                <div class="modal-section-title">${p.teamOnly ? 'Lagets match' : 'Kommande match'}</div>
                 <div class="modal-stats-list">
                     ${stat('Datum', p.matchDate)}
-                    ${stat('Avspark (svensk tid)', p.kickoff)}
+                    ${p.teamOnly ? stat('Resultat', (p.scoreHome ?? '–') + ' – ' + (p.scoreAway ?? '–')) : stat('Avspark (svensk tid)', p.kickoff)}
                     ${stat('Hemmalag', p.home)}
                     ${stat('Bortalag', p.away)}
                     ${stat('Tävling', p.league)}
                 </div>
+                ${p.teamOnly ? '<p style="color:var(--text-muted);font-size:0.72rem;margin-top:8px;">Ingen spelardata hittades för den här matchen.</p>' : ''}
                 ${p.matchUrl ? `<a class="external-btn" href="${p.matchUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Öppna match hos datakällan</a>` : ''}`;
             document.getElementById('stats-modal').classList.add('active');
         }
 
         function openMatchStatsModal(p) {
-            if (p.status === 'Kommande') { openUpcomingModal(p); return; }
+            if (p.status === 'Kommande' || p.teamOnly) { openUpcomingModal(p); return; }
             const avatarUrl = p.photo || (p.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(p.playerId)}.png` : '');
             const stat = (label, value, suffix = "") =>
                 `<div class="stat-item"><span>${label}</span><strong>${displayStat(value, suffix)}</strong></div>`;
