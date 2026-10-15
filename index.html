@@ -333,6 +333,11 @@
             padding-bottom: 4px;
         }
 
+        details.fold { margin-top: 0.9rem; }
+        details.fold > summary { list-style: none; cursor: pointer; margin: 0 0 0.5rem 0; display: flex; justify-content: space-between; align-items: center; }
+        details.fold > summary::-webkit-details-marker { display: none; }
+        details.fold > summary::after { content: '▾'; font-size: 0.85rem; }
+        details.fold[open] > summary::after { content: '▴'; }
         .modal-stats-list { background: #081230; border-radius: 10px; padding: 0.6rem; border: 1px solid var(--card-border); }
         .stat-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.78rem; }
         .stat-item:last-child { border-bottom: none; }
@@ -503,8 +508,233 @@
         // CENTRAL SPELARDATABAS (Endast verifierad fakta + direktlänk till FotMob)
         const masterPlayers = [
             {
+                id: '961305', name: 'Benjamin Mbunga Kimpioka', team: 'Asteras Tripolis', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänsterytter', league: 'Super League (Grekland)',
+                verified: true, nat: 'Sverige, DR Kongo', birth: '2000-02-21', born: '21 feb 2000', age: 26, height: '185 cm', foot: 'Höger', contract: '30 juni 2028',
+                sirius: { seasons: [] },
+                career: {
+                    after: [
+                        { club: 'Sunderland', season: '2018/2019', apps: 9, goals: 2, assists: 0, rating: null },
+                        { club: 'Sunderland', season: '2019/2020', apps: 5, goals: 1, assists: 0, rating: 5.8 },
+                        { club: 'Torquay United', season: '2020/2021', apps: 10, goals: 0, assists: 0, rating: null },
+                        { club: 'Southend United', season: '2021/2022', apps: 2, goals: 0, assists: 0, rating: null },
+                        { club: 'Sunderland', season: '2021/2022', apps: 4, goals: 1, assists: 0, rating: 6.9 },
+                        { club: 'AIK', season: '2022', apps: 16, goals: 1, assists: 0, rating: 6.4 },
+                        { club: 'AIK', season: '2022/2023', apps: 7, goals: 0, assists: 0, rating: null },
+                        { club: 'Luzern', season: '2022/2023', apps: 7, goals: 1, assists: 0, rating: 6.1 },
+                        { club: 'St. Johnstone', season: '2023/2024', apps: 18, goals: 3, assists: 0, rating: 6.4 },
+                        { club: 'St. Johnstone', season: '2024/2025', apps: 33, goals: 11, assists: 2, rating: 6.4 },
+                        { club: 'Sivasspor', season: '2025/2026', apps: 20, goals: 2, assists: 2, rating: 6.3 },
+                        { club: 'Tondela', season: '2025/2026', apps: 10, goals: 0, assists: 0, rating: 6.1 },
+                        { club: 'Asteras Tripolis', season: '2026/2027', apps: 4, goals: 0, assists: 0, rating: 6.4 }
+                    ],
+                    before: []
+                },
+                transfers: [
+                    { date: '2026-07-20', from: 'Sivasspor', to: 'Asteras Tripolis', fee: 'Fri övergång' },
+                    { date: '2026-06-30', from: 'Tondela', to: 'Sivasspor', fee: 'Lånet slut' },
+                    { date: '2026-02-02', from: 'Sivasspor', to: 'Tondela', fee: 'Lån' },
+                    { date: '2025-07-24', from: 'St. Johnstone', to: 'Sivasspor', fee: 'Fri övergång' },
+                    { date: '2024-01-02', from: 'AIK', to: 'St. Johnstone', fee: 'Fri övergång' },
+                    { date: '2023-06-30', from: 'FC Luzern', to: 'AIK', fee: 'Lånet slut' },
+                    { date: '2023-01-23', from: 'AIK', to: 'FC Luzern', fee: 'Lån' },
+                    { date: '2022-03-31', from: 'Sunderland', to: 'AIK', fee: 'Okänd' },
+                    { date: '2021-10-28', from: 'Southend United', to: 'Sunderland', fee: 'Lånet slut' },
+                    { date: '2021-09-30', from: 'Sunderland', to: 'Southend United', fee: 'Lån' },
+                    { date: '2021-06-21', from: 'Torquay United', to: 'Sunderland', fee: 'Lånet slut' },
+                    { date: '2021-03-27', from: 'Sunderland', to: 'Torquay United', fee: 'Lån' },
+                    { date: '2016-07-01', from: 'IK Sirius U17', to: 'Sunderland U18', fee: 'Okänd' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/961305/benjamin-mbunga-kimpioka'
+            },
+            {
+                id: '839970', name: 'Magnus Kaastrup', team: 'Aarhus Fremad', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänsterytter', league: '1. Division (Danmark)',
+                verified: true, nat: 'Danmark', birth: '2000-12-28', born: '28 dec 2000', age: 25, height: '176 cm', foot: 'Vänster', contract: '30 juni 2027',
+                sirius: { seasons: [
+                    { season: '2023', league: '', apps: 10, goals: 0, assists: 1 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'VVV-Venlo', season: '2023/2024', apps: 33, goals: 4, assists: 3, rating: 6.7 },
+                        { club: 'Vendsyssel FF', season: '2024/2025', apps: 32, goals: 5, assists: 3, rating: 6.9 },
+                        { club: 'Aarhus Fremad', season: '2025/2026', apps: 34, goals: 8, assists: 6, rating: 7.0 },
+                        { club: 'Aarhus Fremad', season: '2026/2027', apps: 12, goals: 5, assists: 1, rating: 7.4 }
+                    ],
+                    before: [
+                        { club: 'AGF', season: '2017/2018', apps: 10, goals: 0, assists: 0, rating: 6.1 },
+                        { club: 'AGF', season: '2018/2019', apps: 5, goals: 0, assists: 0, rating: 6.1 },
+                        { club: 'Borussia Dortmund II', season: '2019/2020', apps: 17, goals: 3, assists: 0, rating: null },
+                        { club: 'Viborg', season: '2020/2021', apps: 10, goals: 1, assists: 0, rating: null },
+                        { club: 'Lyngby', season: '2020/2021', apps: 17, goals: 2, assists: 1, rating: 6.6 },
+                        { club: 'Lyngby', season: '2021/2022', apps: 35, goals: 12, assists: 8, rating: null },
+                        { club: 'Lyngby', season: '2022/2023', apps: 20, goals: 0, assists: 1, rating: 6.5 }
+                    ]
+                },
+                transfers: [
+                    { date: '2025-07-01', from: 'Vendsyssel FF', to: 'Aarhus Fremad', fee: 'Okänd' },
+                    { date: '2024-07-01', from: 'Lyngby BK', to: 'Vendsyssel FF', fee: 'Okänd' },
+                    { date: '2024-06-30', from: 'VVV-Venlo', to: 'Lyngby BK', fee: 'Lånet slut' },
+                    { date: '2023-08-30', from: 'Lyngby BK', to: 'VVV-Venlo', fee: 'Lån' },
+                    { date: '2023-06-30', from: 'Sirius', to: 'Lyngby BK', fee: 'Lånet slut' },
+                    { date: '2023-03-28', from: 'Lyngby BK', to: 'Sirius', fee: 'Lån' },
+                    { date: '2021-02-01', from: 'Aarhus GF', to: 'Lyngby BK', fee: 'Okänd' },
+                    { date: '2020-12-31', from: 'Viborg FF', to: 'Aarhus GF', fee: 'Lånet slut' },
+                    { date: '2020-10-05', from: 'Aarhus GF', to: 'Viborg FF', fee: 'Lån' },
+                    { date: '2020-06-30', from: 'Borussia Dortmund II', to: 'Aarhus GF', fee: 'Lånet slut' },
+                    { date: '2019-07-01', from: 'Aarhus GF', to: 'Borussia Dortmund II', fee: 'Lån (150 tn €)' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/839970/magnus-kaastrup'
+            },
+            {
+                id: '1183360', name: 'Yousef Salech', team: 'Cardiff City', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'Championship (England)',
+                verified: true, nat: 'Danmark, Palestina', birth: '2002-01-17', born: '17 jan 2002', age: 24, height: '195 cm', foot: 'Höger', contract: '30 juni 2030',
+                sirius: { seasons: [
+                    { season: '2023/2024', league: '', apps: 1, goals: 1, assists: 0 },
+                    { season: '2024', league: '', apps: 27, goals: 11, assists: 4 },
+                    { season: '2024/2025', league: '', apps: 1, goals: 1, assists: 0 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'Cardiff', season: '2024/2025', apps: 22, goals: 9, assists: 1, rating: 7.0 },
+                        { club: 'Cardiff', season: '2025/2026', apps: 41, goals: 15, assists: 4, rating: 7.1 },
+                        { club: 'Cardiff', season: '2026/2027', apps: 10, goals: 5, assists: 2, rating: 7.1 }
+                    ],
+                    before: [
+                        { club: 'Brøndby IF', season: '2021/2022', apps: 2, goals: 0, assists: 0, rating: 5.7 },
+                        { club: 'Brøndby IF', season: '2022/2023', apps: 6, goals: 0, assists: 0, rating: 6.2 },
+                        { club: 'HB Køge', season: '2022/2023', apps: 25, goals: 15, assists: 3, rating: 7.4 },
+                        { club: 'SK Beveren', season: '2023/2024', apps: 19, goals: 1, assists: 1, rating: null },
+                        { club: 'Brøndby IF', season: '2023/2024', apps: 3, goals: 0, assists: 0, rating: 6.7 }
+                    ]
+                },
+                transfers: [
+                    { date: '2025-01-17', from: 'Sirius', to: 'Cardiff', fee: '4 mn €' },
+                    { date: '2024-02-22', from: 'Brøndby IF', to: 'Sirius', fee: '500 tn €' },
+                    { date: '2024-02-21', from: 'SK Beveren', to: 'Brøndby IF', fee: 'Lånet slut' },
+                    { date: '2023-08-29', from: 'Brøndby IF', to: 'SK Beveren', fee: 'Lån' },
+                    { date: '2023-06-30', from: 'HB Køge', to: 'Brøndby IF', fee: 'Lånet slut' },
+                    { date: '2022-08-31', from: 'Brøndby IF', to: 'HB Køge', fee: 'Lån' },
+                    { date: '2021-07-01', from: 'Hellerup IK', to: 'Brøndby IF', fee: 'Okänd' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1183360/yousef-salech'
+            },
+            {
+                id: '793909', name: 'Joseph Colley', team: 'KF Tirana', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Kategoria Superiore (Albanien)',
+                verified: true, nat: 'Gambia, Sverige', birth: '1999-04-13', born: '13 apr 1999', age: 27, height: '187 cm', foot: 'Höger', contract: '30 juni 2027',
+                sirius: { seasons: [
+                    { season: '2021', league: '', apps: 23, goals: 0, assists: 0 },
+                    { season: '2021/2022', league: '', apps: 1, goals: 0, assists: 0 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'Wisła Kraków', season: '2021/2022', apps: 12, goals: 0, assists: 0, rating: null },
+                        { club: 'Wisła Kraków', season: '2022/2023', apps: 17, goals: 0, assists: 0, rating: null },
+                        { club: 'Wisła Kraków', season: '2023/2024', apps: 33, goals: 0, assists: 0, rating: null },
+                        { club: 'Wisła Kraków', season: '2024/2025', apps: 8, goals: 0, assists: 0, rating: null },
+                        { club: 'Wisła Kraków', season: '2025/2026', apps: 8, goals: 0, assists: 0, rating: null },
+                        { club: 'KF Tirana', season: '2026/2027', apps: 4, goals: 0, assists: 0, rating: null }
+                    ],
+                    before: []
+                },
+                transfers: [
+                    { date: '2026-07-07', from: 'Wisła Kraków', to: 'KF Tirana', fee: 'Fri övergång' },
+                    { date: '2022-01-18', from: 'Chievo Verona', to: 'Wisła Kraków', fee: 'Fri övergång' },
+                    { date: '2021-12-31', from: 'Sirius', to: 'Chievo Verona', fee: 'Lånet slut' },
+                    { date: '2021-03-25', from: 'Chievo Verona', to: 'Sirius', fee: 'Lån' },
+                    { date: '2019-09-02', from: 'Chelsea U23', to: 'Chievo Verona', fee: 'Fri övergång' },
+                    { date: '2015-07-01', from: 'IF Bromma U19', to: 'Chelsea U18', fee: 'Okänd' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/793909/joseph-colley'
+            },
+            {
+                id: '831044', name: 'Hjalmar Ekdal', team: 'Burnley', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Championship (England)',
+                verified: true, nat: 'Sverige', birth: '1998-10-21', born: '21 okt 1998', age: 27, height: '187 cm', foot: 'Höger', contract: '30 juni 2027',
+                sirius: { seasons: [
+                    { season: '2019/2020', league: '', apps: 1, goals: 0, assists: 0 },
+                    { season: '2020', league: '', apps: 26, goals: 0, assists: 0 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'Djurgården', season: '2020/2021', apps: 5, goals: 0, assists: 0, rating: null },
+                        { club: 'Djurgården', season: '2021', apps: 26, goals: 4, assists: 0, rating: 7.4 },
+                        { club: 'Djurgården', season: '2021/2022', apps: 6, goals: 2, assists: 0, rating: null },
+                        { club: 'Djurgården', season: '2022', apps: 24, goals: 3, assists: 0, rating: 7.3 },
+                        { club: 'Djurgården', season: '2022/2023', apps: 12, goals: 1, assists: 0, rating: 7.2 },
+                        { club: 'Burnley', season: '2022/2023', apps: 9, goals: 1, assists: 1, rating: 7.5 },
+                        { club: 'Burnley', season: '2023/2024', apps: 9, goals: 0, assists: 0, rating: 6.5 },
+                        { club: 'Burnley', season: '2024/2025', apps: 1, goals: 0, assists: 0, rating: null },
+                        { club: 'FC Groningen', season: '2024/2025', apps: 14, goals: 0, assists: 0, rating: 6.9 },
+                        { club: 'Burnley', season: '2025/2026', apps: 21, goals: 0, assists: 1, rating: 6.5 },
+                        { club: 'Burnley', season: '2026/2027', apps: 5, goals: 0, assists: 0, rating: 6.6 }
+                    ],
+                    before: [
+                        { club: 'Assyriska FF', season: '2018', apps: 1, goals: 0, assists: 0, rating: null },
+                        { club: 'Hammarby TFF', season: '2018', apps: 19, goals: 3, assists: 0, rating: null },
+                        { club: 'Hammarby TFF', season: '2019', apps: 30, goals: 2, assists: 0, rating: null },
+                        { club: 'Hammarby TFF', season: '2019', apps: 2, goals: 0, assists: 0, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2025-06-30', from: 'FC Groningen', to: 'Burnley', fee: 'Lånet slut' },
+                    { date: '2025-01-23', from: 'Burnley', to: 'FC Groningen', fee: 'Lån' },
+                    { date: '2023-01-21', from: 'Djurgården', to: 'Burnley', fee: '2,8 mn €' },
+                    { date: '2021-01-08', from: 'Hammarby', to: 'Djurgården', fee: '70 tn €' },
+                    { date: '2020-11-30', from: 'Sirius', to: 'Hammarby', fee: 'Lånet slut' },
+                    { date: '2020-03-03', from: 'Hammarby', to: 'Sirius', fee: 'Lån' },
+                    { date: '2019-11-30', from: 'IK Frej Täby', to: 'Hammarby', fee: 'Lånet slut' },
+                    { date: '2019-07-20', from: 'Hammarby', to: 'IK Frej Täby', fee: 'Lån' },
+                    { date: '2019-07-19', from: 'IK Frej Täby', to: 'Hammarby', fee: 'Okänd' },
+                    { date: '2018-11-30', from: 'Assyriska FF', to: 'IK Frej Täby', fee: 'Lånet slut' },
+                    { date: '2018-06-09', from: 'IK Frej Täby', to: 'Assyriska FF', fee: 'Lån' },
+                    { date: '2018-05-01', from: 'UNC Wilmington', to: 'IK Frej Täby', fee: 'Fri övergång' },
+                    { date: '2017-06-28', from: 'Brommapojkarna', to: 'UNC Wilmington', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/831044/hjalmar-ekdal'
+            },
+            {
+                id: '639580', name: 'Marcus Mathisen', team: 'FC St. Pauli', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: '2. Bundesliga (Tyskland)',
+                verified: true, nat: 'Danmark', birth: '1996-02-27', born: '27 feb 1996', age: 30, height: '185 cm', foot: 'Höger', contract: '-',
+                sourceNote: 'Karriärstatistik: FotMob. Övergångar, position och personuppgifter: Transfermarkt. Inhämtat 14 okt 2026.',
+                sirius: { note: 'Alla tävlingar enligt FotMob (liga och cup). M = matcher.', source: { label: 'FotMob', url: 'https://www.fotmob.com/sv/players/639580' }, seasons: [
+                    { season: '2020/2021', league: '', apps: 3, goals: 1, assists: 0 },
+                    { season: '2021', league: '', apps: 27, goals: 2, assists: 2 },
+                    { season: '2021/2022', league: '', apps: 4, goals: 0, assists: 0 },
+                    { season: '2022', league: '', apps: 25, goals: 3, assists: 2 },
+                    { season: '2022/2023', league: '', apps: 4, goals: 2, assists: 0 },
+                    { season: '2023', league: '', apps: 12, goals: 1, assists: 0 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'Wehen Wiesbaden', season: '2023/2024', apps: 34, goals: 0, assists: 0, rating: 7.0 },
+                        { club: 'Magdeburg', season: '2024/2025', apps: 31, goals: 3, assists: 3, rating: 7.3 },
+                        { club: 'Magdeburg', season: '2025/2026', apps: 35, goals: 1, assists: 1, rating: 7.1 },
+                        { club: 'St. Pauli', season: '2026/2027', apps: 5, goals: 1, assists: 0, rating: 7.2 }
+                    ],
+                    before: [
+                        { club: 'FC København U19', season: 'Ungdom', apps: 7, goals: 1, assists: 0, rating: null },
+                        { club: 'FC København', season: '2014/2015', apps: 1, goals: 0, assists: 0, rating: null },
+                        { club: 'FC København', season: '2015/2016', apps: 3, goals: 0, assists: 0, rating: null },
+                        { club: 'Halmstads BK', season: '2016', apps: 18, goals: 4, assists: 0, rating: null },
+                        { club: 'Halmstads BK', season: '2017', apps: 32, goals: 2, assists: 0, rating: 7.7 },
+                        { club: 'Halmstads BK', season: '2018', apps: 27, goals: 4, assists: 0, rating: null },
+                        { club: 'Falkenbergs FF', season: '2018/2019', apps: 3, goals: 1, assists: 0, rating: null },
+                        { club: 'Falkenbergs FF', season: '2019', apps: 18, goals: 1, assists: 0, rating: 6.7 },
+                        { club: 'Falkenbergs FF', season: '2019/2020', apps: 3, goals: 0, assists: 0, rating: null },
+                        { club: 'Falkenbergs FF', season: '2020', apps: 25, goals: 2, assists: 1, rating: 7.1 }
+                    ]
+                },
+                transfers: [
+                    { date: '2026-07-01', from: 'Magdeburg', to: 'St. Pauli', fee: 'Fri övergång' },
+                    { date: '2024-07-01', from: 'Wehen Wiesbaden', to: 'Magdeburg', fee: 'Okänd' },
+                    { date: '2023-07-01', from: 'Sirius', to: 'Wehen Wiesbaden', fee: 'Fri övergång' },
+                    { date: '2021-01-04', from: 'Falkenbergs FF', to: 'Sirius', fee: 'Fri övergång' },
+                    { date: '2019-01-12', from: 'Halmstads BK', to: 'Falkenbergs FF', fee: 'Fri övergång' },
+                    { date: '2016-08-02', from: 'FC København', to: 'Halmstads BK', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/639580/marcus-mathisen'
+            },
+            {
                 id: '982336', name: 'Tashreeq Matthews', team: 'Mamelodi Sundowns FC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Yttermittfältare', league: 'Premier Soccer League (Sydafrika)',
-                age: 26, height: '175 cm', foot: 'Höger', contract: '-',
+                verified: true, nat: 'Sydafrika', birth: '2000-09-12', born: '12 sep 2000', age: 26, height: '175 cm', foot: 'Höger', contract: '-',
                 fotmobUrl: 'https://www.fotmob.com/sv/players/982336/tashreeq-matthews'
             },
             { 
@@ -880,7 +1110,6 @@
         function siriusHtml(p) {
             const s = p.sirius;
             const list = s?.seasons?.length ? s.seasons : (s?.total ? [{ season: s.total.years, league: '', apps: s.total.apps, goals: s.total.goals, assists: s.total.assists ?? null }] : []);
-            if (!list.length) return '';
             const esc = (x) => String(x ?? '').replace(/[<>&"]/g, '');
             const n = (v) => (v === null || v === undefined ? '–' : v);
             const sum = (k) => list.reduce((a, x) => a + (x[k] || 0), 0);
@@ -888,15 +1117,28 @@
             const row = (a, b, c, d, e, bold) => `<div class="sirius-row"${bold ? ' style="font-weight:800;color:#fff;"' : ''}><span>${a}${b ? ` <small>${b}</small>` : ''}</span><span>${c}</span><span>${d}</span><span>${e}</span></div>`;
             const rows = list.map((x) => row(esc(x.season), esc(x.league), n(x.apps), n(x.goals), n(x.assists))).join('');
             const total = list.length > 1 ? row('Totalt', '', sum('apps'), sum('goals'), hasAss ? sum('assists') : '–', true) : '';
-            const src = s.source ? ` Källa: <a href="${esc(s.source.url)}" target="_blank" rel="noopener" style="color:var(--sirius-gold);">${esc(s.source.label)}</a>.` : '';
-            return `<div class="modal-section-title" style="margin-top:1rem;">Karriär i Sirius</div><div class="modal-stats-list">${row('Säsong', '', 'M', 'Mål', 'Ass', true)}${rows}${total}</div><p style="color:var(--text-muted);font-size:0.65rem;margin-top:6px;">Ligamatcher. M = matcher.${src}</p>`;
+            return `<details class="fold"><summary class="modal-section-title">Karriär i Sirius</summary><div class="modal-stats-list">${row('Säsong', '', 'M', 'Mål', 'Ass', true)}${rows}${total}</div></details>`;
+        }
+
+        function careerHtml(p) {
+            const c = p.career || {};
+            const esc = (x) => String(x ?? '').replace(/[<>&\"]/g, '');
+            const n = (v) => (v === null || v === undefined ? '–' : v);
+            const rt = (v) => (v === null || v === undefined ? '–' : Number(v).toFixed(1).replace('.', ','));
+            const grid = 'display:grid;grid-template-columns:1fr 28px 30px 30px 36px;gap:6px;padding:6px 0;border-bottom:1px solid var(--card-border);font-size:0.76rem;color:var(--text-muted);';
+            const row = (club, season, a, g, s, r, bold) => `<div style="${grid}${bold ? 'font-weight:800;color:#fff;' : ''}"><span>${club}${season ? ` <small style="color:var(--sirius-gold);font-size:0.65rem;">${season}</small>` : ''}</span><span style="text-align:right">${a}</span><span style="text-align:right">${g}</span><span style="text-align:right">${s}</span><span style="text-align:right">${r}</span></div>`;
+            const table = (list) => row('Klubb', '', 'M', 'Mål', 'Ass', 'Bet', true) + list.map((x) => row(esc(x.club), esc(x.season), n(x.apps), n(x.goals), n(x.assists), rt(x.rating))).join('');
+            let html = '';
+            html += `<details class="fold"><summary class="modal-section-title">Karriär efter Sirius</summary><div class="modal-stats-list">${table(c.after || [])}</div></details>`;
+            html += `<details class="fold"><summary class="modal-section-title">Karriär före Sirius</summary><div class="modal-stats-list">${table(c.before || [])}</div></details>`;
+            return html;
         }
 
         function seasonHtml(p) {
             const s = p.card?.season;
             if (!s || !s.apps) return '';
             const row = (l, v) => `<div class="stat-item"><span>${l}</span><strong>${displayStat(v)}</strong></div>`;
-            return `<div class="modal-section-title" style="margin-top:1rem;">Säsongen ${s.year}</div><div class="modal-stats-list">${row('Matcher (från start)', `${s.apps} (${s.starts})`)}${row('Minuter', s.minutes)}${row('Mål / assist', `${s.goals} /${s.assists}`)}${row('Snittbetyg', s.rating)}${row('Gula / röda kort', `${s.yellow} /${s.red}`)}</div>`;
+            return `<details class="fold"><summary class="modal-section-title">Säsongen ${s.year}</summary><div class="modal-stats-list">${row('Matcher (från start)', `${s.apps} (${s.starts})`)}${row('Minuter', s.minutes)}${row('Mål / assist', `${s.goals} /${s.assists}`)}${row('Snittbetyg', s.rating)}${row('Gula / röda kort', `${s.yellow} /${s.red}`)}</div></details>`;
         }
 
         function sourcesHtml(p) {
@@ -907,15 +1149,14 @@
         }
 
         function transfersHtml(p) {
-            if (!Array.isArray(p.transfers) || p.transfers.length === 0) return '';
             const esc = (t) => String(t ?? '').replace(/[<>&"]/g, '');
-            const rows = p.transfers.map(t => `
+            const rows = (Array.isArray(p.transfers) ? p.transfers : []).map(t => `
                 <div class="transfer-row">
                     <div class="transfer-date">${esc(t.date)}</div>
                     <div class="transfer-clubs">${esc(t.from)} <span>→</span> ${esc(t.to)}</div>
                     <div class="transfer-fee">${esc(t.fee || '–')}</div>
                 </div>`).join('');
-            return `<div class="modal-section-title" style="margin-top:1rem;">Karriär & övergångar</div><div class="modal-stats-list">${rows}</div>`;
+            return `<details class="fold"><summary class="modal-section-title">Övergångar</summary><div class="modal-stats-list" style="min-height:2rem;">${rows}</div></details>`;
         }
 
         function openPlayerProfileModal(p) {
@@ -932,18 +1173,20 @@
 
                 <div class="modal-section-title">Spelarinfo</div>
                 <div class="modal-stats-list">
-                    <div class="stat-item"><span>Ålder</span><strong>${p.age} år</strong></div>
-                    <div class="stat-item"><span>Position</span><strong>${p.pos}</strong></div>
-                    <div class="stat-item"><span>Kontrakt till</span><strong>${p.contract}</strong></div>
+                    <div class="stat-item"><span>Ålder</span><strong>${(() => { if (p.birth) { const b = new Date(p.birth), t = new Date(); let a = t.getFullYear() - b.getFullYear(); if (t < new Date(t.getFullYear(), b.getMonth(), b.getDate())) a--; return a + ' år'; } return p.age ? p.age + ' år' : ''; })()}</strong></div>
+                    <div class="stat-item"><span>Position</span><strong>${p.pos || ''}</strong></div>
+                    <div class="stat-item"><span>Kontrakt till</span><strong>${p.contract && p.contract !== '-' ? p.contract : ''}</strong></div>
+                    <div class="stat-item"><span>Nationalitet</span><strong>${p.nat || ''}</strong></div>
+                    <div class="stat-item"><span>Tid i Sirius</span><strong>${(() => { const t = Array.isArray(p.transfers) ? p.transfers : []; const ins = t.filter(x => x.to === 'Sirius').map(x => +String(x.date).slice(0, 4)); const outs = t.filter(x => x.from === 'Sirius').map(x => +String(x.date).slice(0, 4)); if (!ins.length) return ''; const a = Math.min(...ins); if (!outs.length) return a + '–'; const b = Math.max(...outs); return a === b ? String(a) : a + '–' + b; })()}</strong></div>
                 </div>
 
                 ${siriusHtml(p)}
+                ${careerHtml(p)}
                 ${seasonHtml(p)}
                 ${transfersHtml(p)}
-                ${sourcesHtml(p)}
 
                 <a href="${p.fotmobUrl}" target="_blank" class="external-btn">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Se live-stats & karriär på FotMob
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Se live-stats på FotMob
                 </a>
             `;
 
