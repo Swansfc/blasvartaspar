@@ -23,8 +23,14 @@ PLAYERS = [
     {"name": "Aron Bjarnason",  "id": "474133",  "track": "utland", "team": "Breiðablik"},
     {"name": "Wessam Abou Ali", "id": "919036",  "track": "utland", "team": "Columbus Crew"},
     {"name": "Jamie Roche",     "id": "1129082", "track": "utland", "team": "Kortrijk"},
-    {"name": "Jesper Nyholm",   "id": "619826",  "track": "utland", "team": "Muangthong United"},
+    {"name": "Jesper Nyholm",   "id": "619826",  "track": "utland", "team": "Prachuap FC"},
     {"name": "Tashreeq Matthews", "id": "982336", "track": "utland", "team": "Mamelodi Sundowns FC"},
+    {"name": "Marcus Mathisen", "id": "639580", "track": "utland", "team": "FC St. Pauli"},
+    {"name": "Hjalmar Ekdal", "id": "831044", "track": "utland", "team": "Burnley"},
+    {"name": "Joseph Colley", "id": "793909", "track": "utland", "team": "KF Tirana"},
+    {"name": "Yousef Salech", "id": "1183360", "track": "utland", "team": "Cardiff City"},
+    {"name": "Magnus Kaastrup", "id": "839970", "track": "utland", "team": "Aarhus Fremad"},
+    {"name": "Benjamin Mbunga Kimpioka", "id": "961305", "track": "utland", "team": "Asteras Tripolis"},
 ]
 
 
