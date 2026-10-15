@@ -12,7 +12,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 OUT = Path(__file__).with_name("matches.json")
-DAYS_BACK = int(sys.argv[1]) if len(sys.argv) > 1 else 30
+DAYS_BACK = int(sys.argv[1]) if len(sys.argv) > 1 else 7
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 
@@ -31,6 +31,7 @@ PLAYERS = [
     {"name": "Yousef Salech", "id": "1183360", "track": "utland", "team": "Cardiff City"},
     {"name": "Magnus Kaastrup", "id": "839970", "track": "utland", "team": "Aarhus Fremad"},
     {"name": "Benjamin Mbunga Kimpioka", "id": "961305", "track": "utland", "team": "Asteras Tripolis"},
+    {"name": "Malcolm Jeng", "id": "1457824", "track": "utland", "team": "FC Groningen"},
 ]
 
 
@@ -72,7 +73,7 @@ def player_data(pid):
 
 
 
-UPCOMING_DAYS = 14
+UPCOMING_DAYS = 7
 _fixture_cache = {}
 
 
@@ -110,18 +111,39 @@ def team_fixtures(team_id):
     return _fixture_cache[team_id]
 
 
-def upcoming_rows(p, team_id, team_name, now):
+def upcoming_rows(p, team_id, team_name, now, have_dates=()):
     rows = []
     fx = team_fixtures(team_id)
     print(f"  matcher i lagets schema: {len(fx)}")
     horizon = now + timedelta(days=UPCOMING_DAYS)
     for f in fx:
         st = f.get("status") or {}
-        if st.get("finished") or st.get("cancelled"):
+        if st.get("cancelled"):
             continue
         try:
             utc = datetime.fromisoformat(st["utcTime"].replace("Z", "+00:00"))
         except Exception:
+            continue
+        if st.get("finished"):
+            if not (now - timedelta(days=DAYS_BACK) <= utc <= now):
+                continue
+            local = utc.astimezone(ZoneInfo("Europe/Stockholm"))
+            if local.date().isoformat() in have_dates:
+                continue
+            m = re.match(r"\s*(\d+)\s*-\s*(\d+)\s*$", str(st.get("scoreStr") or ""))
+            tour = f.get("tournament") or {}
+            page = f.get("pageUrl") or ""
+            rows.append({
+                "matchId": str(f.get("id", "")),
+                "player": p["name"], "team": team_name, "playerId": p["id"], "track": p["track"],
+                "league": tour.get("name") or tour.get("leagueName") or f.get("leagueName") or "",
+                "matchDate": local.date().isoformat(), "kickoff": local.strftime("%H:%M"),
+                "home": (f.get("home") or {}).get("name", ""), "away": (f.get("away") or {}).get("name", ""),
+                "scoreHome": int(m.group(1)) if m else None, "scoreAway": int(m.group(2)) if m else None,
+                "status": "Slut", "teamOnly": True,
+                "rating": None, "mins": None, "goals": None, "ass": None, "passes": None, "chances": None,
+                "matchUrl": ("https://www.fotmob.com" + page) if page else "",
+            })
             continue
         started = bool(st.get("started"))
         if not started and not (now - timedelta(hours=1) <= utc <= horizon):
@@ -200,8 +222,11 @@ def main():
         except Exception:
             pass
     kept = {(m["playerId"], m["matchId"]): m for m in old.get("matches", [])
-            if m.get("matchId") and m.get("status") not in ("Kommande", "Pågår")}
+            if m.get("matchId") and m.get("status") not in ("Kommande", "Pågår") and not m.get("teamOnly")}
     now = datetime.now(timezone.utc)
+    # Gamla matcher utanför fönstret (DAYS_BACK dagar bakåt) rensas bort så filen hålls liten
+    oldest = (now.astimezone(ZoneInfo("Europe/Stockholm")).date() - timedelta(days=DAYS_BACK)).isoformat()
+    kept = {k: m for k, m in kept.items() if m.get("matchDate", "") >= oldest}
     ok = 0
 
     for p in PLAYERS:
@@ -273,16 +298,22 @@ def main():
         tid = (data.get("primaryTeam") or {}).get("teamId")
         if tid:
             try:
-                ups = upcoming_rows(p, tid, team, now)
+                have = {m["matchDate"] for (pid, _), m in kept.items() if pid == p["id"]}
+                ups = upcoming_rows(p, tid, team, now, have)
                 for row in ups:
                     key = (p["id"], row["matchId"])
                     if key not in kept:
                         kept[key] = row
                 if ups:
                     n = ups[0]
-                    print(f'  nästa: {n["matchDate"]} {n["kickoff"]} {n["home"]} - {n["away"]} ({n["status"]})')
+                    only = [r for r in ups if r.get("teamOnly")]
+                    if only:
+                        print(f"  lagets spelade matcher utan spelardata: {len(only)} (t.ex. {only[0]['matchDate']} {only[0]['home']} {only[0]['scoreHome']}-{only[0]['scoreAway']} {only[0]['away']})")
+                    nxt = [r for r in ups if not r.get("teamOnly")]
+                    if nxt:
+                        print(f'  nästa: {nxt[0]["matchDate"]} {nxt[0]["kickoff"]} {nxt[0]["home"]} - {nxt[0]["away"]} ({nxt[0]["status"]})')
                 else:
-                    print("  inga kommande matcher hittades")
+                    print("  inga kommande eller lagmatcher hittades")
             except Exception as e:
                 print(f"  kunde inte hämta kommande matcher: {e}")
         else:
