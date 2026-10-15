@@ -804,6 +804,7 @@
                 pos: raw.position || raw.pos || "",
                 league: raw.leagueName || raw.league || "",
                 matchDate: String(raw.matchDate || raw.date || "").slice(0, 10),
+                kickoff: raw.kickoff || "",
                 home: raw.homeTeam || raw.home || "",
                 away: raw.awayTeam || raw.away || "",
                 scoreHome: raw.homeScore ?? raw.scoreHome ?? null,
@@ -999,14 +1000,15 @@
             );
 
             if (filtered.length === 0) {
-                area.innerHTML = `<div class="empty-state"><p>Inga matchdata hittades för ${selectedDate} i valt spår.</p><p style="margin-top:8px;">Det betyder inte nödvändigtvis att spelaren inte spelade; datakällans täckning kan variera.</p></div>`;
+                area.innerHTML = `<div class="empty-state"><p>Inga matchdata hittades för ${selectedDate} i valt spår.</p><p style="margin-top:8px;">Det betyder inte nödvändigtvis att spelaren inte spelade; datakällans täckning kan variera. Kommande matcher visas för de närmaste 14 dagarna.</p></div>`;
                 return;
             }
 
             filtered.sort((a,b) => a.player.localeCompare(b.player, 'sv')).forEach((m) => {
                 const imgUrl = m.photo || (m.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(m.playerId)}.png` : '');
-                const scoreHome = displayStat(m.scoreHome);
-                const scoreAway = displayStat(m.scoreAway);
+                const isUpcoming = m.status === 'Kommande';
+                const scoreHome = isUpcoming ? '' : displayStat(m.scoreHome);
+                const scoreAway = isUpcoming ? '' : displayStat(m.scoreAway);
                 const rating = displayStat(m.rating);
                 const mins = displayStat(m.mins, "'");
                 const goals = displayStat(m.goals);
@@ -1018,7 +1020,7 @@
                 card.innerHTML = `
                     <div class="match-header">
                         <span>${m.league || "Liga saknas"}</span>
-                        <span class="status-badge">${m.status || "Status saknas"}</span>
+                        <span class="status-badge">${isUpcoming ? "Kommande" + (m.kickoff ? " · " + m.kickoff : "") : (m.status || "Status saknas")}</span>
                     </div>
                     <div class="team-row"><span>${m.home}</span><span class="team-score">${scoreHome}</span></div>
                     <div class="team-row"><span>${m.away}</span><span class="team-score">${scoreAway}</span></div>
@@ -1026,14 +1028,14 @@
                         <div class="player-info-group">
                             <div class="player-thumb-wrapper">
                                 <img src="${imgUrl}" class="player-thumb" onerror="this.onerror=null; this.src='https://via.placeholder.com/30';">
-                                ${m.rating !== null ? `<span class="rating-badge">${rating}</span>` : ''}
+                                ${m.rating !== null && !isUpcoming ? `<span class="rating-badge">${rating}</span>` : ''}
                             </div>
                             <div class="player-details">
                                 <h4>${m.player}</h4>
                                 <span>${m.team || ""}</span>
                             </div>
                         </div>
-                        <div class="player-quick-stats">${mins} <span>min</span> | ${goals}G ${assists}A</div>
+                        <div class="player-quick-stats">${isUpcoming ? "Lagets match" : `${mins} <span>min</span> | ${goals}G ${assists}A`}</div>
                     </div>`;
                 area.appendChild(card);
             });
@@ -1071,7 +1073,31 @@
         }
 
         // ÖPPNAR MATCHSTATISTIK & X-DELNING
+        function openUpcomingModal(p) {
+            const avatarUrl = p.photo || (p.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(p.playerId)}.png` : '');
+            const stat = (label, value) => `<div class="stat-item"><span>${label}</span><strong>${value || ''}</strong></div>`;
+            document.getElementById('modal-body-content').innerHTML = `
+                <div class="modal-player-header">
+                    <div class="modal-avatar-wrapper">
+                        <img class="modal-avatar" src="${avatarUrl}" onerror="this.src='https://via.placeholder.com/60';">
+                    </div>
+                    <h3 style="color:#fff; font-size:1rem; font-weight:900;">${p.player}</h3>
+                    <p style="color:var(--sirius-gold); font-size:0.8rem; font-weight:700;">${p.team}</p>
+                </div>
+                <div class="modal-section-title">Kommande match</div>
+                <div class="modal-stats-list">
+                    ${stat('Datum', p.matchDate)}
+                    ${stat('Avspark (svensk tid)', p.kickoff)}
+                    ${stat('Hemmalag', p.home)}
+                    ${stat('Bortalag', p.away)}
+                    ${stat('Tävling', p.league)}
+                </div>
+                ${p.matchUrl ? `<a class="external-btn" href="${p.matchUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Öppna match hos datakällan</a>` : ''}`;
+            document.getElementById('stats-modal').classList.add('active');
+        }
+
         function openMatchStatsModal(p) {
+            if (p.status === 'Kommande') { openUpcomingModal(p); return; }
             const avatarUrl = p.photo || (p.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(p.playerId)}.png` : '');
             const stat = (label, value, suffix = "") =>
                 `<div class="stat-item"><span>${label}</span><strong>${displayStat(value, suffix)}</strong></div>`;
