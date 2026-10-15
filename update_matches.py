@@ -71,6 +71,85 @@ def player_data(pid):
     return None
 
 
+
+UPCOMING_DAYS = 14
+_fixture_cache = {}
+
+
+def find_fixtures(node, out):
+    """Letar rekursivt efter matchobjekt (har home, away och status med utcTime)."""
+    if isinstance(node, dict):
+        st = node.get("status")
+        if isinstance(st, dict) and st.get("utcTime") and "home" in node and "away" in node:
+            out.append(node)
+        else:
+            for v in node.values():
+                find_fixtures(v, out)
+    elif isinstance(node, list):
+        for v in node:
+            find_fixtures(v, out)
+
+
+def team_fixtures(team_id):
+    if team_id in _fixture_cache:
+        return _fixture_cache[team_id]
+    found = []
+    for tab in ("fixtures", "overview"):
+        try:
+            nd = next_data(get(f"https://www.fotmob.com/sv/teams/{team_id}/{tab}"))
+            find_fixtures(((nd.get("props") or {}).get("pageProps")) or {}, found)
+            if found:
+                break
+        except Exception as e:
+            print(f"  lagsidan ({tab}) misslyckades: {e}")
+    uniq = {}
+    for f in found:
+        uniq[str(f.get("id"))] = f
+    _fixture_cache[team_id] = list(uniq.values())
+    time.sleep(0.7)
+    return _fixture_cache[team_id]
+
+
+def upcoming_rows(p, team_id, team_name, now):
+    rows = []
+    fx = team_fixtures(team_id)
+    print(f"  matcher i lagets schema: {len(fx)}")
+    horizon = now + timedelta(days=UPCOMING_DAYS)
+    for f in fx:
+        st = f.get("status") or {}
+        if st.get("finished") or st.get("cancelled"):
+            continue
+        try:
+            utc = datetime.fromisoformat(st["utcTime"].replace("Z", "+00:00"))
+        except Exception:
+            continue
+        started = bool(st.get("started"))
+        if not started and not (now - timedelta(hours=1) <= utc <= horizon):
+            continue
+        if started and utc < now - timedelta(hours=4):
+            continue
+        local = utc.astimezone(ZoneInfo("Europe/Stockholm"))
+        sh = sa = None
+        m = re.match(r"\s*(\d+)\s*-\s*(\d+)\s*$", str(st.get("scoreStr") or ""))
+        if started and m:
+            sh, sa = int(m.group(1)), int(m.group(2))
+        tour = f.get("tournament") or {}
+        page = f.get("pageUrl") or ""
+        rows.append({
+            "matchId": str(f.get("id", "")),
+            "player": p["name"], "team": team_name, "playerId": p["id"], "track": p["track"],
+            "league": tour.get("name") or tour.get("leagueName") or f.get("leagueName") or "",
+            "matchDate": local.date().isoformat(), "kickoff": local.strftime("%H:%M"),
+            "home": (f.get("home") or {}).get("name", ""), "away": (f.get("away") or {}).get("name", ""),
+            "scoreHome": sh, "scoreAway": sa,
+            "status": "Pågår" if started else "Kommande",
+            "rating": None, "mins": None, "goals": None, "ass": None, "passes": None, "chances": None,
+            "matchUrl": ("https://www.fotmob.com" + page) if page else "",
+        })
+    rows.sort(key=lambda r: (r["matchDate"], r["kickoff"]))
+    return rows
+
+
 def num(v):
     try:
         return float(v)
@@ -120,7 +199,9 @@ def main():
             old = json.loads(OUT.read_text(encoding="utf-8"))
         except Exception:
             pass
-    kept = {(m["playerId"], m["matchId"]): m for m in old.get("matches", []) if m.get("matchId")}
+    kept = {(m["playerId"], m["matchId"]): m for m in old.get("matches", [])
+            if m.get("matchId") and m.get("status") not in ("Kommande", "Pågår")}
+    now = datetime.now(timezone.utc)
     ok = 0
 
     for p in PLAYERS:
@@ -189,12 +270,29 @@ def main():
             kept[(p["id"], row["matchId"])] = row
             print(f'  {row["matchDate"]} {row["home"]} {row["scoreHome"]}-{row["scoreAway"]} {row["away"]}'
                   f' | betyg {row["rating"]} | {row["mins"]} min')
+        tid = (data.get("primaryTeam") or {}).get("teamId")
+        if tid:
+            try:
+                ups = upcoming_rows(p, tid, team, now)
+                for row in ups:
+                    key = (p["id"], row["matchId"])
+                    if key not in kept:
+                        kept[key] = row
+                if ups:
+                    n = ups[0]
+                    print(f'  nästa: {n["matchDate"]} {n["kickoff"]} {n["home"]} - {n["away"]} ({n["status"]})')
+                else:
+                    print("  inga kommande matcher hittades")
+            except Exception as e:
+                print(f"  kunde inte hämta kommande matcher: {e}")
+        else:
+            print("  hittade inget lag-ID, hoppar över kommande matcher")
         time.sleep(1)
 
     if ok == 0:
         sys.exit("Ingen spelare kunde hämtas - matches.json lämnas orörd.")
 
-    matches = sorted(kept.values(), key=lambda m: (m["matchDate"], m["player"]), reverse=True)
+    matches = sorted(kept.values(), key=lambda m: (m["matchDate"], m.get("kickoff", ""), m["player"]), reverse=True)
     out = {"updated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
            "matches": matches, "players": old.get("players", {})}
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
