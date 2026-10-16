@@ -2,1161 +2,709 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BLÅSVARTA SPÅR | Resultat & Matchcenter</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proffskollen - Tidigare Siriusspelare utomlands</title>
     <style>
         :root {
-            --sirius-gold: #ffcc00;
-            --live-green: #00e676;
-            --rating-green: #10b981;
-            --bg-black: #050914;
-            --card-bg: #0c1632;
-            --card-border: #1a2b55;
-            --dropdown-bg: #112049;
-            --text-main: #ffffff;
-            --text-muted: #8b9bb4;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-blue: #3b82f6;
+            --sirius-blue: #005293;
+            --sirius-black: #111111;
+            --border-color: #334155;
+            --rating-green: #22c55e;
+            --rating-orange: #f97316;
         }
 
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-            -webkit-tap-highlight-color: transparent; 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        html {
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden;
-        }
         body {
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: clip;
-            position: relative;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        body { 
-            font-family: 'Montserrat', sans-serif; 
-            background-color: var(--bg-black);
-            background-image:
-                radial-gradient(ellipse 90% 45% at 50% 0%, rgba(20, 70, 190, 0.38), transparent 70%);
-            background-attachment: fixed;
-            color: var(--text-main); 
-            line-height: 1.4; 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-        }
-
-        /* Mörk blå-svart nyans på headern */
-        header { 
-            background: #060e24; 
-            border-bottom: 2px solid var(--sirius-gold); 
-            position: -webkit-sticky;
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            width: 100%;
-        }
-        .header-container { 
-            width: 100%;
-            max-width: 1280px; 
-            margin: 0 auto; 
-            padding: 0.7rem 0.8rem; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            gap: 6px;
-        }
-        
-        .brand-logo { display: flex; align-items: center; cursor: pointer; flex-shrink: 0; }
-        .logo-img { 
-            height: 42px; 
-            width: auto; 
-            display: block; 
-        }
-
-        .nav-links { display: flex; gap: 4px; flex-shrink: 0; }
-        .nav-btn { 
-            background: #10204a; 
-            border: 1px solid var(--card-border); 
-            color: #fff; 
-            padding: 9px clamp(8px, 2.6vw, 12px); 
-            border-radius: 10px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            font-size: clamp(0.78rem, 3.4vw, 0.9rem); 
-            display: flex; 
-            align-items: center; 
-            gap: 4px; 
-            transition: 0.2s;
-        }
-        .nav-btn:hover, .nav-btn.active { background: #0044cc; border-color: #0055ff; }
-
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-menu { 
-            display: none; 
-            position: absolute; 
-            top: 115%; 
-            right: 0; 
-            background-color: var(--dropdown-bg); 
-            min-width: 170px; 
-            box-shadow: 0px 8px 24px rgba(0,0,0,0.6); 
-            border: 1px solid var(--card-border); 
-            border-radius: 10px; 
-            z-index: 1001; 
-            padding: 6px 0; 
-        }
-        .dropdown.open .dropdown-menu { display: block; }
-        .dropdown-item { 
-            color: #fff; 
-            padding: 10px 14px; 
-            font-size: 0.8rem; 
-            font-weight: 700; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-        }
-        .dropdown-item:hover { background-color: #1b3170; }
-
-        .date-picker-bar {
-            background: #081230;
-            border-bottom: 1px solid var(--card-border);
-            padding: 0.5rem 0.4rem;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .date-picker-container { flex: 1; min-width: 0; display: flex; gap: 4px; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
-        .date-item {
-            flex: 1;
-            min-width: 0;
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--text-muted);
-            font-family: inherit;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 7px 2px;
-            border-radius: 14px;
-            cursor: pointer;
+        header {
             text-align: center;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-        }
-        .date-item:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
-        .date-item.active {
-            color: #000;
-            background: var(--sirius-gold);
-            border-color: var(--sirius-gold);
-            font-weight: 800;
-        }
-        .date-arrow {
-            flex: 0 0 34px;
-            height: 34px;
-            background: transparent;
-            border: 0;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .date-arrow:hover { background: rgba(255, 204, 0, 0.14); }
-        .date-arrow svg { width: 20px; height: 20px; fill: var(--sirius-gold); }
-
-        main { 
-            width: 100%;
-            max-width: 1280px; 
-            margin: 0 auto; 
-            padding: 0.8rem; 
-            flex: 1; 
-        }
-        .section-header { 
-            border-left: 3px solid var(--sirius-gold); 
-            padding-left: 8px; 
-            margin-bottom: 0.8rem; 
-        }
-        .section-header h2 { font-size: 1.1rem; font-weight: 900; letter-spacing: 0.3px; }
-        .section-header p { color: var(--text-muted); font-size: 0.72rem; }
-        
-        .track-selector { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr;
-            gap: 8px; 
-            margin-bottom: 1rem; 
-            width: 100%;
-        }
-        .track-btn { 
-            background: #0c1632; 
-            border: 1px solid var(--card-border); 
-            color: var(--text-muted); 
-            padding: 9px 12px; 
-            border-radius: 14px; 
-            font-weight: 700; 
-            font-size: 0.78rem; 
-            cursor: pointer; 
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-        .track-btn:hover, .track-btn.active { background: #0044cc; color: #fff; border-color: #0055ff; }
-
-        .matches-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; width: 100%; }
-        @media (min-width: 640px) {
-            .matches-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--sirius-black), var(--sirius-blue));
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
         }
 
-        .match-card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--card-border); 
-            border-radius: 12px; 
-            padding: 0.8rem 0.9rem; 
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s;
-            width: 100%;
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: #ffffff;
         }
-        .match-card:active { border-color: var(--sirius-gold); transform: scale(0.99); }
-        .match-header { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--text-muted); margin-bottom: 0.6rem; font-weight: 700; }
-        .status-badge { background: #10204a; color: var(--sirius-gold); font-weight: 800; padding: 2px 6px; border-radius: 10px; border: 1px solid #243e82; font-size: 0.65rem; }
 
-        .team-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 0.9rem; margin-bottom: 5px; align-items: center; }
-        .team-score { font-family: 'Roboto Mono', monospace; background: #050a1c; padding: 1px 7px; border-radius: 5px; border: 1px solid #1c2536; font-size: 0.95rem; }
-        
-        .player-footer { 
-            border-top: 1px dashed #222d3d; 
-            padding-top: 8px; 
-            margin-top: 8px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-        }
-        .player-info-group { display: flex; align-items: center; gap: 8px; }
-        .player-thumb-wrapper { position: relative; }
-        .player-thumb { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; background: #050a1c; border: 1px solid var(--sirius-gold); }
-        .rating-badge { 
-            position: absolute; 
-            top: -3px; 
-            right: -5px; 
-            background: var(--rating-green); 
-            color: #fff; 
-            font-size: 0.6rem; 
-            font-weight: 900; 
-            padding: 1px 3px; 
-            border-radius: 6px; 
-            border: 1px solid #000;
-        }
-        .player-details h4 { color: var(--sirius-gold); font-weight: 800; font-size: 0.78rem; line-height: 1.1; }
-        .player-details span { color: var(--text-muted); font-size: 0.65rem; }
-        .player-quick-stats { text-align: right; font-size: 0.7rem; color: #fff; font-weight: 700; }
-        .player-quick-stats span { color: var(--text-muted); font-weight: 400; font-size: 0.65rem; }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem 1rem 3rem;
-            backdrop-filter: blur(4px);
-        }
-        @media (min-width: 640px) {
-            .modal-overlay { padding: 1rem; }
-        }
-        .modal-overlay.active { display: flex; }
-        .modal-content {
-            background: #0a1330;
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 440px;
-            padding: 1.2rem;
-            position: relative;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.8);
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-        @media (min-width: 640px) {
-            .modal-content { border-radius: 16px; }
-        }
-        .close-modal {
-            position: absolute;
-            top: 12px; right: 14px;
-            background: #112049;
-            border: none;
+        header p {
             color: var(--text-muted);
-            width: 28px; height: 28px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
         }
 
-        .modal-player-header { text-align: center; margin-bottom: 1rem; }
-        .modal-avatar-wrapper { position: relative; display: inline-block; margin-bottom: 6px; }
-        .modal-avatar { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--sirius-gold); object-fit: cover; background: #000; }
-        
-        .modal-section-title {
-            color: var(--sirius-gold);
+        .player-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .player-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .player-info h2 {
+            font-size: 1.4rem;
+            color: #ffffff;
+        }
+
+        .player-info .club {
+            font-size: 0.95rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        .player-meta {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            background-color: rgba(15, 23, 42, 0.5);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-label {
+            color: var(--text-muted);
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin: 1rem 0 0.5rem 0;
-            font-weight: 800;
-            border-bottom: 1px solid var(--card-border);
-            padding-bottom: 4px;
         }
 
-        details.fold { margin-top: 0.9rem; }
-        details.fold > summary { list-style: none; cursor: pointer; margin: 0 0 0.5rem 0; display: flex; justify-content: space-between; align-items: center; }
-        details.fold > summary::-webkit-details-marker { display: none; }
-        details.fold > summary::after { content: '▾'; font-size: 0.85rem; }
-        details.fold[open] > summary::after { content: '▴'; }
-        .modal-stats-list { background: #081230; border-radius: 10px; padding: 0.6rem; border: 1px solid var(--card-border); }
-        .stat-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.78rem; }
-        .stat-item:last-child { border-bottom: none; }
-        .stat-item span { color: var(--text-muted); }
-        .stat-item strong { color: #fff; font-weight: 700; }
+        .detail-value {
+            font-weight: 600;
+            color: var(--text-main);
+        }
 
-        .external-btn {
-            width: 100%;
-            margin-top: 1rem;
-            padding: 10px;
-            background: var(--sirius-gold);
-            color: #000;
-            border: none;
-            border-radius: 12px;
-            font-weight: 800;
-            font-size: 0.8rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: 0.2s;
-            text-decoration: none;
-        }
-        .external-btn:hover { background: #e6b800; }
-
-        .share-x-btn {
-            width: 100%;
-            margin-top: 0.6rem;
-            padding: 10px;
-            background: #000000;
-            color: #ffffff;
-            border: 1px solid #333;
-            border-radius: 12px;
-            font-weight: 800;
-            font-size: 0.8rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: 0.2s;
-        }
-        .share-x-btn:active { background: #111111; border-color: var(--sirius-gold); color: var(--sirius-gold); }
-
-        .players-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; width: 100%; }
-        @media (min-width: 640px) {
-            .players-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
-        }
-        .player-card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--card-border); 
-            border-radius: 12px; 
-            padding: 0.9rem; 
-            width: 100%;
-            cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-        .player-card:active { border-color: var(--sirius-gold); transform: scale(0.99); }
-        .player-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .player-avatar { 
-            width: 40px; 
-            height: 40px; 
-            background: #10204a; 
-            border: 2px solid var(--sirius-gold); 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: var(--sirius-gold); 
+        .section-title {
             font-size: 0.9rem;
-            overflow: hidden;
-            flex-shrink: 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            margin-top: 5px;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
         }
-        .player-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .studs { width: 1.75em; height: 1.75em; fill: var(--sirius-gold); flex-shrink: 0; }
-        .search-input { width: 100%; background: #081230; color: #fff; border: 1px solid var(--card-border); border-radius: 12px; padding: 0.85rem 1rem; font: 600 16px 'Montserrat', sans-serif; margin-bottom: 1rem; outline: none; }
-        .search-input:focus { border-color: var(--sirius-gold); }
-        .search-input::placeholder { color: var(--text-muted); font-weight: 400; }
-        .sirius-row { display: grid; grid-template-columns: 1fr 38px 38px 38px; gap: 6px; padding: 6px 0; border-bottom: 1px solid var(--card-border); font-size: 0.76rem; color: var(--text-muted); }
-        .sirius-row:last-child { border-bottom: 0; }
-        .sirius-row span + span { text-align: right; }
-        .sirius-row small { color: var(--sirius-gold); font-size: 0.65rem; }
-        .transfer-row { display: grid; grid-template-columns: 62px 1fr auto; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--card-border); font-size: 0.74rem; align-items: center; }
-        .transfer-row:last-child { border-bottom: 0; }
-        .transfer-date { color: var(--text-muted); }
-        .transfer-clubs { color: #fff; font-weight: 700; }
-        .transfer-clubs span { color: var(--sirius-gold); }
-        .transfer-fee { color: var(--sirius-gold); font-weight: 800; white-space: nowrap; }
-        .empty-state { grid-column: 1 / -1; text-align: center; padding: 2.5rem 1rem; background: var(--card-bg); border: 1px dashed var(--card-border); border-radius: 12px; color: var(--text-muted); font-size: 0.85rem; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+
+        th, td {
+            padding: 6px 8px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .rating-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #ffffff;
+            font-size: 0.75rem;
+        }
+
+        .rating-green {
+            background-color: var(--rating-green);
+        }
+
+        .rating-orange {
+            background-color: var(--rating-orange);
+        }
+
+        .transfer-list {
+            font-size: 0.8rem;
+            list-style: none;
+        }
+
+        .transfer-list li {
+            padding: 4px 0;
+            border-bottom: 1px dashed var(--border-color);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .transfer-list li:last-child {
+            border-bottom: none;
+        }
+
+        .transfer-date {
+            color: var(--text-muted);
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-container">
-            <!-- NY BILDLOGOTYP -->
-            <div class="brand-logo" role="link" tabindex="0" aria-label="Till startsidan" onclick="goHome()" onkeydown="if(event.key==='Enter')goHome()">
-                <img src="logo.png" alt="BLÅSVARTA SPÅR" class="logo-img">
-            </div>
-            <nav class="nav-links">
-                <button class="nav-btn active" id="nav-results" onclick="goHome()">
-                    Resultat
-                </button>
-                <div class="dropdown" id="spar-dropdown">
-                    <button class="nav-btn" id="nav-sparen" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown(event)">
-                        <svg class="studs" viewBox="0 0 24 24" aria-hidden="true"><g transform="translate(7.2 15.2) rotate(-14)"><circle cx="-2.3" cy="-4.6" r="1.35"/><circle cx="2.3" cy="-4.6" r="1.35"/><circle cx="-2.7" cy="-0.6" r="1.35"/><circle cx="2.7" cy="-0.6" r="1.35"/><circle cx="-1.5" cy="4.6" r="1.35"/><circle cx="1.5" cy="4.6" r="1.35"/></g><g transform="translate(16.8 8.8) rotate(14)"><circle cx="-2.3" cy="-4.6" r="1.35"/><circle cx="2.3" cy="-4.6" r="1.35"/><circle cx="-2.7" cy="-0.6" r="1.35"/><circle cx="2.7" cy="-0.6" r="1.35"/><circle cx="-1.5" cy="4.6" r="1.35"/><circle cx="1.5" cy="4.6" r="1.35"/></g></svg> Spåren <i class="fa-solid fa-chevron-down" style="font-size: 0.6rem;"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-item" onclick="selectTrackFromMenu('utland')"><i class="fa-solid fa-globe" style="color:#ffcc00"></i> Utlandsspåret</div>
-                        <div class="dropdown-item" onclick="selectTrackFromMenu('lane')"><i class="fa-solid fa-handshake" style="color:#00e676"></i> Lånespåret</div>
-                        <div class="dropdown-item" onclick="selectTrackFromMenu('sverige')"><i class="fa-solid fa-flag" style="color:#29b6f6"></i> Sverigespåret</div>
-                        <div class="dropdown-item" onclick="openSearchView()"><i class="fa-solid fa-magnifying-glass" style="color:#ffcc00"></i> Sök</div>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <h1>Proffskollen Sirius</h1>
+        <p>Aktuell statistik och karriärdata för tidigare Siriusspelare utomlands</p>
     </header>
 
-    <div class="date-picker-bar" id="date-picker-bar">
-        <button class="date-arrow" onclick="shiftDates(-1)" aria-label="Tidigare datum"><svg viewBox="0 0 24 24"><path d="M15.5 4 7 12l8.5 8z"/></svg></button>
-        <div class="date-picker-container" id="date-container"></div>
-        <button class="date-arrow" onclick="shiftDates(1)" aria-label="Senare datum"><svg viewBox="0 0 24 24"><path d="M8.5 4 17 12l-8.5 8z"/></svg></button>
+    <div class="player-grid">
+
+        <!-- HERMAN SJÖGRELL -->
+        <div class="player-card">
+            <div class="player-header">
+                <div class="player-info">
+                    <h2>Herman Sjögrell</h2>
+                    <div class="club">FC Inter Turku (#7)</div>
+                </div>
+                <div class="player-meta">
+                    <div>25 år (8 maj 2001)</div>
+                    <div>🇸🇪 Sverige</div>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Längd / Fot</span>
+                    <span class="detail-value">179 cm / Vänster</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Position</span>
+                    <span class="detail-value">Högerytter (VY/A)</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Kontrakt</span>
+                    <span class="detail-value">Till 31 dec 2027</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Marknadsvärde</span>
+                    <span class="detail-value">€250k / 228 tn GBP</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title">Sirius-karriär</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Säsong</th>
+                            <th>Matcher</th>
+                            <th>Mål</th>
+                            <th>Ass</th>
+                            <th>Betyg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2021</td><td>7</td><td>0</td><td>0</td><td><span class="rating-badge rating-orange">6.2</span></td></tr>
+                        <tr><td>2021/2022</td><td>3</td><td>0</td><td>0</td><td>-</td></tr>
+                        <tr><td>2022/2023</td><td>3</td><td>0</td><td>0</td><td>-</td></tr>
+                        <tr><td>2023</td><td>16</td><td>1</td><td>2</td><td><span class="rating-badge rating-orange">6.4</span></td></tr>
+                        <tr><td>2023/2024</td><td>3</td><td>1</td><td>0</td><td>-</td></tr>
+                        <tr><td>2024</td><td>14</td><td>0</td><td>0</td><td><span class="rating-badge rating-orange">6.6</span></td></tr>
+                        <tr><td>2025</td><td>6</td><td>0</td><td>0</td><td><span class="rating-badge rating-orange">6.0</span></td></tr>
+                        <tr><td>2025/2026</td><td>1</td><td>0</td><td>0</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="section-title">Senaste prestationer</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Klubb / Liga</th>
+                            <th>M</th>
+                            <th>Mål</th>
+                            <th>Ass</th>
+                            <th>Betyg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>FC Inter Turku (2026)</td><td>7</td><td>1</td><td>1</td><td><span class="rating-badge rating-green">7.0</span></td></tr>
+                        <tr><td>FF Jaro (2026)</td><td>22</td><td>8</td><td>2</td><td><span class="rating-badge rating-green">7.0</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="section-title">Övergångshistorik</div>
+                <ul class="transfer-list">
+                    <li><span>Örgryte IS ➔ Sirius</span><span class="transfer-date">15/07/2021 (€400k)</span></li>
+                    <li><span>Sirius ➔ Örgryte IS (Lån)</span><span class="transfer-date">22/07/2022</span></li>
+                    <li><span>Sirius ➔ FF Jaro</span><span class="transfer-date">23/01/2026 (Fri)</span></li>
+                    <li><span>FF Jaro ➔ FC Inter Turku</span><span class="transfer-date">24/08/2026 (€35k)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TOBIAS CARLSSON -->
+        <div class="player-card">
+            <div class="player-header">
+                <div class="player-info">
+                    <h2>Tobias Carlsson</h2>
+                    <div class="club">FH Hafnarfjörður (#4)</div>
+                </div>
+                <div class="player-meta">
+                    <div>31 år (28 juli 1995)</div>
+                    <div>🇸🇪 Sverige</div>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Längd / Fot</span>
+                    <span class="detail-value">187 cm / Höger</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Position</span>
+                    <span class="detail-value">Mittback</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Kontrakt</span>
+                    <span class="detail-value">Feb 2026 – 31 dec 2029</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Marknadsvärde</span>
+                    <span class="detail-value">€250k / 52 tn GBP</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title">Sirius-karriär</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Säsong</th>
+                            <th>Matcher</th>
+                            <th>Mål</th>
+                            <th>Ass</th>
+                            <th>Betyg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2023</td><td>11</td><td>1</td><td>0</td><td><span class="rating-badge rating-green">7.1</span></td></tr>
+                        <tr><td>2023/2024</td><td>3</td><td>0</td><td>0</td><td>-</td></tr>
+                        <tr><td>2024</td><td>3</td><td>0</td><td>0</td><td><span class="rating-badge rating-orange">6.5</span></td></tr>
+                        <tr><td>2024/2025</td><td>1</td><td>0</td><td>0</td><td>-</td></tr>
+                        <tr><td>2025</td><td>9</td><td>0</td><td>1</td><td><span class="rating-badge rating-orange">6.6</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="section-title">Senaste prestationer</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Klubb / Liga</th>
+                            <th>M</th>
+                            <th>Mål</th>
+                            <th>Ass</th>
+                            <th>Betyg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>FH Hafnarfjörður (2026)</td><td>7</td><td>0</td><td>0</td><td><span class="rating-badge rating-orange">6.4</span></td></tr>
+                        <tr><td>Varbergs BoIS (2022)</td><td>17</td><td>2</td><td>2</td><td><span class="rating-badge rating-orange">6.8</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="section-title">Övergångshistorik</div>
+                <ul class="transfer-list">
+                    <li><span>Grebbestads IF ➔ Varberg</span><span class="transfer-date">12/01/2019 (Fri)</span></li>
+                    <li><span>Varbergs BoIS ➔ BK Häcken</span><span class="transfer-date">01/01/2020</span></li>
+                    <li><span>BK Häcken ➔ Varberg (Lån)</span><span class="transfer-date">23/07/2022</span></li>
+                    <li><span>BK Häcken ➔ Sirius</span><span class="transfer-date">16/08/2023</span></li>
+                    <li><span>Sirius ➔ FH Hafnarfjörður</span><span class="transfer-date">06/02/2026</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- DIEGO MONTIEL -->
+        <div class="player-card">
+            <div class="player-header">
+                <div class="player-info">
+                    <h2>Diego Montiel</h2>
+                    <div class="club">KA Akureyri (#20)</div>
+                </div>
+                <div class="player-meta">
+                    <div>31 år (26 apr 1995)</div>
+                    <div>🇸🇪 / 🇺🇾 Sverige/Uruguay</div>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Längd / Fot</span>
+                    <span class="detail-value">183 cm / Höger</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Position</span>
+                    <span class="detail-value">Offensiv mittfältare / VY</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Kontrakt</span>
+                    <span class="detail-value">Feb 2026 – 31 dec 2027</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Marknadsvärde</span>
+                    <span class="detail-value">€150k</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title">Sirius-karriär</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Säsong</th>
+                            <th>Matcher</th>
+                            <th>Mål</th>
+                            <th>Ass</th>
+                            <th>Betyg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2016/2017</td><td>2</td><td>1</td><td>0</td><td>-</td></tr>
+                        <tr><td>2017</td><td>5</td><td>0</td><td>0</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="section-title">Senaste prestationer</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Klubb / Liga</th>
+                            <th>M</th>
+                            <th>Mål</th>
+                            <th>Ass</th>
+                            <th>Betyg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>KA Akureyri (2026)</td><td>18</td><td>1</td><td>0</td><td><span class="rating-badge rating-orange">6.6</span></td></tr>
+                        <tr><td>Vestri (2025)</td><td>32</td><td>5</td><td>5</td><td><span class="rating-badge rating-orange">6.9</span></td></tr>
+                        <tr><td>Örgryte IS (2018)</td><td>28</td><td>13</td><td>0</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="section-title">Övergångshistorik</div>
+                <ul class="transfer-list">
+                    <li><span>Dalkurd FF ➔ Sirius</span><span class="transfer-date">01/01/2017</span></li>
+                    <li><span>Sirius ➔ Gefle IF (Lån)</span><span class="transfer-date">28/07/2017</span></li>
+                    <li><span>Sirius ➔ Örgryte IS</span><span class="transfer-date">01/01/2018 (Fri)</span></li>
+                    <li><span>Varbergs BoIS ➔ Vestri</span><span class="transfer-date">06/02/2025 (Fri)</span></li>
+                    <li><span>Vestri ➔ KA Akureyri</span><span class="transfer-date">05/02/2026 (Fri)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ROBBIE URE -->
+        <div class="player-card">
+            <div class="player-header">
+                <div class="player-info">
+                    <h2>Robbie Ure</h2>
+                    <div class="club">Sevilla FC (#9)</div>
+                </div>
+                <div class="player-meta">
+                    <div>22 år (26 feb 2004)</div>
+                    <div>🏴󠁧󠁢󠁳󠁣󠁴󠁿 / 🇺🇦 Skottland/Ukraina</div>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Längd / Fot</span>
+                    <span class="detail-value">189 cm / Höger</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Position</span>
+                    <span class="detail-value">Centerforward</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Kontrakt</span>
+                    <span class="detail-value">Aug 2026 – 30 juni 2031</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Marknadsvärde</span>
+                    <span class="detail-value">€7.00m / £4.3m</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title">Sirius-karriär</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Säsong</th>
+                            <th>Matcher</th>
+                            <th>Mål</th>
+                            <th>Ass</th>
+                            <th>Betyg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2025</td><td>30</td><td>11</td><td>4</td><td><span class="rating-badge rating-green">7.2</span></td></tr>
+                        <tr><td>2025/2026</td><td>5</td><td>5</td><td>1</td><td>-</td></tr>
+                        <tr><td>2026</td><td>15</td><td>15</td><td>2</td><td><span class="rating-badge rating-green">8.0</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="section-title">Senaste prestationer</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Klubb / Liga</th>
+                            <th>M</th>
+                            <th>Mål</th>
+                            <th>Ass</th>
+                            <th>Betyg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sevilla FC (2026/2027)</td><td>8</td><td>1</td><td>2</td><td><span class="rating-badge rating-orange">6.7</span></td></tr>
+                        <tr><td>Skottland A-landslag</td><td>4</td><td>0</td><td>0</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="section-title">Övergångshistorik</div>
+                <ul class="transfer-list">
+                    <li><span>Rangers ➔ RSCA Futures</span><span class="transfer-date">06/09/2023 (Fri)</span></li>
+                    <li><span>RSCA Futures ➔ Sirius</span><span class="transfer-date">13/03/2025 (€750k)</span></li>
+                    <li><span>Sirius ➔ Sevilla FC</span><span class="transfer-date">11/08/2026 (€6.50m)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- JOHAN KARLSSON -->
+        <div class="player-card">
+            <div class="player-header">
+                <div class="player-info">
+                    <h2>Johan Karlsson</h2>
+                    <div class="club">Vejle Boldklub (#23)</div>
+                </div>
+                <div class="player-meta">
+                    <div>25 år (20 juni 2001)</div>
+                    <div>🇸🇪 Sverige</div>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Längd / Fot</span>
+                    <span class="detail-value">172 cm / Höger</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Position</span>
+                    <span class="detail-value">Högerback</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Kontrakt</span>
+                    <span class="detail-value">Från 19 aug 2026</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Marknadsvärde</span>
+                    <span class="detail-value">€500k / 173 tn GBP</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title">Sirius-karriär</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Säsong</th>
+                            <th>Matcher</th>
+                            <th>Mål</th>
+                            <th>Ass</th>
+                            <th>Betyg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2020</td><td>20</td><td>0</td><td>0</td><td><span class="rating-badge rating-orange">6.3</span></td></tr>
+                        <tr><td>2020/2021</td><td>4</td><td>0</td><td>0</td><td>-</td></tr>
+                        <tr><td>2021</td><td>22</td><td>1</td><td>0</td><td><span class="rating-badge rating-orange">6.3</span></td></tr>
+                        <tr><td>2021/2022</td><td>1</td><td>0</td><td>0</td><td>-</td></tr>
+                        <tr><td>2022</td><td>13</td><td>0</td><td>0</td><td><span class="rating-badge rating-orange">6.9</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="section-title">Senaste prestationer</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Klubb / Liga</th>
+                            <th>M</th>
+                            <th>Mål</th>
+                            <th>Ass</th>
+                            <th>Betyg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Vejle Boldklub (2026/27)</td><td>7</td><td>1</td><td>0</td><td><span class="rating-badge rating-green">7.1</span></td></tr>
+                        <tr><td>Malmö FF (2025/2026)</td><td>30</td><td>1</td><td>2</td><td><span class="rating-badge rating-orange">6.7</span></td></tr>
+                        <tr><td>Sverige A-landslag (2024)</td><td>1</td><td>0</td><td>0</td><td><span class="rating-badge rating-green">7.5</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="section-title">Övergångshistorik</div>
+                <ul class="transfer-list">
+                    <li><span>Sirius U19 ➔ Sirius A</span><span class="transfer-date">12/08/2020</span></li>
+                    <li><span>Sirius ➔ Kalmar FF</span><span class="transfer-date">11/08/2022</span></li>
+                    <li><span>Kalmar FF ➔ Malmö FF</span><span class="transfer-date">29/01/2025 (€520k)</span></li>
+                    <li><span>Malmö FF ➔ Vejle BK</span><span class="transfer-date">19/08/2026</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- STEFANO VECCHIA -->
+        <div class="player-card">
+            <div class="player-header">
+                <div class="player-info">
+                    <h2>Stefano Vecchia</h2>
+                    <div class="club">Aalesunds FK (#23)</div>
+                </div>
+                <div class="player-meta">
+                    <div>31 år (23 jan 1995)</div>
+                    <div>🇸🇪 / 🇮🇹 Sverige/Italien</div>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Längd / Fot</span>
+                    <span class="detail-value">182 cm / Höger</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Position</span>
+                    <span class="detail-value">Vänsterytter / MF</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Kontrakt</span>
+                    <span class="detail-value">10 sep 2026 – 31 dec 2026</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Marknadsvärde</span>
+                    <span class="detail-value">€600k / 335 tn GBP</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title">Sirius-karriär</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Säsong</th>
+                            <th>Matcher</th>
+                            <th>Mål</th>
+                            <th>Ass</th>
+                            <th>Betyg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2016/2017</td><td>2</td><td>2</td><td>0</td><td>-</td></tr>
+                        <tr><td>2017</td><td>17</td><td>4</td><td>1</td><td><span class="rating-badge rating-orange">6.7</span></td></tr>
+                        <tr><td>2017/2018</td><td>4</td><td>2</td><td>0</td><td>-</td></tr>
+                        <tr><td>2018</td><td>19</td><td>1</td><td>2</td><td><span class="rating-badge rating-orange">6.6</span></td></tr>
+                        <tr><td>2019</td><td>9</td><td>0</td><td>1</td><td><span class="rating-badge rating-orange">6.3</span></td></tr>
+                        <tr><td>2019/2020</td><td>3</td><td>2</td><td>0</td><td>-</td></tr>
+                        <tr><td>2020</td><td>26</td><td>12</td><td>5</td><td><span class="rating-badge rating-green">7.3</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="section-title">Senaste prestationer</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Klubb / Liga</th>
+                            <th>M</th>
+                            <th>Mål</th>
+                            <th>Ass</th>
+                            <th>Betyg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Aalesunds FK (2026)</td><td>2</td><td>0</td><td>0</td><td><span class="rating-badge rating-orange">6.4</span></td></tr>
+                        <tr><td>Malmö FF (2023–2026)</td><td>38</td><td>10</td><td>3</td><td><span class="rating-badge rating-green">7.3</span></td></tr>
+                        <tr><td>Rosenborg BK (2021–22)</td><td>39</td><td>23</td><td>2</td><td><span class="rating-badge rating-green">7.5</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="section-title">Övergångshistorik</div>
+                <ul class="transfer-list">
+                    <li><span>Brommapojkarna ➔ Sirius</span><span class="transfer-date">08/01/2017 (Fri)</span></li>
+                    <li><span>Sirius ➔ Rosenborg BK</span><span class="transfer-date">18/01/2021 (Fri)</span></li>
+                    <li><span>Rosenborg BK ➔ Malmö FF</span><span class="transfer-date">10/03/2023 (€1.00m)</span></li>
+                    <li><span>Malmö FF ➔ Klubblös</span><span class="transfer-date">06/08/2026</span></li>
+                    <li><span>Klubblös ➔ Aalesunds FK</span><span class="transfer-date">10/09/2026 (Fri)</span></li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 
-    <main>
-        <div class="section-header">
-            <h2 id="view-title">RESULTAT & SCHEMA</h2>
-            <p id="view-desc">Klicka på ett matchkort eller spelarkort för detaljerad statistik</p>
-        </div>
-
-        <div class="track-selector" id="track-selector">
-            <button class="track-btn active" id="track-btn-utland" onclick="setTrack('utland')"><i class="fa-solid fa-globe" style="color:#ffcc00"></i> Utlandsspåret</button>
-            <button class="track-btn" id="track-btn-lane" onclick="setTrack('lane')"><i class="fa-solid fa-handshake" style="color:#00e676"></i> Lånespåret</button>
-            <button class="track-btn" id="track-btn-sverige" onclick="setTrack('sverige')"><i class="fa-solid fa-flag" style="color:#29b6f6"></i> Sverigespåret</button>
-            <button class="track-btn" id="track-btn-search" onclick="openSearchView()"><i class="fa-solid fa-magnifying-glass" style="color:#ffcc00"></i> Sök</button>
-        </div>
-
-        <div id="content-area"></div>
-    </main>
-
-    <div class="modal-overlay" id="stats-modal" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close-modal" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-            <div id="modal-body-content"></div>
-        </div>
-    </div>
-
-    <script>
-        const siteUrl = "https://dindoman.se";
-        function swedenToday() { return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm' }).format(new Date()); }
-        function addDays(iso, n) { const d = new Date(iso + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
-        let todayStr = swedenToday();
-        let selectedDate = todayStr;
-        let dateOffset = 0;
-        let selectedTrack = 'utland';
-        let currentMode = 'results';
-
-        const masterPlayers = [
-            {
-                id: '1399218', name: 'Robbie Ure', team: 'Sevilla', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'LaLiga (Spanien)',
-                verified: true, nat: 'Skottland', age: 22, foot: 'Höger', contract: '2031',
-                sirius: { seasons: [
-                    { season: '2025', league: '', apps: 30, goals: 11, assists: 4 },
-                    { season: '2025 (Svenska cupen)', league: '', apps: 5, goals: 5, assists: null },
-                    { season: '2026', league: '', apps: 15, goals: 15, assists: 2 }
-                ] },
-                career: { after: [ { club: 'Sevilla', season: '2026/2027', apps: 7, goals: 0, assists: 1, rating: null } ], before: [] },
-                transfers: [ { date: '2026-08', from: 'Sirius', to: 'Sevilla', fee: 'Okänd' } ],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/1399218/robbie-ure'
-            },
-            {
-                id: '1157905', name: 'Johan Karlsson', team: 'Vejle Boldklub', track: 'utland', trackName: 'Utlandsspåret', pos: 'Högerback', league: '1. Division (Danmark)',
-                verified: true, nat: 'Sverige', birth: '2001-06-20', age: 25, foot: 'Höger', contract: '31 dec 2028',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/1157905/johan-karlsson'
-            },
-            {
-                id: '493159', name: 'Stefano Holmquist Vecchia', team: 'Aalesund', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'Norge',
-                verified: true, age: 31, contract: '',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/493159/stefano-holmquist-vecchia'
-            },
-            {
-                id: '293718', name: 'Joeri de Kamps', team: 'Sepsi OSK', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'Superliga (Rumänien)',
-                verified: true, nat: 'Nederländerna', birth: '1992-02-10', age: 34, foot: 'Vänster', contract: '',
-                sirius: { seasons: [ { season: '2023', league: '', apps: 13, goals: 0, assists: 0 } ] },
-                career: { after: [], before: [] },
-                transfers: [
-                    { date: '2026-02-10', from: 'Volos', to: 'Sepsi OSK', fee: 'Fri övergång' },
-                    { date: '2024-01-31', from: 'Sirius', to: 'Volos', fee: 'Fri övergång' },
-                    { date: '2023-07-30', from: 'Lechia Gdańsk', to: 'Sirius', fee: 'Fri övergång' }
-                ],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/293718/joeri-de-kamps'
-            },
-            {
-                id: '759565', name: 'Kristopher Da Graça', team: 'Krasava ENY Ypsonas', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Cyprus League (Cypern)',
-                verified: true, birth: '1998-01-16', age: 28, foot: 'Höger', contract: '',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/759565/kristopher-da-graca'
-            },
-            {
-                id: '965710', name: 'Óli Ómarsson', team: 'Breiðablik', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'Besta deildin (Island)',
-                verified: true, nat: 'Island', birth: '2003-01-09', age: 23, foot: 'Höger', contract: '31 dec 2028',
-                sirius: { seasons: [ { season: '2022', league: '', apps: 13, goals: 0, assists: 0 } ] },
-                career: { after: [], before: [] },
-                transfers: [ { date: '2025-02', from: 'Sirius', to: 'Breiðablik', fee: '100 tn €' } ],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/965710/oli-omarsson'
-            },
-            {
-                id: '1276686', name: 'Leo Walta', team: 'Los Angeles FC (lån)', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'MLS (USA)',
-                verified: true, nat: 'Finland', birth: '2003-06-24', age: 23, foot: 'Höger', contract: '',
-                sirius: { seasons: [
-                    { season: '2024', league: 'Allsvenskan', apps: 28, goals: 3, assists: 2 },
-                    { season: '2025', league: 'Allsvenskan', apps: 29, goals: 5, assists: 4 }
-                ] },
-                career: {
-                    after: [
-                        { club: 'Swansea City', season: '2025/2026', apps: 12, goals: 1, assists: 1, rating: 6.8 },
-                        { club: 'Los Angeles FC', season: '2026', apps: 8, goals: 2, assists: 2, rating: 7.1 }
-                    ],
-                    before: [
-                        { club: 'HJK Helsingfors', season: '2020', apps: 3, goals: 0, assists: 0, rating: 6.2 },
-                        { club: 'Nordsjælland', season: '2021/2022', apps: 4, goals: 0, assists: 0, rating: 6.4 },
-                        { club: 'Mjällby AIF', season: '2023', apps: 15, goals: 1, assists: 0, rating: 6.5 }
-                    ]
-                },
-                transfers: [
-                    { date: '2026-08-31', from: 'Swansea City', to: 'Los Angeles FC', fee: 'Lån (till jan 2027)' },
-                    { date: '2026-01', from: 'Sirius', to: 'Swansea City', fee: 'Okänd' },
-                    { date: '2024-03-08', from: 'Mjällby', to: 'Sirius', fee: 'Okänd' }
-                ],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/1276686/leo-walta'
-            },
-            {
-                id: '561838', name: 'Isak Ssewankambo', team: 'Vancouver FC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Canadian Premier League (Kanada)',
-                verified: true, birth: '1996-02-27', age: 30, foot: 'Höger', contract: '',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/561838/isak-ssewankambo'
-            },
-            {
-                id: '1016540', name: 'Tobias Carlsson', team: 'FH Hafnarfjörður', track: 'utland', trackName: 'Utlandsspåret', pos: 'Försvarare', league: 'Besta deildin (Island)',
-                verified: true, nat: 'Sverige', birth: '1995-07-28', age: 31, contract: '',
-                sirius: { seasons: [] }, career: { after: [], before: [] },
-                transfers: [
-                    { date: '2026-02-06', from: 'Sirius', to: 'FH Hafnarfjörður', fee: 'Okänd' },
-                    { date: '2023-08-16', from: 'Häcken', to: 'Sirius', fee: 'Okänd' }
-                ],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/1016540/tobias-carlsson'
-            },
-            {
-                id: '566351', name: 'Diego Montiel', team: 'KA Akureyri', track: 'utland', trackName: 'Utlandsspåret', pos: '', league: 'Besta deildin (Island)',
-                verified: true, contract: '',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/566351/diego-montiel'
-            },
-            {
-                id: '767777', name: 'Moustafa Zeidan', team: 'Al Masry SC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Central mittfältare', league: 'Premier League (Egypten)',
-                verified: true, nat: 'Palestina, Sverige', age: 27, contract: '',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/767777/moustafa-zeidan'
-            },
-            {
-                id: '1022484', name: 'André Alsanati', team: 'Al-Mosul', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'Stars League (Irak)',
-                verified: true, nat: 'Irak', birth: '2000-01-06', age: 26, foot: 'Vänster', contract: '',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/1022484/andre-alsanati'
-            },
-            {
-                id: '1000835', name: 'Jakob Tånnander', team: 'Farense', track: 'utland', trackName: 'Utlandsspåret', pos: 'Målvakt', league: 'Liga Portugal 2 (Portugal)',
-                verified: true, nat: 'Sverige', birth: '2000-08-10', age: 26, height: '191 cm', foot: 'Vänster', contract: '29 juni 2027',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/1000835/jakob-tannander'
-            },
-            {
-                id: '1109472', name: 'Patrick Nwadike', team: 'Spartak Trnava', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Slovakien',
-                verified: true, birth: '1998-08-29', age: 27, foot: 'Höger', contract: '',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/1109472/patrick-nwadike'
-            },
-            {
-                id: '948374', name: 'Filip Majchrowicz', team: 'Radomiak Radom', track: 'utland', trackName: 'Utlandsspåret', pos: 'Målvakt', league: 'Ekstraklasa (Polen)',
-                verified: true, nat: 'Polen', birth: '2000-02-09', age: 26, height: '194 cm', foot: 'Höger', contract: '30 juni 2028',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/948374/filip-majchrowicz'
-            },
-            {
-                id: '1457824', name: 'Malcolm Jeng', team: 'FC Groningen (lån)', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Eredivisie (Nederländerna)',
-                verified: true, nat: 'Sverige', birth: '2005-03-09', age: 21, height: '190 cm', foot: 'Vänster', contract: '30 juni 2027 (lån från Reims)',
-                sirius: { seasons: [
-                    { season: '2023', league: '', apps: 20, goals: 0, assists: 0 },
-                    { season: '2024', league: '', apps: 30, goals: 0, assists: 1 }
-                ] },
-                career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/1457824/malcolm-jeng'
-            },
-            {
-                id: '961305', name: 'Benjamin Mbunga Kimpioka', team: 'Asteras Tripolis', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänsterytter', league: 'Super League (Grekland)',
-                verified: true, nat: 'Sverige, DR Kongo', birth: '2000-02-21', age: 26, height: '185 cm', foot: 'Höger', contract: '30 juni 2028',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/961305/benjamin-mbunga-kimpioka'
-            },
-            {
-                id: '839970', name: 'Magnus Kaastrup', team: 'Aarhus Fremad', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänsterytter', league: '1. Division (Danmark)',
-                verified: true, nat: 'Danmark', birth: '2000-12-28', age: 25, height: '176 cm', foot: 'Vänster', contract: '30 juni 2027',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/839970/magnus-kaastrup'
-            },
-            {
-                id: '1183360', name: 'Yousef Salech', team: 'Cardiff City', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'Championship (England)',
-                verified: true, nat: 'Danmark, Palestina', birth: '2002-01-17', age: 24, height: '195 cm', foot: 'Höger', contract: '30 juni 2030',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/1183360/yousef-salech'
-            },
-            {
-                id: '793909', name: 'Joseph Colley', team: 'KF Tirana', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Kategoria Superiore (Albanien)',
-                verified: true, nat: 'Gambia, Sverige', birth: '1999-04-13', age: 27, height: '187 cm', foot: 'Höger', contract: '30 juni 2027',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/793909/joseph-colley'
-            },
-            {
-                id: '831044', name: 'Hjalmar Ekdal', team: 'Burnley', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Championship (England)',
-                verified: true, nat: 'Sverige', birth: '1998-10-21', age: 27, height: '187 cm', foot: 'Höger', contract: '30 juni 2027',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/831044/hjalmar-ekdal'
-            },
-            {
-                id: '639580', name: 'Marcus Mathisen', team: 'FC St. Pauli', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: '2. Bundesliga (Tyskland)',
-                verified: true, nat: 'Danmark', birth: '1996-02-27', age: 30, height: '185 cm', foot: 'Höger', contract: '-',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/639580/marcus-mathisen'
-            },
-            {
-                id: '982336', name: 'Tashreeq Matthews', team: 'Mamelodi Sundowns FC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Yttermittfältare', league: 'Premier Soccer League (Sydafrika)',
-                verified: true, nat: 'Sydafrika', birth: '2000-09-12', age: 26, height: '175 cm', foot: 'Höger', contract: '-',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/982336/tashreeq-matthews'
-            },
-            { 
-                id: '528409', name: 'Kerim Mrabti', team: 'AEK Larnaca', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallande mittfältare', league: 'Cyprus League (Cypern)',
-                age: 32, height: '175 cm', foot: 'Höger', contract: '31 maj 2028',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/528409/kerim-mrabti'
-            },
-            { 
-                id: '1177212', name: 'Herman Sjögrell', team: 'FC Inter Turku', track: 'utland', trackName: 'Utlandsspåret', pos: 'Yttermittfältare', league: 'Veikkausliiga (Finland)',
-                age: 25, height: '183 cm', foot: 'Höger', contract: '-',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/1177212/herman-sjogrell'
-            },
-            { 
-                id: '474133', name: 'Aron Bjarnason', team: 'Breiðablik', track: 'utland', trackName: 'Utlandsspåret', pos: 'Yttermittfältare', league: 'Besta deildin (Island)',
-                age: 30, height: '182 cm', foot: 'Höger', contract: '16 nov 2027',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/474133/aron-bjarnason'
-            },
-            { 
-                id: '919036', name: 'Wessam Abou Ali', team: 'Columbus Crew', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'MLS (USA)',
-                age: 27, height: '187 cm', foot: 'Höger', contract: 'Säsongen 2027 (option 2028)',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/919036/wessam-abou-ali'
-            },
-            { 
-                id: '1129082', name: 'Jamie Roche', team: 'Kortrijk', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'Jupiler Pro League (Belgien)',
-                age: 25, height: '186 cm', foot: 'Höger', contract: '-',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/1129082/jamie-roche'
-            },
-            { 
-                id: '619826', name: 'Jesper Nyholm', team: 'Prachuap FC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Thai League 1 (Thailand)',
-                age: 33, height: '185 cm', foot: 'Höger', contract: '30 juni 2027',
-                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
-                fotmobUrl: 'https://www.fotmob.com/sv/players/619826'
-            }
-        ];
-
-        const MATCH_FEED_URL = "matches.json";
-
-        let playersData = [];
-        let feedState = "loading";
-        let feedError = "";
-
-        function normalizeMatch(raw) {
-            return {
-                player: raw.playerName || raw.player || "",
-                team: raw.playerTeam || raw.team || "",
-                playerId: String(raw.playerId || ""),
-                track: raw.track || "utland",
-                trackName: raw.trackName || "",
-                pos: raw.position || raw.pos || "",
-                league: raw.leagueName || raw.league || "",
-                matchDate: String(raw.matchDate || raw.date || "").slice(0, 10),
-                kickoff: raw.kickoff || "",
-                teamOnly: !!raw.teamOnly,
-                home: raw.homeTeam || raw.home || "",
-                away: raw.awayTeam || raw.away || "",
-                scoreHome: raw.homeScore ?? raw.scoreHome ?? null,
-                scoreAway: raw.awayScore ?? raw.scoreAway ?? null,
-                status: raw.status || "Okänd status",
-                rating: raw.rating ?? null,
-                mins: raw.minutesPlayed ?? raw.mins ?? null,
-                goals: raw.goals ?? null,
-                ass: raw.assists ?? raw.ass ?? null,
-                passes: raw.passes || null,
-                chances: raw.chancesCreated ?? raw.chances ?? null,
-                bigChances: raw.bigChancesCreated ?? raw.bigChances ?? null,
-                shotsTarget: raw.shotsOnTarget ?? raw.shotsTarget ?? null,
-                touches: raw.touches ?? null,
-                photo: raw.photo || "",
-                matchUrl: raw.matchUrl || ""
-            };
-        }
-
-        async function loadMatchFeed() {
-            if (!MATCH_FEED_URL) {
-                feedState = "unconfigured";
-                feedError = "Matchdatakällan är inte konfigurerad ännu.";
-                renderContent();
-                return;
-            }
-            feedState = "loading";
-            renderContent();
-            try {
-                const response = await fetch(MATCH_FEED_URL, {
-                    headers: { "Accept": "application/json" },
-                    cache: "no-store"
-                });
-                if (!response.ok) throw new Error("Datakällan svarade HTTP " + response.status);
-                const payload = await response.json();
-                const rows = Array.isArray(payload) ? payload : payload.matches;
-                if (!Array.isArray(rows)) throw new Error("JSON måste innehålla en matches-lista.");
-                playersData = rows.map(normalizeMatch).filter(m =>
-                    m.player && m.home && m.away && m.matchDate
-                );
-                feedState = "ready";
-                feedError = "";
-            } catch (error) {
-                feedState = "error";
-                feedError = "Kunde inte hämta matchdata.";
-                console.error("Blåsvarta Spår matchfeed:", error);
-            }
-            renderContent();
-        }
-
-        function displayStat(value, suffix = "") {
-            return value === null || value === undefined || value === "" ? "–" : `${value}${suffix}`;
-        }
-
-        function buildDatePicker() {
-            const container = document.getElementById('date-container');
-            container.innerHTML = "";
-            const center = addDays(todayStr, dateOffset);
-            for (let i = -2; i <= 2; i++) {
-                const iso = addDays(center, i);
-                let label;
-                if (iso === todayStr) label = "Idag";
-                else if (iso === addDays(todayStr, -1)) label = "Igår";
-                else if (iso === addDays(todayStr, 1)) label = "Imorgon";
-                else label = `${new Date(iso + 'T12:00:00Z').toLocaleDateString('sv-SE', { weekday: 'short', timeZone: 'UTC' })} ${iso.slice(8)}`;
-                const btn = document.createElement('button');
-                btn.className = `date-item ${iso === selectedDate ? 'active' : ''}`;
-                btn.textContent = label;
-                btn.onclick = () => { selectedDate = iso; buildDatePicker(); renderContent(); };
-                container.appendChild(btn);
-            }
-        }
-
-        let swipeJustHappened = false;
-        function setupDateSwipe() {
-            const el = document.getElementById('date-container');
-            if (!el) return;
-            const STEP_PX = 56;
-            let startX = null, moved = false, pid = null;
-            el.addEventListener('pointerdown', (e) => {
-                startX = e.clientX; moved = false; pid = e.pointerId;
-            });
-            el.addEventListener('pointermove', (e) => {
-                if (startX === null || e.pointerId !== pid) return;
-                const dx = e.clientX - startX;
-                if (Math.abs(dx) < STEP_PX) return;
-                const steps = Math.trunc(Math.abs(dx) / STEP_PX);
-                const dir = dx > 0 ? -1 : 1;
-                startX += Math.sign(dx) * steps * STEP_PX;
-                moved = true;
-                shiftDates(dir * steps);
-            });
-            const end = () => {
-                if (moved) { swipeJustHappened = true; setTimeout(() => { swipeJustHappened = false; }, 60); }
-                startX = null; moved = false; pid = null;
-            };
-            el.addEventListener('pointerup', end);
-            el.addEventListener('pointercancel', end);
-            el.addEventListener('click', (e) => { if (swipeJustHappened) { e.stopPropagation(); e.preventDefault(); } }, true);
-        }
-        window.addEventListener('load', setupDateSwipe);
-
-        function jumpToDate(iso) {
-            selectedDate = iso;
-            dateOffset = Math.round((new Date(iso + 'T12:00:00Z') - new Date(todayStr + 'T12:00:00Z')) / 86400000);
-            buildDatePicker();
-            renderContent();
-        }
-
-        function shiftDates(n) {
-            dateOffset += n;
-            selectedDate = addDays(todayStr, dateOffset);
-            buildDatePicker();
-            renderContent();
-        }
-
-        function goHome() {
-            closeModal();
-            closeDropdown();
-            goToday();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function goToday() {
-            todayStr = swedenToday();
-            selectedDate = todayStr;
-            dateOffset = 0;
-            buildDatePicker();
-            openResultsView();
-        }
-
-        function syncTrackButtons() {
-            document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('active'));
-            if (currentMode === 'search') document.getElementById('track-btn-search')?.classList.add('active');
-            else document.getElementById(`track-btn-${selectedTrack}`)?.classList.add('active');
-        }
-
-        function openResultsView() {
-            currentMode = 'results';
-            document.getElementById('date-picker-bar').style.display = 'flex';
-            document.getElementById('track-selector').style.display = 'grid';
-            document.getElementById('view-title').textContent = "RESULTAT & SCHEMA";
-            document.getElementById('view-desc').textContent = "Klicka på ett matchkort eller spelarkort för detaljerad statistik";
-            setActiveNav('nav-results');
-            syncTrackButtons();
-            renderContent();
-        }
-
-        function setTrack(track) {
-            selectedTrack = track;
-            if (currentMode !== 'results') { openResultsView(); return; }
-            syncTrackButtons();
-            renderContent();
-        }
-
-        function normalizeText(t) {
-            return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        }
-
-        function openSearchView() {
-            closeDropdown();
-            currentMode = 'search';
-            document.getElementById('date-picker-bar').style.display = 'none';
-            document.getElementById('track-selector').style.display = 'grid';
-            document.getElementById('view-title').textContent = "SÖK SPELARE";
-            document.getElementById('view-desc').textContent = "Sök på spelare eller lag";
-            setActiveNav('nav-sparen');
-            syncTrackButtons();
-            const area = document.getElementById('content-area');
-            area.className = "";
-            area.innerHTML = `<input type="search" id="player-search" class="search-input" placeholder="Sök spelare eller lag…" autocomplete="off" aria-label="Sök spelare"><div id="search-results" class="players-grid"></div>`;
-            const input = document.getElementById('player-search');
-            input.addEventListener('input', () => renderSearchResults(input.value));
-            renderSearchResults('');
-            input.focus();
-        }
-
-        function renderSearchResults(query) {
-            const q = normalizeText(query).trim();
-            const list = masterPlayers.filter(p => !q || normalizeText([p.name, p.team, p.league, p.pos, p.trackName].join(' ')).includes(q));
-            const target = document.getElementById('search-results');
-            if (list.length === 0) {
-                target.innerHTML = `<div class="empty-state"><p>Ingen spelare matchar "${query.replace(/[<>&"]/g, '')}".</p></div>`;
-                return;
-            }
-            renderProfiles(null, list, target);
-        }
-
-        function toggleDropdown(e) {
-            e.stopPropagation();
-            const open = document.getElementById('spar-dropdown').classList.toggle('open');
-            document.getElementById('nav-sparen').setAttribute('aria-expanded', open);
-        }
-        function closeDropdown() {
-            document.getElementById('spar-dropdown').classList.remove('open');
-            document.getElementById('nav-sparen').setAttribute('aria-expanded', 'false');
-        }
-        document.addEventListener('click', closeDropdown);
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDropdown(); });
-
-        function selectTrackFromMenu(track) {
-            closeDropdown();
-            currentMode = 'profiles';
-            document.getElementById('date-picker-bar').style.display = 'none';
-            document.getElementById('track-selector').style.display = 'none';
-            document.getElementById('view-title').textContent = "EX-SIRIUS SPELARKORT";
-            setActiveNav('nav-sparen');
-            renderProfiles(track);
-        }
-
-        function renderResults() {
-            const area = document.getElementById('content-area');
-            area.className = "matches-grid";
-            area.innerHTML = "";
-
-            if (feedState !== "ready") {
-                area.innerHTML = `<div class="empty-state"><p>Hämtar riktiga matchdata…</p></div>`;
-                return;
-            }
-
-            const filtered = playersData.filter(m =>
-                (selectedTrack === 'all' || m.track === selectedTrack) &&
-                m.matchDate === selectedDate
-            );
-
-            if (filtered.length === 0) {
-                area.innerHTML = `<div class="empty-state"><p>Inga matchdata hittades för ${selectedDate} i valt spår.</p></div>`;
-                return;
-            }
-
-            filtered.sort((a,b) => a.player.localeCompare(b.player, 'sv')).forEach((m) => {
-                const imgUrl = m.photo || (m.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(m.playerId)}.png` : '');
-                const isUpcoming = m.status === 'Kommande';
-                const scoreHome = isUpcoming ? '' : displayStat(m.scoreHome);
-                const scoreAway = isUpcoming ? '' : displayStat(m.scoreAway);
-                const rating = displayStat(m.rating);
-                const mins = displayStat(m.mins, "'");
-                const goals = displayStat(m.goals);
-                const assists = displayStat(m.ass);
-
-                const card = document.createElement('div');
-                card.className = "match-card";
-                card.onclick = () => openMatchStatsModal(m);
-                card.innerHTML = `
-                    <div class="match-header">
-                        <span>${m.league || "Liga saknas"}</span>
-                        <span class="status-badge">${isUpcoming ? "Kommande" + (m.kickoff ? " · " + m.kickoff : "") : (m.status || "Status saknas")}</span>
-                    </div>
-                    <div class="team-row"><span>${m.home}</span><span class="team-score">${scoreHome}</span></div>
-                    <div class="team-row"><span>${m.away}</span><span class="team-score">${scoreAway}</span></div>
-                    <div class="player-footer">
-                        <div class="player-info-group">
-                            <div class="player-thumb-wrapper">
-                                <img src="${imgUrl}" class="player-thumb" onerror="this.onerror=null; this.src='https://via.placeholder.com/30';">
-                                ${m.rating !== null && !isUpcoming ? `<span class="rating-badge">${rating}</span>` : ''}
-                            </div>
-                            <div class="player-details">
-                                <h4>${m.player}</h4>
-                                <span>${m.team || ""}</span>
-                            </div>
-                        </div>
-                        <div class="player-quick-stats">${isUpcoming ? "" : (m.teamOnly ? "Spelade ej" : `${mins} <span>min</span> | ${goals}G${assists}A`)}</div>
-                    </div>`;
-                area.appendChild(card);
-            });
-        }
-
-        function renderProfiles(track, list, target) {
-            const area = target || document.getElementById('content-area');
-            if (!target) area.className = "players-grid";
-            area.innerHTML = "";
-
-            const filtered = list ? list.slice() : (track === 'all' ? masterPlayers : masterPlayers.filter(x => x.track === track));
-
-            filtered.sort((a,b) => a.name.localeCompare(b.name, 'sv')).forEach(p => {
-                const card = document.createElement('div');
-                card.className = "player-card";
-                card.onclick = () => openPlayerProfileModal(p);
-                card.innerHTML = `
-                    <div class="player-card-header">
-                        <div class="player-avatar">
-                            ${p.id ? `<img src="https://images.fotmob.com/image_resources/playerimages/${p.id}.png" alt="${p.name}" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\\'fa-solid fa-user\\'></i>';">` : `<i class="fa-solid fa-user"></i>`}
-                        </div>
-                        <div>
-                            <h3 style="color:#fff; font-size:0.9rem;">${p.name}</h3>
-                            <span style="color:var(--sirius-gold); font-size:0.75rem; font-weight:700;">${p.team}</span>
-                        </div>
-                    </div>
-                    <div style="font-size:0.75rem; color:var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 8px; margin-top: 8px;">
-                        <p style="margin-bottom: 2px;"><strong>Liga:</strong> ${p.league}</p>
-                        <p style="margin-bottom: 2px;"><strong>Position:</strong> ${p.pos || '-'}</p>
-                        <p><strong>Ålder:</strong> ${p.age ? p.age + ' år' : '-'}</p>
-                    </div>
-                `;
-                area.appendChild(card);
-            });
-        }
-
-        function openUpcomingModal(p) {
-            const avatarUrl = p.photo || (p.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(p.playerId)}.png` : '');
-            const stat = (label, value) => `<div class="stat-item"><span>${label}</span><strong>${value || ''}</strong></div>`;
-            document.getElementById('modal-body-content').innerHTML = `
-                <div class="modal-player-header">
-                    <div class="modal-avatar-wrapper">
-                        <img class="modal-avatar" src="${avatarUrl}" onerror="this.src='https://via.placeholder.com/60';">
-                    </div>
-                    <h3 style="color:#fff; font-size:1rem; font-weight:900;">${p.player}</h3>
-                    <p style="color:var(--sirius-gold); font-size:0.8rem; font-weight:700;">${p.team}</p>
-                </div>
-                <div class="modal-section-title">${p.teamOnly ? 'Spelade ej' : 'Kommande match'}</div>
-                <div class="modal-stats-list">
-                    ${stat('Datum', p.matchDate)}
-                    ${p.teamOnly ? stat('Resultat', (p.scoreHome ?? '–') + ' – ' + (p.scoreAway ?? '–')) : stat('Avspark (svensk tid)', p.kickoff)}
-                    ${stat('Hemmalag', p.home)}
-                    ${stat('Bortalag', p.away)}
-                    ${stat('Tävling', p.league)}
-                </div>`;
-            { const mc = document.querySelector('#stats-modal .modal-content'); if (mc) mc.scrollTop = 0; } document.getElementById('stats-modal').classList.add('active');
-        }
-
-        function openMatchStatsModal(p) {
-            if (p.status === 'Kommande' || p.teamOnly) { openUpcomingModal(p); return; }
-            const avatarUrl = p.photo || (p.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(p.playerId)}.png` : '');
-            const stat = (label, value, suffix = "") =>
-                `<div class="stat-item"><span>${label}</span><strong>${displayStat(value, suffix)}</strong></div>`;
-
-            document.getElementById('modal-body-content').innerHTML = `
-                <div class="modal-player-header">
-                    <div class="modal-avatar-wrapper">
-                        <img class="modal-avatar" src="${avatarUrl}" onerror="this.src='https://via.placeholder.com/60';">
-                        ${p.rating !== null ? `<span class="modal-rating-badge">${displayStat(p.rating)}</span>` : ''}
-                    </div>
-                    <h3 style="color:#fff; font-size:1rem; font-weight:900;">${p.player}</h3>
-                    <p style="color:var(--sirius-gold); font-size:0.8rem; font-weight:700;">${p.team} ${p.pos ? '(' + p.pos + ')' : ''}</p>
-                    <p style="color:var(--text-muted); font-size:0.72rem; margin-top:4px;">${p.matchDate} · ${p.league}</p>
-                </div>
-                <div class="modal-section-title">Matchstatistik från datakällan</div>
-                <div class="modal-stats-list">
-                    ${stat("Slutresultat", `${displayStat(p.scoreHome)} –${displayStat(p.scoreAway)}`)}
-                    ${stat("Spelade minuter", p.mins, p.mins === null ? "" : "'")}
-                    ${stat("Mål", p.goals)}
-                    ${stat("Assister", p.ass)}
-                    ${stat("Spelarbetyg", p.rating)}
-                    ${stat("Precisa passningar", p.passes)}
-                    ${stat("Skapade chanser", p.chances)}
-                </div>`;
-            { const mc = document.querySelector('#stats-modal .modal-content'); if (mc) mc.scrollTop = 0; } document.getElementById('stats-modal').classList.add('active');
-        }
-
-        function siriusHtml(p) {
-            const s = p.sirius;
-            const list = s?.seasons?.length ? s.seasons : (s?.total ? [{ season: s.total.years, league: '', apps: s.total.apps, goals: s.total.goals, assists: s.total.assists ?? null }] : []);
-            const esc = (x) => String(x ?? '').replace(/[<>&"]/g, '');
-            const n = (v) => (v === null || v === undefined ? '–' : v);
-            const sum = (k) => list.reduce((a, x) => a + (x[k] || 0), 0);
-            const hasAss = list.some((x) => x.assists !== null && x.assists !== undefined);
-            const row = (a, b, c, d, e, bold) => `<div class="sirius-row"${bold ? ' style="font-weight:800;color:#fff;"' : ''}><span>${a}${b ? ` <small>${b}</small>` : ''}</span><span>${c}</span><span>${d}</span><span>${e}</span></div>`;
-            
-            let content = '';
-            if (list.length > 0) {
-                const rows = list.map((x) => row(esc(x.season), esc(x.league), n(x.apps), n(x.goals), n(x.assists))).join('');
-                const total = list.length > 1 ? row('Totalt', '', sum('apps'), sum('goals'), hasAss ? sum('assists') : '–', true) : '';
-                content = `${row('Säsong', '', 'M', 'Mål', 'Ass', true)}${rows}${total}`;
-            }
-            return `<details class="fold"><summary class="modal-section-title">Karriär i Sirius</summary><div class="modal-stats-list" style="min-height:1.5rem;">${content}</div></details>`;
-        }
-
-        function careerHtml(p) {
-            const c = p.career || {};
-            const esc = (x) => String(x ?? '').replace(/[<>&\"]/g, '');
-            const n = (v) => (v === null || v === undefined ? '–' : v);
-            const rt = (v) => (v === null || v === undefined ? '–' : Number(v).toFixed(1).replace('.', ','));
-            const grid = 'display:grid;grid-template-columns:1fr 28px 30px 30px 36px;gap:6px;padding:6px 0;border-bottom:1px solid var(--card-border);font-size:0.76rem;color:var(--text-muted);';
-            const row = (club, season, a, g, s, r, bold) => `<div style="${grid}${bold ? 'font-weight:800;color:#fff;' : ''}"><span>${club}${season ? ` <small style="color:var(--sirius-gold);font-size:0.65rem;">${season}</small>` : ''}</span><span style="text-align:right">${a}</span><span style="text-align:right">${g}</span><span style="text-align:right">${s}</span><span style="text-align:right">${r}</span></div>`;
-            const table = (list) => list && list.length ? (row('Klubb', '', 'M', 'Mål', 'Ass', 'Bet', true) + list.map((x) => row(esc(x.club), esc(x.season), n(x.apps), n(x.goals), n(x.assists), rt(x.rating))).join('')) : '';
-            
-            return `
-                <details class="fold"><summary class="modal-section-title">Karriär efter Sirius</summary><div class="modal-stats-list" style="min-height:1.5rem;">${table(c.after)}</div></details>
-                <details class="fold"><summary class="modal-section-title">Karriär före Sirius</summary><div class="modal-stats-list" style="min-height:1.5rem;">${table(c.before)}</div></details>
-            `;
-        }
-
-        function transfersHtml(p) {
-            const esc = (t) => String(t ?? '').replace(/[<>&"]/g, '');
-            const rows = (p.transfers && p.transfers.length) ? p.transfers.map(t => `
-                <div class="transfer-row">
-                    <div class="transfer-date">${esc(t.date)}</div>
-                    <div class="transfer-clubs">${esc(t.from)} <span>→</span> ${esc(t.to)}</div>
-                    <div class="transfer-fee">${esc(t.fee || '–')}</div>
-                </div>`).join('') : '';
-            return `<details class="fold"><summary class="modal-section-title">Övergångar</summary><div class="modal-stats-list" style="min-height:1.5rem;">${rows}</div></details>`;
-        }
-
-        function getSiriusTime(p) {
-            const t = Array.isArray(p.transfers) ? p.transfers : [];
-            const ins = t.filter(x => x.to === 'Sirius').map(x => +String(x.date).slice(0, 4));
-            const outs = t.filter(x => x.from === 'Sirius').map(x => +String(x.date).slice(0, 4));
-            if (!ins.length) return '-';
-            const a = Math.min(...ins);
-            if (!outs.length) return a + '–';
-            const b = Math.max(...outs);
-            return a === b ? String(a) : a + '–' + b;
-        }
-
-        function openPlayerProfileModal(p) {
-            const avatarUrl = p.id ? `https://images.fotmob.com/image_resources/playerimages/${p.id}.png` : '';
-            document.getElementById('modal-body-content').innerHTML = `
-                <div class="modal-player-header">
-                    <div class="modal-avatar-wrapper">
-                        <img class="modal-avatar" src="${avatarUrl}" onerror="this.src='https://via.placeholder.com/60';">
-                    </div>
-                    <h3 style="color:#fff; font-size:1.1rem; font-weight:900;">${p.name}</h3>
-                    <p style="color:var(--sirius-gold); font-size:0.8rem; font-weight:700;">${p.team} • ${p.league}</p>
-                </div>
-                <div class="modal-section-title">Spelarinfo</div>
-                <div class="modal-stats-list">
-                    <div class="stat-item"><span>Ålder</span><strong>${p.age ? p.age + ' år' : '-'}</strong></div>
-                    <div class="stat-item"><span>Position</span><strong>${p.pos || '-'}</strong></div>
-                    <div class="stat-item"><span>Kontrakt till</span><strong>${p.contract && p.contract !== '-' ? p.contract : '-'}</strong></div>
-                    <div class="stat-item"><span>Nationalitet</span><strong>${p.nat || '-'}</strong></div>
-                    <div class="stat-item"><span>Tid i Sirius</span><strong>${getSiriusTime(p)}</strong></div>
-                </div>
-                ${siriusHtml(p)}
-                ${careerHtml(p)}
-                ${transfersHtml(p)}
-                <a href="${p.fotmobUrl}" target="_blank" class="external-btn">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Se live-stats på FotMob
-                </a>`;
-            { const mc = document.querySelector('#stats-modal .modal-content'); if (mc) mc.scrollTop = 0; } document.getElementById('stats-modal').classList.add('active');
-        }
-
-        function closeModal(e) {
-            document.getElementById('stats-modal').classList.remove('active');
-        }
-
-        function renderContent() { if (currentMode === 'results') renderResults(); }
-        function setActiveNav(navId) { document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')); document.getElementById(navId)?.classList.add('active'); }
-
-        window.onload = () => { goToday(); loadMatchFeed(); };
-    </script>
 </body>
 </html>
