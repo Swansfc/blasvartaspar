@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-16T21:43:49+00:00",
+  "updated": "2026-10-16T22:18:09+00:00",
   "matches": [
     {
       "matchId": "5811786",
@@ -1075,52 +1075,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/atromitos-vs-asteras-tripolis/1w8m4xf#5943262"
-    },
-    {
-      "matchId": "5764506",
-      "player": "Magnus Kaastrup",
-      "team": "Aarhus Fremad",
-      "playerId": "839970",
-      "track": "utland",
-      "league": "1. Division",
-      "matchDate": "2026-10-09",
-      "home": "AB",
-      "away": "Aarhus Fremad",
-      "scoreHome": 2,
-      "scoreAway": null,
-      "status": "Slut",
-      "rating": 6.8,
-      "mins": 90,
-      "goals": 0,
-      "ass": 0,
-      "passes": "44/55",
-      "chances": 1,
-      "matchUrl": "https://www.fotmob.com/matches/aarhus-fremad-vs-ab/2njivw#5764506",
-      "shotsTarget": 2,
-      "touches": 87
-    },
-    {
-      "matchId": "5764502",
-      "player": "Johan Karlsson",
-      "team": "Vejle Boldklub",
-      "playerId": "1157905",
-      "track": "utland",
-      "league": "1. Division",
-      "matchDate": "2026-10-09",
-      "home": "Vejle Boldklub",
-      "away": "Hvidovre",
-      "scoreHome": 1,
-      "scoreAway": 2,
-      "status": "Slut",
-      "rating": 6.4,
-      "mins": 90,
-      "goals": 0,
-      "ass": 0,
-      "passes": "51/58",
-      "chances": 2,
-      "matchUrl": "https://www.fotmob.com/matches/vejle-boldklub-vs-hvidovre/2tkoqb#5764502",
-      "shotsTarget": 0,
-      "touches": 77
     }
   ],
   "players": {}
