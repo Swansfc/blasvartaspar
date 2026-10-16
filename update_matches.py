@@ -2,9 +2,6 @@
 """
 Hämtar senaste matcher för spelarna ni följer från FotMob och skriver matches.json
 i det format som index.html läser. Körs manuellt: python update_matches.py [dagar]
-
-Inga värden hittas på: saknas ett fält hos FotMob skrivs null (visas som "–").
-Bara Pythons standardbibliotek behövs.
 """
 import json, re, sys, time, urllib.request
 from datetime import datetime, timedelta, timezone
@@ -16,7 +13,6 @@ DAYS_BACK = int(sys.argv[1]) if len(sys.argv) > 1 else 7
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 
-# Lägg till/ta bort spelare här. id = siffrorna i FotMob-länken.
 PLAYERS = [
     {"name": "Kerim Mrabti",    "id": "528409",  "track": "utland", "team": "AEK Larnaca"},
     {"name": "Herman Sjögrell", "id": "1177212", "track": "utland", "team": "FC Inter Turku"},
@@ -32,19 +28,9 @@ PLAYERS = [
     {"name": "Magnus Kaastrup", "id": "839970", "track": "utland", "team": "Aarhus Fremad"},
     {"name": "Benjamin Mbunga Kimpioka", "id": "961305", "track": "utland", "team": "Asteras Tripolis"},
     {"name": "Malcolm Jeng", "id": "1457824", "track": "utland", "team": "FC Groningen"},
-    {"name": "Filip Majchrowicz", "id": "948374", "track": "utland", "team": "Radomiak Radom"},
-    {"name": "Robbie Ure", "id": "1399218", "track": "utland", "team": "Sevilla"},
-    {"name": "Johan Karlsson", "id": "1157905", "track": "utland", "team": "Vejle Boldklub"},
-    {"name": "Stefano Holmquist Vecchia", "id": "493159", "track": "utland", "team": "Aalesund"},
-    {"name": "Joeri de Kamps", "id": "293718", "track": "utland", "team": "Sepsi OSK"},
-    {"name": "Kristopher Da Graça", "id": "759565", "track": "utland", "team": "Krasava ENY Ypsonas"},
-    {"name": "Isak Ssewankambo", "id": "561838", "track": "utland", "team": "Vancouver FC"},
-    {"name": "Diego Montiel", "id": "566351", "track": "utland", "team": "KA Akureyri"},
-    {"name": "Moustafa Zeidan", "id": "767777", "track": "utland", "team": "Al Masry SC"},
-    {"name": "André Alsanati", "id": "1022484", "track": "utland", "team": "Al-Mosul"},
-    {"name": "Jakob Tånnander", "id": "1000835", "track": "utland", "team": "Farense"},
-    {"name": "Patrick Nwadike", "id": "1109472", "track": "utland", "team": "Spartak Trnava"},
-    # Saknar FotMob-ID än (lägg till när länken finns): Óli Ómarsson, Leo Walta, Tobias Carlsson
+    {"name": "Óli Ómarsson", "id": "965710", "track": "utland", "team": "Breiðablik"},
+    {"name": "Leo Walta", "id": "1276686", "track": "utland", "team": "Los Angeles FC"},
+    {"name": "Tobias Carlsson", "id": "1016540", "track": "utland", "team": "FH Hafnarfjörður"},
 ]
 
 
@@ -65,30 +51,26 @@ def get(url, as_json=False):
 def next_data(html):
     m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', html, re.S)
     if not m:
-        raise ValueError("hittade inte __NEXT_DATA__ (FotMob kan ha ändrat sidan eller blockerar)")
+        raise ValueError("hittade inte __NEXT_DATA__")
     return json.loads(m.group(1))
 
 
 def player_data(pid):
-    """Provar sidan, sedan API:t. Returnerar dict eller None."""
     try:
         nd = next_data(get(f"https://www.fotmob.com/sv/players/{pid}"))
         pp = (nd.get("props") or {}).get("pageProps") or {}
         data = pp.get("data") or pp.get("playerData")
         if isinstance(data, dict) and data:
             return data
-        print(f"  sidan saknade spelardata (pageProps-nycklar: {list(pp.keys())[:8]})")
-    except Exception as e:
-        print(f"  sidan misslyckades ({e})")
+    except Exception:
+        pass
     try:
         data = get(f"https://www.fotmob.com/api/playerData?id={pid}", as_json=True)
         if isinstance(data, dict) and data:
             return data
-        print("  API:t gav tomt svar")
-    except Exception as e:
-        print(f"  API:t misslyckades ({e})")
+    except Exception:
+        pass
     return None
-
 
 
 UPCOMING_DAYS = 7
@@ -96,7 +78,6 @@ _fixture_cache = {}
 
 
 def find_fixtures(node, out):
-    """Letar rekursivt efter matchobjekt (har home, away och status med utcTime)."""
     if isinstance(node, dict):
         st = node.get("status")
         if isinstance(st, dict) and st.get("utcTime") and "home" in node and "away" in node:
@@ -119,8 +100,8 @@ def team_fixtures(team_id):
             find_fixtures(((nd.get("props") or {}).get("pageProps")) or {}, found)
             if found:
                 break
-        except Exception as e:
-            print(f"  lagsidan ({tab}) misslyckades: {e}")
+        except Exception:
+            pass
     uniq = {}
     for f in found:
         uniq[str(f.get("id"))] = f
@@ -132,7 +113,6 @@ def team_fixtures(team_id):
 def upcoming_rows(p, team_id, team_name, now, have_dates=()):
     rows = []
     fx = team_fixtures(team_id)
-    print(f"  matcher i lagets schema: {len(fx)}")
     horizon = now + timedelta(days=UPCOMING_DAYS)
     for f in fx:
         st = f.get("status") or {}
@@ -198,7 +178,6 @@ def num(v):
 
 
 def match_details(match_url, pid):
-    """Extra statistik (passningar m.m.) från matchsidan. Best effort."""
     out = {}
     try:
         d = next_data(get("https://www.fotmob.com" + match_url))
@@ -226,8 +205,8 @@ def match_details(match_url, pid):
             s_ = val(*names)
             if s_ and s_.get("value") is not None:
                 out[key] = s_["value"]
-    except Exception as e:
-        print(f"    (ingen detaljstatistik: {e})")
+    except Exception:
+        pass
     return out
 
 
@@ -242,40 +221,21 @@ def main():
     kept = {(m["playerId"], m["matchId"]): m for m in old.get("matches", [])
             if m.get("matchId") and m.get("status") not in ("Kommande", "Pågår") and not m.get("teamOnly")}
     now = datetime.now(timezone.utc)
-    # Gamla matcher utanför fönstret (DAYS_BACK dagar bakåt) rensas bort så filen hålls liten
     oldest = (now.astimezone(ZoneInfo("Europe/Stockholm")).date() - timedelta(days=DAYS_BACK)).isoformat()
     kept = {k: m for k, m in kept.items() if m.get("matchDate", "") >= oldest}
     ok = 0
 
     for p in PLAYERS:
         print(f'{p["name"]} ({p["id"]})')
-        try:
-            data = player_data(p["id"])
-        except Exception as e:
-            print(f"  FEL: {e}")
-            continue
+        data = player_data(p["id"])
         if not data:
             print("  hoppar över spelaren (ingen data)")
             continue
         ok += 1
-        fm_name = data.get("name") or "?"
-        fm_team = (data.get("primaryTeam") or {}).get("teamName") or "?"
-        warn = "" if _plain(fm_name) == _plain(p["name"]) else "   <-- OBS: NAMNET STÄMMER INTE, kontrollera ID"
-        print(f"  FotMob säger: {fm_name} ({fm_team}){warn}")
+        team = (data.get("primaryTeam") or {}).get("teamName") or p["team"]
         recent = data.get("recentMatches") or []
         if isinstance(recent, dict):
             recent = recent.get("matches", [])
-        team = (data.get("primaryTeam") or {}).get("teamName") or p["team"]
-        if recent:
-            print(f"  fält i matchlistan: {sorted(recent[0].keys())}")
-        else:
-            print(f"  inga recentMatches (nycklar i data: {sorted(data.keys())[:10]})")
-        if recent:
-            try:
-                print(f"  senaste match hos FotMob: {recent[0]['matchDate']['utcTime'][:10]}")
-                print(f"  ratingProps (första): {recent[0].get('ratingProps')}")
-            except Exception:
-                pass
         for r in recent:
             try:
                 utc = datetime.fromisoformat(
@@ -293,7 +253,7 @@ def main():
                 "matchDate": utc.astimezone(ZoneInfo("Europe/Stockholm")).date().isoformat(),
                 "home": mine if home_is_player else opp,
                 "away": opp if home_is_player else mine,
-                "scoreHome": r.get("homeScore"), "scoreAway": r.get("awayScore"),
+                "scoreHome": r.get("homeScore"), "scoreAway": r.get("scoreAway"),
                 "status": "Slut",
                 "rating": (num((r.get("ratingProps") or {}).get("rating")) or None),
                 "mins": r.get("minutesPlayed"), "goals": r.get("goals"), "ass": r.get("assists"),
@@ -311,8 +271,6 @@ def main():
                 row.update(det)
                 time.sleep(0.7)
             kept[(p["id"], row["matchId"])] = row
-            print(f'  {row["matchDate"]} {row["home"]} {row["scoreHome"]}-{row["scoreAway"]} {row["away"]}'
-                  f' | betyg {row["rating"]} | {row["mins"]} min')
         tid = (data.get("primaryTeam") or {}).get("teamId")
         if tid:
             try:
@@ -322,20 +280,8 @@ def main():
                     key = (p["id"], row["matchId"])
                     if key not in kept:
                         kept[key] = row
-                if ups:
-                    n = ups[0]
-                    only = [r for r in ups if r.get("teamOnly")]
-                    if only:
-                        print(f"  lagets spelade matcher utan spelardata: {len(only)} (t.ex. {only[0]['matchDate']} {only[0]['home']} {only[0]['scoreHome']}-{only[0]['scoreAway']} {only[0]['away']})")
-                    nxt = [r for r in ups if not r.get("teamOnly")]
-                    if nxt:
-                        print(f'  nästa: {nxt[0]["matchDate"]} {nxt[0]["kickoff"]} {nxt[0]["home"]} - {nxt[0]["away"]} ({nxt[0]["status"]})')
-                else:
-                    print("  inga kommande eller lagmatcher hittades")
-            except Exception as e:
-                print(f"  kunde inte hämta kommande matcher: {e}")
-        else:
-            print("  hittade inget lag-ID, hoppar över kommande matcher")
+            except Exception:
+                pass
         time.sleep(1)
 
     if ok == 0:
