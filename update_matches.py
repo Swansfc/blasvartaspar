@@ -32,7 +32,25 @@ PLAYERS = [
     {"name": "Magnus Kaastrup", "id": "839970", "track": "utland", "team": "Aarhus Fremad"},
     {"name": "Benjamin Mbunga Kimpioka", "id": "961305", "track": "utland", "team": "Asteras Tripolis"},
     {"name": "Malcolm Jeng", "id": "1457824", "track": "utland", "team": "FC Groningen"},
+    {"name": "Filip Majchrowicz", "id": "948374", "track": "utland", "team": "Radomiak Radom"},
+    {"name": "Robbie Ure", "id": "1399218", "track": "utland", "team": "Sevilla"},
+    {"name": "Johan Karlsson", "id": "1157905", "track": "utland", "team": "Vejle Boldklub"},
+    {"name": "Stefano Holmquist Vecchia", "id": "493159", "track": "utland", "team": "Aalesund"},
+    {"name": "Joeri de Kamps", "id": "293718", "track": "utland", "team": "Sepsi OSK"},
+    {"name": "Kristopher Da Graça", "id": "759565", "track": "utland", "team": "Krasava ENY Ypsonas"},
+    {"name": "Isak Ssewankambo", "id": "561838", "track": "utland", "team": "Vancouver FC"},
+    {"name": "Diego Montiel", "id": "566351", "track": "utland", "team": "KA Akureyri"},
+    {"name": "Moustafa Zeidan", "id": "767777", "track": "utland", "team": "Al Masry SC"},
+    {"name": "André Alsanati", "id": "1022484", "track": "utland", "team": "Al-Mosul"},
+    {"name": "Jakob Tånnander", "id": "1000835", "track": "utland", "team": "Farense"},
+    {"name": "Patrick Nwadike", "id": "1109472", "track": "utland", "team": "Spartak Trnava"},
+    # Saknar FotMob-ID än (lägg till när länken finns): Óli Ómarsson, Leo Walta, Tobias Carlsson
 ]
+
+
+def _plain(t):
+    import unicodedata
+    return "".join(c for c in unicodedata.normalize("NFD", str(t).lower()) if unicodedata.category(c) != "Mn")
 
 
 def get(url, as_json=False):
@@ -242,7 +260,7 @@ def main():
         ok += 1
         fm_name = data.get("name") or "?"
         fm_team = (data.get("primaryTeam") or {}).get("teamName") or "?"
-        warn = "" if fm_name.lower() == p["name"].lower() else "   <-- OBS: NAMNET STÄMMER INTE, kontrollera ID"
+        warn = "" if _plain(fm_name) == _plain(p["name"]) else "   <-- OBS: NAMNET STÄMMER INTE, kontrollera ID"
         print(f"  FotMob säger: {fm_name} ({fm_team}){warn}")
         recent = data.get("recentMatches") or []
         if isinstance(recent, dict):
