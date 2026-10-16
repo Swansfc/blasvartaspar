@@ -534,53 +534,88 @@
         const masterPlayers = [
             {
                 id: '1399218', name: 'Robbie Ure', team: 'Sevilla', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'LaLiga (Spanien)',
-                verified: true, nat: 'Skottland', age: 22, foot: 'Höger', contract: '2031',
+                verified: true, nat: 'Skottland', age: 22, foot: 'Höger', contract: '30 juni 2031',
                 sirius: { seasons: [
                     { season: '2025', league: 'Allsvenskan', apps: 30, goals: 11, assists: 4 },
+                    { season: '2025/2026', league: 'Allsvenskan / Cuper', apps: 5, goals: 5, assists: 1 },
                     { season: '2026', league: 'Allsvenskan', apps: 15, goals: 15, assists: 2 }
                 ] },
-                career: { after: [ { club: 'Sevilla', season: '2026/2027', apps: 8, goals: 1, assists: 2, rating: 6.7 } ], before: [] },
-                transfers: [ { date: '2026-08', from: 'Sirius', to: 'Sevilla', fee: '6.50m €' } ],
+                career: { after: [ { club: 'Sevilla FC', season: '2026/2027', apps: 8, goals: 1, assists: 2, rating: 6.7 } ], before: [] },
+                transfers: [
+                    { date: '2026-08-11', from: 'Sirius', to: 'Sevilla FC', fee: '6.50m €' },
+                    { date: '2025-03-13', from: 'RSCA Futures', to: 'Sirius', fee: '750k €' },
+                    { date: '2023-09-06', from: 'Rangers', to: 'RSCA Futures', fee: 'Fri övergång' }
+                ],
                 fotmobUrl: 'https://www.fotmob.com/sv/players/1399218/robbie-ure'
             },
             {
                 id: '1157905', name: 'Johan Karlsson', team: 'Vejle Boldklub', track: 'utland', trackName: 'Utlandsspåret', pos: 'Högerback', league: '1. Division (Danmark)',
-                verified: true, nat: 'Sverige', birth: '2001-06-20', age: 25, foot: 'Höger', contract: '-',
+                verified: true, nat: 'Sverige', birth: '2001-06-20', age: 25, height: '172 cm', foot: 'Höger', contract: '-',
                 sirius: { seasons: [
                     { season: '2020', league: 'Allsvenskan', apps: 20, goals: 0, assists: 0 },
+                    { season: '2020/2021', league: 'Svenska Cupen', apps: 4, goals: 0, assists: 0 },
                     { season: '2021', league: 'Allsvenskan', apps: 22, goals: 1, assists: 0 },
+                    { season: '2021/2022', league: 'Svenska Cupen', apps: 1, goals: 0, assists: 0 },
                     { season: '2022', league: 'Allsvenskan', apps: 13, goals: 0, assists: 0 }
                 ] }, 
-                career: { after: [ { club: 'Vejle Boldklub', season: '2026/2027', apps: 7, goals: 1, assists: 0, rating: 7.1 } ], before: [] }, 
-                transfers: [],
+                career: { 
+                    after: [ 
+                        { club: 'Vejle BK', season: '2026/2027', apps: 7, goals: 1, assists: 0, rating: 7.1 },
+                        { club: 'Malmö FF', season: '2025/2026', apps: 30, goals: 1, assists: 2, rating: 6.7 } 
+                    ], 
+                    before: [] 
+                }, 
+                transfers: [
+                    { date: '2026-08-19', from: 'Malmö FF', to: 'Vejle BK', fee: 'Okänd' },
+                    { date: '2025-01-29', from: 'Kalmar FF', to: 'Malmö FF', fee: '520k €' },
+                    { date: '2022-08-11', from: 'Sirius', to: 'Kalmar FF', fee: 'Okänd' }
+                ],
                 fotmobUrl: 'https://www.fotmob.com/sv/players/1157905/johan-karlsson'
             },
             {
-                id: '493159', name: 'Stefano Holmquist Vecchia', team: 'Aalesund', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'Norge',
-                verified: true, age: 31, contract: '31 dec 2026',
+                id: '493159', name: 'Stefano Holmquist Vecchia', team: 'Aalesunds FK', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänsterytter / MF', league: 'Eliteserien (Norge)',
+                verified: true, nat: 'Sverige, Italien', age: 31, height: '182 cm', foot: 'Höger', contract: '31 dec 2026',
                 sirius: { seasons: [
+                    { season: '2016/2017', league: 'Svenska Cupen', apps: 2, goals: 2, assists: 0 },
                     { season: '2017', league: 'Allsvenskan', apps: 17, goals: 4, assists: 1 },
+                    { season: '2017/2018', league: 'Svenska Cupen', apps: 4, goals: 2, assists: 0 },
                     { season: '2018', league: 'Allsvenskan', apps: 19, goals: 1, assists: 2 },
                     { season: '2019', league: 'Allsvenskan', apps: 9, goals: 0, assists: 1 },
+                    { season: '2019/2020', league: 'Svenska Cupen', apps: 3, goals: 2, assists: 0 },
                     { season: '2020', league: 'Allsvenskan', apps: 26, goals: 12, assists: 5 }
                 ] }, 
-                career: { after: [ { club: 'Aalesunds FK', season: '2026', apps: 2, goals: 0, assists: 0, rating: 6.4 } ], before: [] }, 
-                transfers: [],
+                career: { 
+                    after: [ 
+                        { club: 'Aalesunds FK', season: '2026', apps: 2, goals: 0, assists: 0, rating: 6.4 },
+                        { club: 'Malmö FF', season: '2023–2026', apps: 38, goals: 10, assists: 3, rating: 7.3 },
+                        { club: 'Rosenborg BK', season: '2021–2022', apps: 39, goals: 23, assists: 2, rating: 7.5 }
+                    ], 
+                    before: [] 
+                }, 
+                transfers: [
+                    { date: '2026-09-10', from: 'Klubblös', to: 'Aalesunds FK', fee: 'Fri övergång' },
+                    { date: '2023-03-10', from: 'Rosenborg BK', to: 'Malmö FF', fee: '1.00m €' },
+                    { date: '2021-01-18', from: 'Sirius', to: 'Rosenborg BK', fee: 'Fri övergång' }
+                ],
                 fotmobUrl: 'https://www.fotmob.com/sv/players/493159/stefano-holmquist-vecchia'
             },
             {
-                id: '1177212', name: 'Herman Sjögrell', team: 'FC Inter Turku', track: 'utland', trackName: 'Utlandsspåret', pos: 'Yttermittfältare', league: 'Veikkausliiga (Finland)',
+                id: '1177212', name: 'Herman Sjögrell', team: 'FC Inter Turku', track: 'utland', trackName: 'Utlandsspåret', pos: 'Högerytter', league: 'Veikkausliiga (Finland)',
                 verified: true, nat: 'Sverige', birth: '2001-05-08', age: 25, height: '179 cm', foot: 'Vänster', contract: '31 dec 2027',
                 sirius: { seasons: [
                     { season: '2021', league: 'Allsvenskan', apps: 7, goals: 0, assists: 0 },
+                    { season: '2021/2022', league: 'Svenska Cupen', apps: 3, goals: 0, assists: 0 },
+                    { season: '2022/2023', league: 'Svenska Cupen', apps: 3, goals: 0, assists: 0 },
                     { season: '2023', league: 'Allsvenskan', apps: 16, goals: 1, assists: 2 },
+                    { season: '2023/2024', league: 'Svenska Cupen', apps: 3, goals: 1, assists: 0 },
                     { season: '2024', league: 'Allsvenskan', apps: 14, goals: 0, assists: 0 },
-                    { season: '2025', league: 'Allsvenskan', apps: 6, goals: 0, assists: 0 }
+                    { season: '2025', league: 'Allsvenskan', apps: 6, goals: 0, assists: 0 },
+                    { season: '2025/2026', league: 'Svenska Cupen', apps: 1, goals: 0, assists: 0 }
                 ] },
                 career: {
                     after: [
-                        { club: 'FF Jaro', season: '2026', apps: 22, goals: 8, assists: 2, rating: 7.0 },
-                        { club: 'FC Inter Turku', season: '2026', apps: 7, goals: 1, assists: 1, rating: 7.0 }
+                        { club: 'FC Inter Turku', season: '2026', apps: 7, goals: 1, assists: 1, rating: 7.0 },
+                        { club: 'FF Jaro', season: '2026', apps: 22, goals: 8, assists: 2, rating: 7.0 }
                     ],
                     before: []
                 },
@@ -592,11 +627,13 @@
                 fotmobUrl: 'https://www.fotmob.com/sv/players/1177212/herman-sjogrell'
             },
             {
-                id: '1016540', name: 'Tobias Carlsson', team: 'FH Hafnarfjörður', track: 'utland', trackName: 'Utlandsspåret', pos: 'Försvarare', league: 'Besta deildin (Island)',
+                id: '1016540', name: 'Tobias Carlsson', team: 'FH Hafnarfjörður', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Besta deildin (Island)',
                 verified: true, nat: 'Sverige', birth: '1995-07-28', age: 31, height: '187 cm', foot: 'Höger', contract: '31 dec 2029',
                 sirius: { seasons: [
                     { season: '2023', league: 'Allsvenskan', apps: 11, goals: 1, assists: 0 },
+                    { season: '2023/2024', league: 'Svenska Cupen', apps: 3, goals: 0, assists: 0 },
                     { season: '2024', league: 'Allsvenskan', apps: 3, goals: 0, assists: 0 },
+                    { season: '2024/2025', league: 'Svenska Cupen', apps: 1, goals: 0, assists: 0 },
                     { season: '2025', league: 'Allsvenskan', apps: 9, goals: 0, assists: 1 }
                 ] },
                 career: {
@@ -609,7 +646,7 @@
                 },
                 transfers: [
                     { date: '2026-02-06', from: 'Sirius', to: 'FH Hafnarfjörður', fee: 'Okänd' },
-                    { date: '2023-08-16', from: 'Häcken', to: 'Sirius', fee: 'Okänd' }
+                    { date: '2023-08-16', from: 'BK Häcken', to: 'Sirius', fee: 'Okänd' }
                 ],
                 fotmobUrl: 'https://www.fotmob.com/sv/players/1016540/tobias-carlsson'
             },
@@ -617,7 +654,7 @@
                 id: '566351', name: 'Diego Montiel', team: 'KA Akureyri', track: 'utland', trackName: 'Utlandsspåret', pos: 'Offensiv mittfältare', league: 'Besta deildin (Island)',
                 verified: true, nat: 'Sverige, Uruguay', birth: '1995-04-26', age: 31, height: '183 cm', foot: 'Höger', contract: '31 dec 2027',
                 sirius: { seasons: [
-                    { season: '2016/2017', league: 'Allsvenskan', apps: 2, goals: 1, assists: 0 },
+                    { season: '2016/2017', league: 'Svenska Cupen', apps: 2, goals: 1, assists: 0 },
                     { season: '2017', league: 'Allsvenskan', apps: 5, goals: 0, assists: 0 }
                 ] },
                 career: {
@@ -634,6 +671,27 @@
                     { date: '2017-01-01', from: 'Dalkurd', to: 'Sirius', fee: '-' }
                 ],
                 fotmobUrl: 'https://www.fotmob.com/sv/players/566351/diego-montiel'
+            },
+            {
+                id: '992150', name: 'Leo Walta', team: 'IK Sirius', track: 'lane', trackName: 'Lånespåret', pos: 'Mittfältare', league: 'Allsvenskan',
+                verified: true, nat: 'Finland', age: 23, contract: '2027',
+                sirius: { seasons: [
+                    { season: '2024', league: 'Allsvenskan', apps: 28, goals: 5, assists: 3 },
+                    { season: '2025', league: 'Allsvenskan', apps: 29, goals: 6, assists: 4 }
+                ] },
+                career: { after: [], before: [] },
+                transfers: [],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/992150/leo-walta'
+            },
+            {
+                id: '823411', name: 'Marcus Lindberg', team: 'IK Sirius', track: 'sverige', trackName: 'Sverigespåret', pos: 'Mittfältare', league: 'Allsvenskan',
+                verified: true, nat: 'Danmark', age: 26, contract: '2026',
+                sirius: { seasons: [
+                    { season: '2024', league: 'Allsvenskan', apps: 27, goals: 7, assists: 5 }
+                ] },
+                career: { after: [], before: [] },
+                transfers: [],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/823411/marcus-lindberg'
             }
         ];
 
