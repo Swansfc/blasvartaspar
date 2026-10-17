@@ -318,7 +318,7 @@
         }
         .modal-overlay.active { display: flex; }
         .modal-content {
-            background: #0a1330;
+            background: #060e26;
             border: 1px solid var(--card-border);
             border-radius: 20px;
             width: 100%;
@@ -372,8 +372,14 @@
             padding-bottom: 4px;
         }
 
-        .modal-stats-list { background: #081230; border-radius: 10px; padding: 0.6rem; border: 1px solid var(--card-border); }
-        .stat-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.78rem; }
+        details.fold { margin-top: 0.9rem; }
+        details.fold > summary { list-style: none; cursor: pointer; margin: 0 0 0.5rem 0; display: flex; justify-content: space-between; align-items: center; }
+        details.fold > summary::-webkit-details-marker { display: none; }
+        details.fold > summary::after { content: '▾'; font-size: 0.85rem; }
+        details.fold[open] > summary::after { content: '▴'; }
+        
+        .modal-stats-list { background: #081230; border-radius: 12px; padding: 0.6rem 0.8rem; border: 1px solid var(--card-border); }
+        .stat-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.78rem; }
         .stat-item:last-child { border-bottom: none; }
         .stat-item span { color: var(--text-muted); }
         .stat-item strong { color: #fff; font-weight: 700; }
@@ -435,6 +441,19 @@
         }
         .player-avatar img { width: 100%; height: 100%; object-fit: cover; }
         .studs { width: 1.75em; height: 1.75em; fill: var(--sirius-gold); flex-shrink: 0; }
+        
+        .sirius-row { display: grid; grid-template-columns: 1fr 38px 38px 38px; gap: 6px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.76rem; color: var(--text-muted); }
+        .sirius-row:last-child { border-bottom: 0; }
+        .sirius-row span + span { text-align: right; }
+        .sirius-row small { color: var(--sirius-gold); font-size: 0.65rem; }
+
+        .transfer-row { display: grid; grid-template-columns: 72px 1fr auto; gap: 8px; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.74rem; align-items: center; }
+        .transfer-row:last-child { border-bottom: 0; }
+        .transfer-date { color: var(--text-muted); }
+        .transfer-clubs { color: #fff; font-weight: 700; }
+        .transfer-clubs span { color: var(--sirius-gold); }
+        .transfer-fee { color: var(--sirius-gold); font-weight: 800; white-space: nowrap; text-align: right; }
+
         .empty-state { grid-column: 1 / -1; text-align: center; padding: 2.5rem 1rem; background: var(--card-bg); border: 1px dashed var(--card-border); border-radius: 12px; color: var(--text-muted); font-size: 0.85rem; }
     </style>
 </head>
@@ -548,45 +567,904 @@
         let savedScrollPosition = 0;
 
         const masterPlayers = [
-            // --- LÅNESPÅRET ---
-            { id: '1215994', name: 'Andreas Pyndt', team: 'FC Fredericia (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Mittfältare', league: '1. Division (Danmark)', verified: true, nat: 'Danmark', birth: '2001-03-04', age: 25, height: '184 cm', foot: 'Höger', contract: '31 dec 2026 (lån hos Fredericia)', fotmobUrl: 'https://www.fotmob.com/sv/players/1215994/andreas-pyndt' },
-            { id: '1379389', name: 'Saba Mamatsashvili', team: 'Žalgiris Vilnius (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Vänsterback', league: 'A Lyga (Litauen)', verified: true, nat: 'Georgien', birth: '2002-08-23', age: 24, height: '181 cm', foot: 'Vänster', contract: 'Utlånad från IK Sirius', fotmobUrl: 'https://www.fotmob.com/sv/players/1379389/saba-mamatsashvili' },
-            { id: '1441735', name: 'Isaac Yawe Höök', team: 'IF Karlstad (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Högerback', league: 'Ettan Norra (Sverige)', verified: true, nat: 'Sverige', birth: '2007-04-03', age: 19, height: '-', foot: 'Höger', contract: '30 nov 2026 (lån från Sirius)', fotmobUrl: 'https://www.fotmob.com/sv/players/1441735/isaac-hook' },
-            { id: '1612928', name: 'Hugo Andersson Mella', team: 'IFK Värnamo (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Anfallare', league: 'Allsvenskan (Sverige)', verified: true, nat: 'Sverige', birth: '2007-01-01', age: 19, height: '-', foot: '-', contract: 'Utlånad från IK Sirius', fotmobUrl: 'https://www.fotmob.com/sv/players/1612928/hugo-andersson-mella' },
-            { id: '900559', name: 'Bogdan Milovanov', team: 'IF Gnistan (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Högerback', league: 'Veikkausliiga (Finland)', verified: true, nat: 'Spanien, Ukraina', birth: '1998-04-19', age: 28, height: '178 cm', foot: 'Höger', contract: '31 dec 2026 (lån från Sirius)', fotmobUrl: 'https://www.fotmob.com/sv/players/900559/bogdan-milovanov' },
-            { id: '1782169', name: 'Finlay Neat', team: 'Norrby IF (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Anfallare', league: 'Superettan (Sverige)', verified: true, nat: 'Skottland, Sverige', birth: '2006-02-08', age: 20, height: '-', foot: '-', contract: '30 nov 2026 (lån från Sirius)', fotmobUrl: 'https://www.fotmob.com/sv/players/1782169/finlay-neat' },
-            { id: '1127365', name: 'Noel Milleskog', team: 'Degerfors IF (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Högerytter', league: 'Allsvenskan (Sverige)', verified: true, nat: 'Sverige', birth: '2002-05-08', age: 24, height: '178 cm', foot: 'Vänster', contract: '30 nov 2026 (lån från Sirius)', fotmobUrl: 'https://www.fotmob.com/sv/players/1127365/noel-milleskog' },
+            // --- LÅNESPÅRET (Utlånade FRÅN Sirius) ---
+            {
+                id: '1215994', name: 'Andreas Pyndt', team: 'FC Fredericia (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Mittfältare', league: '1. Division (Danmark)',
+                verified: true, nat: 'Danmark', birth: '2001-03-04', age: 25, height: '184 cm', foot: 'Höger', contract: '31 dec 2026 (lån hos Fredericia)',
+                sirius: { seasons: [] },
+                career: [
+                    { club: 'Silkeborg IF', season: '2021/2022', apps: 4, goals: 0, assists: 0, rating: 6.2 },
+                    { club: 'Silkeborg IF', season: '2022/2023', apps: 12, goals: 0, assists: 1, rating: 6.5 },
+                    { club: 'Hvidovre IF', season: '2023/2024', apps: 15, goals: 1, assists: 2, rating: 6.7 },
+                    { club: 'IK Sirius', season: '2024', apps: 13, goals: 0, assists: 1, rating: 6.8 },
+                    { club: 'IK Sirius', season: '2025', apps: 28, goals: 2, assists: 4, rating: 7.1 },
+                    { club: 'IK Sirius', season: '2026', apps: 22, goals: 1, assists: 3, rating: 7.0 },
+                    { club: 'FC Fredericia', season: '2026/2027', apps: 0, goals: 0, assists: 0, rating: null }
+                ],
+                transfers: [
+                    { date: '2026-08-31', from: 'IK Sirius', to: 'FC Fredericia', fee: 'Lån' },
+                    { date: '2024-02-01', from: 'Silkeborg IF', to: 'IK Sirius', fee: 'Okänd' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1215994/andreas-pyndt'
+            },
+            {
+                id: '1379389', name: 'Saba Mamatsashvili', team: 'Žalgiris Vilnius (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Vänsterback', league: 'A Lyga (Litauen)',
+                verified: true, nat: 'Georgien', birth: '2002-08-23', age: 24, height: '181 cm', foot: 'Vänster', contract: 'Utlånad från IK Sirius',
+                sirius: { seasons: [] },
+                career: [
+                    { club: 'Iberia 1999', season: '2021', apps: 8, goals: 0, assists: 0, rating: null },
+                    { club: 'Iberia 1999 II', season: '2022', apps: 1, goals: 0, assists: 0, rating: null },
+                    { club: 'Iberia 1999', season: '2022', apps: 18, goals: 1, assists: 0, rating: null },
+                    { club: 'Iberia 1999', season: '2023', apps: 2, goals: 0, assists: 0, rating: null },
+                    { club: 'FC Gagra', season: '2023', apps: 16, goals: 4, assists: 0, rating: null },
+                    { club: 'Iberia 1999', season: '2024', apps: 21, goals: 5, assists: 0, rating: null },
+                    { club: 'Iberia 1999', season: '2024/2025', apps: 3, goals: 0, assists: 0, rating: null },
+                    { club: 'IK Sirius', season: '2024', apps: 6, goals: 0, assists: 0, rating: 6.5 },
+                    { club: 'IK Sirius', season: '2024/2025', apps: 3, goals: 0, assists: 0, rating: null },
+                    { club: 'IK Sirius', season: '2025', apps: 12, goals: 2, assists: 0, rating: 7.0 },
+                    { club: 'Kalmar FF', season: '2025', apps: 14, goals: 3, assists: 2, rating: null },
+                    { club: 'Žalgiris Vilnius', season: '2026', apps: 26, goals: 0, assists: 0, rating: null }
+                ],
+                transfers: [
+                    { date: '2026-01-27', from: 'IK Sirius', to: 'Žalgiris Vilnius', fee: 'Lån' },
+                    { date: '2025-11-30', from: 'Kalmar FF', to: 'IK Sirius', fee: 'Slut på lån' },
+                    { date: '2025-08-08', from: 'IK Sirius', to: 'Kalmar FF', fee: 'Lån' },
+                    { date: '2024-08-13', from: 'Iberia 1999', to: 'IK Sirius', fee: '200k €' },
+                    { date: '2023-12-31', from: 'FC Gagra', to: 'Iberia 1999', fee: 'Slut på lån' },
+                    { date: '2023-07-01', from: 'Saburtalo', to: 'FC Gagra', fee: 'Lån' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1379389/saba-mamatsashvili'
+            },
+            {
+                id: '1441735', name: 'Isaac Yawe Höök', team: 'IF Karlstad (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Högerback', league: 'Ettan Norra (Sverige)',
+                verified: true, nat: 'Sverige', birth: '2007-04-03', age: 19, height: '-', foot: 'Höger', contract: '30 nov 2026 (lån från Sirius)',
+                sirius: { seasons: [] },
+                career: [
+                    { club: 'Dalkurd FF U19', season: '-', apps: 0, goals: 0, assists: 0, rating: null },
+                    { club: 'Dalkurd FF', season: '2022/2023', apps: 1, goals: 0, assists: 0, rating: null },
+                    { club: 'Dalkurd FF', season: '2023', apps: 4, goals: 0, assists: 0, rating: null },
+                    { club: 'IK Sirius U19', season: '2023/2024', apps: 0, goals: 0, assists: 0, rating: null },
+                    { club: 'IK Sirius', season: '2024/2025', apps: 3, goals: 0, assists: 0, rating: null },
+                    { club: 'IK Sirius', season: '2025', apps: 2, goals: 0, assists: 0, rating: 6.0 },
+                    { club: 'IK Sirius', season: '2025/2026', apps: 2, goals: 0, assists: 0, rating: null },
+                    { club: 'Enköpings SK', season: '2025', apps: 11, goals: 0, assists: 0, rating: null },
+                    { club: 'IF Karlstad', season: '2026', apps: 18, goals: 0, assists: 0, rating: null },
+                    { club: 'IK Sirius', season: '2026', apps: 1, goals: 0, assists: 0, rating: null },
+                    { club: 'IK Sirius', season: '2026/2027', apps: 1, goals: 0, assists: 0, rating: null }
+                ],
+                transfers: [
+                    { date: '2026-05-05', from: 'IK Sirius', to: 'IF Karlstad', fee: 'Lån' },
+                    { date: '2025-08-28', from: 'IK Sirius', to: 'Enköpings SK', fee: 'Lån' },
+                    { date: '2025-01-29', from: 'IK Sirius U19', to: 'IK Sirius', fee: '-' },
+                    { date: '2024-01-01', from: 'Dalkurd FF', to: 'IK Sirius U19', fee: 'Fri övergång' },
+                    { date: '2023-02-01', from: 'Dalkurd FF U19', to: 'Dalkurd FF', fee: '-' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1441735/isaac-hook'
+            },
+            {
+                id: '1612928', name: 'Hugo Andersson Mella', team: 'IFK Värnamo (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Anfallare', league: 'Allsvenskan (Sverige)',
+                verified: true, nat: 'Sverige', birth: '2007-01-01', age: 19, height: '-', foot: '-', contract: 'Utlånad från IK Sirius',
+                sirius: { seasons: [] },
+                career: [],
+                transfers: [
+                    { date: '2026-01-01', from: 'IK Sirius', to: 'IFK Värnamo', fee: 'Lån' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1612928/hugo-andersson-mella'
+            },
+            {
+                id: '900559', name: 'Bogdan Milovanov', team: 'IF Gnistan (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Högerback', league: 'Veikkausliiga (Finland)',
+                verified: true, nat: 'Spanien, Ukraina', birth: '1998-04-19', age: 28, height: '178 cm', foot: 'Höger', contract: '31 dec 2026 (lån från Sirius)',
+                sirius: { seasons: [] },
+                career: [
+                    { club: 'Getafe B', season: '2015/2016', apps: 9, goals: 0, assists: 0, rating: null },
+                    { club: 'San Sebastián de los Reyes', season: '2017/2018', apps: 22, goals: 1, assists: 0, rating: null },
+                    { club: 'Sporting Gijón B', season: '2018/2019', apps: 29, goals: 1, assists: 0, rating: null },
+                    { club: 'Sporting Gijón B', season: '2019/2020', apps: 11, goals: 0, assists: 0, rating: null },
+                    { club: 'Sporting Gijón', season: '2019/2020', apps: 9, goals: 0, assists: 0, rating: 6.3 },
+                    { club: 'Sporting Gijón B', season: '2020/2021', apps: 2, goals: 0, assists: 0, rating: null },
+                    { club: 'Sporting Gijón', season: '2020/2021', apps: 25, goals: 0, assists: 1, rating: 7.0 },
+                    { club: 'Sporting Gijón', season: '2021/2022', apps: 31, goals: 2, assists: 0, rating: 7.1 },
+                    { club: 'Arouca', season: '2022/2023', apps: 21, goals: 0, assists: 0, rating: 6.8 },
+                    { club: 'Arouca', season: '2023/2024', apps: 27, goals: 0, assists: 0, rating: 6.6 },
+                    { club: 'IK Sirius', season: '2024/2025', apps: 3, goals: 0, assists: 0, rating: null },
+                    { club: 'IK Sirius', season: '2025', apps: 15, goals: 0, assists: 1, rating: 6.7 },
+                    { club: 'IK Sirius', season: '2025/2026', apps: 4, goals: 0, assists: 0, rating: null },
+                    { club: 'IF Gnistan', season: '2026', apps: 8, goals: 2, assists: 1, rating: 7.4 }
+                ],
+                transfers: [
+                    { date: '2026-08-14', from: 'IK Sirius', to: 'IF Gnistan', fee: 'Lån' },
+                    { date: '2025-02-01', from: 'Klubblös', to: 'IK Sirius', fee: '-' },
+                    { date: '2022-07-09', from: 'Sporting Gijón', to: 'Arouca', fee: 'Fri övergång' },
+                    { date: '2020-09-17', from: 'Sporting Gijón B', to: 'Sporting Gijón', fee: '-' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/900559/bogdan-milovanov'
+            },
+            {
+                id: '1782169', name: 'Finlay Neat', team: 'Norrby IF (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Anfallare', league: 'Superettan (Sverige)',
+                verified: true, nat: 'Skottland, Sverige', birth: '2006-02-08', age: 20, height: '-', foot: '-', contract: '30 nov 2026 (lån från Sirius)',
+                sirius: { seasons: [] },
+                career: [
+                    { club: 'IK Sirius', season: '2025', apps: 3, goals: 0, assists: 0, rating: 6.3 },
+                    { club: 'IK Sirius', season: '2025/2026', apps: 1, goals: 0, assists: 0, rating: null },
+                    { club: 'Norrby IF', season: '2026', apps: 3, goals: 0, assists: 0, rating: null }
+                ],
+                transfers: [
+                    { date: '2026-08-24', from: 'IK Sirius', to: 'Norrby IF', fee: 'Lån' },
+                    { date: '2025-07-08', from: 'Malmö FF', to: 'IK Sirius', fee: 'Okänd' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1782169/finlay-neat'
+            },
+            {
+                id: '1127365', name: 'Noel Milleskog', team: 'Degerfors IF (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Högerytter', league: 'Allsvenskan (Sverige)',
+                verified: true, nat: 'Sverige', birth: '2002-05-08', age: 24, height: '178 cm', foot: 'Vänster', contract: '30 nov 2026 (lån från Sirius)',
+                sirius: { seasons: [] },
+                career: [
+                    { club: 'Örebro SK', season: '2021', apps: 12, goals: 0, assists: 1, rating: 6.5 },
+                    { club: 'Örebro SK', season: '2022', apps: 23, goals: 6, assists: 0, rating: null },
+                    { club: 'Örebro SK', season: '2023', apps: 13, goals: 5, assists: 0, rating: null },
+                    { club: 'Djurgården', season: '2023', apps: 11, goals: 1, assists: 0, rating: 6.3 },
+                    { club: 'Djurgården', season: '2023/2024', apps: 2, goals: 2, assists: 0, rating: null },
+                    { club: 'IK Sirius', season: '2023/2024', apps: 2, goals: 0, assists: 0, rating: null },
+                    { club: 'IK Sirius', season: '2024', apps: 29, goals: 9, assists: 3, rating: 6.8 },
+                    { club: 'IK Sirius', season: '2024/2025', apps: 4, goals: 0, assists: 0, rating: null },
+                    { club: 'IK Sirius', season: '2025', apps: 20, goals: 1, assists: 1, rating: 6.3 },
+                    { club: 'IK Sirius', season: '2025/2026', apps: 1, goals: 1, assists: 0, rating: null },
+                    { club: 'IK Sirius', season: '2026', apps: 3, goals: 0, assists: 0, rating: 6.5 },
+                    { club: 'Degerfors IF', season: '2026', apps: 4, goals: 0, assists: 0, rating: 6.5 }
+                ],
+                transfers: [
+                    { date: '2026-08-31', from: 'IK Sirius', to: 'Degerfors IF', fee: 'Lån' },
+                    { date: '2024-02-01', from: 'Djurgårdens IF', to: 'IK Sirius', fee: '133k €' },
+                    { date: '2023-07-14', from: 'Örebro SK', to: 'Djurgårdens IF', fee: 'Okänd' },
+                    { date: '2021-08-24', from: 'Örebro SK', to: 'Karlslunds IF', fee: 'Lån' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1127365/noel-milleskog'
+            },
 
             // --- UTLANDSSPÅRET ---
-            { id: '528409', name: 'Kerim Mrabti', team: 'AEK Larnaca', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallande mittfältare', league: 'Cyprus League (Cypern)', verified: true, nat: 'Sverige, Tunisien', birth: '1994-05-20', age: 32, height: '175 cm', foot: 'Höger', contract: '31 maj 2028', fotmobUrl: 'https://www.fotmob.com/sv/players/528409/kerim-mrabti' },
-            { id: '1177212', name: 'Herman Sjögrell', team: 'FC Inter Turku', track: 'utland', trackName: 'Utlandsspåret', pos: 'Yttermittfältare', league: 'Veikkausliiga (Finland)', age: 25, height: '183 cm', foot: 'Höger', contract: '-', fotmobUrl: 'https://www.fotmob.com/sv/players/1177212/herman-sjogrell' },
-            { id: '474133', name: 'Aron Bjarnason', team: 'Breiðablik', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänsterytter', league: 'Besta deildin (Island)', verified: true, nat: 'Island', birth: '1995-10-14', age: 31, height: '173 cm', foot: 'Båda', contract: '16 nov 2027', fotmobUrl: 'https://www.fotmob.com/sv/players/474133/aron-bjarnason' },
-            { id: '919036', name: 'Wessam Abou Ali', team: 'Columbus Crew', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'MLS (USA)', verified: true, nat: 'Palestina, Danmark', birth: '1999-01-04', age: 27, height: '187 cm', foot: 'Höger', contract: '31 dec 2027', fotmobUrl: 'https://www.fotmob.com/sv/players/919036/wessam-abou-ali' },
-            { id: '1129082', name: 'Jamie Roche', team: 'Kortrijk', track: 'utland', trackName: 'Utlandsspåret', pos: 'Defensiv mittfältare', league: 'Jupiler Pro League (Belgien)', verified: true, nat: 'Sverige, England', birth: '2001-04-05', age: 25, height: '191 cm', foot: 'Vänster', contract: '30 juni 2029', fotmobUrl: 'https://www.fotmob.com/sv/players/1129082/jamie-roche' },
-            { id: '619826', name: 'Jesper Nyholm', team: 'Prachuap FC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Thai League 1 (Thailand)', verified: true, nat: 'Filippinerna, Sverige', birth: '1993-09-10', age: 33, height: '183 cm', foot: 'Höger', contract: '30 juni 2027', fotmobUrl: 'https://www.fotmob.com/sv/players/619826/jesper-nyholm' },
-            { id: '982336', name: 'Tashreeq Matthews', team: 'Mamelodi Sundowns FC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänsterytter', league: 'Premier Soccer League (Sydafrika)', verified: true, nat: 'Sydafrika', birth: '2000-09-12', age: 26, height: '175 cm', foot: 'Höger', contract: '-', fotmobUrl: 'https://www.fotmob.com/sv/players/982336/tashreeq-matthews' },
-            { id: '639580', name: 'Marcus Mathisen', team: 'FC St. Pauli', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: '2. Bundesliga (Tyskland)', verified: true, nat: 'Danmark', birth: '1996-02-27', age: 30, height: '185 cm', foot: 'Höger', contract: '-', fotmobUrl: 'https://www.fotmob.com/sv/players/639580/marcus-mathisen' },
-            { id: '831044', name: 'Hjalmar Ekdal', team: 'Burnley', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Championship (England)', verified: true, nat: 'Sverige', birth: '1998-10-21', age: 27, height: '187 cm', foot: 'Höger', contract: '30 juni 2027', fotmobUrl: 'https://www.fotmob.com/sv/players/831044/hjalmar-ekdal' },
-            { id: '793909', name: 'Joseph Colley', team: 'KF Tirana', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Kategoria Superiore (Albanien)', verified: true, nat: 'Gambia, Sverige', birth: '1999-04-13', age: 27, height: '187 cm', foot: 'Höger', contract: '30 juni 2027', fotmobUrl: 'https://www.fotmob.com/sv/players/793909/joseph-colley' },
-            { id: '1183360', name: 'Yousef Salech', team: 'Cardiff City', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'Championship (England)', verified: true, nat: 'Danmark, Palestina', birth: '2002-01-17', age: 24, height: '195 cm', foot: 'Höger', contract: '30 juni 2030', fotmobUrl: 'https://www.fotmob.com/sv/players/1183360/yousef-salech' },
-            { id: '839970', name: 'Magnus Kaastrup', team: 'Aarhus Fremad', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänstermittfältare', league: '1. Division (Danmark)', verified: true, nat: 'Danmark', birth: '2000-12-28', age: 25, height: '176 cm', foot: 'Höger', contract: '30 juni 2027', fotmobUrl: 'https://www.fotmob.com/sv/players/839970/magnus-kaastrup' },
-            { id: '961305', name: 'Benjamin Mbunga Kimpioka', team: 'Asteras Tripolis', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänsterytter', league: 'Super League (Grekland)', verified: true, nat: 'Sverige, DR Kongo', birth: '2000-02-21', age: 26, height: '185 cm', foot: 'Höger', contract: '30 juni 2028', fotmobUrl: 'https://www.fotmob.com/sv/players/961305/benjamin-mbunga-kimpioka' },
-            { id: '1457824', name: 'Malcolm Jeng', team: 'FC Groningen (lån)', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Eredivisie (Nederländerna)', verified: true, nat: 'Sverige', birth: '2005-03-09', age: 21, height: '190 cm', foot: 'Vänster', contract: '30 juni 2027', fotmobUrl: 'https://www.fotmob.com/sv/players/1457824/malcolm-jeng' },
-            { id: '948374', name: 'Filip Majchrowicz', team: 'Radomiak Radom', track: 'utland', trackName: 'Utlandsspåret', pos: 'Målvakt', league: 'Ekstraklasa (Polen)', verified: true, nat: 'Polen', birth: '2000-02-09', age: 26, height: '194 cm', foot: 'Höger', contract: '30 juni 2028', fotmobUrl: 'https://www.fotmob.com/sv/players/948374/filip-majchrowicz' },
-            { id: '1399218', name: 'Robbie Ure', team: 'Sevilla', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'LaLiga (Spanien)', verified: true, nat: 'Skottland', age: 22, foot: 'Höger', contract: '2031', fotmobUrl: 'https://www.fotmob.com/sv/players/1399218/robbie-ure' },
-            { id: '1157905', name: 'Johan Karlsson', team: 'Vejle Boldklub', track: 'utland', trackName: 'Utlandsspåret', pos: 'Högerback', league: '1. Division (Danmark)', verified: true, nat: 'Sverige', birth: '2001-06-20', age: 25, foot: 'Höger', contract: '31 dec 2028', fotmobUrl: 'https://www.fotmob.com/sv/players/1157905/johan-karlsson' },
-            { id: '493159', name: 'Stefano Holmquist Vecchia', team: 'Aalesund', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'Norge', verified: true, age: 31, contract: '', fotmobUrl: 'https://www.fotmob.com/sv/players/493159/stefano-holmquist-vecchia' },
-            { id: '293718', name: 'Joeri de Kamps', team: 'Sepsi OSK', track: 'utland', trackName: 'Utlandsspåret', pos: 'Defensiv mittfältare', league: 'Superliga (Rumänien)', verified: true, nat: 'Nederländerna', birth: '1992-02-10', age: 34, foot: 'Vänster', contract: '', fotmobUrl: 'https://www.fotmob.com/sv/players/293718/joeri-de-kamps' },
-            { id: '759565', name: 'Kristopher Da Graça', team: 'Krasava Ypsonas FC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Cyprus League (Cypern)', verified: true, nat: 'Kap Verde, Sverige', birth: '1998-01-16', age: 28, height: '190 cm', foot: 'Höger', contract: '31 maj 2027', fotmobUrl: 'https://www.fotmob.com/sv/players/759565/kristopher-da-graca' },
-            { id: '561838', name: 'Isak Ssewankambo', team: 'Vancouver FC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Canadian Premier League (Kanada)', verified: true, birth: '1996-02-27', age: 30, foot: 'Höger', contract: '', fotmobUrl: 'https://www.fotmob.com/sv/players/561838/isak-ssewankambo' },
-            { id: '566351', name: 'Diego Montiel', team: 'KA Akureyri', track: 'utland', trackName: 'Utlandsspåret', pos: '', league: 'Besta deildin (Island)', verified: true, contract: '', fotmobUrl: 'https://www.fotmob.com/sv/players/566351/diego-montiel' },
-            { id: '767777', name: 'Moustafa Zeidan', team: 'Al Masry SC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Central / Anfallande mittfältare', league: 'Premier League (Egypten)', verified: true, nat: 'Palestina, Sverige', birth: '1998-06-07', age: 28, height: '174 cm', foot: 'Båda', contract: '30 juni 2029', fotmobUrl: 'https://www.fotmob.com/sv/players/767777/moustafa-zeidan' },
-            { id: '1022484', name: 'André Alsanati', team: 'Mosul SC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Högerytter / Anfallare', league: 'Stars League (Irak)', verified: true, nat: 'Irak, Sverige', birth: '2000-01-06', age: 26, height: '165 cm', foot: 'Vänster', contract: '30 juni 2027', fotmobUrl: 'https://www.fotmob.com/sv/players/1022484/andre-alsanati' },
-            { id: '1000835', name: 'Jakob Tånnander', team: 'SC Farense', track: 'utland', trackName: 'Utlandsspåret', pos: 'Målvakt', league: 'Liga Portugal 2 (Portugal)', verified: true, nat: 'Sverige', birth: '2000-08-10', age: 26, height: '191 cm', foot: 'Vänster', contract: '30 juni 2027', fotmobUrl: 'https://www.fotmob.com/sv/players/1000835/jakob-tannander' },
-            { id: '1109472', name: 'Patrick Nwadike', team: 'Spartak Trnava', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Niké Liga (Slovakien)', verified: true, nat: 'Sverige, Haiti', birth: '1998-08-29', age: 28, height: '190 cm', foot: 'Höger', contract: '30 juni 2027', fotmobUrl: 'https://www.fotmob.com/sv/players/1109472/patrick-nwadike' },
-            { id: '965710', name: 'Óli Valur Ómarsson', team: 'Breiðablik', track: 'utland', trackName: 'Utlandsspåret', pos: 'Högerytter / Ytterback', league: 'Besta deildin (Island)', verified: true, nat: 'Island', birth: '2003-01-09', age: 23, height: '172 cm', foot: 'Höger', contract: '31 dec 2028', fotmobUrl: 'https://www.fotmob.com/sv/players/965710/oli-omarsson' },
-            { id: '1276686', name: 'Leo Walta', team: 'Los Angeles FC (lån)', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallande mittfältare', league: 'MLS (USA)', verified: true, nat: 'Finland', birth: '2003-06-24', age: 23, height: '170 cm', foot: 'Höger', contract: '31 dec 2026', fotmobUrl: 'https://www.fotmob.com/sv/players/1276686/leo-walta' },
-            { id: '1016540', name: 'Tobias Carlsson', team: 'FH Hafnarfjörður', track: 'utland', trackName: 'Utlandsspåret', pos: 'Försvarare', league: 'Besta deildin (Island)', verified: true, nat: 'Sverige', birth: '1995-07-28', age: 31, contract: '', fotmobUrl: 'https://www.fotmob.com/sv/players/1016540/tobias-carlsson' }
+            {
+                id: '1242516', name: 'Michael Martin', team: 'SGV Freiberg', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'Regionalliga Southwest (Tyskland)',
+                verified: true, nat: 'Tyskland', birth: '2000-07-10', age: 26, height: '180 cm', foot: 'Höger', contract: '30 juni 2027',
+                sirius: { seasons: [
+                    { season: '2023/2024', league: 'Allsvenskan', apps: 3, goals: 0, assists: 0 },
+                    { season: '2024', league: 'Allsvenskan', apps: 4, goals: 0, assists: 0, rating: 6.6 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'SGV Heilbronn-Freiberg', season: '2026/2027', apps: 11, goals: 1, assists: 0, rating: null }
+                    ],
+                    before: [
+                        { club: 'FC Emmen', season: '2024/2025', apps: 29, goals: 1, assists: 3, rating: 7.0 },
+                        { club: 'SK Dynamo České Budějovice', season: '2024/2025', apps: 3, goals: 0, assists: 0, rating: null },
+                        { club: 'SC Paderborn 07 II', season: '2023/2024', apps: 4, goals: 0, assists: 0, rating: null },
+                        { club: 'SV Ried', season: '2023/2024', apps: 2, goals: 0, assists: 0, rating: null },
+                        { club: 'SV Ried', season: '2022/2023', apps: 33, goals: 0, assists: 1, rating: 7.2 },
+                        { club: 'Vorwärts Steyr', season: '2021/2022', apps: 14, goals: 4, assists: 1, rating: null },
+                        { club: 'Bayern Alzenau', season: '2020/2021', apps: 21, goals: 5, assists: 0, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2026-07-01', from: 'Klubblös', to: 'SGV Heilbronn-Freiberg', fee: '-' },
+                    { date: '2026-03-11', from: 'Sirius', to: 'Klubblös', fee: '-' },
+                    { date: '2025-06-30', from: 'FC Emmen', to: 'Sirius', fee: 'Slut på lån' },
+                    { date: '2024-09-02', from: 'Sirius', to: 'FC Emmen', fee: 'Lån' },
+                    { date: '2024-09-01', from: 'SK Dynamo České Budějovice', to: 'Sirius', fee: 'Slut på lån' },
+                    { date: '2024-07-11', from: 'Sirius', to: 'SK Dynamo České Budějovice', fee: 'Lån' },
+                    { date: '2024-02-01', from: 'SC Paderborn', to: 'Sirius', fee: 'Okänd' },
+                    { date: '2023-09-01', from: 'SV Ried', to: 'SC Paderborn', fee: '80 tn €' },
+                    { date: '2022-07-01', from: 'Vorwärts Steyr', to: 'SV Ried', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1242516/michael-martin'
+            },
+            {
+                id: '1399218', name: 'Robbie Ure', team: 'Sevilla', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'LaLiga (Spanien)',
+                verified: true, nat: 'Skottland', age: 22, foot: 'Höger', contract: '2031',
+                sirius: { seasons: [
+                    { season: '2025', league: 'Allsvenskan', apps: 30, goals: 11, assists: 4 },
+                    { season: '2026', league: 'Allsvenskan', apps: 15, goals: 15, assists: 2 }
+                ] },
+                career: { after: [ { club: 'Sevilla', season: '2026/2027', apps: 7, goals: 0, assists: 1, rating: null } ], before: [] },
+                transfers: [ { date: '2026-08', from: 'Sirius', to: 'Sevilla', fee: 'Okänd' } ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1399218/robbie-ure'
+            },
+            {
+                id: '1157905', name: 'Johan Karlsson', team: 'Vejle Boldklub', track: 'utland', trackName: 'Utlandsspåret', pos: 'Högerback', league: '1. Division (Danmark)',
+                verified: true, nat: 'Sverige', birth: '2001-06-20', age: 25, foot: 'Höger', contract: '31 dec 2028',
+                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1157905/johan-karlsson'
+            },
+            {
+                id: '493159', name: 'Stefano Holmquist Vecchia', team: 'Aalesund', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'Norge',
+                verified: true, age: 31, contract: '',
+                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/493159/stefano-holmquist-vecchia'
+            },
+            { 
+                id: '1177212', name: 'Herman Sjögrell', team: 'FC Inter Turku', track: 'utland', trackName: 'Utlandsspåret', pos: 'Yttermittfältare', league: 'Veikkausliiga (Finland)',
+                age: 25, height: '183 cm', foot: 'Höger', contract: '-',
+                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1177212/herman-sjogrell'
+            },
+            {
+                id: '1016540', name: 'Tobias Carlsson', team: 'FH Hafnarfjörður', track: 'utland', trackName: 'Utlandsspåret', pos: 'Försvarare', league: 'Besta deildin (Island)',
+                verified: true, nat: 'Sverige', birth: '1995-07-28', age: 31, contract: '',
+                sirius: { seasons: [] }, career: { after: [], before: [] },
+                transfers: [
+                    { date: '2026-02-06', from: 'Sirius', to: 'FH Hafnarfjörður', fee: 'Okänd' },
+                    { date: '2023-08-16', from: 'Häcken', to: 'Sirius', fee: 'Okänd' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1016540/tobias-carlsson'
+            },
+            {
+                id: '566351', name: 'Diego Montiel', team: 'KA Akureyri', track: 'utland', trackName: 'Utlandsspåret', pos: '', league: 'Besta deildin (Island)',
+                verified: true, contract: '',
+                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/566351/diego-montiel'
+            },
+            {
+                id: '293718', name: 'Joeri de Kamps', team: 'Sepsi OSK', track: 'utland', trackName: 'Utlandsspåret', pos: 'Defensiv mittfältare', league: 'Superliga (Rumänien)',
+                verified: true, nat: 'Nederländerna', birth: '1992-02-10', age: 34, foot: 'Vänster', contract: '',
+                sirius: { seasons: [ { season: '2023', league: 'Allsvenskan', apps: 13, goals: 0, assists: 0 } ] },
+                career: { 
+                    after: [
+                        { club: 'NFC Volos', season: '2023/2024', apps: 11, goals: 0, assists: 1, rating: 6.9 },
+                        { club: 'NFC Volos', season: '2024/2025', apps: 15, goals: 0, assists: 0, rating: 6.6 },
+                        { club: 'Sepsi OSK', season: '2025/2026', apps: 4, goals: 0, assists: 0, rating: null },
+                        { club: 'Sepsi OSK', season: '2026/2027', apps: 2, goals: 0, assists: 0, rating: 6.1 }
+                    ], 
+                    before: [
+                        { club: 'Jong Ajax', season: '2013/2014', apps: 5, goals: 0, assists: 0, rating: null },
+                        { club: 'SC Heerenveen', season: '2013/2014', apps: 13, goals: 0, assists: 0, rating: null },
+                        { club: 'NAC Breda', season: '2014/2015', apps: 34, goals: 1, assists: 4, rating: null },
+                        { club: 'NAC Breda', season: '2015/2016', apps: 7, goals: 0, assists: 0, rating: null },
+                        { club: 'Slovan Bratislava', season: '2015/2016', apps: 17, goals: 0, assists: 0, rating: null },
+                        { club: 'Slovan Bratislava', season: '2016/2017', apps: 29, goals: 4, assists: 0, rating: null },
+                        { club: 'Slovan Bratislava', season: '2017/2018', apps: 28, goals: 1, assists: 0, rating: null },
+                        { club: 'Slovan Bratislava', season: '2018/2019', apps: 25, goals: 0, assists: 0, rating: null },
+                        { club: 'Slovan Bratislava', season: '2019/2020', apps: 37, goals: 0, assists: 0, rating: 6.1 },
+                        { club: 'Slovan Bratislava B', season: '2019/2020', apps: 1, goals: 0, assists: 0, rating: null },
+                        { club: 'Slovan Bratislava B', season: '2020/2021', apps: 1, goals: 0, assists: 0, rating: null },
+                        { club: 'Slovan Bratislava', season: '2020/2021', apps: 33, goals: 0, assists: 0, rating: null },
+                        { club: 'Slovan Bratislava', season: '2021/2022', apps: 16, goals: 0, assists: 0, rating: 5.9 },
+                        { club: 'Sparta Rotterdam', season: '2021/2022', apps: 14, goals: 1, assists: 0, rating: 7.3 },
+                        { club: 'Lechia Gdańsk', season: '2022/2023', apps: 11, goals: 0, assists: 0, rating: 6.6 }
+                    ] 
+                },
+                transfers: [
+                    { date: '2026-02-10', from: 'Klubblös', to: 'Sepsi OSK', fee: 'Fri övergång' },
+                    { date: '2025-07-01', from: 'Volos NFC', to: 'Klubblös', fee: '-' },
+                    { date: '2024-01-31', from: 'Sirius', to: 'Volos NFC', fee: 'Fri övergång' },
+                    { date: '2023-07-30', from: 'Lechia Gdańsk', to: 'Sirius', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/293718/joeri-de-kamps'
+            },
+            {
+                id: '759565', name: 'Kristopher Da Graça', team: 'Krasava Ypsonas FC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Cyprus League (Cypern)',
+                verified: true, nat: 'Kap Verde, Sverige', birth: '1998-01-16', age: 28, height: '190 cm', foot: 'Höger', contract: '31 maj 2027',
+                sirius: { seasons: [
+                    { season: '2022', league: 'Allsvenskan', apps: 22, goals: 0, assists: 0 },
+                    { season: '2023', league: 'Allsvenskan', apps: 8, goals: 0, assists: 0 }
+                ] }, 
+                career: { 
+                    after: [
+                        { club: 'HJK', season: '2023', apps: 9, goals: 0, assists: 0, rating: null },
+                        { club: 'KuPS', season: '2024', apps: 18, goals: 0, assists: 0, rating: null },
+                        { club: 'KuPS Akatemia', season: '2024', apps: 1, goals: 0, assists: 0, rating: null },
+                        { club: 'Schaffhausen', season: '2024/2025', apps: 15, goals: 1, assists: 1, rating: 6.4 },
+                        { club: 'Krasava Ypsonas', season: '2025/2026', apps: 15, goals: 0, assists: 0, rating: null },
+                        { club: 'Krasava Ypsonas', season: '2026/2027', apps: 4, goals: 0, assists: 0, rating: null }
+                    ], 
+                    before: [
+                        { club: 'IFK Göteborg', season: '2017', apps: 7, goals: 0, assists: 0, rating: 7.0 },
+                        { club: 'IFK Göteborg', season: '2018', apps: 4, goals: 0, assists: 0, rating: 6.8 },
+                        { club: 'IFK Göteborg', season: '2019', apps: 22, goals: 0, assists: 0, rating: 6.6 },
+                        { club: 'IFK Göteborg', season: '2020', apps: 18, goals: 0, assists: 0, rating: 6.4 },
+                        { club: 'VVV-Venlo', season: '2020/2021', apps: 22, goals: 0, assists: 0, rating: 6.3 },
+                        { club: 'VVV-Venlo', season: '2021/2022', apps: 16, goals: 0, assists: 0, rating: 6.8 }
+                    ] 
+                }, 
+                transfers: [
+                    { date: '2025-08-27', from: 'Sirius', to: 'Krasava ENY', fee: 'Fri övergång' },
+                    { date: '2025-02-04', from: 'Sirius', to: 'Schaffhausen', fee: 'Lån' },
+                    { date: '2024-03-01', from: 'Sirius', to: 'KuPS Kuopio', fee: 'Lån' },
+                    { date: '2023-07-26', from: 'Sirius', to: 'HJK Helsinki', fee: 'Lån' },
+                    { date: '2022-01-29', from: 'VVV-Venlo', to: 'Sirius', fee: 'Okänd' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/759565/kristopher-da-graca'
+            },
+            {
+                id: '965710', name: 'Óli Valur Ómarsson', team: 'Breiðablik', track: 'utland', trackName: 'Utlandsspåret', pos: 'Högerytter / Ytterback', league: 'Besta deildin (Island)',
+                verified: true, nat: 'Island', birth: '2003-01-09', age: 23, height: '172 cm', foot: 'Höger', contract: '31 dec 2028',
+                sirius: { seasons: [
+                    { season: '2022', league: 'Allsvenskan', apps: 13, goals: 0, assists: 0 },
+                    { season: '2023', league: 'Allsvenskan', apps: 2, goals: 0, assists: 0 }
+                ] },
+                career: { 
+                    after: [
+                        { club: 'Stjarnan', season: '2024', apps: 26, goals: 6, assists: 3, rating: 6.9 },
+                        { club: 'Breiðablik', season: '2025', apps: 27, goals: 3, assists: 2, rating: 6.8 },
+                        { club: 'Breiðablik', season: '2025/2026', apps: 14, goals: 2, assists: 2, rating: 6.8 },
+                        { club: 'Breiðablik', season: '2026', apps: 26, goals: 3, assists: 5, rating: 7.0 }
+                    ], 
+                    before: [
+                        { club: 'Stjarnan', season: '2019', apps: 1, goals: 0, assists: 0, rating: null },
+                        { club: 'Stjarnan', season: '2020', apps: 8, goals: 0, assists: 0, rating: null },
+                        { club: 'Stjarnan', season: '2021', apps: 17, goals: 0, assists: 0, rating: null },
+                        { club: 'Stjarnan', season: '2022', apps: 13, goals: 1, assists: 0, rating: null }
+                    ] 
+                },
+                transfers: [
+                    { date: '2025-02-08', from: 'Sirius', to: 'Breiðablik', fee: '100 tn €' },
+                    { date: '2024-03-18', from: 'Sirius', to: 'Stjarnan', fee: 'Lån' },
+                    { date: '2022-07-15', from: 'Stjarnan', to: 'Sirius', fee: 'Okänd' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/965710/oli-omarsson'
+            },
+            {
+                id: '1276686', name: 'Leo Walta', team: 'Los Angeles FC (lån)', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallande mittfältare', league: 'MLS (USA)',
+                verified: true, nat: 'Finland', birth: '2003-06-24', age: 23, height: '170 cm', foot: 'Höger', contract: '31 dec 2026 (lån från Swansea City, option att köpa)',
+                sirius: { seasons: [
+                    { season: '2024', league: 'Allsvenskan', apps: 29, goals: 7, assists: 3, rating: 7.3 },
+                    { season: '2024/2025', league: 'Allsvenskan', apps: 4, goals: 1, assists: 0 },
+                    { season: '2025', league: 'Allsvenskan', apps: 30, goals: 16, assists: 3, rating: 7.8 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'Swansea City', season: '2025/2026', apps: 10, goals: 1, assists: 0, rating: 6.6 },
+                        { club: 'Swansea City', season: '2026/2027', apps: 2, goals: 0, assists: 0, rating: 6.7 },
+                        { club: 'Los Angeles FC', season: '2026', apps: 2, goals: 0, assists: 0, rating: 7.3 }
+                    ],
+                    before: [
+                        { club: 'Klubi 04', season: '2019', apps: 6, goals: 0, assists: 0, rating: null },
+                        { club: 'Nordsjælland', season: '2021/2022', apps: 16, goals: 0, assists: 1, rating: 6.6 },
+                        { club: 'Nordsjælland', season: '2022/2023', apps: 7, goals: 0, assists: 3, rating: 6.4 },
+                        { club: 'HB Køge', season: '2022/2023', apps: 14, goals: 3, assists: 4, rating: 7.7 },
+                        { club: 'Mjällby AIF', season: '2023', apps: 11, goals: 2, assists: 0, rating: 7.1 },
+                        { club: 'Mjällby AIF', season: '2023/2024', apps: 1, goals: 0, assists: 0, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2026-08-31', from: 'Swansea City', to: 'Los Angeles FC', fee: 'Lån' },
+                    { date: '2026-07-01', from: 'Sirius', to: 'Swansea City', fee: '3.40m €' },
+                    { date: '2026-02-02', from: 'Sirius', to: 'Swansea City', fee: 'Lån' },
+                    { date: '2024-03-08', from: 'Nordsjælland', to: 'Sirius', fee: '400k €' },
+                    { date: '2023-08-01', from: 'Nordsjælland', to: 'Mjällby AIF', fee: 'Lån' },
+                    { date: '2023-01-31', from: 'Nordsjælland', to: 'HB Køge', fee: 'Lån' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1276686/leo-walta'
+            },
+            {
+                id: '561838', name: 'Isak Ssewankambo', team: 'Vancouver FC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Canadian Premier League (Kanada)',
+                verified: true, birth: '1996-02-27', age: 30, foot: 'Höger', contract: '',
+                sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/561838/isak-ssewankambo'
+            },
+            {
+                id: '767777', name: 'Moustafa Zeidan', team: 'Al Masry SC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Central / Anfallande mittfältare', league: 'Premier League (Egypten)',
+                verified: true, nat: 'Palestina, Sverige', birth: '1998-06-07', age: 28, height: '174 cm', foot: 'Båda', contract: '30 juni 2029',
+                sirius: { seasons: [
+                    { season: '2021', league: 'Allsvenskan', apps: 20, goals: 3, assists: 1 },
+                    { season: '2022', league: 'Allsvenskan', apps: 8, goals: 1, assists: 3 }
+                ] }, 
+                career: { 
+                    after: [
+                        { club: 'Malmö FF', season: '2022', apps: 15, goals: 3, assists: 7, rating: 7.5 },
+                        { club: 'Hatta Club', season: '2023/2024', apps: 6, goals: 1, assists: 1, rating: 6.6 },
+                        { club: 'Rosenborg', season: '2024', apps: 12, goals: 0, assists: 1, rating: 6.9 },
+                        { club: 'Rosenborg', season: '2025', apps: 26, goals: 1, assists: 1, rating: 6.6 },
+                        { club: 'Al Masry SC', season: '2025/2026', apps: 3, goals: 0, assists: 0, rating: 6.4 }
+                    ], 
+                    before: [
+                        { club: 'Helsingborg', season: '2016', apps: 4, goals: 0, assists: 0, rating: null },
+                        { club: 'Syrianska', season: '2017', apps: 14, goals: 1, assists: 0, rating: null },
+                        { club: 'Brommapojkarna', season: '2018', apps: 15, goals: 0, assists: 1, rating: 6.7 },
+                        { club: 'Hammarby TFF', season: '2019', apps: 16, goals: 4, assists: 0, rating: null },
+                        { club: 'Jönköping S.', season: '2020', apps: 30, goals: 4, assists: 0, rating: 6.6 }
+                    ] 
+                }, 
+                transfers: [
+                    { date: '2026-01-30', from: 'Malmö FF', to: 'Al Masry SC', fee: 'Fri övergång' },
+                    { date: '2024-08-15', from: 'Malmö FF', to: 'Rosenborg BK', fee: 'Lån' },
+                    { date: '2023-07-26', from: 'Malmö FF', to: 'Hatta Club', fee: 'Lån' },
+                    { date: '2022-07-15', from: 'Sirius', to: 'Malmö FF', fee: '800k €' },
+                    { date: '2021-07-15', from: 'Jönköpings Södra IF', to: 'Sirius', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/767777/moustafa-zeidan'
+            },
+            {
+                id: '1022484', name: 'André Alsanati', team: 'Mosul SC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Högerytter / Anfallare', league: 'Stars League (Irak)',
+                verified: true, nat: 'Irak, Sverige', birth: '2000-01-06', age: 26, height: '165 cm', foot: 'Vänster', contract: '30 juni 2027',
+                sirius: { seasons: [
+                    { season: '2022/2023', league: 'Allsvenskan', apps: 3, goals: 0, assists: 0 },
+                    { season: '2023', league: 'Allsvenskan', apps: 23, goals: 5, assists: 1, rating: 6.8 },
+                    { season: '2024', league: 'Allsvenskan', apps: 6, goals: 0, assists: 0, rating: 6.5 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'AC Oulu', season: '2024', apps: 6, goals: 0, assists: 0, rating: null }
+                    ],
+                    before: [
+                        { club: 'Hammarby TFF', season: '2019', apps: 13, goals: 0, assists: 0, rating: null },
+                        { club: 'Hammarby TFF', season: '2020', apps: 13, goals: 0, assists: 0, rating: null },
+                        { club: 'AFC Eskilstuna', season: '2020/2021', apps: 3, goals: 0, assists: 0, rating: null },
+                        { club: 'AFC Eskilstuna', season: '2021', apps: 28, goals: 3, assists: 0, rating: null },
+                        { club: 'AFC Eskilstuna', season: '2022', apps: 28, goals: 5, assists: 0, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2026-07-01', from: 'Sirius', to: 'Mosul SC', fee: 'Fri övergång' },
+                    { date: '2025-07-31', from: 'Sirius', to: 'Duhok SC', fee: 'Lån' },
+                    { date: '2024-08-30', from: 'Sirius', to: 'Al-Mina\'a SC', fee: 'Lån' },
+                    { date: '2024-07-11', from: 'Sirius', to: 'AC Oulu', fee: 'Lån' },
+                    { date: '2023-02-01', from: 'AFC Eskilstuna', to: 'Sirius', fee: 'Fri övergång' },
+                    { date: '2021-01-28', from: 'Hammarby', to: 'AFC Eskilstuna', fee: 'Fri övergång' },
+                    { date: '2020-02-01', from: 'Hammarby', to: 'IK Frej Täby', fee: 'Lån' },
+                    { date: '2019-02-01', from: 'Hammarby', to: 'IK Frej Täby', fee: 'Lån' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1022484/andre-alsanati'
+            },
+            {
+                id: '1000835', name: 'Jakob Tånnander', team: 'SC Farense', track: 'utland', trackName: 'Utlandsspåret', pos: 'Målvakt', league: 'Liga Portugal 2 (Portugal)',
+                verified: true, nat: 'Sverige', birth: '2000-08-10', age: 26, height: '191 cm', foot: 'Vänster', contract: '30 juni 2027 (option +1 år)',
+                sirius: { seasons: [
+                    { season: '2022/2023', league: 'Allsvenskan', apps: 3, goals: 0, assists: 0 },
+                    { season: '2023', league: 'Allsvenskan', apps: 19, goals: 0, assists: 0, rating: 6.5 },
+                    { season: '2023/2024', league: 'Allsvenskan', apps: 2, goals: 0, assists: 0 },
+                    { season: '2024', league: 'Allsvenskan', apps: 22, goals: 0, assists: 1, rating: 6.8 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'SC Farense', season: '2025/2026', apps: 4, goals: 0, assists: 0, rating: 6.2 }
+                    ],
+                    before: [
+                        { club: 'Lunds BK', season: '2015', apps: 1, goals: 0, assists: 0, rating: null },
+                        { club: 'Lunds BK', season: '2018', apps: 18, goals: 0, assists: 0, rating: null },
+                        { club: 'Lunds BK', season: '2019', apps: 19, goals: 0, assists: 0, rating: null },
+                        { club: 'Klubi 04', season: '2020', apps: 2, goals: 0, assists: 0, rating: null },
+                        { club: 'HJK Helsinki', season: '2020', apps: 2, goals: 0, assists: 0, rating: null },
+                        { club: 'FC Haka', season: '2020', apps: 11, goals: 0, assists: 0, rating: null },
+                        { club: 'Klubi 04', season: '2021', apps: 1, goals: 0, assists: 0, rating: null },
+                        { club: 'HJK Helsinki', season: '2021', apps: 14, goals: 0, assists: 0, rating: null },
+                        { club: 'Klubi 04', season: '2022', apps: 2, goals: 0, assists: 0, rating: null },
+                        { club: 'HJK Helsinki', season: '2022', apps: 8, goals: 0, assists: 0, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2025-08-25', from: 'US Cremonese', to: 'SC Farense', fee: 'Fri övergång' },
+                    { date: '2025-02-17', from: 'Sirius', to: 'US Cremonese', fee: 'Fri övergång' },
+                    { date: '2023-02-01', from: 'HJK Helsinki', to: 'Sirius', fee: 'Fri övergång' },
+                    { date: '2020-08-10', from: 'HJK Helsinki', to: 'FC Haka', fee: 'Lån' },
+                    { date: '2020-01-29', from: 'Malmö FF', to: 'HJK Helsinki', fee: 'Fri övergång' },
+                    { date: '2018-01-02', from: 'Malmö FF', to: 'Lunds BK', fee: 'Lån' },
+                    { date: '2017-01-12', from: 'Malmö FF U19', to: 'Österlen FF', fee: 'Lån' },
+                    { date: '2016-06-01', from: 'Malmö FF U19', to: 'Högaborgs BK', fee: 'Lån' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1000835/jakob-tannander'
+            },
+            {
+                id: '1109472', name: 'Patrick Nwadike', team: 'Spartak Trnava', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Niké Liga (Slovakien)',
+                verified: true, nat: 'Sverige, Haiti', birth: '1998-08-29', age: 28, height: '190 cm', foot: 'Höger', contract: '30 juni 2027',
+                sirius: { seasons: [
+                    { season: '2020/2021', league: 'Allsvenskan', apps: 3, goals: 0, assists: 0 },
+                    { season: '2021', league: 'Allsvenskan', apps: 11, goals: 0, assists: 0, rating: 6.9 },
+                    { season: '2022', league: 'Allsvenskan', apps: 5, goals: 1, assists: 0, rating: 7.0 },
+                    { season: '2022/2023', league: 'Allsvenskan', apps: 3, goals: 2, assists: 0 },
+                    { season: '2023', league: 'Allsvenskan', apps: 9, goals: 0, assists: 0, rating: 6.9 },
+                    { season: '2024', league: 'Allsvenskan', apps: 22, goals: 0, assists: 1, rating: 6.7 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'Spartak Trnava', season: '2025/2026', apps: 17, goals: 1, assists: 0, rating: 7.2 },
+                        { club: 'Spartak Trnava', season: '2026/2027', apps: 3, goals: 0, assists: 0, rating: 6.5 }
+                    ],
+                    before: [
+                        { club: 'Landskrona BoIS', season: '2019', apps: 19, goals: 2, assists: 0, rating: null },
+                        { club: 'Landskrona BoIS', season: '2020', apps: 28, goals: 4, assists: 0, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2025-07-01', from: 'Sirius', to: 'Spartak Trnava', fee: 'Fri övergång' },
+                    { date: '2021-01-08', from: 'Landskrona BoIS', to: 'Sirius', fee: 'Fri övergång' },
+                    { date: '2019-03-23', from: 'Landskrona BoIS', to: 'Prespa Birlik', fee: 'Lån' },
+                    { date: '2017-01-01', from: 'Landskrona BoIS U19', to: 'IK Wormo', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1109472/patrick-nwadike'
+            },
+            {
+                id: '948374', name: 'Filip Majchrowicz', team: 'Radomiak Radom', track: 'utland', trackName: 'Utlandsspåret', pos: 'Målvakt', league: 'Ekstraklasa (Polen)',
+                verified: true, nat: 'Polen', birth: '2000-02-09', age: 26, height: '194 cm', foot: 'Höger', contract: '30 juni 2028',
+                sirius: { seasons: [ { season: '2023', league: 'Allsvenskan', apps: 8, goals: 0, assists: 0 } ] },
+                career: {
+                    after: [
+                        { club: 'Górnik Zabrze', season: '2024/2025', apps: 13, goals: 0, assists: 0, rating: 7.1 },
+                        { club: 'Radomiak Radom', season: '2025/2026', apps: 35, goals: 0, assists: 1, rating: 6.7 },
+                        { club: 'Radomiak Radom', season: '2026/2027', apps: 10, goals: 0, assists: 0, rating: 6.7 }
+                    ],
+                    before: [
+                        { club: 'CWKS Resovia Rzeszów', season: '2019/2020', apps: 4, goals: 0, assists: 0, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2025-07-01', from: 'Górnik Zabrze', to: 'Radomiak Radom', fee: '35k €' },
+                    { date: '2024-07-01', from: 'Radomiak Radom', to: 'Górnik Zabrze', fee: 'Fri övergång' },
+                    { date: '2023-08-26', from: 'Radomiak Radom', to: 'Sirius', fee: 'Lån' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/948374/filip-majchrowicz'
+            },
+            {
+                id: '1457824', name: 'Malcolm Jeng', team: 'FC Groningen (lån)', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Eredivisie (Nederländerna)',
+                verified: true, nat: 'Sverige', birth: '2005-03-09', age: 21, height: '190 cm', foot: 'Vänster', contract: '30 juni 2027 (lån från Reims)',
+                sirius: { seasons: [
+                    { season: '2023', league: 'Allsvenskan', apps: 20, goals: 0, assists: 0 },
+                    { season: '2024', league: 'Allsvenskan', apps: 30, goals: 0, assists: 1 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'Stade Reims', season: '2024/2025', apps: 4, goals: 0, assists: 0, rating: 6.3 },
+                        { club: 'Feyenoord', season: '2025/2026', apps: 2, goals: 0, assists: 0, rating: 6.9 },
+                        { club: 'FC Groningen', season: '2025/2026', apps: 1, goals: 0, assists: 0, rating: 7.0 }
+                    ],
+                    before: [
+                        { club: 'IFK Haninge', season: '2021-2022', apps: 0, goals: 0, assists: 0, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2026-07-30', from: 'Stade Reims', to: 'FC Groningen', fee: 'Lån' },
+                    { date: '2025-09-01', from: 'Stade Reims', to: 'Feyenoord', fee: 'Lån' },
+                    { date: '2025-01-12', from: 'Sirius', to: 'Stade Reims', fee: '2.50m €' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1457824/malcolm-jeng'
+            },
+            {
+                id: '961305', name: 'Benjamin Mbunga Kimpioka', team: 'Asteras Tripolis', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänsterytter', league: 'Super League (Grekland)',
+                verified: true, nat: 'Sverige, DR Kongo', birth: '2000-02-21', age: 26, height: '185 cm', foot: 'Höger', contract: '30 juni 2028',
+                sirius: { seasons: [] },
+                career: {
+                    after: [
+                        { club: 'Sunderland', season: '2021/2022', apps: 4, goals: 1, assists: 0, rating: 6.9 },
+                        { club: 'AIK', season: '2022', apps: 16, goals: 1, assists: 0, rating: 6.4 },
+                        { club: 'AIK', season: '2022/2023', apps: 7, goals: 0, assists: 0, rating: null },
+                        { club: 'Luzern', season: '2022/2023', apps: 7, goals: 1, assists: 0, rating: 6.1 },
+                        { club: 'St. Johnstone', season: '2023/2024', apps: 18, goals: 3, assists: 0, rating: 6.4 },
+                        { club: 'St. Johnstone', season: '2024/2025', apps: 33, goals: 11, assists: 2, rating: 6.4 },
+                        { club: 'Sivasspor', season: '2025/2026', apps: 20, goals: 2, assists: 2, rating: 6.3 },
+                        { club: 'Tondela', season: '2025/2026', apps: 10, goals: 0, assists: 0, rating: 6.1 },
+                        { club: 'Asteras Tripolis', season: '2026/2027', apps: 4, goals: 0, assists: 0, rating: 6.4 }
+                    ],
+                    before: [
+                        { club: 'Sunderland', season: '2018-2021', apps: 14, goals: 3, assists: 0, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2026-07-20', from: 'Sivasspor', to: 'Asteras Tripolis', fee: 'Fri övergång' },
+                    { date: '2026-02-02', from: 'Sivasspor', to: 'Tondela', fee: 'Lån' },
+                    { date: '2025-07-24', from: 'St. Johnstone', to: 'Sivasspor', fee: 'Fri övergång' },
+                    { date: '2024-01-02', from: 'AIK', to: 'St. Johnstone', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/961305/benjamin-mbunga-kimpioka'
+            },
+            {
+                id: '839970', name: 'Magnus Kaastrup', team: 'Aarhus Fremad', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänstermittfältare', league: '1. Division (Danmark)',
+                verified: true, nat: 'Danmark', birth: '2000-12-28', age: 25, height: '176 cm', foot: 'Höger', contract: '30 juni 2027',
+                sirius: { seasons: [ { season: '2023', league: 'Allsvenskan', apps: 10, goals: 0, assists: 1 } ] },
+                career: {
+                    after: [
+                        { club: 'VVV-Venlo', season: '2023/2024', apps: 33, goals: 4, assists: 3, rating: 6.7 },
+                        { club: 'Vendsyssel FF', season: '2024/2025', apps: 32, goals: 5, assists: 3, rating: 6.9 },
+                        { club: 'Aarhus Fremad', season: '2025/2026', apps: 34, goals: 8, assists: 6, rating: 7.0 },
+                        { club: 'Aarhus Fremad', season: '2026/2027', apps: 12, goals: 5, assists: 1, rating: 7.4 }
+                    ],
+                    before: [
+                        { club: 'AGF', season: '2017/2018', apps: 10, goals: 0, assists: 0, rating: 6.1 },
+                        { club: 'AGF', season: '2018/2019', apps: 5, goals: 0, assists: 0, rating: 6.1 },
+                        { club: 'Borussia Dortmund II', season: '2019/2020', apps: 17, goals: 3, assists: 0, rating: null },
+                        { club: 'Viborg', season: '2020/2021', apps: 10, goals: 1, assists: 0, rating: null },
+                        { club: 'Lyngby', season: '2020/2021', apps: 17, goals: 2, assists: 1, rating: 6.6 },
+                        { club: 'Lyngby', season: '2021/2022', apps: 35, goals: 12, assists: 8, rating: null },
+                        { club: 'Lyngby', season: '2022/2023', apps: 20, goals: 0, assists: 1, rating: 6.5 }
+                    ]
+                },
+                transfers: [
+                    { date: '2025-07-01', from: 'Vendsyssel FF', to: 'Aarhus Fremad', fee: 'Okänd' },
+                    { date: '2024-07-01', from: 'Lyngby BK', to: 'Vendsyssel FF', fee: 'Okänd' },
+                    { date: '2023-08-30', from: 'Lyngby BK', to: 'VVV-Venlo', fee: 'Lån' },
+                    { date: '2023-03-28', from: 'Lyngby BK', to: 'Sirius', fee: 'Lån' },
+                    { date: '2020-10-05', from: 'AGF', to: 'Viborg FF', fee: 'Lån' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/839970/magnus-kaastrup'
+            },
+            {
+                id: '1183360', name: 'Yousef Salech', team: 'Cardiff City', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'Championship (England)',
+                verified: true, nat: 'Danmark, Palestina', birth: '2002-01-17', age: 24, height: '195 cm', foot: 'Höger', contract: '30 juni 2030',
+                sirius: { seasons: [ { season: '2024', league: 'Allsvenskan', apps: 27, goals: 11, assists: 4 } ] },
+                career: {
+                    after: [
+                        { club: 'Cardiff City', season: '2024/2025', apps: 22, goals: 9, assists: 1, rating: 7.0 },
+                        { club: 'Cardiff City', season: '2025/2026', apps: 41, goals: 15, assists: 4, rating: 7.1 },
+                        { club: 'Cardiff City', season: '2026/2027', apps: 10, goals: 5, assists: 2, rating: 7.1 }
+                    ],
+                    before: [
+                        { club: 'Brøndby IF', season: '2021/2022', apps: 2, goals: 0, assists: 0, rating: 5.7 },
+                        { club: 'Brøndby IF', season: '2022/2023', apps: 6, goals: 0, assists: 0, rating: 6.2 },
+                        { club: 'HB Køge', season: '2022/2023', apps: 25, goals: 15, assists: 3, rating: 7.4 },
+                        { club: 'SK Beveren', season: '2023/2024', apps: 19, goals: 1, assists: 1, rating: null },
+                        { club: 'Brøndby IF', season: '2023/2024', apps: 3, goals: 0, assists: 0, rating: 6.7 }
+                    ]
+                },
+                transfers: [
+                    { date: '2025-01-17', from: 'Sirius', to: 'Cardiff City', fee: '4.00m €' },
+                    { date: '2024-02-22', from: 'Brøndby IF', to: 'Sirius', fee: '500k €' },
+                    { date: '2023-08-29', from: 'Brøndby IF', to: 'SK Beveren', fee: 'Lån' },
+                    { date: '2022-08-31', from: 'Brøndby IF', to: 'HB Køge', fee: 'Lån' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1183360/yousef-salech'
+            },
+            {
+                id: '793909', name: 'Joseph Colley', team: 'KF Tirana', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Kategoria Superiore (Albanien)',
+                verified: true, nat: 'Gambia, Sverige', birth: '1999-04-13', age: 27, height: '187 cm', foot: 'Höger', contract: '30 juni 2027',
+                sirius: { seasons: [ { season: '2021', league: 'Allsvenskan', apps: 23, goals: 0, assists: 0 } ] },
+                career: {
+                    after: [
+                        { club: 'Wisła Kraków', season: '2021/2022', apps: 12, goals: 0, assists: 0, rating: null },
+                        { club: 'Wisła Kraków', season: '2022/2023', apps: 17, goals: 0, assists: 0, rating: null },
+                        { club: 'Wisła Kraków', season: '2023/2024', apps: 33, goals: 0, assists: 0, rating: null },
+                        { club: 'Wisła Kraków', season: '2024/2025', apps: 8, goals: 0, assists: 0, rating: null },
+                        { club: 'Wisła Kraków', season: '2025/2026', apps: 8, goals: 0, assists: 0, rating: null },
+                        { club: 'KF Tirana', season: '2026/2027', apps: 4, goals: 0, assists: 0, rating: null }
+                    ],
+                    before: [
+                        { club: 'Brommapojkarna U17/U19', season: '2013/2014', apps: 0, goals: 0, assists: 0, rating: null },
+                        { club: 'Chelsea U18/U23', season: '2015-2019', apps: 0, goals: 0, assists: 0, rating: null },
+                        { club: 'Chievo Verona', season: '2019/2020', apps: 0, goals: 0, assists: 0, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2026-07-07', from: 'Wisła Kraków', to: 'KF Tirana', fee: 'Fri övergång' },
+                    { date: '2022-01-18', from: 'Chievo Verona', to: 'Wisła Kraków', fee: 'Fri övergång' },
+                    { date: '2021-03-25', from: 'Chievo Verona', to: 'Sirius', fee: 'Lån' },
+                    { date: '2019-09-02', from: 'Chelsea U23', to: 'Chievo Verona', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/793909/joseph-colley'
+            },
+            {
+                id: '831044', name: 'Hjalmar Ekdal', team: 'Burnley', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Championship (England)',
+                verified: true, nat: 'Sverige', birth: '1998-10-21', age: 27, height: '187 cm', foot: 'Höger', contract: '30 juni 2027',
+                sirius: { seasons: [ { season: '2020', league: 'Allsvenskan', apps: 26, goals: 0, assists: 0 } ] },
+                career: {
+                    after: [
+                        { club: 'Djurgården', season: '2021', apps: 26, goals: 4, assists: 0, rating: 7.4 },
+                        { club: 'Djurgården', season: '2022', apps: 24, goals: 3, assists: 0, rating: 7.3 },
+                        { club: 'Burnley', season: '2022/2023', apps: 0, goals: 0, assists: 0, rating: null }
+                    ],
+                    before: [
+                        { club: 'Hammarby TFF', season: '2018-2019', apps: 51, goals: 5, assists: 0, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2025-01-23', from: 'Burnley', to: 'FC Groningen', fee: 'Lån' },
+                    { date: '2023-01-21', from: 'Djurgården', to: 'Burnley', fee: '2.80m €' },
+                    { date: '2021-01-08', from: 'Hammarby', to: 'Djurgården', fee: '70k €' },
+                    { date: '2020-03-03', from: 'Hammarby', to: 'Sirius', fee: 'Lån' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/831044/hjalmar-ekdal'
+            },
+            {
+                id: '639580', name: 'Marcus Mathisen', team: 'FC St. Pauli', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: '2. Bundesliga (Tyskland)',
+                verified: true, nat: 'Danmark', birth: '1996-02-27', age: 30, height: '185 cm', foot: 'Höger', contract: '-',
+                sirius: { seasons: [
+                    { season: '2021', league: 'Allsvenskan', apps: 27, goals: 2, assists: 2 },
+                    { season: '2022', league: 'Allsvenskan', apps: 25, goals: 3, assists: 2 },
+                    { season: '2023', league: 'Allsvenskan', apps: 12, goals: 1, assists: 0 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'Wehen Wiesbaden', season: '2023/2024', apps: 34, goals: 0, assists: 0, rating: 7.0 },
+                        { club: '1.FC Magdeburg', season: '2024/2025', apps: 31, goals: 3, assists: 3, rating: 7.3 },
+                        { club: '1.FC Magdeburg', season: '2025/2026', apps: 35, goals: 1, assists: 1, rating: 7.1 },
+                        { club: 'St. Pauli', season: '2026/2027', apps: 5, goals: 1, assists: 0, rating: 7.2 }
+                    ],
+                    before: [
+                        { club: 'FC København', season: '2014-2016', apps: 4, goals: 0, assists: 0, rating: null },
+                        { club: 'Halmstads BK', season: '2016-2018', apps: 77, goals: 10, assists: 0, rating: null },
+                        { club: 'Falkenbergs FF', season: '2018-2020', apps: 49, goals: 4, assists: 2, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2026-07-01', from: '1.FC Magdeburg', to: 'St. Pauli', fee: 'Fri övergång' },
+                    { date: '2024-07-01', from: 'Wehen Wiesbaden', to: '1.FC Magdeburg', fee: 'Okänd' },
+                    { date: '2023-07-01', from: 'Sirius', to: 'Wehen Wiesbaden', fee: 'Fri övergång' },
+                    { date: '2021-01-04', from: 'Falkenbergs FF', to: 'Sirius', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/639580/marcus-mathisen'
+            },
+            {
+                id: '619826', name: 'Jesper Nyholm', team: 'Prachuap FC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittback', league: 'Thai League 1 (Thailand)',
+                verified: true, nat: 'Filippinerna, Sverige', birth: '1993-09-10', age: 33, height: '183 cm', foot: 'Höger', contract: '30 juni 2027',
+                sirius: { seasons: [
+                    { season: '2011', league: 'Allsvenskan', apps: 0, goals: 0, assists: 0 },
+                    { season: '2012', league: 'Allsvenskan', apps: 0, goals: 0, assists: 0 },
+                    { season: '2013', league: 'Allsvenskan', apps: 0, goals: 0, assists: 0 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'Gamla Upsala SK', season: '2013-2014', apps: 0, goals: 0, assists: 0, rating: null },
+                        { club: 'Dalkurd FF', season: '2014-2016', apps: 56, goals: 2, assists: 0, rating: null },
+                        { club: 'AIK', season: '2017-2019', apps: 34, goals: 1, assists: 1, rating: null },
+                        { club: 'Djurgården', season: '2020-2021', apps: 23, goals: 1, assists: 0, rating: 6.6 },
+                        { club: 'Muangthong United', season: '2021/2023', apps: 34, goals: 1, assists: 0, rating: 6.7 },
+                        { club: 'Perak FC', season: '2023/2024', apps: 24, goals: 0, assists: 0, rating: null },
+                        { club: 'Prachuap FC', season: '2024/2027', apps: 53, goals: 1, assists: 2, rating: 6.8 }
+                    ],
+                    before: []
+                },
+                transfers: [
+                    { date: '2025-01-03', from: 'Perak FC', to: 'Prachuap FC', fee: 'Fri övergång' },
+                    { date: '2023-06-26', from: 'Muangthong United', to: 'Perak FC', fee: 'Fri övergång' },
+                    { date: '2022-01-01', from: 'Djurgården', to: 'Muangthong United', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/619826/jesper-nyholm'
+            },
+            {
+                id: '982336', name: 'Tashreeq Matthews', team: 'Mamelodi Sundowns FC', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänsterytter', league: 'Premier Soccer League (Sydafrika)',
+                verified: true, nat: 'Sydafrika', birth: '2000-09-12', age: 26, height: '175 cm', foot: 'Höger', contract: '-',
+                sirius: { seasons: [
+                    { season: '2022', league: 'Allsvenskan', apps: 12, goals: 1, assists: 0 },
+                    { season: '2023', league: 'Allsvenskan', apps: 30, goals: 10, assists: 10 }
+                ] }, 
+                career: { 
+                    after: [
+                        { club: 'Mamelodi Sundowns', season: '2023/2024', apps: 17, goals: 4, assists: 1, rating: 6.6 },
+                        { club: 'Mamelodi Sundowns', season: '2024/2025', apps: 34, goals: 8, assists: 7, rating: 6.9 },
+                        { club: 'Mamelodi Sundowns', season: '2025/2026', apps: 51, goals: 8, assists: 7, rating: 7.1 },
+                        { club: 'Mamelodi Sundowns', season: '2026/2027', apps: 14, goals: 3, assists: 4, rating: 7.4 }
+                    ], 
+                    before: [
+                        { club: 'Jong FC Utrecht', season: '2018/2019', apps: 4, goals: 0, assists: 0, rating: null },
+                        { club: 'Helsingborg', season: '2019', apps: 2, goals: 0, assists: 0, rating: 5.4 },
+                        { club: 'Varbergs BoIS', season: '2020', apps: 18, goals: 1, assists: 3, rating: 6.3 },
+                        { club: 'Varbergs BoIS', season: '2021', apps: 27, goals: 5, assists: 5, rating: 7.2 },
+                        { club: 'Varbergs BoIS', season: '2022', apps: 10, goals: 0, assists: 0, rating: 6.7 }
+                    ] 
+                }, 
+                transfers: [
+                    { date: '2024-01-26', from: 'Sirius', to: 'Mamelodi Sundowns', fee: '1.50m €' },
+                    { date: '2022-08-10', from: 'Varbergs BoIS', to: 'Sirius', fee: 'Fri övergång' },
+                    { date: '2020-01-17', from: 'B. Dortmund II', to: 'Varbergs BoIS', fee: 'Okänd' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/982336/tashreeq-matthews'
+            },
+            { 
+                id: '528409', name: 'Kerim Mrabti', team: 'AEK Larnaca', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallande mittfältare', league: 'Cyprus League (Cypern)',
+                verified: true, nat: 'Sverige, Tunisien', birth: '1994-05-20', age: 32, height: '175 cm', foot: 'Höger', contract: '31 maj 2028',
+                sirius: { seasons: [
+                    { season: '2013', league: 'Superettan', apps: 30, goals: 5, assists: 0 },
+                    { season: '2014', league: 'Superettan', apps: 23, goals: 3, assists: 0 }
+                ] }, 
+                career: { 
+                    after: [
+                        { club: 'Djurgården', season: '2015', apps: 28, goals: 4, assists: 0, rating: null },
+                        { club: 'Djurgården', season: '2017', apps: 25, goals: 8, assists: 6, rating: 7.0 },
+                        { club: 'Djurgården', season: '2018', apps: 24, goals: 6, assists: 1, rating: 7.0 },
+                        { club: 'Birmingham City', season: '2018/2019', apps: 12, goals: 1, assists: 0, rating: 6.5 },
+                        { club: 'Birmingham City', season: '2019/2020', apps: 17, goals: 2, assists: 1, rating: 6.4 },
+                        { club: 'KV Mechelen', season: '2020/2021', apps: 38, goals: 8, assists: 7, rating: 7.0 },
+                        { club: 'KV Mechelen', season: '2021/2022', apps: 39, goals: 10, assists: 6, rating: 7.1 },
+                        { club: 'KV Mechelen', season: '2022/2023', apps: 16, goals: 3, assists: 3, rating: 6.8 },
+                        { club: 'KV Mechelen', season: '2023/2024', apps: 42, goals: 9, assists: 7, rating: 7.2 },
+                        { club: 'KV Mechelen', season: '2024/2025', apps: 36, goals: 2, assists: 3, rating: 6.9 },
+                        { club: 'KV Mechelen', season: '2025/2026', apps: 34, goals: 5, assists: 3, rating: 6.9 },
+                        { club: 'AEK Larnaca', season: '2026/2027', apps: 5, goals: 0, assists: 1, rating: null }
+                    ], 
+                    before: [
+                        { club: 'Enköpings SK', season: '2012', apps: 16, goals: 2, assists: 0, rating: null }
+                    ] 
+                }, 
+                transfers: [
+                    { date: '2026-08-08', from: 'KV Mechelen', to: 'AEK Larnaca', fee: 'Fri övergång' },
+                    { date: '2020-08-17', from: 'Birmingham', to: 'KV Mechelen', fee: 'Fri övergång' },
+                    { date: '2019-01-18', from: 'Djurgården', to: 'Birmingham', fee: 'Fri övergång' },
+                    { date: '2015-02-08', from: 'Sirius', to: 'Djurgården', fee: 'Okänd' },
+                    { date: '2013-01-03', from: 'Enköpings SK', to: 'Sirius', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/528409/kerim-mrabti'
+            },
+            { 
+                id: '474133', name: 'Aron Bjarnason', team: 'Breiðablik', track: 'utland', trackName: 'Utlandsspåret', pos: 'Vänsterytter', league: 'Besta deildin (Island)',
+                verified: true, nat: 'Island', birth: '1995-10-14', age: 31, height: '173 cm', foot: 'Båda', contract: '16 nov 2027',
+                sirius: { seasons: [
+                    { season: '2021', league: 'Allsvenskan', apps: 2, goals: 0, assists: 0 },
+                    { season: '2022', league: 'Allsvenskan', apps: 30, goals: 4, assists: 2 },
+                    { season: '2023', league: 'Allsvenskan', apps: 28, goals: 2, assists: 2 }
+                ] }, 
+                career: { 
+                    after: [
+                        { club: 'Breiðablik', season: '2024', apps: 26, goals: 6, assists: 5, rating: 7.5 },
+                        { club: 'Breiðablik', season: '2025', apps: 20, goals: 2, assists: 2, rating: 7.0 },
+                        { club: 'Breiðablik', season: '2025/2026', apps: 11, goals: 0, assists: 0, rating: 6.5 },
+                        { club: 'Breiðablik', season: '2026', apps: 17, goals: 3, assists: 5, rating: 7.3 }
+                    ], 
+                    before: [
+                        { club: 'Fram Reykjavík', season: '2013', apps: 7, goals: 1, assists: 0, rating: null },
+                        { club: 'Fram Reykjavík', season: '2014', apps: 20, goals: 4, assists: 0, rating: null },
+                        { club: 'ÍBV', season: '2015', apps: 20, goals: 3, assists: 0, rating: null },
+                        { club: 'ÍBV', season: '2016', apps: 26, goals: 5, assists: 0, rating: null },
+                        { club: 'Breiðablik', season: '2017', apps: 22, goals: 6, assists: 0, rating: null },
+                        { club: 'Breiðablik', season: '2018', apps: 21, goals: 2, assists: 0, rating: null },
+                        { club: 'Breiðablik', season: '2019', apps: 12, goals: 5, assists: 0, rating: null },
+                        { club: 'Újpest FC', season: '2019/2020', apps: 16, goals: 0, assists: 0, rating: null },
+                        { club: 'Valur', season: '2020', apps: 21, goals: 8, assists: 0, rating: null }
+                    ] 
+                }, 
+                transfers: [
+                    { date: '2024-02-02', from: 'Sirius', to: 'Breiðablik', fee: 'Okänd' },
+                    { date: '2021-02-06', from: 'Újpest FC', to: 'Sirius', fee: 'Okänd' },
+                    { date: '2020-06-05', from: 'Újpest FC', to: 'Valur', fee: 'Lån' },
+                    { date: '2019-07-23', from: 'Breiðablik', to: 'Újpest FC', fee: '125k €' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/474133/aron-bjarnason'
+            },
+            { 
+                id: '919036', name: 'Wessam Abou Ali', team: 'Columbus Crew', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'MLS (USA)',
+                verified: true, nat: 'Palestina, Danmark', birth: '1999-01-04', age: 27, height: '187 cm', foot: 'Höger', contract: '31 dec 2027 (option +1 år)',
+                sirius: { seasons: [
+                    { season: '2023', league: 'Allsvenskan', apps: 16, goals: 10, assists: 1 }
+                ] }, 
+                career: { 
+                    after: [
+                        { club: 'Al Ahly SC', season: '2023/2024', apps: 25, goals: 19, assists: 4, rating: 7.4 },
+                        { club: 'Al Ahly SC', season: '2024/2025', apps: 34, goals: 19, assists: 4, rating: 7.1 },
+                        { club: 'Columbus Crew', season: '2025', apps: 5, goals: 3, assists: 0, rating: 7.0 },
+                        { club: 'Columbus Crew', season: '2026', apps: 7, goals: 5, assists: 1, rating: 7.0 }
+                    ], 
+                    before: [
+                        { club: 'AaB', season: '2017/2018', apps: 6, goals: 1, assists: 0, rating: 6.4 },
+                        { club: 'AaB', season: '2018/2019', apps: 22, goals: 1, assists: 2, rating: 6.1 },
+                        { club: 'AaB', season: '2019/2020', apps: 2, goals: 0, assists: 0, rating: 5.9 },
+                        { club: 'Vendsyssel FF', season: '2019/2020', apps: 22, goals: 11, assists: 0, rating: null },
+                        { club: 'Silkeborg IF', season: '2020/2021', apps: 10, goals: 3, assists: 0, rating: null },
+                        { club: 'Silkeborg IF', season: '2021/2022', apps: 3, goals: 0, assists: 0, rating: 6.1 },
+                        { club: 'Vendsyssel FF', season: '2021/2022', apps: 10, goals: 0, assists: 0, rating: null },
+                        { club: 'Vendsyssel FF', season: '2022/2023', apps: 34, goals: 16, assists: 1, rating: 7.1 }
+                    ] 
+                }, 
+                transfers: [
+                    { date: '2025-07-26', from: 'Al Ahly', to: 'Columbus Crew', fee: '6.40m €' },
+                    { date: '2024-01-11', from: 'Sirius', to: 'Al Ahly', fee: '1.70m €' },
+                    { date: '2023-07-13', from: 'Vendsyssel FF', to: 'Sirius', fee: '463k €' },
+                    { date: '2021-08-31', from: 'Silkeborg IF', to: 'Vendsyssel FF', fee: 'Okänd' },
+                    { date: '2020-09-08', from: 'AaB', to: 'Silkeborg IF', fee: '150k €' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/919036/wessam-abou-ali'
+            },
+            { 
+                id: '1129082', name: 'Jamie Roche', team: 'Kortrijk', track: 'utland', trackName: 'Utlandsspåret', pos: 'Defensiv mittfältare', league: 'Jupiler Pro League (Belgien)',
+                verified: true, nat: 'Sverige, England', birth: '2001-04-05', age: 25, height: '191 cm', foot: 'Vänster', contract: '30 juni 2029',
+                sirius: { seasons: [
+                    { season: '2020', league: 'Allsvenskan', apps: 18, goals: 0, assists: 0 },
+                    { season: '2021', league: 'Allsvenskan', apps: 22, goals: 0, assists: 1 },
+                    { season: '2022', league: 'Allsvenskan', apps: 27, goals: 0, assists: 0 },
+                    { season: '2023', league: 'Allsvenskan', apps: 14, goals: 2, assists: 2 }
+                ] }, 
+                career: { 
+                    after: [
+                        { club: 'Lausanne-Sport', season: '2023/2024', apps: 30, goals: 0, assists: 1, rating: 7.0 },
+                        { club: 'Lausanne-Sport', season: '2024/2025', apps: 39, goals: 3, assists: 1, rating: 7.2 },
+                        { club: 'Lausanne-Sport', season: '2025/2026', apps: 41, goals: 4, assists: 1, rating: 7.1 },
+                        { club: 'Lausanne-Sport', season: '2026/2027', apps: 4, goals: 0, assists: 0, rating: 7.2 },
+                        { club: 'Kortrijk', season: '2026/2027', apps: 4, goals: 1, assists: 0, rating: 6.9 }
+                    ], 
+                    before: [
+                        { club: 'Bälinge IF', season: '2012', apps: 0, goals: 0, assists: 0, rating: null },
+                        { club: 'IK Sirius U17/U19', season: '2018-2020', apps: 0, goals: 0, assists: 0, rating: null }
+                    ] 
+                }, 
+                transfers: [
+                    { date: '2026-09-02', from: 'Lausanne-Sport', to: 'Kortrijk', fee: 'Okänd' },
+                    { date: '2023-07-25', from: 'Sirius', to: 'Lausanne-Sport', fee: '1.00m €' },
+                    { date: '2020-04-22', from: 'Sirius U19', to: 'Sirius', fee: '-' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1129082/jamie-roche'
+            }
         ];
 
         const MATCH_FEED_URL = "matches.json";
@@ -1086,6 +1964,76 @@
             document.body.classList.add('modal-open');
         }
 
+        function siriusHtml(p) {
+            const s = p.sirius;
+            const list = s?.seasons?.length ? s.seasons : [];
+            const esc = (x) => String(x ?? '').replace(/[<>&"]/g, '');
+            const n = (v) => (v === null || v === undefined ? '–' : v);
+            const sum = (k) => list.reduce((a, x) => a + (x[k] || 0), 0);
+            const hasAss = list.some((x) => x.assists !== null && x.assists !== undefined);
+            const row = (a, b, c, d, e, bold) => `<div class="sirius-row"${bold ? ' style="font-weight:800;color:#fff;"' : ''}><span>${a}${b ? ` <small>${b}</small>` : ''}</span><span>${c}</span><span>${d}</span><span>${e}</span></div>`;
+            
+            let content = '';
+            if (list.length > 0) {
+                const rows = list.map((x) => row(esc(x.season), esc(x.league), n(x.apps), n(x.goals), n(x.assists))).join('');
+                const total = list.length > 1 ? row('Totalt', '', sum('apps'), sum('goals'), hasAss ? sum('assists') : '–', true) : '';
+                content = `${row('Säsong', '', 'M', 'Mål', 'Ass', true)}${rows}${total}`;
+            }
+            return `<details class="fold"><summary class="modal-section-title">Karriär i Sirius</summary><div class="modal-stats-list" style="min-height:1.5rem;">${content}</div></details>`;
+        }
+
+        function careerHtml(p) {
+            const c = p.career || {};
+            const esc = (x) => String(x ?? '').replace(/[<>&"]/g, '');
+            const n = (v) => (v === null || v === undefined ? '–' : v);
+            const rt = (v) => (v === null || v === undefined ? '–' : Number(v).toFixed(1).replace('.', ','));
+            const grid = 'display:grid;grid-template-columns:1fr 28px 30px 30px 36px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.76rem;color:var(--text-muted);';
+            const row = (club, season, a, g, s, r, bold) => `<div style="${grid}${bold ? 'font-weight:800;color:#fff;' : ''}"><span>${club}${season ? ` <small style="color:var(--sirius-gold);font-size:0.65rem;">${season}</small>` : ''}</span><span style="text-align:right">${a}</span><span style="text-align:right">${g}</span><span style="text-align:right">${s}</span><span style="text-align:right">${r}</span></div>`;
+            const table = (list) => list && list.length ? (row('Klubb', '', 'M', 'Mål', 'Ass', 'Bet', true) + list.map((x) => row(esc(x.club), esc(x.season), n(x.apps), n(x.goals), n(x.assists), rt(x.rating))).join('')) : '';
+            
+            if (Array.isArray(c)) {
+                return `<details class="fold"><summary class="modal-section-title">Karriär</summary><div class="modal-stats-list" style="min-height:1.5rem;">${table(c)}</div></details>`;
+            }
+
+            return `
+                <details class="fold"><summary class="modal-section-title">Karriär efter Sirius</summary><div class="modal-stats-list" style="min-height:1.5rem;">${table(c.after)}</div></details>
+                <details class="fold"><summary class="modal-section-title">Karriär före Sirius</summary><div class="modal-stats-list" style="min-height:1.5rem;">${table(c.before)}</div></details>
+            `;
+        }
+
+        function transfersHtml(p) {
+            const esc = (t) => String(t ?? '').replace(/[<>&"]/g, '');
+            const rows = (p.transfers && p.transfers.length) ? p.transfers.map(t => `
+                <div class="transfer-row">
+                    <div class="transfer-date">${esc(t.date)}</div>
+                    <div class="transfer-clubs">${esc(t.from)} <span>→</span> ${esc(t.to)}</div>
+                    <div class="transfer-fee">${esc(t.fee || '–')}</div>
+                </div>`).join('') : '';
+            return `<details class="fold"><summary class="modal-section-title">Övergångar</summary><div class="modal-stats-list" style="min-height:1.5rem;">${rows}</div></details>`;
+        }
+
+        function getSiriusTime(p) {
+            const t = Array.isArray(p.transfers) ? p.transfers : [];
+            const ins = t.filter(x => x.to === 'IK Sirius' || x.to === 'Sirius').map(x => +String(x.date).slice(0, 4));
+            const outs = t.filter(x => x.from === 'IK Sirius' || x.from === 'Sirius').map(x => +String(x.date).slice(0, 4));
+            
+            const seasons = p.sirius?.seasons || [];
+            if (seasons.length > 0) {
+                const years = seasons.map(s => parseInt(s.season)).filter(y => !isNaN(y));
+                if (years.length > 0) {
+                    const min = Math.min(...years);
+                    const max = Math.max(...years);
+                    return min === max ? String(min) : `${min}–${max}`;
+                }
+            }
+
+            if (!ins.length) return '-';
+            const a = Math.min(...ins);
+            if (!outs.length) return String(a);
+            const b = Math.max(...outs);
+            return a === b ? String(a) : a + '–' + b;
+        }
+
         function openPlayerProfileModal(p) {
             savedScrollPosition = window.scrollY;
             const avatarUrl = p.id ? `https://images.fotmob.com/image_resources/playerimages/${p.id}.png` : '';
@@ -1097,13 +2045,17 @@
                     <h3 style="color:#fff; font-size:1.1rem; font-weight:900;">${p.name}</h3>
                     <p style="color:var(--sirius-gold); font-size:0.8rem; font-weight:700;">${p.team} • ${p.league}</p>
                 </div>
-                <div class="modal-section-title">Spelarkort</div>
+                <div class="modal-section-title">Spelarinfo</div>
                 <div class="modal-stats-list">
                     <div class="stat-item"><span>Ålder</span><strong>${p.age ? p.age + ' år' : '-'}</strong></div>
                     <div class="stat-item"><span>Position</span><strong>${p.pos || '-'}</strong></div>
                     <div class="stat-item"><span>Kontrakt till</span><strong>${p.contract && p.contract !== '-' ? p.contract : '-'}</strong></div>
                     <div class="stat-item"><span>Nationalitet</span><strong>${p.nat || '-'}</strong></div>
+                    <div class="stat-item"><span>Tid i Sirius</span><strong>${getSiriusTime(p)}</strong></div>
                 </div>
+                ${p.track === 'lane' ? '' : siriusHtml(p)}
+                ${careerHtml(p)}
+                ${transfersHtml(p)}
                 <a href="${p.fotmobUrl}" target="_blank" class="external-btn">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i> Se live-stats på FotMob
                 </a>`;
