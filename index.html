@@ -534,6 +534,10 @@
             </button>
         </div>
 
+        <div id="results-search-container" style="display: block; margin-bottom: 1rem;">
+            <input type="search" id="results-search-input" class="search-input" placeholder="Sök spelare eller lag under dessa 14 dagar..." autocomplete="off">
+        </div>
+
         <div id="content-area"></div>
     </main>
 
@@ -1318,7 +1322,7 @@
                 pos: raw.position || raw.pos || "",
                 league: raw.leagueName || raw.league || "",
                 matchDate: String(raw.matchDate || raw.date || "").slice(0, 10),
-                kickoff: raw.kickoff || "",
+                kickoff: raw.kickoff || "00:00",
                 teamOnly: !!raw.teamOnly,
                 home: raw.homeTeam || raw.home || "",
                 away: raw.awayTeam || raw.away || "",
@@ -1368,6 +1372,10 @@
                 console.error("Blåsvarta Spår matchfeed:", error);
             }
             renderContent();
+        }
+
+        function displayResult(value) {
+            return (value === null || value === undefined || value === "") ? "–" : String(value);
         }
 
         function displayStat(value, suffix = "") {
@@ -1461,18 +1469,26 @@
             currentMode = 'results';
             document.getElementById('date-picker-bar').style.display = 'flex';
             document.getElementById('track-selector').style.display = 'grid';
+            document.getElementById('results-search-container').style.display = 'block';
             document.getElementById('view-title').textContent = "RESULTAT & KOMMANDE";
             document.getElementById('view-desc').textContent = "Tryck på en match för mer information";
             setActiveNav('nav-results');
             syncTrackButtons();
-            renderContent();
+
+            const searchInput = document.getElementById('results-search-input');
+            if (searchInput && !searchInput.dataset.bound) {
+                searchInput.dataset.bound = "true";
+                searchInput.addEventListener('input', () => renderResults());
+            }
+
+            renderResults();
         }
 
         function setTrack(track) {
             selectedTrack = track;
             if (currentMode !== 'results') { openResultsView(); return; }
             syncTrackButtons();
-            renderContent();
+            renderResults();
         }
 
         function normalizeText(t) {
@@ -1484,6 +1500,7 @@
             currentMode = 'search';
             document.getElementById('date-picker-bar').style.display = 'none';
             document.getElementById('track-selector').style.display = 'grid';
+            document.getElementById('results-search-container').style.display = 'none';
             document.getElementById('view-title').textContent = "SÖK SPELARE";
             document.getElementById('view-desc').textContent = "Sök på spelare eller lag";
             setActiveNav('nav-sparen');
@@ -1525,6 +1542,7 @@
             currentMode = 'profiles';
             document.getElementById('date-picker-bar').style.display = 'none';
             document.getElementById('track-selector').style.display = 'none';
+            document.getElementById('results-search-container').style.display = 'none';
             document.getElementById('view-title').textContent = "EX-SIRIUS SPELARKORT";
             setActiveNav('nav-sparen');
             renderProfiles(track);
@@ -1540,13 +1558,23 @@
                 return;
             }
 
-            const filtered = playersData.filter(m =>
-                (selectedTrack === 'all' || m.track === selectedTrack) &&
-                m.matchDate === selectedDate
-            );
+            const searchInputVal = document.getElementById('results-search-input')?.value || "";
+            const q = normalizeText(searchInputVal).trim();
+
+            const filtered = playersData.filter(m => {
+                const matchTrack = (selectedTrack === 'all' || m.track === selectedTrack);
+                if (!matchTrack) return false;
+
+                if (q) {
+                    const matchesSearch = normalizeText([m.player, m.home, m.away, m.league, m.team].join(' ')).includes(q);
+                    return matchesSearch;
+                } else {
+                    return m.matchDate === selectedDate;
+                }
+            });
 
             if (filtered.length === 0) {
-                area.innerHTML = `<div class="empty-state"><p>Inga matcher hittades för ${selectedDate} i valt spår.</p></div>`;
+                area.innerHTML = `<div class="empty-state"><p>Inga matcher hittades.</p></div>`;
                 return;
             }
 
@@ -1568,15 +1596,17 @@
                     if (status === 'Kommande') return 3;
                     return 4;
                 };
-                return statusOrder(a[0].status) - statusOrder(b[0].status);
+                const statDiff = statusOrder(a[0].status) - statusOrder(b[0].status);
+                if (statDiff !== 0) return statDiff;
+                return (a[0].kickoff || "00:00").localeCompare(b[0].kickoff || "00:00");
             });
 
             matchList.forEach((group) => {
                 const primaryMatch = group[0];
                 const isUpcoming = primaryMatch.status === 'Kommande';
                 
-                const scoreHome = isUpcoming ? '' : displayStat(primaryMatch.scoreHome);
-                const scoreAway = isUpcoming ? '' : displayStat(primaryMatch.scoreAway);
+                const scoreHome = isUpcoming ? '' : displayResult(primaryMatch.scoreHome);
+                const scoreAway = isUpcoming ? '' : displayResult(primaryMatch.scoreAway);
 
                 const card = document.createElement('div');
                 card.className = "match-card";
@@ -1608,7 +1638,7 @@
 
                 card.innerHTML = `
                     <div class="match-header">
-                        <span>${primaryMatch.league || "Liga saknas"}</span>
+                        <span>${primaryMatch.league || "Liga saknas"} ${q ? '· ' + primaryMatch.matchDate : ''}</span>
                         <span class="status-badge">${isUpcoming ? "Kommande" + (primaryMatch.kickoff ? " · " + primaryMatch.kickoff : "") : (primaryMatch.status || "Status saknas")}</span>
                     </div>
                     <div class="team-row"><span>${primaryMatch.home}</span><span class="team-score">${scoreHome}</span></div>
@@ -1665,7 +1695,7 @@
                 <div class="modal-section-title">${p.teamOnly ? 'Spelade ej' : 'Kommande match'}</div>
                 <div class="modal-stats-list">
                     ${stat('Datum', p.matchDate)}
-                    ${p.teamOnly ? stat('Resultat', (p.scoreHome ?? '–') + ' – ' + (p.scoreAway ?? '–')) : stat('Avspark (svensk tid)', p.kickoff)}
+                    ${p.teamOnly ? stat('Resultat', displayResult(p.scoreHome) + ' – ' + displayResult(p.scoreAway)) : stat('Avspark (svensk tid)', p.kickoff)}
                     ${stat('Hemmalag', p.home)}
                     ${stat('Bortalag', p.away)}
                     ${stat('Tävling', p.league)}
@@ -1706,7 +1736,7 @@
                 </div>
                 <div class="modal-section-title">Matchstatistik</div>
                 <div class="modal-stats-list">
-                    ${stat("Slutresultat", `${displayStat(p.scoreHome)} –${displayStat(p.scoreAway)}`)}
+                    ${stat("Slutresultat", `${displayResult(p.scoreHome)} –${displayResult(p.scoreAway)}`)}
                     ${stat("Spelade minuter", p.mins, p.mins === null ? "" : "'")}
                     ${stat("Mål", p.goals)}
                     ${stat("Assister", p.ass)}
