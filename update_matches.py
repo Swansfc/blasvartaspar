@@ -14,23 +14,35 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 
 PLAYERS = [
-    {"name": "Kerim Mrabti",    "id": "528409",  "track": "utland", "team": "AEK Larnaca"},
-    {"name": "Herman Sjögrell", "id": "1177212", "track": "utland", "team": "FC Inter Turku"},
-    {"name": "Aron Bjarnason",  "id": "474133",  "track": "utland", "team": "Breiðablik"},
-    {"name": "Wessam Abou Ali", "id": "919036",  "track": "utland", "team": "Columbus Crew"},
-    {"name": "Jamie Roche",     "id": "1129082", "track": "utland", "team": "Kortrijk"},
-    {"name": "Jesper Nyholm",   "id": "619826",  "track": "utland", "team": "Prachuap FC"},
-    {"name": "Tashreeq Matthews", "id": "982336", "track": "utland", "team": "Mamelodi Sundowns FC"},
-    {"name": "Marcus Mathisen", "id": "639580", "track": "utland", "team": "FC St. Pauli"},
-    {"name": "Hjalmar Ekdal", "id": "831044", "track": "utland", "team": "Burnley"},
-    {"name": "Joseph Colley", "id": "793909", "track": "utland", "team": "KF Tirana"},
-    {"name": "Yousef Salech", "id": "1183360", "track": "utland", "team": "Cardiff City"},
-    {"name": "Magnus Kaastrup", "id": "839970", "track": "utland", "team": "Aarhus Fremad"},
-    {"name": "Benjamin Mbunga Kimpioka", "id": "961305", "track": "utland", "team": "Asteras Tripolis"},
-    {"name": "Malcolm Jeng", "id": "1457824", "track": "utland", "team": "FC Groningen"},
-    {"name": "Óli Ómarsson", "id": "965710", "track": "utland", "team": "Breiðablik"},
+    {"name": "Robbie Ure", "id": "1399218", "track": "utland", "team": "Sevilla"},
+    {"name": "Johan Karlsson", "id": "1157905", "track": "utland", "team": "Vejle Boldklub"},
+    {"name": "Stefano Holmquist Vecchia", "id": "493159", "track": "utland", "team": "Aalesund"},
+    {"name": "Joeri de Kamps", "id": "293718", "track": "utland", "team": "Sepsi OSK"},
+    {"name": "Kristopher Da Graça", "id": "759565", "track": "utland", "team": "Krasava Ypsonas FC"},
+    {"name": "Óli Valur Ómarsson", "id": "965710", "track": "utland", "team": "Breiðablik"},
     {"name": "Leo Walta", "id": "1276686", "track": "utland", "team": "Los Angeles FC"},
+    {"name": "Isak Ssewankambo", "id": "561838", "track": "utland", "team": "Vancouver FC"},
     {"name": "Tobias Carlsson", "id": "1016540", "track": "utland", "team": "FH Hafnarfjörður"},
+    {"name": "Diego Montiel", "id": "566351", "track": "utland", "team": "KA Akureyri"},
+    {"name": "Moustafa Zeidan", "id": "767777", "track": "utland", "team": "Al Masry SC"},
+    {"name": "André Alsanati", "id": "1022484", "track": "utland", "team": "Mosul SC"},
+    {"name": "Jakob Tånnander", "id": "1000835", "track": "utland", "team": "SC Farense"},
+    {"name": "Patrick Nwadike", "id": "1109472", "track": "utland", "team": "Spartak Trnava"},
+    {"name": "Filip Majchrowicz", "id": "948374", "track": "utland", "team": "Radomiak Radom"},
+    {"name": "Malcolm Jeng", "id": "1457824", "track": "utland", "team": "FC Groningen"},
+    {"name": "Benjamin Mbunga Kimpioka", "id": "961305", "track": "utland", "team": "Asteras Tripolis"},
+    {"name": "Magnus Kaastrup", "id": "839970", "track": "utland", "team": "Aarhus Fremad"},
+    {"name": "Yousef Salech", "id": "1183360", "track": "utland", "team": "Cardiff City"},
+    {"name": "Joseph Colley", "id": "793909", "track": "utland", "team": "KF Tirana"},
+    {"name": "Hjalmar Ekdal", "id": "831044", "track": "utland", "team": "Burnley"},
+    {"name": "Marcus Mathisen", "id": "639580", "track": "utland", "team": "FC St. Pauli"},
+    {"name": "Jesper Nyholm", "id": "619826", "track": "utland", "team": "Prachuap FC"},
+    {"name": "Tashreeq Matthews", "id": "982336", "track": "utland", "team": "Mamelodi Sundowns FC"},
+    {"name": "Kerim Mrabti", "id": "528409", "track": "utland", "team": "AEK Larnaca"},
+    {"name": "Herman Sjögrell", "id": "1177212", "track": "utland", "team": "FC Inter Turku"},
+    {"name": "Aron Bjarnason", "id": "474133", "track": "utland", "team": "Breiðablik"},
+    {"name": "Wessam Abou Ali", "id": "919036", "track": "utland", "team": "Columbus Crew"},
+    {"name": "Jamie Roche", "id": "1129082", "track": "utland", "team": "Kortrijk"},
 ]
 
 
@@ -290,8 +302,8 @@ def main():
     matches = sorted(kept.values(), key=lambda m: (m["matchDate"], m.get("kickoff", ""), m["player"]), reverse=True)
     out = {"updated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
            "matches": matches, "players": old.get("players", {})}
-    OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"\nKlart: {len(matches)} matcher skrivna till {OUT.name}")
+OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+print(f"\nKlart: {len(matches)} matcher skrivna till {OUT.name}")
 
 
 if __name__ == "__main__":
