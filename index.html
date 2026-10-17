@@ -187,7 +187,7 @@
         
         .track-selector { 
             display: grid; 
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr auto;
             gap: 8px; 
             margin-bottom: 1rem; 
             width: 100%;
@@ -206,6 +206,9 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+        }
+        .track-btn-icon-only {
+            padding: 9px 14px;
         }
         .track-btn:hover, .track-btn.active { background: #0044cc; color: #fff; border-color: #0055ff; }
 
@@ -235,7 +238,16 @@
         }
         .match-card:active { border-color: var(--sirius-gold); transform: scale(0.99); }
         .match-header { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--text-muted); margin-bottom: 0.6rem; font-weight: 700; }
-        .status-badge { background: #10204a; color: var(--sirius-gold); font-weight: 800; padding: 2px 6px; border-radius: 10px; border: 1px solid #243e82; font-size: 0.65rem; }
+        
+        .status-badge { 
+            background: #10204a; 
+            color: var(--sirius-gold); 
+            font-weight: 800; 
+            padding: 2px 8px; 
+            border-radius: 10px; 
+            border: none; 
+            font-size: 0.65rem; 
+        }
 
         .team-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 0.9rem; margin-bottom: 5px; align-items: center; }
         .team-score { font-family: 'Roboto Mono', monospace; background: #050a1c; padding: 1px 7px; border-radius: 5px; border: 1px solid #1c2536; font-size: 0.95rem; }
@@ -247,7 +259,13 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center;
+            border-radius: 6px;
+            transition: background 0.2s;
         }
+        .player-footer.clickable:hover {
+            background: rgba(255, 204, 0, 0.05);
+        }
+        
         .player-info-group { display: flex; align-items: center; gap: 8px; }
         .player-thumb-wrapper { position: relative; }
         .player-thumb { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; background: #050a1c; border: 1px solid var(--sirius-gold); }
@@ -264,7 +282,6 @@
             border: 1px solid #000;
         }
         .player-details h4 { color: var(--sirius-gold); font-weight: 800; font-size: 0.78rem; line-height: 1.1; }
-        .player-details span { color: var(--text-muted); font-size: 0.65rem; }
         .player-quick-stats { text-align: right; font-size: 0.7rem; color: #fff; font-weight: 700; }
         .player-quick-stats span { color: var(--text-muted); font-weight: 400; font-size: 0.65rem; }
 
@@ -349,9 +366,28 @@
         .stat-item span { color: var(--text-muted); }
         .stat-item strong { color: #fff; font-weight: 700; }
 
+        .nav-player-btn {
+            width: 100%;
+            margin-top: 0.8rem;
+            padding: 10px;
+            background: #112049;
+            color: var(--sirius-gold);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .nav-player-btn:hover { background: #1a2b55; }
+
         .external-btn {
             width: 100%;
-            margin-top: 1rem;
+            margin-top: 0.8rem;
             padding: 10px;
             background: var(--sirius-gold);
             color: #000;
@@ -449,10 +485,6 @@
                             <svg class="custom-icon" viewBox="0 0 100 100" fill="none" stroke="#00e676" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M 22 28 L 44 50 L 32 62 M 78 28 L 56 50 L 68 62 L 56 74 L 46 64 L 56 54 L 44 42 L 34 52 L 22 40 L 40 22 C 43 19 49 19 52 22 L 62 32 Z M 62 32 L 78 48"/></svg>
                             Lånespåret
                         </div>
-                        <div class="dropdown-item" onclick="selectTrackFromMenu('sverige')">
-                            <svg class="custom-icon" viewBox="0 0 100 100" fill="none" stroke="#29b6f6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M 25 88 L 45 22 M 39 28 C 55 18 70 36 82 24 L 70 60 C 58 72 43 54 27 64"/></svg>
-                            Sverigespåret
-                        </div>
                         <div class="dropdown-item" onclick="openSearchView()">
                             <svg class="custom-icon" viewBox="0 0 100 100" fill="none" stroke="#ffcc00" stroke-width="9" stroke-linecap="round"><circle cx="44" cy="44" r="28"/><line x1="64" y1="64" x2="88" y2="88"/></svg>
                             Sök
@@ -471,8 +503,8 @@
 
     <main>
         <div class="section-header">
-            <h2 id="view-title">RESULTAT & SCHEMA</h2>
-            <p id="view-desc">Klicka på ett matchkort eller spelarkort för detaljerad statistik</p>
+            <h2 id="view-title">RESULTAT & KOMMANDE</h2>
+            <p id="view-desc">Tryck på en match för mer information</p>
         </div>
 
         <div class="track-selector" id="track-selector">
@@ -494,19 +526,11 @@
                 Lånespåret
             </button>
 
-            <button class="track-btn" id="track-btn-sverige" onclick="setTrack('sverige')">
-                <svg class="custom-icon" viewBox="0 0 100 100" fill="none" stroke="#29b6f6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M 25 88 L 45 22 M 39 28 C 55 18 70 36 82 24 L 70 60 C 58 72 43 54 27 64"/>
-                </svg>
-                Sverigespåret
-            </button>
-
-            <button class="track-btn" id="track-btn-search" onclick="openSearchView()">
+            <button class="track-btn track-btn-icon-only" id="track-btn-search" onclick="openSearchView()" aria-label="Sök">
                 <svg class="custom-icon" viewBox="0 0 100 100" fill="none" stroke="#ffcc00" stroke-width="9" stroke-linecap="round">
                     <circle cx="44" cy="44" r="28"/>
                     <line x1="64" y1="64" x2="88" y2="88"/>
                 </svg>
-                Sök
             </button>
         </div>
 
@@ -532,7 +556,40 @@
         let savedScrollPosition = 0;
 
         const masterPlayers = [
-            // --- NYA SPELARE TILLAGDA ---
+            {
+                id: '1242516', name: 'Michael Martin', team: 'SGV Freiberg', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'Regionalliga Southwest (Tyskland)',
+                verified: true, nat: 'Tyskland', birth: '2000-07-10', age: 26, height: '180 cm', foot: 'Höger', contract: '30 juni 2027',
+                sirius: { seasons: [
+                    { season: '2023/2024', league: 'Allsvenskan', apps: 3, goals: 0, assists: 0 },
+                    { season: '2024', league: 'Allsvenskan', apps: 4, goals: 0, assists: 0, rating: 6.6 }
+                ] },
+                career: {
+                    after: [
+                        { club: 'SGV Heilbronn-Freiberg', season: '2026/2027', apps: 11, goals: 1, assists: 0, rating: null }
+                    ],
+                    before: [
+                        { club: 'FC Emmen', season: '2024/2025', apps: 29, goals: 1, assists: 3, rating: 7.0 },
+                        { club: 'SK Dynamo České Budějovice', season: '2024/2025', apps: 3, goals: 0, assists: 0, rating: null },
+                        { club: 'SC Paderborn 07 II', season: '2023/2024', apps: 4, goals: 0, assists: 0, rating: null },
+                        { club: 'SV Ried', season: '2023/2024', apps: 2, goals: 0, assists: 0, rating: null },
+                        { club: 'SV Ried', season: '2022/2023', apps: 33, goals: 0, assists: 1, rating: 7.2 },
+                        { club: 'Vorwärts Steyr', season: '2021/2022', apps: 14, goals: 4, assists: 1, rating: null },
+                        { club: 'Bayern Alzenau', season: '2020/2021', apps: 21, goals: 5, assists: 0, rating: null }
+                    ]
+                },
+                transfers: [
+                    { date: '2026-07-01', from: 'Klubblös', to: 'SGV Heilbronn-Freiberg', fee: '-' },
+                    { date: '2026-03-11', from: 'Sirius', to: 'Klubblös', fee: '-' },
+                    { date: '2025-06-30', from: 'FC Emmen', to: 'Sirius', fee: 'Slut på lån' },
+                    { date: '2024-09-02', from: 'Sirius', to: 'FC Emmen', fee: 'Lån' },
+                    { date: '2024-09-01', from: 'SK Dynamo České Budějovice', to: 'Sirius', fee: 'Slut på lån' },
+                    { date: '2024-07-11', from: 'Sirius', to: 'SK Dynamo České Budějovice', fee: 'Lån' },
+                    { date: '2024-02-01', from: 'SC Paderborn', to: 'Sirius', fee: 'Okänd' },
+                    { date: '2023-09-01', from: 'SV Ried', to: 'SC Paderborn', fee: '80 tn €' },
+                    { date: '2022-07-01', from: 'Vorwärts Steyr', to: 'SV Ried', fee: 'Fri övergång' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1242516/michael-martin'
+            },
             {
                 id: '1399218', name: 'Robbie Ure', team: 'Sevilla', track: 'utland', trackName: 'Utlandsspåret', pos: 'Anfallare', league: 'LaLiga (Spanien)',
                 verified: true, nat: 'Skottland', age: 22, foot: 'Höger', contract: '2031',
@@ -578,8 +635,6 @@
                 sirius: { seasons: [] }, career: { after: [], before: [] }, transfers: [],
                 fotmobUrl: 'https://www.fotmob.com/sv/players/566351/diego-montiel'
             },
-
-            // --- URSPRUNGLIGA SPELARE ---
             {
                 id: '293718', name: 'Joeri de Kamps', team: 'Sepsi OSK', track: 'utland', trackName: 'Utlandsspåret', pos: 'Defensiv mittfältare', league: 'Superliga (Rumänien)',
                 verified: true, nat: 'Nederländerna', birth: '1992-02-10', age: 34, foot: 'Vänster', contract: '',
@@ -1254,6 +1309,7 @@
 
         function normalizeMatch(raw) {
             return {
+                matchId: raw.matchId || "",
                 player: raw.playerName || raw.player || "",
                 team: raw.playerTeam || raw.team || "",
                 playerId: String(raw.playerId || ""),
@@ -1266,8 +1322,8 @@
                 teamOnly: !!raw.teamOnly,
                 home: raw.homeTeam || raw.home || "",
                 away: raw.awayTeam || raw.away || "",
-                scoreHome: raw.homeScore ?? raw.scoreHome ?? null,
-                scoreAway: raw.awayScore ?? raw.scoreAway ?? null,
+                scoreHome: raw.scoreHome ?? raw.homeScore ?? null,
+                scoreAway: raw.scoreAway ?? raw.awayScore ?? null,
                 status: raw.status || "Okänd status",
                 rating: raw.rating ?? null,
                 mins: raw.minutesPlayed ?? raw.mins ?? null,
@@ -1405,8 +1461,8 @@
             currentMode = 'results';
             document.getElementById('date-picker-bar').style.display = 'flex';
             document.getElementById('track-selector').style.display = 'grid';
-            document.getElementById('view-title').textContent = "RESULTAT & SCHEMA";
-            document.getElementById('view-desc').textContent = "Klicka på ett matchkort eller spelarkort för detaljerad statistik";
+            document.getElementById('view-title').textContent = "RESULTAT & KOMMANDE";
+            document.getElementById('view-desc').textContent = "Tryck på en match för mer information";
             setActiveNav('nav-results');
             syncTrackButtons();
             renderContent();
@@ -1480,7 +1536,7 @@
             area.innerHTML = "";
 
             if (feedState !== "ready") {
-                area.innerHTML = `<div class="empty-state"><p>Hämtar riktiga matchdata…</p></div>`;
+                area.innerHTML = `<div class="empty-state"><p>Hämtar matchdata…</p></div>`;
                 return;
             }
 
@@ -1490,43 +1546,75 @@
             );
 
             if (filtered.length === 0) {
-                area.innerHTML = `<div class="empty-state"><p>Inga matchdata hittades för ${selectedDate} i valt spår.</p></div>`;
+                area.innerHTML = `<div class="empty-state"><p>Inga matcher hittades för ${selectedDate} i valt spår.</p></div>`;
                 return;
             }
 
-            filtered.sort((a,b) => a.player.localeCompare(b.player, 'sv')).forEach((m) => {
-                const imgUrl = m.photo || (m.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(m.playerId)}.png` : '');
-                const isUpcoming = m.status === 'Kommande';
-                const scoreHome = isUpcoming ? '' : displayStat(m.scoreHome);
-                const scoreAway = isUpcoming ? '' : displayStat(m.scoreAway);
-                const rating = displayStat(m.rating);
-                const mins = displayStat(m.mins, "'");
-                const goals = displayStat(m.goals);
-                const assists = displayStat(m.ass);
+            const groupedMatches = {};
+            filtered.forEach(m => {
+                const key = m.matchId ? m.matchId : `${m.home}-${m.away}-${m.matchDate}`;
+                if (!groupedMatches[key]) {
+                    groupedMatches[key] = [];
+                }
+                groupedMatches[key].push(m);
+            });
+
+            const matchList = Object.values(groupedMatches);
+
+            matchList.sort((a, b) => {
+                const statusOrder = (status) => {
+                    if (status.startsWith('Slut')) return 1;
+                    if (status === 'Pågår') return 2;
+                    if (status === 'Kommande') return 3;
+                    return 4;
+                };
+                return statusOrder(a[0].status) - statusOrder(b[0].status);
+            });
+
+            matchList.forEach((group) => {
+                const primaryMatch = group[0];
+                const isUpcoming = primaryMatch.status === 'Kommande';
+                
+                const scoreHome = isUpcoming ? '' : displayStat(primaryMatch.scoreHome);
+                const scoreAway = isUpcoming ? '' : displayStat(primaryMatch.scoreAway);
 
                 const card = document.createElement('div');
                 card.className = "match-card";
-                card.onclick = () => openMatchStatsModal(m);
+                card.onclick = () => openMatchStatsModalGroup(group, 0);
+
+                let playersListHtml = '';
+                group.forEach((m, idx) => {
+                    const imgUrl = m.photo || (m.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(m.playerId)}.png` : '');
+                    const rating = displayStat(m.rating);
+                    const mins = displayStat(m.mins, "'");
+                    const goals = m.goals ?? 0;
+                    const assists = m.ass ?? 0;
+
+                    playersListHtml += `
+                        <div class="player-footer clickable" onclick="event.stopPropagation(); openMatchStatsModalGroup(JSON.parse(this.dataset.group), ${idx})" data-group='${JSON.stringify(group).replace(/'/g, "&apos;")}'>
+                            <div class="player-info-group">
+                                <div class="player-thumb-wrapper">
+                                    <img src="${imgUrl}" class="player-thumb" onerror="this.onerror=null; this.src='https://via.placeholder.com/30';">
+                                    ${m.rating !== null && !isUpcoming ? `<span class="rating-badge">${rating}</span>` : ''}
+                                </div>
+                                <div class="player-details">
+                                    <h4>${m.player}</h4>
+                                </div>
+                            </div>
+                            <div class="player-quick-stats">${isUpcoming ? "" : (m.teamOnly ? "Spelade ej" : `${mins} | ${goals} MÅL ${assists} ASS`)}</div>
+                        </div>
+                    `;
+                });
+
                 card.innerHTML = `
                     <div class="match-header">
-                        <span>${m.league || "Liga saknas"}</span>
-                        <span class="status-badge">${isUpcoming ? "Kommande" + (m.kickoff ? " · " + m.kickoff : "") : (m.status || "Status saknas")}</span>
+                        <span>${primaryMatch.league || "Liga saknas"}</span>
+                        <span class="status-badge">${isUpcoming ? "Kommande" + (primaryMatch.kickoff ? " · " + primaryMatch.kickoff : "") : (primaryMatch.status || "Status saknas")}</span>
                     </div>
-                    <div class="team-row"><span>${m.home}</span><span class="team-score">${scoreHome}</span></div>
-                    <div class="team-row"><span>${m.away}</span><span class="team-score">${scoreAway}</span></div>
-                    <div class="player-footer">
-                        <div class="player-info-group">
-                            <div class="player-thumb-wrapper">
-                                <img src="${imgUrl}" class="player-thumb" onerror="this.onerror=null; this.src='https://via.placeholder.com/30';">
-                                ${m.rating !== null && !isUpcoming ? `<span class="rating-badge">${rating}</span>` : ''}
-                            </div>
-                            <div class="player-details">
-                                <h4>${m.player}</h4>
-                                <span>${m.team || ""}</span>
-                            </div>
-                        </div>
-                        <div class="player-quick-stats">${isUpcoming ? "" : (m.teamOnly ? "Spelade ej" : `${mins} <span>min</span> | ${goals}G${assists}A`)}</div>
-                    </div>`;
+                    <div class="team-row"><span>${primaryMatch.home}</span><span class="team-score">${scoreHome}</span></div>
+                    <div class="team-row"><span>${primaryMatch.away}</span><span class="team-score">${scoreAway}</span></div>
+                    ${playersListHtml}
+                `;
                 area.appendChild(card);
             });
         }
@@ -1588,12 +1676,23 @@
             document.body.classList.add('modal-open');
         }
 
-        function openMatchStatsModal(p) {
+        function openMatchStatsModalGroup(group, index = 0) {
+            const p = group[index];
             if (p.status === 'Kommande' || p.teamOnly) { openUpcomingModal(p); return; }
             savedScrollPosition = window.scrollY;
             const avatarUrl = p.photo || (p.playerId ? `https://images.fotmob.com/image_resources/playerimages/${encodeURIComponent(p.playerId)}.png` : '');
             const stat = (label, value, suffix = "") =>
                 `<div class="stat-item"><span>${label}</span><strong>${displayStat(value, suffix)}</strong></div>`;
+
+            let navButtonHtml = '';
+            if (group.length > 1) {
+                const nextIdx = (index + 1) % group.length;
+                navButtonHtml = `
+                    <button class="nav-player-btn" onclick="openMatchStatsModalGroup(${JSON.stringify(group).replace(/"/g, '&quot;')}, ${nextIdx})">
+                        Nästa spelare (${group[nextIdx].player}) <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                `;
+            }
 
             document.getElementById('modal-body-content').innerHTML = `
                 <div class="modal-player-header">
@@ -1605,7 +1704,7 @@
                     <p style="color:var(--sirius-gold); font-size:0.8rem; font-weight:700;">${p.team} ${p.pos ? '(' + p.pos + ')' : ''}</p>
                     <p style="color:var(--text-muted); font-size:0.72rem; margin-top:4px;">${p.matchDate} · ${p.league}</p>
                 </div>
-                <div class="modal-section-title">Matchstatistik från datakällan</div>
+                <div class="modal-section-title">Matchstatistik</div>
                 <div class="modal-stats-list">
                     ${stat("Slutresultat", `${displayStat(p.scoreHome)} –${displayStat(p.scoreAway)}`)}
                     ${stat("Spelade minuter", p.mins, p.mins === null ? "" : "'")}
@@ -1614,7 +1713,8 @@
                     ${stat("Spelarbetyg", p.rating)}
                     ${stat("Precisa passningar", p.passes)}
                     ${stat("Skapade chanser", p.chances)}
-                </div>`;
+                </div>
+                ${navButtonHtml}`;
             { const mc = document.querySelector('#stats-modal .modal-content'); if (mc) mc.scrollTop = 0; } 
             document.getElementById('stats-modal').classList.add('active');
             document.documentElement.classList.add('modal-open');
