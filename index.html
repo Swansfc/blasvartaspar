@@ -577,6 +577,25 @@
         let savedScrollPosition = 0;
 
         const masterPlayers = [
+            // --- LÅNESPÅRET (Utlånade FRÅN Sirius) ---
+            {
+                id: '1215994', name: 'Andreas Pyndt', team: 'Silkeborg IF (lån)', track: 'lane', trackName: 'Lånespåret', pos: 'Mittfältare', league: 'Superliga (Danmark)',
+                verified: true, nat: 'Danmark', birth: '2001-03-04', age: 25, height: '184 cm', foot: 'Höger', contract: '31 dec 2026',
+                sirius: { seasons: [] },
+                career: [
+                    { club: 'Silkeborg IF', season: '2021/2022', apps: 4, goals: 0, assists: 0, rating: 6.2 },
+                    { club: 'Silkeborg IF', season: '2022/2023', apps: 12, goals: 0, assists: 1, rating: 6.5 },
+                    { club: 'Hvidovre IF', season: '2023/2024', apps: 15, goals: 1, assists: 2, rating: 6.7 },
+                    { club: 'IK Sirius', season: '2024', apps: 13, goals: 0, assists: 1, rating: 6.8 },
+                    { club: 'IK Sirius', season: '2025', apps: 28, goals: 2, assists: 4, rating: 7.1 },
+                    { club: 'IK Sirius', season: '2026', apps: 22, goals: 1, assists: 3, rating: 7.0 }
+                ],
+                transfers: [
+                    { date: '2024-02-01', from: 'Silkeborg IF', to: 'IK Sirius', fee: 'Okänd' }
+                ],
+                fotmobUrl: 'https://www.fotmob.com/sv/players/1215994/andreas-pyndt'
+            },
+            // --- UTLANDSSPÅRET ---
             {
                 id: '1242516', name: 'Michael Martin', team: 'SGV Freiberg', track: 'utland', trackName: 'Utlandsspåret', pos: 'Mittfältare', league: 'Regionalliga Southwest (Tyskland)',
                 verified: true, nat: 'Tyskland', birth: '2000-07-10', age: 26, height: '180 cm', foot: 'Höger', contract: '30 juni 2027',
@@ -1648,8 +1667,10 @@
                 const primaryMatch = group[0];
                 const isUpcoming = primaryMatch.status === 'Kommande';
                 
-                const scoreHome = isUpcoming ? '' : displayResult(primaryMatch.scoreHome);
-                const scoreAway = isUpcoming ? '' : displayResult(primaryMatch.scoreAway);
+                const rawHome = displayResult(primaryMatch.scoreHome);
+                const rawAway = displayResult(primaryMatch.scoreAway);
+                const scoreHome = isUpcoming ? '' : (rawHome === '-' ? '–' : rawHome);
+                const scoreAway = isUpcoming ? '' : (rawAway === '-' ? '–' : rawAway);
 
                 const card = document.createElement('div');
                 card.className = "match-card";
@@ -1767,6 +1788,11 @@
                 `;
             }
 
+            const rawH = displayResult(p.scoreHome);
+            const rawA = displayResult(p.scoreAway);
+            const resH = rawH === '-' ? '–' : rawH;
+            const resA = rawA === '-' ? '–' : rawA;
+
             document.getElementById('modal-body-content').innerHTML = `
                 <div class="modal-player-header">
                     <div class="modal-avatar-wrapper">
@@ -1779,7 +1805,7 @@
                 </div>
                 <div class="modal-section-title">Matchstatistik</div>
                 <div class="modal-stats-list">
-                    ${stat("Slutresultat", `${displayResult(p.scoreHome)} –${displayResult(p.scoreAway)}`)}
+                    ${stat("Slutresultat", `${resH} –${resA}`)}
                     ${stat("Spelade minuter", p.mins, p.mins === null ? "" : "'")}
                     ${stat("Mål", p.goals)}
                     ${stat("Assister", p.ass)}
@@ -1821,6 +1847,10 @@
             const row = (club, season, a, g, s, r, bold) => `<div style="${grid}${bold ? 'font-weight:800;color:#fff;' : ''}"><span>${club}${season ? ` <small style="color:var(--sirius-gold);font-size:0.65rem;">${season}</small>` : ''}</span><span style="text-align:right">${a}</span><span style="text-align:right">${g}</span><span style="text-align:right">${s}</span><span style="text-align:right">${r}</span></div>`;
             const table = (list) => list && list.length ? (row('Klubb', '', 'M', 'Mål', 'Ass', 'Bet', true) + list.map((x) => row(esc(x.club), esc(x.season), n(x.apps), n(x.goals), n(x.assists), rt(x.rating))).join('')) : '';
             
+            if (Array.isArray(c)) {
+                return `<details class="fold"><summary class="modal-section-title">Karriär</summary><div class="modal-stats-list" style="min-height:1.5rem;">${table(c)}</div></details>`;
+            }
+
             return `
                 <details class="fold"><summary class="modal-section-title">Karriär efter Sirius</summary><div class="modal-stats-list" style="min-height:1.5rem;">${table(c.after)}</div></details>
                 <details class="fold"><summary class="modal-section-title">Karriär före Sirius</summary><div class="modal-stats-list" style="min-height:1.5rem;">${table(c.before)}</div></details>
@@ -1840,8 +1870,8 @@
 
         function getSiriusTime(p) {
             const t = Array.isArray(p.transfers) ? p.transfers : [];
-            const ins = t.filter(x => x.to === 'Sirius').map(x => +String(x.date).slice(0, 4));
-            const outs = t.filter(x => x.from === 'Sirius').map(x => +String(x.date).slice(0, 4));
+            const ins = t.filter(x => x.to === 'IK Sirius' || x.to === 'Sirius').map(x => +String(x.date).slice(0, 4));
+            const outs = t.filter(x => x.from === 'IK Sirius' || x.from === 'Sirius').map(x => +String(x.date).slice(0, 4));
             
             const seasons = p.sirius?.seasons || [];
             if (seasons.length > 0) {
@@ -1879,7 +1909,7 @@
                     <div class="stat-item"><span>Nationalitet</span><strong>${p.nat || '-'}</strong></div>
                     <div class="stat-item"><span>Tid i Sirius</span><strong>${getSiriusTime(p)}</strong></div>
                 </div>
-                ${siriusHtml(p)}
+                ${p.track === 'lane' ? '' : siriusHtml(p)}
                 ${careerHtml(p)}
                 ${transfersHtml(p)}
                 <a href="${p.fotmobUrl}" target="_blank" class="external-btn">
