@@ -1392,14 +1392,14 @@
         }
 
         function displayResult(value) {
-            if (value === null || value === undefined || value === "") return "–";
+            if (value === null || value === undefined || value === "" || value === "-") return "–";
             const s = String(value).trim();
-            if (s === "" || s.toLowerCase() === "null" || s.toLowerCase() === "undefined") return "–";
+            if (s === "" || s === "-" || s.toLowerCase() === "null" || s.toLowerCase() === "undefined") return "–";
             return s;
         }
 
         function displayStat(value, suffix = "") {
-            return value === null || value === undefined || value === "" ? "–" : `${value}${suffix}`;
+            return value === null || value === undefined || value === "" || value === "-" ? "–" : `${value}${suffix}`;
         }
 
         function buildDatePicker() {
