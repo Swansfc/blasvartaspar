@@ -103,7 +103,7 @@
             top: 115%; 
             right: 0; 
             background-color: var(--dropdown-bg); 
-            min-width: 170px; 
+            min-width: 180px; 
             box-shadow: 0px 8px 24px rgba(0,0,0,0.6); 
             border: 1px solid var(--card-border); 
             border-radius: 10px; 
@@ -285,6 +285,23 @@
         .player-quick-stats { text-align: right; font-size: 0.7rem; color: #fff; font-weight: 700; }
         .player-quick-stats span { color: var(--text-muted); font-weight: 400; font-size: 0.65rem; }
 
+        .search-bar-inline {
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        .search-input { 
+            width: 100%; 
+            background: #081230; 
+            color: #fff; 
+            border: 1px solid var(--card-border); 
+            border-radius: 12px; 
+            padding: 0.85rem 1rem; 
+            font: 600 16px 'Montserrat', sans-serif; 
+            outline: none; 
+        }
+        .search-input:focus { border-color: var(--sirius-gold); }
+        .search-input::placeholder { color: var(--text-muted); font-weight: 400; }
+
         .modal-overlay {
             display: none;
             position: fixed;
@@ -436,9 +453,6 @@
         }
         .player-avatar img { width: 100%; height: 100%; object-fit: cover; }
         .studs { width: 1.75em; height: 1.75em; fill: var(--sirius-gold); flex-shrink: 0; }
-        .search-input { width: 100%; background: #081230; color: #fff; border: 1px solid var(--card-border); border-radius: 12px; padding: 0.85rem 1rem; font: 600 16px 'Montserrat', sans-serif; margin-bottom: 1rem; outline: none; }
-        .search-input:focus { border-color: var(--sirius-gold); }
-        .search-input::placeholder { color: var(--text-muted); font-weight: 400; }
         .sirius-row { display: grid; grid-template-columns: 1fr 38px 38px 38px; gap: 6px; padding: 6px 0; border-bottom: 1px solid var(--card-border); font-size: 0.76rem; color: var(--text-muted); }
         .sirius-row:last-child { border-bottom: 0; }
         .sirius-row span + span { text-align: right; }
@@ -485,9 +499,13 @@
                             <svg class="custom-icon" viewBox="0 0 100 100" fill="none" stroke="#00e676" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M 22 28 L 44 50 L 32 62 M 78 28 L 56 50 L 68 62 L 56 74 L 46 64 L 56 54 L 44 42 L 34 52 L 22 40 L 40 22 C 43 19 49 19 52 22 L 62 32 Z M 62 32 L 78 48"/></svg>
                             Lånespåret
                         </div>
+                        <div class="dropdown-item" onclick="selectTrackFromMenu('sverige')">
+                            <svg class="custom-icon" viewBox="0 0 100 100" fill="none" stroke="#00e676" stroke-width="8"><circle cx="50" cy="50" r="42"/><line x1="50" y1="8" x2="50" y2="92"/><line x1="8" y1="50" x2="92" y2="50"/></svg>
+                            Sverigespåret
+                        </div>
                         <div class="dropdown-item" onclick="openSearchView()">
                             <svg class="custom-icon" viewBox="0 0 100 100" fill="none" stroke="#ffcc00" stroke-width="9" stroke-linecap="round"><circle cx="44" cy="44" r="28"/><line x1="64" y1="64" x2="88" y2="88"/></svg>
-                            Sök
+                            Sök spelarkort
                         </div>
                     </div>
                 </div>
@@ -526,7 +544,7 @@
                 Lånespåret
             </button>
 
-            <button class="track-btn track-btn-icon-only" id="track-btn-search" onclick="openSearchView()" aria-label="Sök">
+            <button class="track-btn track-btn-icon-only" id="track-btn-search" onclick="toggleResultsSearch()" aria-label="Sök i matcher">
                 <svg class="custom-icon" viewBox="0 0 100 100" fill="none" stroke="#ffcc00" stroke-width="9" stroke-linecap="round">
                     <circle cx="44" cy="44" r="28"/>
                     <line x1="64" y1="64" x2="88" y2="88"/>
@@ -534,10 +552,7 @@
             </button>
         </div>
 
-        <div id="results-search-container" style="display: block; margin-bottom: 1rem;">
-            <input type="search" id="results-search-input" class="search-input" placeholder="Sök spelare eller lag under dessa 14 dagar..." autocomplete="off">
-        </div>
-
+        <div id="search-container-inline"></div>
         <div id="content-area"></div>
     </main>
 
@@ -557,6 +572,8 @@
         let dateOffset = 0;
         let selectedTrack = 'utland';
         let currentMode = 'results';
+        let matchSearchQuery = '';
+        let isResultsSearchOpen = false;
         let savedScrollPosition = 0;
 
         const masterPlayers = [
@@ -1326,8 +1343,8 @@
                 teamOnly: !!raw.teamOnly,
                 home: raw.homeTeam || raw.home || "",
                 away: raw.awayTeam || raw.away || "",
-                scoreHome: raw.scoreHome ?? raw.homeScore ?? null,
-                scoreAway: raw.scoreAway ?? raw.awayScore ?? null,
+                scoreHome: raw.scoreHome ?? raw.homeScore ?? raw.homeGoals ?? null,
+                scoreAway: raw.scoreAway ?? raw.awayScore ?? raw.awayGoals ?? null,
                 status: raw.status || "Okänd status",
                 rating: raw.rating ?? null,
                 mins: raw.minutesPlayed ?? raw.mins ?? null,
@@ -1375,7 +1392,10 @@
         }
 
         function displayResult(value) {
-            return (value === null || value === undefined || value === "") ? "–" : String(value);
+            if (value === null || value === undefined || value === "") return "–";
+            const s = String(value).trim();
+            if (s === "" || s.toLowerCase() === "null" || s.toLowerCase() === "undefined") return "–";
+            return s;
         }
 
         function displayStat(value, suffix = "") {
@@ -1396,7 +1416,7 @@
                 const btn = document.createElement('button');
                 btn.className = `date-item ${iso === selectedDate ? 'active' : ''}`;
                 btn.textContent = label;
-                btn.onclick = () => { selectedDate = iso; buildDatePicker(); renderContent(); };
+                btn.onclick = () => { selectedDate = iso; matchSearchQuery = ''; buildDatePicker(); renderContent(); };
                 container.appendChild(btn);
             }
         }
@@ -1430,16 +1450,10 @@
         }
         window.addEventListener('load', setupDateSwipe);
 
-        function jumpToDate(iso) {
-            selectedDate = iso;
-            dateOffset = Math.round((new Date(iso + 'T12:00:00Z') - new Date(todayStr + 'T12:00:00Z')) / 86400000);
-            buildDatePicker();
-            renderContent();
-        }
-
         function shiftDates(n) {
             dateOffset += n;
             selectedDate = addDays(todayStr, dateOffset);
+            matchSearchQuery = '';
             buildDatePicker();
             renderContent();
         }
@@ -1447,21 +1461,20 @@
         function goHome() {
             closeModal();
             closeDropdown();
-            goToday();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function goToday() {
             todayStr = swedenToday();
             selectedDate = todayStr;
             dateOffset = 0;
+            matchSearchQuery = '';
+            isResultsSearchOpen = false;
+            document.getElementById('search-container-inline').innerHTML = '';
             buildDatePicker();
             openResultsView();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function syncTrackButtons() {
             document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('active'));
-            if (currentMode === 'search') document.getElementById('track-btn-search')?.classList.add('active');
+            if (isResultsSearchOpen) document.getElementById('track-btn-search')?.classList.add('active');
             else document.getElementById(`track-btn-${selectedTrack}`)?.classList.add('active');
         }
 
@@ -1469,23 +1482,20 @@
             currentMode = 'results';
             document.getElementById('date-picker-bar').style.display = 'flex';
             document.getElementById('track-selector').style.display = 'grid';
-            document.getElementById('results-search-container').style.display = 'block';
-            document.getElementById('view-title').textContent = "RESULTAT & KOMMANDE";
-            document.getElementById('view-desc').textContent = "Tryck på en match för mer information";
+            document.getElementById('view-title').textContent = matchSearchQuery ? `SÖKRESULTAT: "${matchSearchQuery}"` : "RESULTAT & KOMMANDE";
+            document.getElementById('view-desc').textContent = matchSearchQuery ? "Visar matcher inom aktuellt 2-veckorsintervall" : "Tryck på en match för mer information";
             setActiveNav('nav-results');
             syncTrackButtons();
-
-            const searchInput = document.getElementById('results-search-input');
-            if (searchInput && !searchInput.dataset.bound) {
-                searchInput.dataset.bound = "true";
-                searchInput.addEventListener('input', () => renderResults());
-            }
-
             renderResults();
         }
 
         function setTrack(track) {
             selectedTrack = track;
+            if (isResultsSearchOpen) {
+                isResultsSearchOpen = false;
+                document.getElementById('search-container-inline').innerHTML = '';
+                matchSearchQuery = '';
+            }
             if (currentMode !== 'results') { openResultsView(); return; }
             syncTrackButtons();
             renderResults();
@@ -1495,19 +1505,42 @@
             return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         }
 
+        function toggleResultsSearch() {
+            closeDropdown();
+            isResultsSearchOpen = !isResultsSearchOpen;
+            const searchContainer = document.getElementById('search-container-inline');
+            if (isResultsSearchOpen) {
+                currentMode = 'results';
+                searchContainer.innerHTML = `<div class="search-bar-inline"><input type="search" id="match-search-input" class="search-input" placeholder="Sök spelare" autocomplete="off" aria-label="Sök spelare"></div>`;
+                const input = document.getElementById('match-search-input');
+                input.value = matchSearchQuery;
+                input.addEventListener('input', (e) => {
+                    matchSearchQuery = e.target.value;
+                    renderResults();
+                });
+                input.focus();
+            } else {
+                searchContainer.innerHTML = '';
+                matchSearchQuery = '';
+                openResultsView();
+            }
+            syncTrackButtons();
+        }
+
         function openSearchView() {
             closeDropdown();
+            isResultsSearchOpen = false;
+            document.getElementById('search-container-inline').innerHTML = '';
             currentMode = 'search';
             document.getElementById('date-picker-bar').style.display = 'none';
             document.getElementById('track-selector').style.display = 'grid';
-            document.getElementById('results-search-container').style.display = 'none';
-            document.getElementById('view-title').textContent = "SÖK SPELARE";
+            document.getElementById('view-title').textContent = "SÖK SPELARKORT";
             document.getElementById('view-desc').textContent = "Sök på spelare eller lag";
             setActiveNav('nav-sparen');
             syncTrackButtons();
             const area = document.getElementById('content-area');
             area.className = "";
-            area.innerHTML = `<input type="search" id="player-search" class="search-input" placeholder="Sök spelare eller lag…" autocomplete="off" aria-label="Sök spelare"><div id="search-results" class="players-grid"></div>`;
+            area.innerHTML = `<div class="search-bar-inline"><input type="search" id="player-search" class="search-input" placeholder="Sök spelare" autocomplete="off" aria-label="Sök spelarkort"></div><div id="search-results" class="players-grid"></div>`;
             const input = document.getElementById('player-search');
             input.addEventListener('input', () => renderSearchResults(input.value));
             renderSearchResults('');
@@ -1539,11 +1572,13 @@
 
         function selectTrackFromMenu(track) {
             closeDropdown();
+            isResultsSearchOpen = false;
+            document.getElementById('search-container-inline').innerHTML = '';
             currentMode = 'profiles';
             document.getElementById('date-picker-bar').style.display = 'none';
             document.getElementById('track-selector').style.display = 'none';
-            document.getElementById('results-search-container').style.display = 'none';
-            document.getElementById('view-title').textContent = "EX-SIRIUS SPELARKORT";
+            document.getElementById('view-title').textContent = track === 'lane' ? "LÅNESPÅRET" : (track === 'sverige' ? "SVERIGESPÅRET" : "UTLANDSSPÅRET");
+            document.getElementById('view-desc').textContent = "Spelarkort och historik";
             setActiveNav('nav-sparen');
             renderProfiles(track);
         }
@@ -1558,23 +1593,27 @@
                 return;
             }
 
-            const searchInputVal = document.getElementById('results-search-input')?.value || "";
-            const q = normalizeText(searchInputVal).trim();
+            const q = normalizeText(matchSearchQuery).trim();
 
             const filtered = playersData.filter(m => {
                 const matchTrack = (selectedTrack === 'all' || m.track === selectedTrack);
                 if (!matchTrack) return false;
 
                 if (q) {
-                    const matchesSearch = normalizeText([m.player, m.home, m.away, m.league, m.team].join(' ')).includes(q);
-                    return matchesSearch;
+                    const centerDate = selectedDate;
+                    const dMin = addDays(centerDate, -7);
+                    const dMax = addDays(centerDate, 7);
+                    const inRange = m.matchDate >= dMin && m.matchDate <= dMax;
+                    if (!inRange) return false;
+
+                    return normalizeText([m.player, m.home, m.away, m.league, m.team].join(' ')).includes(q);
                 } else {
                     return m.matchDate === selectedDate;
                 }
             });
 
             if (filtered.length === 0) {
-                area.innerHTML = `<div class="empty-state"><p>Inga matcher hittades.</p></div>`;
+                area.innerHTML = `<div class="empty-state"><p>${q ? `Inga matcher hittades för "${matchSearchQuery}" inom ±7 dagar.` : 'Inga matcher för valt datum.'}</p></div>`;
                 return;
             }
 
@@ -1590,6 +1629,10 @@
             const matchList = Object.values(groupedMatches);
 
             matchList.sort((a, b) => {
+                const dateA = a[0].matchDate;
+                const dateB = b[0].matchDate;
+                if (dateA !== dateB) return dateA.localeCompare(dateB);
+
                 const statusOrder = (status) => {
                     if (status.startsWith('Slut')) return 1;
                     if (status === 'Pågår') return 2;
@@ -1858,7 +1901,7 @@
         function renderContent() { if (currentMode === 'results') renderResults(); }
         function setActiveNav(navId) { document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')); document.getElementById(navId)?.classList.add('active'); }
 
-        window.onload = () => { goToday(); loadMatchFeed(); };
+        window.onload = () => { goHome(); loadMatchFeed(); };
     </script>
 </body>
 </html>
