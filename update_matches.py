@@ -300,10 +300,13 @@ def main():
         sys.exit("Ingen spelare kunde hämtas - matches.json lämnas orörd.")
 
     matches = sorted(kept.values(), key=lambda m: (m["matchDate"], m.get("kickoff", ""), m["player"]), reverse=True)
-    out = {"updated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-           "matches": matches, "players": old.get("players", {})}
-OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
-print(f"\nKlart: {len(matches)} matcher skrivna till {OUT.name}")
+    out_data = {
+        "updated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "matches": matches,
+        "players": old.get("players", {})
+    }
+    OUT.write_text(json.dumps(out_data, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"\nKlart: {len(matches)} matcher skrivna till {OUT.name}")
 
 
 if __name__ == "__main__":
