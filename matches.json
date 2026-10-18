@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-18T17:40:51+00:00",
+  "updated": "2026-10-18T18:44:53+00:00",
   "matches": [
     {
       "matchId": "5104935",
@@ -827,7 +827,7 @@
       "home": "Erbil",
       "away": "Al-Mosul",
       "scoreHome": 0,
-      "scoreAway": 0,
+      "scoreAway": 1,
       "status": "Pågår",
       "rating": null,
       "mins": null,
@@ -836,28 +836,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/erbil-vs-al-mosul/ncg9vcpn#6028584"
-    },
-    {
-      "matchId": "5975418",
-      "player": "Kerim Mrabti",
-      "team": "AEK Larnaca",
-      "playerId": "528409",
-      "track": "utland",
-      "league": "Cyprus League",
-      "matchDate": "2026-10-18",
-      "kickoff": "18:00",
-      "home": "Aris Limassol",
-      "away": "AEK Larnaca",
-      "scoreHome": 1,
-      "scoreAway": 0,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/aris-limassol-vs-aek-larnaca/tdmuo#5975418"
     },
     {
       "matchId": "6250908",
@@ -951,6 +929,27 @@
       "bigChances": 1,
       "shotsTarget": 2,
       "touches": 47
+    },
+    {
+      "matchId": "5975418",
+      "player": "Kerim Mrabti",
+      "team": "AEK Larnaca",
+      "playerId": "528409",
+      "track": "utland",
+      "league": "1. Division",
+      "matchDate": "2026-10-18",
+      "home": "Aris Limassol",
+      "away": "AEK Larnaca",
+      "scoreHome": 1,
+      "scoreAway": 1,
+      "status": "Slut",
+      "rating": null,
+      "mins": 90,
+      "goals": 0,
+      "ass": 0,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/aris-limassol-vs-aek-larnaca/tdmuo#5975418"
     },
     {
       "matchId": "5127622",
