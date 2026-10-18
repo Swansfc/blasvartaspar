@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-18T19:38:13+00:00",
+  "updated": "2026-10-18T20:41:37+00:00",
   "matches": [
+    {
+      "matchId": "1000008720",
+      "player": "Isak Ssewankambo",
+      "team": "Vancouver FC",
+      "playerId": "561838",
+      "track": "utland",
+      "league": "Premier League",
+      "matchDate": "2026-10-25",
+      "kickoff": "21:00",
+      "home": "Cavalry FC",
+      "away": "Vancouver FC",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/cavalry-fc-vs-vancouver-fc/12l2txdxx#1000008720"
+    },
     {
       "matchId": "5104935",
       "player": "Stefano Holmquist Vecchia",
@@ -804,7 +826,7 @@
       "kickoff": "21:00",
       "home": "Real Madrid",
       "away": "Sevilla",
-      "scoreHome": 0,
+      "scoreHome": 3,
       "scoreAway": 0,
       "status": "Pågår",
       "rating": null,
