@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-18T11:41:29+00:00",
+  "updated": "2026-10-18T12:48:13+00:00",
   "matches": [
+    {
+      "matchId": "5125664",
+      "player": "Finlay Neat",
+      "team": "Norrby",
+      "playerId": "1782169",
+      "track": "lane",
+      "league": "Superettan",
+      "matchDate": "2026-10-25",
+      "kickoff": "13:00",
+      "home": "Norrby",
+      "away": "IFK Norrköping",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/norrby-vs-ifk-norrkoping/wli1d#5125664"
+    },
     {
       "matchId": "1000017761",
       "player": "Jesper Nyholm",
