@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-18T16:43:42+00:00",
+  "updated": "2026-10-18T17:40:51+00:00",
   "matches": [
     {
       "matchId": "5104935",
@@ -826,9 +826,9 @@
       "kickoff": "18:45",
       "home": "Erbil",
       "away": "Al-Mosul",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
@@ -872,7 +872,8 @@
       "away": "Mamelodi Sundowns FC",
       "scoreHome": 0,
       "scoreAway": 0,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
@@ -894,7 +895,8 @@
       "away": "Ajax",
       "scoreHome": 2,
       "scoreAway": 5,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
@@ -948,7 +950,7 @@
       "matchUrl": "https://www.fotmob.com/matches/new-york-city-fc-vs-los-angeles-fc/cqxxlvy1#5071429",
       "bigChances": 1,
       "shotsTarget": 2,
-      "touches": 46
+      "touches": 47
     },
     {
       "matchId": "5127622",
