@@ -1943,15 +1943,25 @@
             const resH = rawH === '-' ? '–' : rawH;
             const resA = rawA === '-' ? '–' : rawA;
 
+            const topStat = (() => {
+                const n = v => { const x = parseFloat(v); return isNaN(x) ? 0 : x; };
+                if (n(p.bigChances) > 0) return `🔑 Stora chanser skapade: ${p.bigChances}`;
+                if (n(p.chances) > 0) return `📈 Chanser skapade: ${p.chances}`;
+                if (n(p.shotsTarget) > 0) return `🎯 Skott på mål: ${p.shotsTarget}`;
+                if (p.passes) return `📈 Passningar: ${p.passes}`;
+                if (n(p.touches) > 0) return `📈 Bollkontakter: ${p.touches}`;
+                return '';
+            })();
             const xShareText = encodeURIComponent(
-                `📊 BLÅSVARTA SPÅR\n\n` +
-                `${p.player} (${p.team})\n` +
+                `⭐️ BLÅSVARTA SPÅR\n\n` +
+                `${p.player} (${p.team})\n\n` +
                 `📅 ${p.matchDate} | ${p.league}\n` +
                 `⚽ ${p.home} - ${p.away} ${resH}-${resA}\n` +
                 `⭐ Betyg: ${displayStat(p.rating)}\n` +
-                `⏱️ Minuter: ${displayStat(p.mins, "'")}\n` +
+                `⏱️ ${displayStat(p.mins, "'")}\n` +
                 `🎯 Mål: ${p.goals ?? 0} | Ass: ${p.ass ?? 0}\n` +
-                `📈 Chanser: ${displayStat(p.chances)}`
+                (topStat ? `${topStat}\n` : '') +
+                `\nFölj flera spår på https://swansfc.github.io/blasvartaspar/`
             );
             const xShareUrl = `https://twitter.com/intent/tweet?text=${xShareText}`;
 
