@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19T18:55:40+00:00",
+  "updated": "2026-10-19T19:47:45+00:00",
   "matches": [
     {
       "matchId": "5853535",
@@ -828,7 +828,8 @@
       "away": "Abo Qir Semad",
       "scoreHome": 1,
       "scoreAway": 1,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
@@ -836,28 +837,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/al-masry-sc-vs-abo-qir-semad/146nm0pj#5996743"
-    },
-    {
-      "matchId": "5804011",
-      "player": "Filip Majchrowicz",
-      "team": "Radomiak Radom",
-      "playerId": "948374",
-      "track": "utland",
-      "league": "Ekstraklasa",
-      "matchDate": "2026-10-19",
-      "kickoff": "19:00",
-      "home": "Wisła Płock",
-      "away": "Radomiak Radom",
-      "scoreHome": 1,
-      "scoreAway": 0,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-wisa-pock/1mgeqh#5804011"
     },
     {
       "matchId": "5107625",
@@ -881,6 +860,28 @@
       "matchUrl": "https://www.fotmob.com/matches/degerfors-vs-kalmar-ff/28ffgm#5107625",
       "shotsTarget": 2,
       "touches": 43
+    },
+    {
+      "matchId": "5804011",
+      "player": "Filip Majchrowicz",
+      "team": "Radomiak Radom",
+      "playerId": "948374",
+      "track": "utland",
+      "league": "Ekstraklasa",
+      "matchDate": "2026-10-19",
+      "home": "Wisła Płock",
+      "away": "Radomiak Radom",
+      "scoreHome": 1,
+      "scoreAway": 0,
+      "status": "Slut",
+      "rating": 5.9,
+      "mins": 90,
+      "goals": 0,
+      "ass": 0,
+      "passes": "17/23",
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-wisa-pock/1mgeqh#5804011",
+      "touches": 30
     },
     {
       "matchId": "5071440",
