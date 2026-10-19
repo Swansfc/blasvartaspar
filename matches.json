@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-19T19:47:45+00:00",
+  "updated": "2026-10-19T20:44:40+00:00",
   "matches": [
+    {
+      "matchId": "5868109",
+      "player": "Robbie Ure",
+      "team": "Sevilla",
+      "playerId": "1399218",
+      "track": "utland",
+      "league": "LaLiga",
+      "matchDate": "2026-10-26",
+      "kickoff": "21:00",
+      "home": "Sevilla",
+      "away": "Osasuna",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/sevilla-vs-osasuna/2arhpg#5868109"
+    },
     {
       "matchId": "5853535",
       "player": "Joeri de Kamps",
