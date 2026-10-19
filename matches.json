@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-19T00:58:07+00:00",
+  "updated": "2026-10-19T01:46:39+00:00",
   "matches": [
+    {
+      "matchId": "5071455",
+      "player": "Leo Walta",
+      "team": "Los Angeles FC",
+      "playerId": "1276686",
+      "track": "utland",
+      "league": "Major League Soccer",
+      "matchDate": "2026-10-26",
+      "kickoff": "02:00",
+      "home": "LAFC",
+      "away": "LA Galaxy",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/la-galaxy-vs-los-angeles-fc/4vfdm25v#5071455"
+    },
     {
       "matchId": "1000008720",
       "player": "Isak Ssewankambo",
