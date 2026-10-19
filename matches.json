@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-18T23:36:37+00:00",
+  "updated": "2026-10-19T00:58:07+00:00",
   "matches": [
     {
       "matchId": "1000008720",
@@ -806,7 +806,8 @@
       "away": "Columbus",
       "scoreHome": 0,
       "scoreAway": 2,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
