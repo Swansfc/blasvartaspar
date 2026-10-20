@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-20T14:46:56+00:00",
+  "updated": "2026-10-20T15:47:22+00:00",
   "matches": [
+    {
+      "matchId": "6176260",
+      "player": "Benjamin Mbunga Kimpioka",
+      "team": "Asteras Tripolis",
+      "playerId": "961305",
+      "track": "utland",
+      "league": "Cup Group Stage",
+      "matchDate": "2026-10-27",
+      "kickoff": "16:30",
+      "home": "Asteras Tripolis",
+      "away": "Kifisia FC",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/asteras-tripolis-vs-kifisia-fc/22aw12qf#6176260"
+    },
     {
       "matchId": "5868109",
       "player": "Robbie Ure",
