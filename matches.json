@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-20T17:44:02+00:00",
+  "updated": "2026-10-20T18:52:18+00:00",
   "matches": [
     {
       "matchId": "6176260",
@@ -1394,10 +1394,10 @@
       "mins": 90,
       "goals": 0,
       "ass": 0,
-      "passes": "25/30",
+      "passes": "26/31",
       "chances": 2,
       "matchUrl": "https://www.fotmob.com/matches/vejle-boldklub-vs-aab/2b1ibd#5764508",
-      "touches": 44
+      "touches": 45
     },
     {
       "matchId": "1000017751",
@@ -1738,29 +1738,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/krasava-ypsonas-fc-vs-spartakos-kitiou/1bwvbaxq0#6384114"
-    },
-    {
-      "matchId": "5836865",
-      "player": "Yousef Salech",
-      "team": "Cardiff City",
-      "playerId": "1183360",
-      "track": "utland",
-      "league": "Championship",
-      "matchDate": "2026-10-13",
-      "kickoff": "20:45",
-      "home": "Cardiff",
-      "away": "Watford",
-      "scoreHome": 5,
-      "scoreAway": 1,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/cardiff-city-vs-watford/2q70oy#5836865"
     },
     {
       "matchId": "5955106",
