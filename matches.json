@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-21T14:46:51+00:00",
+  "updated": "2026-10-21T15:49:33+00:00",
   "matches": [
     {
       "matchId": "5996752",
@@ -889,12 +889,12 @@
       "track": "utland",
       "league": "Cup",
       "matchDate": "2026-10-21",
-      "kickoff": "18:00",
+      "kickoff": "16:00",
       "home": "AEK Larnaca",
       "away": "Akritas Chlorakas",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 1,
+      "scoreAway": 1,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
