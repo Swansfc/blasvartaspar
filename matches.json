@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-21T13:53:39+00:00",
+  "updated": "2026-10-21T14:46:51+00:00",
   "matches": [
+    {
+      "matchId": "5996752",
+      "player": "Moustafa Zeidan",
+      "team": "Al Masry SC",
+      "playerId": "767777",
+      "track": "utland",
+      "league": "Premier League",
+      "matchDate": "2026-10-28",
+      "kickoff": "15:00",
+      "home": "National Bank",
+      "away": "Al Masry SC",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/al-masry-sc-vs-national-bank/3z91lqbo#5996752"
+    },
     {
       "matchId": "1000022602",
       "player": "Tashreeq Matthews",
