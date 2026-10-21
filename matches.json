@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-21T17:44:54+00:00",
+  "updated": "2026-10-21T18:54:00+00:00",
   "matches": [
+    {
+      "matchId": "5107642",
+      "player": "Noel Milleskog",
+      "team": "Degerfors",
+      "playerId": "1127365",
+      "track": "lane",
+      "league": "Allsvenskan",
+      "matchDate": "2026-10-28",
+      "kickoff": "19:00",
+      "home": "Degerfors",
+      "away": "Västerås SK",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/vasteras-sk-vs-degerfors/1cb4z7#5107642"
+    },
     {
       "matchId": "6284091",
       "player": "Stefano Holmquist Vecchia",
