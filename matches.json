@@ -1,6 +1,50 @@
 {
-  "updated": "2026-10-21T16:45:50+00:00",
+  "updated": "2026-10-21T17:44:54+00:00",
   "matches": [
+    {
+      "matchId": "6284091",
+      "player": "Stefano Holmquist Vecchia",
+      "team": "Aalesund",
+      "playerId": "493159",
+      "track": "utland",
+      "league": "Cup",
+      "matchDate": "2026-10-28",
+      "kickoff": "18:00",
+      "home": "Kristiansund",
+      "away": "Aalesund",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/aalesund-vs-kristiansund/2e4s7a#6284091"
+    },
+    {
+      "matchId": "6280509",
+      "player": "Filip Majchrowicz",
+      "team": "Radomiak Radom",
+      "playerId": "948374",
+      "track": "utland",
+      "league": "FA Cup",
+      "matchDate": "2026-10-28",
+      "kickoff": "18:00",
+      "home": "Avia Świdnik",
+      "away": "Radomiak Radom",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-avia-swidnik/28bypyzh#6280509"
+    },
     {
       "matchId": "5944200",
       "player": "Joseph Colley",
@@ -909,18 +953,17 @@
       "team": "AEK Larnaca",
       "playerId": "528409",
       "track": "utland",
-      "league": "Cup",
+      "league": "Cyprus Cup",
       "matchDate": "2026-10-21",
-      "kickoff": "16:00",
       "home": "AEK Larnaca",
       "away": "Akritas Chlorakas",
-      "scoreHome": 1,
-      "scoreAway": 1,
-      "status": "Pågår",
+      "scoreHome": 3,
+      "scoreAway": 2,
+      "status": "Slut",
       "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
+      "mins": 120,
+      "goals": 0,
+      "ass": 0,
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/aek-larnaca-vs-akritas-chlorakas/8i558zv#6384117"
@@ -991,7 +1034,7 @@
       "passes": "17/23",
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-wisa-pock/1mgeqh#5804011",
-      "touches": 30
+      "touches": 31
     },
     {
       "matchId": "5071440",
@@ -1527,11 +1570,11 @@
       "mins": 32,
       "goals": 1,
       "ass": 0,
-      "passes": "9/11",
+      "passes": "10/12",
       "chances": 1,
       "matchUrl": "https://www.fotmob.com/matches/ac-oulu-vs-fc-inter-turku/100qwq#6145882",
       "shotsTarget": 1,
-      "touches": 29
+      "touches": 28
     },
     {
       "matchId": "1000021901",
@@ -1640,11 +1683,11 @@
       "mins": 90,
       "goals": 0,
       "ass": 0,
-      "passes": "17/25",
+      "passes": "16/23",
       "chances": 0,
       "matchUrl": "https://www.fotmob.com/matches/vikingur-reykjavik-vs-breiablik/1pauav#1000021885",
       "shotsTarget": 1,
-      "touches": 42
+      "touches": 43
     },
     {
       "matchId": "5764511",
@@ -1709,10 +1752,10 @@
       "mins": 24,
       "goals": 0,
       "ass": 0,
-      "passes": "6/7",
+      "passes": "7/8",
       "chances": 0,
       "matchUrl": "https://www.fotmob.com/matches/vikingur-reykjavik-vs-breiablik/1pauav#1000021885",
-      "touches": 18
+      "touches": 17
     },
     {
       "matchId": "5071412",
