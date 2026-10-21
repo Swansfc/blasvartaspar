@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-21T12:56:42+00:00",
+  "updated": "2026-10-21T13:53:39+00:00",
   "matches": [
     {
       "matchId": "1000022602",
@@ -1716,29 +1716,6 @@
       "bigChances": 2,
       "shotsTarget": 2,
       "touches": 51
-    },
-    {
-      "matchId": "6277381",
-      "player": "Patrick Nwadike",
-      "team": "Spartak Trnava",
-      "playerId": "1109472",
-      "track": "utland",
-      "league": "FA Cup",
-      "matchDate": "2026-10-14",
-      "kickoff": "15:00",
-      "home": "PFK Piešťany",
-      "away": "Spartak Trnava",
-      "scoreHome": 0,
-      "scoreAway": 2,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/spartak-trnava-vs-pfk-piestany/25oq7vw8#6277381"
     },
     {
       "matchId": "6384114",
