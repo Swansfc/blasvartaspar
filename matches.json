@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-21T22:45:50+00:00",
+  "updated": "2026-10-21T23:42:51+00:00",
   "matches": [
     {
       "matchId": "5107642",
@@ -1778,29 +1778,6 @@
       "chances": 0,
       "matchUrl": "https://www.fotmob.com/matches/vikingur-reykjavik-vs-breiablik/1pauav#1000021885",
       "touches": 17
-    },
-    {
-      "matchId": "5071412",
-      "player": "Wessam Abou Ali",
-      "team": "Columbus Crew",
-      "playerId": "919036",
-      "track": "utland",
-      "league": "Major League Soccer",
-      "matchDate": "2026-10-15",
-      "kickoff": "01:30",
-      "home": "Columbus",
-      "away": "Charlotte FC",
-      "scoreHome": 3,
-      "scoreAway": 1,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/columbus-crew-vs-charlotte-fc/ba9wdivs#5071412"
     },
     {
       "matchId": "5071421",
