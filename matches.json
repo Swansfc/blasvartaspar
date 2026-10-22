@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-22T14:49:18+00:00",
+  "updated": "2026-10-22T15:47:47+00:00",
   "matches": [
+    {
+      "matchId": "6093736",
+      "player": "Joeri de Kamps",
+      "team": "Sepsi OSK",
+      "playerId": "293718",
+      "track": "utland",
+      "league": "Cup Grp. B",
+      "matchDate": "2026-10-29",
+      "kickoff": "16:00",
+      "home": "Concordia Chiajna",
+      "away": "Sepsi OSK",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/concordia-chiajna-vs-sepsi-osk/3suv82iw#6093736"
+    },
     {
       "matchId": "6298364",
       "player": "Magnus Kaastrup",
