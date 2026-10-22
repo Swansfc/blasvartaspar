@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-22T10:47:00+00:00",
+  "updated": "2026-10-22T11:46:55+00:00",
   "matches": [
     {
       "matchId": "5071463",
@@ -958,9 +958,9 @@
       "kickoff": "13:00",
       "home": "Prachuap FC",
       "away": "Nonthaburi United",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
