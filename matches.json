@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-22T02:46:13+00:00",
+  "updated": "2026-10-22T03:47:33+00:00",
   "matches": [
     {
       "matchId": "5071463",
@@ -982,7 +982,8 @@
       "away": "St. Louis City",
       "scoreHome": 0,
       "scoreAway": 0,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
