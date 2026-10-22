@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-22T21:43:06+00:00",
+  "updated": "2026-10-22T22:43:55+00:00",
   "matches": [
     {
       "matchId": "6428918",
@@ -1934,30 +1934,6 @@
       "chances": 0,
       "matchUrl": "https://www.fotmob.com/matches/vikingur-reykjavik-vs-breiablik/1pauav#1000021885",
       "touches": 17
-    },
-    {
-      "matchId": "5071421",
-      "player": "Leo Walta",
-      "team": "Los Angeles FC",
-      "playerId": "1276686",
-      "track": "utland",
-      "league": "MLS",
-      "matchDate": "2026-10-15",
-      "home": "Los Angeles FC",
-      "away": "Austin FC",
-      "scoreHome": 3,
-      "scoreAway": 1,
-      "status": "Slut",
-      "rating": 8.2,
-      "mins": 85,
-      "goals": 0,
-      "ass": 0,
-      "passes": "25/28",
-      "chances": 4,
-      "matchUrl": "https://www.fotmob.com/matches/los-angeles-fc-vs-austin-fc/rrntq1xp#5071421",
-      "bigChances": 2,
-      "shotsTarget": 2,
-      "touches": 51
     }
   ],
   "players": {}
