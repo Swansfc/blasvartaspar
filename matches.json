@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T19:44:13+00:00",
+  "updated": "2026-10-23T20:47:37+00:00",
   "matches": [
     {
       "matchId": "6028600",
@@ -1026,7 +1026,8 @@
       "away": "Wiliete Benguela",
       "scoreHome": 1,
       "scoreAway": 1,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
