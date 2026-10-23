@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T10:45:05+00:00",
+  "updated": "2026-10-23T11:48:08+00:00",
   "matches": [
     {
       "matchId": "6428918",
@@ -990,28 +990,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/fc-inter-turku-vs-vps/1fglnj#6145884"
-    },
-    {
-      "matchId": "5811786",
-      "player": "Jamie Roche",
-      "team": "Kortrijk",
-      "playerId": "1129082",
-      "track": "utland",
-      "league": "Belgian Pro League",
-      "matchDate": "2026-10-23",
-      "kickoff": "20:45",
-      "home": "Kortrijk",
-      "away": "KV Mechelen",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/kv-mechelen-vs-kortrijk/2brp74#5811786"
     },
     {
       "matchId": "6250916",
