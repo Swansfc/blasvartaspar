@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T18:54:07+00:00",
+  "updated": "2026-10-23T19:44:13+00:00",
   "matches": [
     {
       "matchId": "6028600",
@@ -1025,7 +1025,7 @@
       "home": "Mamelodi Sundowns FC",
       "away": "Wiliete Benguela",
       "scoreHome": 1,
-      "scoreAway": 0,
+      "scoreAway": 1,
       "status": "Pågår",
       "rating": null,
       "mins": null,
