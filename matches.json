@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T16:49:37+00:00",
+  "updated": "2026-10-23T17:44:32+00:00",
   "matches": [
     {
       "matchId": "6028600",
@@ -1070,7 +1070,8 @@
       "away": "Al-Mosul",
       "scoreHome": 1,
       "scoreAway": 1,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
@@ -1818,29 +1819,6 @@
       "matchUrl": "https://www.fotmob.com/matches/fredericia-vs-hobro/2su8uw#5764507",
       "shotsTarget": 0,
       "touches": 34
-    },
-    {
-      "matchId": "1000021902",
-      "player": "Tobias Carlsson",
-      "team": "FH Hafnarfjörður",
-      "playerId": "1016540",
-      "track": "utland",
-      "league": "Besta deildin",
-      "matchDate": "2026-10-16",
-      "kickoff": "19:00",
-      "home": "ÍBV Vestmannaeyjar",
-      "away": "FH Hafnarfjörður",
-      "scoreHome": 3,
-      "scoreAway": 1,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/fh-hafnarfjorur-vs-ibv-vestmannaeyjar/28kbv2#1000021902"
     },
     {
       "matchId": "1000021885",
