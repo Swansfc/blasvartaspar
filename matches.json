@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T14:51:17+00:00",
+  "updated": "2026-10-23T15:50:44+00:00",
   "matches": [
     {
       "matchId": "6428918",
@@ -1046,9 +1046,9 @@
       "kickoff": "17:00",
       "home": "Al Karkh",
       "away": "Al-Mosul",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 1,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
