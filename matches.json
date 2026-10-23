@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T02:44:48+00:00",
+  "updated": "2026-10-23T03:47:10+00:00",
   "matches": [
     {
       "matchId": "6428918",
@@ -1615,11 +1615,9 @@
       "mins": 10,
       "goals": 0,
       "ass": 0,
-      "passes": "7/7",
-      "chances": 0,
-      "matchUrl": "https://www.fotmob.com/matches/aalesund-vs-kristiansund/2e4s7a#5105028",
-      "shotsTarget": 0,
-      "touches": 14
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/aalesund-vs-kristiansund/2e4s7a#5105028"
     },
     {
       "matchId": "5772199",
