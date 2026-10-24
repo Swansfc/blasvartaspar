@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24T19:39:27+00:00",
+  "updated": "2026-10-24T20:41:48+00:00",
   "matches": [
     {
       "matchId": "5955115",
@@ -826,9 +826,9 @@
       "kickoff": "21:30",
       "home": "Columbus",
       "away": "Toronto",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 2,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
