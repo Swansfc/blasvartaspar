@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24T18:46:44+00:00",
+  "updated": "2026-10-24T19:39:27+00:00",
   "matches": [
     {
       "matchId": "5955115",
@@ -849,8 +849,9 @@
       "home": "Farense",
       "away": "Penafiel",
       "scoreHome": 1,
-      "scoreAway": 3,
-      "status": "Pågår",
+      "scoreAway": 4,
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
@@ -1117,14 +1118,14 @@
       "scoreHome": 4,
       "scoreAway": 1,
       "status": "Slut",
-      "rating": 5.4,
+      "rating": 5.5,
       "mins": 90,
       "goals": 0,
       "ass": 0,
-      "passes": "35/45",
+      "passes": "40/53",
       "chances": 0,
       "matchUrl": "https://www.fotmob.com/matches/burnley-vs-lincoln-city/2a8xsp#5836890",
-      "touches": 59
+      "touches": 68
     },
     {
       "matchId": "6145884",
