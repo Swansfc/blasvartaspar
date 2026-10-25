@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-25T19:38:11+00:00",
+  "updated": "2026-10-25T20:41:51+00:00",
   "matches": [
     {
       "matchId": "5943287",
@@ -958,9 +958,9 @@
       "kickoff": "21:00",
       "home": "Cavalry FC",
       "away": "Vancouver FC",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
