@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-25T21:43:34+00:00",
+  "updated": "2026-10-25T22:41:09+00:00",
   "matches": [
     {
       "matchId": "5943287",
@@ -948,28 +948,6 @@
       "matchUrl": "https://www.fotmob.com/matches/la-galaxy-vs-los-angeles-fc/4vfdm25v#5071455"
     },
     {
-      "matchId": "1000008720",
-      "player": "Isak Ssewankambo",
-      "team": "Vancouver FC",
-      "playerId": "561838",
-      "track": "utland",
-      "league": "Premier League",
-      "matchDate": "2026-10-25",
-      "kickoff": "21:00",
-      "home": "Cavalry FC",
-      "away": "Vancouver FC",
-      "scoreHome": 0,
-      "scoreAway": 0,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/cavalry-fc-vs-vancouver-fc/12l2txdxx#1000008720"
-    },
-    {
       "matchId": "5781777",
       "player": "Malcolm Jeng",
       "team": "FC Groningen",
@@ -1035,6 +1013,28 @@
       "chances": 0,
       "matchUrl": "https://www.fotmob.com/matches/bangkok-united-vs-prachuap-fc/30hocz3h#1000017761",
       "touches": 32
+    },
+    {
+      "matchId": "1000008720",
+      "player": "Isak Ssewankambo",
+      "team": "Vancouver FC",
+      "playerId": "561838",
+      "track": "utland",
+      "league": "Premier League",
+      "matchDate": "2026-10-25",
+      "home": "Cavalry FC",
+      "away": "Vancouver FC",
+      "scoreHome": 1,
+      "scoreAway": 0,
+      "status": "Slut",
+      "rating": 7.1,
+      "mins": 90,
+      "goals": 0,
+      "ass": 0,
+      "passes": "40/47",
+      "chances": 1,
+      "matchUrl": "https://www.fotmob.com/matches/cavalry-fc-vs-vancouver-fc/12l2txdxx#1000008720",
+      "touches": 62
     },
     {
       "matchId": "5125664",
