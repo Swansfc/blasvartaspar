@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-25T10:44:02+00:00",
+  "updated": "2026-10-25T11:43:39+00:00",
   "matches": [
     {
       "matchId": "5955115",
@@ -804,9 +804,9 @@
       "kickoff": "12:00",
       "home": "Prachuap FC",
       "away": "Bangkok United",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
