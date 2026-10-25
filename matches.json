@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-25T17:41:37+00:00",
+  "updated": "2026-10-25T18:47:17+00:00",
   "matches": [
     {
       "matchId": "5943287",
@@ -970,28 +970,6 @@
       "matchUrl": "https://www.fotmob.com/matches/cavalry-fc-vs-vancouver-fc/12l2txdxx#1000008720"
     },
     {
-      "matchId": "5104935",
-      "player": "Stefano Holmquist Vecchia",
-      "team": "Aalesund",
-      "playerId": "493159",
-      "track": "utland",
-      "league": "Eliteserien",
-      "matchDate": "2026-10-25",
-      "kickoff": "17:00",
-      "home": "Sarpsborg 08",
-      "away": "Aalesund",
-      "scoreHome": 0,
-      "scoreAway": 1,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/aalesund-vs-sarpsborg-08/2d5vpy#5104935"
-    },
-    {
       "matchId": "5781777",
       "player": "Malcolm Jeng",
       "team": "FC Groningen",
@@ -1013,6 +991,28 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/nec-nijmegen-vs-fc-groningen/2ffzr1#5781777"
+    },
+    {
+      "matchId": "5104935",
+      "player": "Stefano Holmquist Vecchia",
+      "team": "Aalesund",
+      "playerId": "493159",
+      "track": "utland",
+      "league": "Eliteserien",
+      "matchDate": "2026-10-25",
+      "home": "Sarpsborg 08",
+      "away": "Aalesund",
+      "scoreHome": 2,
+      "scoreAway": 1,
+      "status": "Slut",
+      "rating": 6.4,
+      "mins": 40,
+      "goals": 0,
+      "ass": 0,
+      "passes": "4/6",
+      "chances": 0,
+      "matchUrl": "https://www.fotmob.com/matches/aalesund-vs-sarpsborg-08/2d5vpy#5104935",
+      "touches": 12
     },
     {
       "matchId": "1000017761",
