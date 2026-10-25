@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-25T06:55:21+00:00",
+  "updated": "2026-10-25T07:48:05+00:00",
   "matches": [
     {
       "matchId": "5955115",
@@ -266,28 +266,6 @@
       "matchUrl": "https://www.fotmob.com/matches/fredericia-vs-ab/2r99pn#5764519"
     },
     {
-      "matchId": "6028600",
-      "player": "André Alsanati",
-      "team": "Al-Mosul",
-      "playerId": "1022484",
-      "track": "utland",
-      "league": "Stars League",
-      "matchDate": "2026-10-30",
-      "kickoff": "17:00",
-      "home": "Al-Mosul",
-      "away": "Al-Jolan SC",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/al-mosul-vs-al-jolan-sc/2rdr2ttup#6028600"
-    },
-    {
       "matchId": "6428918",
       "player": "Robbie Ure",
       "team": "Sevilla",
@@ -396,6 +374,28 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/concordia-chiajna-vs-sepsi-osk/3suv82iw#6093736"
+    },
+    {
+      "matchId": "6028600",
+      "player": "André Alsanati",
+      "team": "Al-Mosul",
+      "playerId": "1022484",
+      "track": "utland",
+      "league": "Stars League",
+      "matchDate": "2026-10-29",
+      "kickoff": "14:00",
+      "home": "Al-Mosul",
+      "away": "Al-Jolan SC",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/al-mosul-vs-al-jolan-sc/2rdr2ttup#6028600"
     },
     {
       "matchId": "6298364",
