@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T22:46:44+00:00",
+  "updated": "2026-10-26T23:43:04+00:00",
   "matches": [
     {
       "matchId": "5804026",
@@ -1749,51 +1749,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/aek-larnaca-vs-akritas-chlorakas/8i558zv#6384117"
-    },
-    {
-      "matchId": "5107625",
-      "player": "Noel Milleskog",
-      "team": "Degerfors",
-      "playerId": "1127365",
-      "track": "lane",
-      "league": "Allsvenskan",
-      "matchDate": "2026-10-19",
-      "home": "Degerfors",
-      "away": "Kalmar FF",
-      "scoreHome": 1,
-      "scoreAway": 2,
-      "status": "Slut",
-      "rating": 6.9,
-      "mins": 65,
-      "goals": 0,
-      "ass": 0,
-      "passes": "18/24",
-      "chances": 1,
-      "matchUrl": "https://www.fotmob.com/matches/degerfors-vs-kalmar-ff/28ffgm#5107625",
-      "shotsTarget": 2,
-      "touches": 44
-    },
-    {
-      "matchId": "5804011",
-      "player": "Filip Majchrowicz",
-      "team": "Radomiak Radom",
-      "playerId": "948374",
-      "track": "utland",
-      "league": "Ekstraklasa",
-      "matchDate": "2026-10-19",
-      "home": "Wisła Płock",
-      "away": "Radomiak Radom",
-      "scoreHome": 1,
-      "scoreAway": 0,
-      "status": "Slut",
-      "rating": 5.9,
-      "mins": 90,
-      "goals": 0,
-      "ass": 0,
-      "passes": "17/23",
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-wisa-pock/1mgeqh#5804011",
-      "touches": 31
     }
   ],
   "players": {}
