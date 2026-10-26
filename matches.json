@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T21:46:01+00:00",
+  "updated": "2026-10-26T22:46:44+00:00",
   "matches": [
     {
       "matchId": "5804026",
@@ -926,28 +926,6 @@
       "matchUrl": "https://www.fotmob.com/matches/asteras-tripolis-vs-kifisia-fc/22aw12qf#6176260"
     },
     {
-      "matchId": "5868109",
-      "player": "Robbie Ure",
-      "team": "Sevilla",
-      "playerId": "1399218",
-      "track": "utland",
-      "league": "LaLiga",
-      "matchDate": "2026-10-26",
-      "kickoff": "21:00",
-      "home": "Sevilla",
-      "away": "Osasuna",
-      "scoreHome": 1,
-      "scoreAway": 0,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/sevilla-vs-osasuna/2arhpg#5868109"
-    },
-    {
       "matchId": "5853535",
       "player": "Joeri de Kamps",
       "team": "Sepsi OSK",
@@ -992,6 +970,29 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/zalgiris-vilnius-vs-fk-kauno-zalgiris/198adphe#5900578"
+    },
+    {
+      "matchId": "5868109",
+      "player": "Robbie Ure",
+      "team": "Sevilla",
+      "playerId": "1399218",
+      "track": "utland",
+      "league": "LaLiga",
+      "matchDate": "2026-10-26",
+      "home": "Sevilla",
+      "away": "Osasuna",
+      "scoreHome": 2,
+      "scoreAway": 0,
+      "status": "Slut",
+      "rating": 5.9,
+      "mins": 27,
+      "goals": 0,
+      "ass": 0,
+      "passes": "6/7",
+      "chances": 0,
+      "matchUrl": "https://www.fotmob.com/matches/sevilla-vs-osasuna/2arhpg#5868109",
+      "shotsTarget": 0,
+      "touches": 15
     },
     {
       "matchId": "5071455",
