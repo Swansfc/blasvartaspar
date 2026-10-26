@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T19:52:43+00:00",
+  "updated": "2026-10-26T20:48:56+00:00",
   "matches": [
     {
       "matchId": "5804026",
@@ -936,9 +936,9 @@
       "kickoff": "21:00",
       "home": "Sevilla",
       "away": "Osasuna",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 1,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
@@ -960,7 +960,8 @@
       "away": "Universitatea Craiova",
       "scoreHome": 0,
       "scoreAway": 5,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
