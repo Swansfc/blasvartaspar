@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T02:49:09+00:00",
+  "updated": "2026-10-26T03:49:14+00:00",
   "matches": [
     {
       "matchId": "5071482",
@@ -953,21 +953,22 @@
       "team": "Los Angeles FC",
       "playerId": "1276686",
       "track": "utland",
-      "league": "Major League Soccer",
+      "league": "MLS",
       "matchDate": "2026-10-26",
-      "kickoff": "02:00",
-      "home": "LAFC",
+      "home": "Los Angeles FC",
       "away": "LA Galaxy",
       "scoreHome": 2,
       "scoreAway": 2,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/la-galaxy-vs-los-angeles-fc/4vfdm25v#5071455"
+      "status": "Slut",
+      "rating": 7.9,
+      "mins": 82,
+      "goals": 1,
+      "ass": 0,
+      "passes": "24/26",
+      "chances": 1,
+      "matchUrl": "https://www.fotmob.com/matches/la-galaxy-vs-los-angeles-fc/4vfdm25v#5071455",
+      "shotsTarget": 1,
+      "touches": 46
     },
     {
       "matchId": "5781777",
