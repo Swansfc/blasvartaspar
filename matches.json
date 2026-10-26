@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T10:52:01+00:00",
+  "updated": "2026-10-26T12:41:12+00:00",
   "matches": [
     {
       "matchId": "5071482",
@@ -684,6 +684,28 @@
       "matchUrl": "https://www.fotmob.com/matches/aarhus-fremad-vs-fc-kobenhavn/291zk9#6298364"
     },
     {
+      "matchId": "6280509",
+      "player": "Filip Majchrowicz",
+      "team": "Radomiak Radom",
+      "playerId": "948374",
+      "track": "utland",
+      "league": "FA Cup",
+      "matchDate": "2026-10-29",
+      "kickoff": "12:30",
+      "home": "Avia Świdnik",
+      "away": "Radomiak Radom",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-avia-swidnik/28bypyzh#6280509"
+    },
+    {
       "matchId": "5071463",
       "player": "Wessam Abou Ali",
       "team": "Columbus Crew",
@@ -748,28 +770,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/aalesund-vs-kristiansund/2e4s7a#6284091"
-    },
-    {
-      "matchId": "6280509",
-      "player": "Filip Majchrowicz",
-      "team": "Radomiak Radom",
-      "playerId": "948374",
-      "track": "utland",
-      "league": "FA Cup",
-      "matchDate": "2026-10-28",
-      "kickoff": "18:00",
-      "home": "Avia Świdnik",
-      "away": "Radomiak Radom",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-avia-swidnik/28bypyzh#6280509"
     },
     {
       "matchId": "5944200",
@@ -1722,11 +1722,11 @@
       "mins": 65,
       "goals": 0,
       "ass": 0,
-      "passes": "17/23",
+      "passes": "18/24",
       "chances": 1,
       "matchUrl": "https://www.fotmob.com/matches/degerfors-vs-kalmar-ff/28ffgm#5107625",
       "shotsTarget": 2,
-      "touches": 43
+      "touches": 44
     },
     {
       "matchId": "5804011",
