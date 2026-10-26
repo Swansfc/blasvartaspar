@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-26T01:08:54+00:00",
+  "updated": "2026-10-26T01:55:16+00:00",
   "matches": [
+    {
+      "matchId": "5071482",
+      "player": "Leo Walta",
+      "team": "Los Angeles FC",
+      "playerId": "1276686",
+      "track": "utland",
+      "league": "Major League Soccer",
+      "matchDate": "2026-11-02",
+      "kickoff": "02:30",
+      "home": "LAFC",
+      "away": "Minnesota",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/minnesota-united-vs-los-angeles-fc/7d7hm53j#5071482"
+    },
     {
       "matchId": "5943287",
       "player": "Benjamin Mbunga Kimpioka",
