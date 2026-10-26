@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T19:00:19+00:00",
+  "updated": "2026-10-26T19:52:43+00:00",
   "matches": [
     {
       "matchId": "5804026",
@@ -959,7 +959,7 @@
       "home": "Sepsi OSK",
       "away": "Universitatea Craiova",
       "scoreHome": 0,
-      "scoreAway": 2,
+      "scoreAway": 5,
       "status": "Pågår",
       "rating": null,
       "mins": null,
@@ -968,28 +968,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/universitatea-craiova-vs-sepsi-osk/7819yl3q#5853535"
-    },
-    {
-      "matchId": "5975424",
-      "player": "Kerim Mrabti",
-      "team": "AEK Larnaca",
-      "playerId": "528409",
-      "track": "utland",
-      "league": "Cyprus League",
-      "matchDate": "2026-10-26",
-      "kickoff": "18:00",
-      "home": "AEK Larnaca",
-      "away": "Omonia Nicosia",
-      "scoreHome": 2,
-      "scoreAway": 0,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/aek-larnaca-vs-omonia-nicosia/22pkjh#5975424"
     },
     {
       "matchId": "5900578",
@@ -1036,6 +1014,27 @@
       "matchUrl": "https://www.fotmob.com/matches/la-galaxy-vs-los-angeles-fc/4vfdm25v#5071455",
       "shotsTarget": 1,
       "touches": 47
+    },
+    {
+      "matchId": "5975424",
+      "player": "Kerim Mrabti",
+      "team": "AEK Larnaca",
+      "playerId": "528409",
+      "track": "utland",
+      "league": "1. Division",
+      "matchDate": "2026-10-26",
+      "home": "AEK Larnaca",
+      "away": "Omonia Nicosia",
+      "scoreHome": 2,
+      "scoreAway": 0,
+      "status": "Slut",
+      "rating": null,
+      "mins": 25,
+      "goals": 0,
+      "ass": 0,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/aek-larnaca-vs-omonia-nicosia/22pkjh#5975424"
     },
     {
       "matchId": "5781777",
