@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T19:51:31+00:00",
+  "updated": "2026-10-27T20:48:34+00:00",
   "matches": [
     {
       "matchId": "5836915",
@@ -914,9 +914,10 @@
       "kickoff": "18:00",
       "home": "Mamelodi Sundowns FC",
       "away": "Marumo Gallants",
-      "scoreHome": 0,
+      "scoreHome": 1,
       "scoreAway": 0,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
@@ -1373,9 +1374,9 @@
       "goals": 0,
       "ass": 0,
       "passes": "19/23",
-      "chances": 2,
+      "chances": 3,
       "matchUrl": "https://www.fotmob.com/matches/aarhus-fremad-vs-vejle-boldklub/27ho7t#5764515",
-      "touches": 50
+      "touches": 51
     },
     {
       "matchId": "5975434",
@@ -1415,10 +1416,10 @@
       "mins": 90,
       "goals": 0,
       "ass": 0,
-      "passes": "30/34",
+      "passes": "30/35",
       "chances": 3,
       "matchUrl": "https://www.fotmob.com/matches/aarhus-fremad-vs-vejle-boldklub/27ho7t#5764515",
-      "touches": 55
+      "touches": 56
     },
     {
       "matchId": "5127633",
