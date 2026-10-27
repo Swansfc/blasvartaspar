@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-27T18:56:37+00:00",
+  "updated": "2026-10-27T19:51:31+00:00",
   "matches": [
+    {
+      "matchId": "5836915",
+      "player": "Hjalmar Ekdal",
+      "team": "Burnley",
+      "playerId": "831044",
+      "track": "utland",
+      "league": "Championship",
+      "matchDate": "2026-11-03",
+      "kickoff": "20:45",
+      "home": "QPR",
+      "away": "Burnley",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/burnley-vs-queens-park-rangers/2se1wp#5836915"
+    },
     {
       "matchId": "5804026",
       "player": "Filip Majchrowicz",
