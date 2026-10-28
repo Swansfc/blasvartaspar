@@ -1,28 +1,6 @@
 {
-  "updated": "2026-10-28T15:04:37+00:00",
+  "updated": "2026-10-28T16:02:12+00:00",
   "matches": [
-    {
-      "matchId": "6486790",
-      "player": "Patrick Nwadike",
-      "team": "Spartak Trnava",
-      "playerId": "1109472",
-      "track": "utland",
-      "league": "FA Cup",
-      "matchDate": "2026-11-04",
-      "kickoff": "13:00",
-      "home": "FK Čadca",
-      "away": "Spartak Trnava",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/spartak-trnava-vs-fk-cadca/5v8qzai#6486790"
-    },
     {
       "matchId": "5836915",
       "player": "Hjalmar Ekdal",
