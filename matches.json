@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28T17:00:24+00:00",
+  "updated": "2026-10-28T17:58:24+00:00",
   "matches": [
     {
       "matchId": "5836915",
@@ -870,9 +870,9 @@
       "kickoff": "18:00",
       "home": "Kristiansund",
       "away": "Aalesund",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 1,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
@@ -892,9 +892,10 @@
       "kickoff": "15:00",
       "home": "National Bank",
       "away": "Al Masry SC",
-      "scoreHome": 0,
-      "scoreAway": 0,
-      "status": "Pågår",
+      "scoreHome": 1,
+      "scoreAway": 1,
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
