@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28T19:56:02+00:00",
+  "updated": "2026-10-28T20:55:48+00:00",
   "matches": [
     {
       "matchId": "5836919",
@@ -882,28 +882,6 @@
       "matchUrl": "https://www.fotmob.com/matches/columbus-crew-vs-fc-dallas/19s2pj#5071463"
     },
     {
-      "matchId": "5107642",
-      "player": "Noel Milleskog",
-      "team": "Degerfors",
-      "playerId": "1127365",
-      "track": "lane",
-      "league": "Allsvenskan",
-      "matchDate": "2026-10-28",
-      "kickoff": "19:00",
-      "home": "Degerfors",
-      "away": "Västerås SK",
-      "scoreHome": 0,
-      "scoreAway": 0,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/vasteras-sk-vs-degerfors/1cb4z7#5107642"
-    },
-    {
       "matchId": "5996752",
       "player": "Moustafa Zeidan",
       "team": "Al Masry SC",
@@ -946,6 +924,29 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/aalesund-vs-kristiansund/2e4s7a#6284091"
+    },
+    {
+      "matchId": "5107642",
+      "player": "Noel Milleskog",
+      "team": "Degerfors",
+      "playerId": "1127365",
+      "track": "lane",
+      "league": "Allsvenskan",
+      "matchDate": "2026-10-28",
+      "home": "Degerfors",
+      "away": "Västerås SK",
+      "scoreHome": 0,
+      "scoreAway": 3,
+      "status": "Slut",
+      "rating": 6.1,
+      "mins": 21,
+      "goals": 0,
+      "ass": 0,
+      "passes": "7/7",
+      "chances": 1,
+      "matchUrl": "https://www.fotmob.com/matches/vasteras-sk-vs-degerfors/1cb4z7#5107642",
+      "shotsTarget": 0,
+      "touches": 17
     },
     {
       "matchId": "1000022602",
