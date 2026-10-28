@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28T13:08:14+00:00",
+  "updated": "2026-10-28T14:10:31+00:00",
   "matches": [
     {
       "matchId": "6486790",
@@ -914,9 +914,9 @@
       "kickoff": "15:00",
       "home": "National Bank",
       "away": "Al Masry SC",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
