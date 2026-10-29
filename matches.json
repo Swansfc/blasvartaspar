@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28T23:47:54+00:00",
+  "updated": "2026-10-29T01:09:36+00:00",
   "matches": [
     {
       "matchId": "5836919",
@@ -870,9 +870,9 @@
       "kickoff": "01:30",
       "home": "Dallas",
       "away": "Columbus",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 1,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
@@ -1773,29 +1773,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/prachuap-fc-vs-nonthaburi-united/10qvqdg9j#1000022335"
-    },
-    {
-      "matchId": "6289573",
-      "player": "Wessam Abou Ali",
-      "team": "Columbus Crew",
-      "playerId": "919036",
-      "track": "utland",
-      "league": "US Open Cup",
-      "matchDate": "2026-10-22",
-      "kickoff": "02:10",
-      "home": "Columbus",
-      "away": "St. Louis City",
-      "scoreHome": 0,
-      "scoreAway": 0,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/columbus-crew-vs-st-louis-city/d4bcbv8v#6289573"
     }
   ],
   "players": {}
