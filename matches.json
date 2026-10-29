@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29T16:05:16+00:00",
+  "updated": "2026-10-29T17:04:16+00:00",
   "matches": [
     {
       "matchId": "6028610",
@@ -760,9 +760,9 @@
       "kickoff": "17:00",
       "home": "FC Inter Turku",
       "away": "HJK",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 1,
+      "scoreAway": 2,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
@@ -783,8 +783,9 @@
       "home": "Concordia Chiajna",
       "away": "Sepsi OSK",
       "scoreHome": 1,
-      "scoreAway": 0,
-      "status": "Pågår",
+      "scoreAway": 1,
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
