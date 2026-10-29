@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29T21:54:07+00:00",
+  "updated": "2026-10-29T22:54:10+00:00",
   "matches": [
     {
       "matchId": "6028610",
@@ -684,28 +684,6 @@
       "matchUrl": "https://www.fotmob.com/matches/fredericia-vs-ab/2r99pn#5764519"
     },
     {
-      "matchId": "6428918",
-      "player": "Robbie Ure",
-      "team": "Sevilla",
-      "playerId": "1399218",
-      "track": "utland",
-      "league": "Copa del Rey",
-      "matchDate": "2026-10-29",
-      "kickoff": "21:00",
-      "home": "Sporting Hortaleza",
-      "away": "Sevilla",
-      "scoreHome": 0,
-      "scoreAway": 2,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/sevilla-vs-sporting-hortaleza/zt558l64#6428918"
-    },
-    {
       "matchId": "6321635",
       "player": "Malcolm Jeng",
       "team": "FC Groningen",
@@ -717,8 +695,9 @@
       "home": "FC Groningen",
       "away": "FC Emmen",
       "scoreHome": 0,
-      "scoreAway": 1,
-      "status": "Pågår",
+      "scoreAway": 2,
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
@@ -841,6 +820,29 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/columbus-crew-vs-fc-dallas/19s2pj#5071463"
+    },
+    {
+      "matchId": "6428918",
+      "player": "Robbie Ure",
+      "team": "Sevilla",
+      "playerId": "1399218",
+      "track": "utland",
+      "league": "Copa del Rey",
+      "matchDate": "2026-10-29",
+      "home": "Sporting Hortaleza",
+      "away": "Sevilla",
+      "scoreHome": 0,
+      "scoreAway": 3,
+      "status": "Slut",
+      "rating": 7.7,
+      "mins": 90,
+      "goals": 1,
+      "ass": 0,
+      "passes": "5/8",
+      "chances": 0,
+      "matchUrl": "https://www.fotmob.com/matches/sevilla-vs-sporting-hortaleza/zt558l64#6428918",
+      "shotsTarget": 1,
+      "touches": 22
     },
     {
       "matchId": "6298364",
