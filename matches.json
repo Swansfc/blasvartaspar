@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29T19:58:04+00:00",
+  "updated": "2026-10-29T20:56:29+00:00",
   "matches": [
     {
       "matchId": "6028610",
@@ -694,9 +694,9 @@
       "kickoff": "21:00",
       "home": "Sporting Hortaleza",
       "away": "Sevilla",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 2,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
@@ -716,9 +716,9 @@
       "kickoff": "21:00",
       "home": "FC Groningen",
       "away": "FC Emmen",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 1,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
@@ -1179,7 +1179,7 @@
       "passes": "4/6",
       "chances": 0,
       "matchUrl": "https://www.fotmob.com/matches/aalesund-vs-sarpsborg-08/2d5vpy#5104935",
-      "touches": 12
+      "touches": 11
     },
     {
       "matchId": "1000017761",
