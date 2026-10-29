@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-29T15:10:38+00:00",
+  "updated": "2026-10-29T16:05:16+00:00",
   "matches": [
+    {
+      "matchId": "6028610",
+      "player": "André Alsanati",
+      "team": "Al-Mosul",
+      "playerId": "1022484",
+      "track": "utland",
+      "league": "Stars League",
+      "matchDate": "2026-11-05",
+      "kickoff": "16:30",
+      "home": "Al-Mosul",
+      "away": "Duhok",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/duhok-vs-al-mosul/ncgb0co4#6028610"
+    },
     {
       "matchId": "5836919",
       "player": "Yousef Salech",
@@ -760,7 +782,7 @@
       "kickoff": "16:00",
       "home": "Concordia Chiajna",
       "away": "Sepsi OSK",
-      "scoreHome": 0,
+      "scoreHome": 1,
       "scoreAway": 0,
       "status": "Pågår",
       "rating": null,
@@ -996,7 +1018,7 @@
       "chances": 1,
       "matchUrl": "https://www.fotmob.com/matches/asteras-tripolis-vs-kifisia-fc/22aw12qf#6176260",
       "shotsTarget": 1,
-      "touches": 33
+      "touches": 34
     },
     {
       "matchId": "5853535",
