@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29T17:58:59+00:00",
+  "updated": "2026-10-29T19:03:02+00:00",
   "matches": [
     {
       "matchId": "6028610",
@@ -728,28 +728,6 @@
       "matchUrl": "https://www.fotmob.com/matches/fc-emmen-vs-fc-groningen/1y06xz#6321635"
     },
     {
-      "matchId": "6145889",
-      "player": "Bogdan Milovanov",
-      "team": "IF Gnistan",
-      "playerId": "900559",
-      "track": "lane",
-      "league": "Veikkausliiga Championship Group",
-      "matchDate": "2026-10-29",
-      "kickoff": "18:00",
-      "home": "KuPS",
-      "away": "IF Gnistan",
-      "scoreHome": 1,
-      "scoreAway": 0,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/kups-vs-if-gnistan/4w80m#6145889"
-    },
-    {
       "matchId": "6093736",
       "player": "Joeri de Kamps",
       "team": "Sepsi OSK",
@@ -908,6 +886,30 @@
       "chances": 1,
       "matchUrl": "https://www.fotmob.com/matches/fc-inter-turku-vs-hjk/286mm7#6145888",
       "touches": 13
+    },
+    {
+      "matchId": "6145889",
+      "player": "Bogdan Milovanov",
+      "team": "IF Gnistan",
+      "playerId": "900559",
+      "track": "lane",
+      "league": "Veikkausliiga",
+      "matchDate": "2026-10-29",
+      "home": "KuPS",
+      "away": "IF Gnistan",
+      "scoreHome": 1,
+      "scoreAway": 1,
+      "status": "Slut",
+      "rating": 7.4,
+      "mins": 90,
+      "goals": 0,
+      "ass": 0,
+      "passes": "19/29",
+      "chances": 1,
+      "matchUrl": "https://www.fotmob.com/matches/kups-vs-if-gnistan/4w80m#6145889",
+      "bigChances": 1,
+      "shotsTarget": 0,
+      "touches": 57
     },
     {
       "matchId": "5996752",
