@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29T02:06:30+00:00",
+  "updated": "2026-10-29T02:58:52+00:00",
   "matches": [
     {
       "matchId": "5836919",
@@ -871,8 +871,9 @@
       "home": "Dallas",
       "away": "Columbus",
       "scoreHome": 0,
-      "scoreAway": 1,
-      "status": "Pågår",
+      "scoreAway": 2,
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
