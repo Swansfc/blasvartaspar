@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29T17:04:16+00:00",
+  "updated": "2026-10-29T17:58:59+00:00",
   "matches": [
     {
       "matchId": "6028610",
@@ -738,30 +738,8 @@
       "kickoff": "18:00",
       "home": "KuPS",
       "away": "IF Gnistan",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/kups-vs-if-gnistan/4w80m#6145889"
-    },
-    {
-      "matchId": "6145888",
-      "player": "Herman Sjögrell",
-      "team": "FC Inter Turku",
-      "playerId": "1177212",
-      "track": "utland",
-      "league": "Veikkausliiga Championship Group",
-      "matchDate": "2026-10-29",
-      "kickoff": "17:00",
-      "home": "FC Inter Turku",
-      "away": "HJK",
       "scoreHome": 1,
-      "scoreAway": 2,
+      "scoreAway": 0,
       "status": "Pågår",
       "rating": null,
       "mins": null,
@@ -769,7 +747,7 @@
       "ass": null,
       "passes": null,
       "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/fc-inter-turku-vs-hjk/286mm7#6145888"
+      "matchUrl": "https://www.fotmob.com/matches/kups-vs-if-gnistan/4w80m#6145889"
     },
     {
       "matchId": "6093736",
@@ -908,6 +886,28 @@
       "matchUrl": "https://www.fotmob.com/matches/aarhus-fremad-vs-fc-kobenhavn/291zk9#6298364",
       "shotsTarget": 1,
       "touches": 60
+    },
+    {
+      "matchId": "6145888",
+      "player": "Herman Sjögrell",
+      "team": "FC Inter Turku",
+      "playerId": "1177212",
+      "track": "utland",
+      "league": "Veikkausliiga",
+      "matchDate": "2026-10-29",
+      "home": "FC Inter Turku",
+      "away": "HJK",
+      "scoreHome": 2,
+      "scoreAway": 4,
+      "status": "Slut",
+      "rating": 5.9,
+      "mins": 29,
+      "goals": 0,
+      "ass": 0,
+      "passes": "7/7",
+      "chances": 1,
+      "matchUrl": "https://www.fotmob.com/matches/fc-inter-turku-vs-hjk/286mm7#6145888",
+      "touches": 13
     },
     {
       "matchId": "5996752",
