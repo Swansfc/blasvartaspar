@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29T10:59:16+00:00",
+  "updated": "2026-10-29T11:56:13+00:00",
   "matches": [
     {
       "matchId": "5836919",
@@ -848,9 +848,9 @@
       "kickoff": "12:30",
       "home": "Avia Świdnik",
       "away": "Radomiak Radom",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
@@ -1751,29 +1751,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/st-pauli-vs-darmstadt/287ndj#5881701"
-    },
-    {
-      "matchId": "1000022335",
-      "player": "Jesper Nyholm",
-      "team": "Prachuap FC",
-      "playerId": "619826",
-      "track": "utland",
-      "league": "FA Cup",
-      "matchDate": "2026-10-22",
-      "kickoff": "13:00",
-      "home": "Prachuap FC",
-      "away": "Nonthaburi United",
-      "scoreHome": 3,
-      "scoreAway": 0,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/prachuap-fc-vs-nonthaburi-united/10qvqdg9j#1000022335"
     }
   ],
   "players": {}
