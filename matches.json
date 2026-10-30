@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-30T14:09:37+00:00",
+  "updated": "2026-10-30T15:06:17+00:00",
   "matches": [
     {
       "matchId": "1000022915",
@@ -1760,29 +1760,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/mamelodi-sundowns-fc-vs-wiliete-benguela/krgrgw1c#6250916"
-    },
-    {
-      "matchId": "6028590",
-      "player": "André Alsanati",
-      "team": "Al-Mosul",
-      "playerId": "1022484",
-      "track": "utland",
-      "league": "Stars League",
-      "matchDate": "2026-10-23",
-      "kickoff": "17:00",
-      "home": "Al Karkh",
-      "away": "Al-Mosul",
-      "scoreHome": 1,
-      "scoreAway": 1,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/al-karkh-vs-al-mosul/pljyq8x7#6028590"
     },
     {
       "matchId": "5881701",
