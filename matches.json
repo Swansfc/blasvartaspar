@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-30T19:56:38+00:00",
+  "updated": "2026-10-30T20:54:11+00:00",
   "matches": [
+    {
+      "matchId": "5868128",
+      "player": "Robbie Ure",
+      "team": "Sevilla",
+      "playerId": "1399218",
+      "track": "utland",
+      "league": "LaLiga",
+      "matchDate": "2026-11-06",
+      "kickoff": "21:00",
+      "home": "Sevilla",
+      "away": "Deportivo Alavés",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/sevilla-vs-deportivo-alaves/2q9que#5868128"
+    },
     {
       "matchId": "5975442",
       "player": "Kerim Mrabti",
