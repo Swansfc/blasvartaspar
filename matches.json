@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-29T23:50:01+00:00",
+  "updated": "2026-10-30T01:13:09+00:00",
   "matches": [
+    {
+      "matchId": "1000022915",
+      "player": "Tashreeq Matthews",
+      "team": "Mamelodi Sundowns FC",
+      "playerId": "982336",
+      "track": "utland",
+      "league": "League Cup",
+      "matchDate": "2026-11-06",
+      "kickoff": "01:00",
+      "home": "Mamelodi Sundowns FC",
+      "away": "Lamontville Golden Arrows",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/mamelodi-sundowns-fc-vs-lamontville-golden-arrows/2m0j794#1000022915"
+    },
     {
       "matchId": "6028610",
       "player": "André Alsanati",
