@@ -1,28 +1,6 @@
 {
-  "updated": "2026-10-30T15:06:17+00:00",
+  "updated": "2026-10-30T16:01:30+00:00",
   "matches": [
-    {
-      "matchId": "1000022915",
-      "player": "Tashreeq Matthews",
-      "team": "Mamelodi Sundowns FC",
-      "playerId": "982336",
-      "track": "utland",
-      "league": "League Cup",
-      "matchDate": "2026-11-06",
-      "kickoff": "01:00",
-      "home": "Mamelodi Sundowns FC",
-      "away": "Lamontville Golden Arrows",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/mamelodi-sundowns-fc-vs-lamontville-golden-arrows/2m0j794#1000022915"
-    },
     {
       "matchId": "6028610",
       "player": "André Alsanati",
@@ -110,6 +88,28 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/burnley-vs-queens-park-rangers/2se1wp#5836915"
+    },
+    {
+      "matchId": "1000022915",
+      "player": "Tashreeq Matthews",
+      "team": "Mamelodi Sundowns FC",
+      "playerId": "982336",
+      "track": "utland",
+      "league": "League Cup",
+      "matchDate": "2026-11-03",
+      "kickoff": "18:00",
+      "home": "Mamelodi Sundowns FC",
+      "away": "Lamontville Golden Arrows",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/mamelodi-sundowns-fc-vs-lamontville-golden-arrows/2m0j794#1000022915"
     },
     {
       "matchId": "5804026",
@@ -879,15 +879,15 @@
       "scoreHome": 0,
       "scoreAway": 3,
       "status": "Slut",
-      "rating": 6.9,
+      "rating": 7.0,
       "mins": 90,
       "goals": 0,
       "ass": 0,
-      "passes": "29/35",
+      "passes": "29/37",
       "chances": 2,
       "matchUrl": "https://www.fotmob.com/matches/aarhus-fremad-vs-fc-kobenhavn/291zk9#6298364",
       "shotsTarget": 1,
-      "touches": 60
+      "touches": 61
     },
     {
       "matchId": "6145888",
