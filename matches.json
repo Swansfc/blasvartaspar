@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-30T22:50:48+00:00",
+  "updated": "2026-10-30T23:47:06+00:00",
   "matches": [
     {
       "matchId": "5868128",
@@ -1825,27 +1825,6 @@
       "chances": 2,
       "matchUrl": "https://www.fotmob.com/matches/esbjerg-fb-vs-fredericia/2bf4kc#5764516",
       "touches": 33
-    },
-    {
-      "matchId": "5881701",
-      "player": "Marcus Mathisen",
-      "team": "St. Pauli",
-      "playerId": "639580",
-      "track": "utland",
-      "league": "2. Bundesliga",
-      "matchDate": "2026-10-23",
-      "home": "Darmstadt",
-      "away": "St. Pauli",
-      "scoreHome": 0,
-      "scoreAway": 0,
-      "status": "Slut (bänken)",
-      "rating": null,
-      "mins": 0,
-      "goals": 0,
-      "ass": 0,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/st-pauli-vs-darmstadt/287ndj#5881701"
     }
   ],
   "players": {}
