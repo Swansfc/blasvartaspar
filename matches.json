@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-31T13:00:00+00:00",
+  "updated": "2026-10-31T13:55:12+00:00",
   "matches": [
     {
       "matchId": "5804033",
@@ -804,9 +804,9 @@
       "kickoff": "13:30",
       "home": "Fredericia",
       "away": "AB",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 1,
+      "scoreAway": 1,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
