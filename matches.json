@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-31T20:48:54+00:00",
+  "updated": "2026-10-31T21:46:06+00:00",
   "matches": [
+    {
+      "matchId": "5071485",
+      "player": "Wessam Abou Ali",
+      "team": "Columbus Crew",
+      "playerId": "919036",
+      "track": "utland",
+      "league": "Major League Soccer",
+      "matchDate": "2026-11-07",
+      "kickoff": "22:00",
+      "home": "Chicago",
+      "away": "Columbus",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/columbus-crew-vs-chicago-fire-fc/19rjkm#5071485"
+    },
     {
       "matchId": "5107658",
       "player": "Noel Milleskog",
