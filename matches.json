@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-31T10:48:08+00:00",
+  "updated": "2026-10-31T11:47:34+00:00",
   "matches": [
+    {
+      "matchId": "5804033",
+      "player": "Filip Majchrowicz",
+      "team": "Radomiak Radom",
+      "playerId": "948374",
+      "track": "utland",
+      "league": "Ekstraklasa",
+      "matchDate": "2026-11-07",
+      "kickoff": "12:15",
+      "home": "Korona Kielce",
+      "away": "Radomiak Radom",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-korona-kielce/1mh0d2#5804033"
+    },
     {
       "matchId": "5868128",
       "player": "Robbie Ure",
