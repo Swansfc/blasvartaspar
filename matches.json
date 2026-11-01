@@ -1,6 +1,28 @@
 {
-  "updated": "2026-10-31T23:45:29+00:00",
+  "updated": "2026-11-01T01:21:12+00:00",
   "matches": [
+    {
+      "matchId": "5071499",
+      "player": "Leo Walta",
+      "team": "Los Angeles FC",
+      "playerId": "1276686",
+      "track": "utland",
+      "league": "Major League Soccer",
+      "matchDate": "2026-11-08",
+      "kickoff": "01:00",
+      "home": "Seattle Sounders",
+      "away": "LAFC",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/seattle-sounders-fc-vs-los-angeles-fc/6cmoo9g7#5071499"
+    },
     {
       "matchId": "5071485",
       "player": "Wessam Abou Ali",
