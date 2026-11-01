@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-01T17:44:50+00:00",
+  "updated": "2026-11-01T18:55:40+00:00",
   "matches": [
     {
       "matchId": "5105044",
@@ -838,28 +838,6 @@
       "matchUrl": "https://www.fotmob.com/matches/minnesota-united-vs-los-angeles-fc/7d7hm53j#5071482"
     },
     {
-      "matchId": "5943287",
-      "player": "Benjamin Mbunga Kimpioka",
-      "team": "Asteras Tripolis",
-      "playerId": "961305",
-      "track": "utland",
-      "league": "Super League",
-      "matchDate": "2026-11-01",
-      "kickoff": "18:00",
-      "home": "PAOK Thessaloniki",
-      "away": "Asteras Tripolis",
-      "scoreHome": 1,
-      "scoreAway": 1,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/paok-thessaloniki-vs-asteras-tripolis/1twhyw0#5943287"
-    },
-    {
       "matchId": "5781789",
       "player": "Malcolm Jeng",
       "team": "FC Groningen",
@@ -1082,6 +1060,29 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/vasalunds-if-vs-if-karlstad/8lam5xn#5127643"
+    },
+    {
+      "matchId": "5943287",
+      "player": "Benjamin Mbunga Kimpioka",
+      "team": "Asteras Tripolis",
+      "playerId": "961305",
+      "track": "utland",
+      "league": "Super League 1",
+      "matchDate": "2026-11-01",
+      "home": "PAOK Thessaloniki",
+      "away": "Asteras Tripolis",
+      "scoreHome": 2,
+      "scoreAway": 1,
+      "status": "Slut",
+      "rating": 7.8,
+      "mins": 76,
+      "goals": 1,
+      "ass": 0,
+      "passes": "12/14",
+      "chances": 2,
+      "matchUrl": "https://www.fotmob.com/matches/paok-thessaloniki-vs-asteras-tripolis/1twhyw0#5943287",
+      "shotsTarget": 1,
+      "touches": 27
     },
     {
       "matchId": "5071472",
