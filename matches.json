@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T15:05:52+00:00",
+  "updated": "2026-11-02T16:12:35+00:00",
   "matches": [
     {
       "matchId": "5105044",
@@ -782,9 +782,9 @@
       "kickoff": "17:00",
       "home": "FC Inter Turku",
       "away": "IF Gnistan",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
@@ -804,9 +804,9 @@
       "kickoff": "17:00",
       "home": "FC Inter Turku",
       "away": "IF Gnistan",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
