@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T19:06:06+00:00",
+  "updated": "2026-11-02T20:01:46+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -772,28 +772,6 @@
       "matchUrl": "https://www.fotmob.com/matches/mamelodi-sundowns-fc-vs-lamontville-golden-arrows/2m0j794#1000022915"
     },
     {
-      "matchId": "5804026",
-      "player": "Filip Majchrowicz",
-      "team": "Radomiak Radom",
-      "playerId": "948374",
-      "track": "utland",
-      "league": "Ekstraklasa",
-      "matchDate": "2026-11-02",
-      "kickoff": "18:00",
-      "home": "Radomiak Radom",
-      "away": "Śląsk Wrocław",
-      "scoreHome": 1,
-      "scoreAway": 1,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-slask-wrocaw/1knfv0#5804026"
-    },
-    {
       "matchId": "5071482",
       "player": "Leo Walta",
       "team": "Los Angeles FC",
@@ -838,6 +816,28 @@
       "bigChances": 1,
       "shotsTarget": 1,
       "touches": 37
+    },
+    {
+      "matchId": "5804026",
+      "player": "Filip Majchrowicz",
+      "team": "Radomiak Radom",
+      "playerId": "948374",
+      "track": "utland",
+      "league": "Ekstraklasa",
+      "matchDate": "2026-11-02",
+      "home": "Radomiak Radom",
+      "away": "Śląsk Wrocław",
+      "scoreHome": 3,
+      "scoreAway": 1,
+      "status": "Slut",
+      "rating": 7.3,
+      "mins": 90,
+      "goals": 0,
+      "ass": 0,
+      "passes": "11/24",
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-slask-wrocaw/1knfv0#5804026",
+      "touches": 33
     },
     {
       "matchId": "6145891",
