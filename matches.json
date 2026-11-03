@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T16:02:48+00:00",
+  "updated": "2026-11-03T17:08:14+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -782,9 +782,9 @@
       "kickoff": "18:00",
       "home": "Mamelodi Sundowns FC",
       "away": "Lamontville Golden Arrows",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
@@ -1081,7 +1081,7 @@
       "mins": 90,
       "goals": 0,
       "ass": 0,
-      "passes": "47/59",
+      "passes": "46/58",
       "chances": 7,
       "matchUrl": "https://www.fotmob.com/matches/vejle-boldklub-vs-vendsyssel-ff/2chn5c#5764524",
       "shotsTarget": 0,
