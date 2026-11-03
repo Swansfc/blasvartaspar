@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T11:04:55+00:00",
+  "updated": "2026-11-03T11:59:51+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -726,6 +726,28 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/kv-mechelen-vs-kortrijk/2brp74#5811786"
+    },
+    {
+      "matchId": "6019577",
+      "player": "Moustafa Zeidan",
+      "team": "Al Masry SC",
+      "playerId": "767777",
+      "track": "utland",
+      "league": "League Cup Grp. D",
+      "matchDate": "2026-11-04",
+      "kickoff": "19:00",
+      "home": "Al Masry SC",
+      "away": "Petrojet-Suez",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/al-masry-sc-vs-petrojet-suez/9mrgojf#6019577"
     },
     {
       "matchId": "5836915",
