@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T17:59:51+00:00",
+  "updated": "2026-11-03T19:05:13+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -782,9 +782,10 @@
       "kickoff": "18:00",
       "home": "Mamelodi Sundowns FC",
       "away": "Lamontville Golden Arrows",
-      "scoreHome": 0,
+      "scoreHome": 1,
       "scoreAway": 0,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
