@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04T22:57:27+00:00",
+  "updated": "2026-11-04T23:53:32+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -1629,50 +1629,6 @@
       "bigChances": 1,
       "shotsTarget": 0,
       "touches": 57
-    },
-    {
-      "matchId": "6284091",
-      "player": "Stefano Holmquist Vecchia",
-      "team": "Aalesund",
-      "playerId": "493159",
-      "track": "utland",
-      "league": "Norgesmesterskapet",
-      "matchDate": "2026-10-28",
-      "home": "Kristiansund",
-      "away": "Aalesund",
-      "scoreHome": 0,
-      "scoreAway": 2,
-      "status": "Slut",
-      "rating": null,
-      "mins": 59,
-      "goals": 1,
-      "ass": 0,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/aalesund-vs-kristiansund/2e4s7a#6284091"
-    },
-    {
-      "matchId": "5107642",
-      "player": "Noel Milleskog",
-      "team": "Degerfors",
-      "playerId": "1127365",
-      "track": "lane",
-      "league": "Allsvenskan",
-      "matchDate": "2026-10-28",
-      "home": "Degerfors",
-      "away": "Västerås SK",
-      "scoreHome": 0,
-      "scoreAway": 3,
-      "status": "Slut",
-      "rating": 6.1,
-      "mins": 22,
-      "goals": 0,
-      "ass": 0,
-      "passes": "7/7",
-      "chances": 1,
-      "matchUrl": "https://www.fotmob.com/matches/vasteras-sk-vs-degerfors/1cb4z7#5107642",
-      "shotsTarget": 0,
-      "touches": 17
     }
   ],
   "players": {}
