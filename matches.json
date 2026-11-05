@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05T16:16:02+00:00",
+  "updated": "2026-11-05T17:29:05+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -673,8 +673,9 @@
       "home": "Al-Mosul",
       "away": "Duhok",
       "scoreHome": 0,
-      "scoreAway": 0,
-      "status": "Pågår",
+      "scoreAway": 1,
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
@@ -1023,7 +1024,7 @@
       "chances": 0,
       "matchUrl": "https://www.fotmob.com/matches/degerfors-vs-djurgarden/27jt3d#5107645",
       "shotsTarget": 0,
-      "touches": 27
+      "touches": 29
     },
     {
       "matchId": "5881715",
