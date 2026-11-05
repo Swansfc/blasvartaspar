@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05T10:18:46+00:00",
+  "updated": "2026-11-05T12:06:46+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -1491,29 +1491,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/fc-dinamo-city-vs-kf-tirana/3br5vd#5944200"
-    },
-    {
-      "matchId": "6280509",
-      "player": "Filip Majchrowicz",
-      "team": "Radomiak Radom",
-      "playerId": "948374",
-      "track": "utland",
-      "league": "FA Cup",
-      "matchDate": "2026-10-29",
-      "kickoff": "12:30",
-      "home": "Avia Świdnik",
-      "away": "Radomiak Radom",
-      "scoreHome": 2,
-      "scoreAway": 1,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-avia-swidnik/28bypyzh#6280509"
     },
     {
       "matchId": "6428918",
