@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05T15:09:21+00:00",
+  "updated": "2026-11-05T16:16:02+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -672,9 +672,9 @@
       "kickoff": "16:30",
       "home": "Al-Mosul",
       "away": "Duhok",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
