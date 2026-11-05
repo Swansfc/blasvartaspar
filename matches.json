@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05T19:07:54+00:00",
+  "updated": "2026-11-05T20:01:57+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -1400,29 +1400,6 @@
       "chances": 0,
       "matchUrl": "https://www.fotmob.com/matches/fredericia-vs-ab/2r99pn#5764519",
       "touches": 41
-    },
-    {
-      "matchId": "6321635",
-      "player": "Malcolm Jeng",
-      "team": "FC Groningen",
-      "playerId": "1457824",
-      "track": "utland",
-      "league": "KNVB Cup",
-      "matchDate": "2026-10-29",
-      "kickoff": "21:00",
-      "home": "FC Groningen",
-      "away": "FC Emmen",
-      "scoreHome": 0,
-      "scoreAway": 2,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/fc-emmen-vs-fc-groningen/1y06xz#6321635"
     },
     {
       "matchId": "6428918",
