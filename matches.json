@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06T12:05:32+00:00",
+  "updated": "2026-11-06T13:18:44+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -837,7 +837,7 @@
       "mins": 78,
       "goals": 1,
       "ass": 0,
-      "passes": "19/24",
+      "passes": "19/23",
       "chances": 3,
       "matchUrl": "https://www.fotmob.com/matches/if-gnistan-vs-fc-inter-turku/nn7hq#6145891",
       "bigChances": 1,
@@ -883,11 +883,11 @@
       "mins": 90,
       "goals": 0,
       "ass": 0,
-      "passes": "22/29",
+      "passes": "23/28",
       "chances": 1,
       "matchUrl": "https://www.fotmob.com/matches/if-gnistan-vs-fc-inter-turku/nn7hq#6145891",
       "shotsTarget": 1,
-      "touches": 48
+      "touches": 47
     },
     {
       "matchId": "5781789",
