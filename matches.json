@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06T21:52:09+00:00",
+  "updated": "2026-11-06T22:53:46+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -581,19 +581,19 @@
       "track": "utland",
       "league": "LaLiga",
       "matchDate": "2026-11-06",
-      "kickoff": "21:00",
       "home": "Sevilla",
       "away": "Deportivo Alavés",
       "scoreHome": 0,
       "scoreAway": 0,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/sevilla-vs-deportivo-alaves/2q9que#5868128"
+      "status": "Slut",
+      "rating": 6.0,
+      "mins": 16,
+      "goals": 0,
+      "ass": 0,
+      "passes": "1/2",
+      "chances": 1,
+      "matchUrl": "https://www.fotmob.com/matches/sevilla-vs-deportivo-alaves/2q9que#5868128",
+      "touches": 4
     },
     {
       "matchId": "5975442",
