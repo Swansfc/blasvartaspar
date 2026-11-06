@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06T20:56:08+00:00",
+  "updated": "2026-11-06T21:52:09+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -584,9 +584,9 @@
       "kickoff": "21:00",
       "home": "Sevilla",
       "away": "Deportivo Alavés",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
