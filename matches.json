@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T13:02:36+00:00",
+  "updated": "2026-11-07T13:59:45+00:00",
   "matches": [
     {
       "matchId": "6486790",
@@ -581,19 +581,19 @@
       "track": "utland",
       "league": "Ekstraklasa",
       "matchDate": "2026-11-07",
-      "kickoff": "12:15",
       "home": "Korona Kielce",
       "away": "Radomiak Radom",
       "scoreHome": 0,
       "scoreAway": 2,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
+      "status": "Slut",
+      "rating": 9.5,
+      "mins": 90,
+      "goals": 0,
+      "ass": 0,
+      "passes": "28/37",
       "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-korona-kielce/1mh0d2#5804033"
+      "matchUrl": "https://www.fotmob.com/matches/radomiak-radom-vs-korona-kielce/1mh0d2#5804033",
+      "touches": 53
     },
     {
       "matchId": "5868128",
