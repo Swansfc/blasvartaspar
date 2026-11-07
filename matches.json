@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T18:56:45+00:00",
+  "updated": "2026-11-07T22:48:42+00:00",
   "matches": [
     {
       "matchId": "6486790",
@@ -364,9 +364,9 @@
       "kickoff": "22:00",
       "home": "Chicago",
       "away": "Columbus",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 3,
+      "scoreAway": 3,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
@@ -545,11 +545,11 @@
       "scoreHome": 5,
       "scoreAway": 4,
       "status": "Slut",
-      "rating": 5.3,
+      "rating": 5.4,
       "mins": 90,
       "goals": 0,
       "ass": 0,
-      "passes": "24/33",
+      "passes": "23/32",
       "chances": 0,
       "matchUrl": "https://www.fotmob.com/matches/burnley-vs-cardiff-city/29edm4#5836925",
       "shotsTarget": 0,
