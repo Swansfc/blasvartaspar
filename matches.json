@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T10:54:14+00:00",
+  "updated": "2026-11-07T11:51:34+00:00",
   "matches": [
     {
       "matchId": "5764526",
@@ -562,9 +562,9 @@
       "kickoff": "12:15",
       "home": "Korona Kielce",
       "away": "Radomiak Radom",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 0,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
