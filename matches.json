@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T17:46:24+00:00",
+  "updated": "2026-11-07T18:56:45+00:00",
   "matches": [
     {
       "matchId": "6486790",
@@ -376,28 +376,6 @@
       "matchUrl": "https://www.fotmob.com/matches/columbus-crew-vs-chicago-fire-fc/19rjkm#5071485"
     },
     {
-      "matchId": "5107658",
-      "player": "Noel Milleskog",
-      "team": "Degerfors",
-      "playerId": "1127365",
-      "track": "lane",
-      "league": "Allsvenskan",
-      "matchDate": "2026-11-07",
-      "kickoff": "17:30",
-      "home": "Degerfors",
-      "away": "GAIS",
-      "scoreHome": 0,
-      "scoreAway": 0,
-      "status": "Pågår",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/degerfors-vs-gais/1tkr5q#5107658"
-    },
-    {
       "matchId": "6543259",
       "player": "Moustafa Zeidan",
       "team": "Al Masry SC",
@@ -488,6 +466,29 @@
       "matchUrl": "https://www.fotmob.com/matches/dukla-banska-bystrica-vs-spartak-trnava/dw8ri#5772218",
       "shotsTarget": 1,
       "touches": 46
+    },
+    {
+      "matchId": "5107658",
+      "player": "Noel Milleskog",
+      "team": "Degerfors",
+      "playerId": "1127365",
+      "track": "lane",
+      "league": "Allsvenskan",
+      "matchDate": "2026-11-07",
+      "home": "Degerfors",
+      "away": "GAIS",
+      "scoreHome": 1,
+      "scoreAway": 2,
+      "status": "Slut",
+      "rating": 6.0,
+      "mins": 78,
+      "goals": 0,
+      "ass": 0,
+      "passes": "14/23",
+      "chances": 1,
+      "matchUrl": "https://www.fotmob.com/matches/degerfors-vs-gais/1tkr5q#5107658",
+      "shotsTarget": 0,
+      "touches": 41
     },
     {
       "matchId": "5975443",
@@ -1160,29 +1161,6 @@
       "matchUrl": "https://www.fotmob.com/matches/paok-thessaloniki-vs-asteras-tripolis/1twhyw0#5943287",
       "shotsTarget": 1,
       "touches": 27
-    },
-    {
-      "matchId": "5071472",
-      "player": "Wessam Abou Ali",
-      "team": "Columbus Crew",
-      "playerId": "919036",
-      "track": "utland",
-      "league": "Major League Soccer",
-      "matchDate": "2026-10-31",
-      "kickoff": "19:00",
-      "home": "Columbus",
-      "away": "DC United",
-      "scoreHome": 3,
-      "scoreAway": 0,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/columbus-crew-vs-dc-united/1bah4k#5071472"
     },
     {
       "matchId": "5836909",
