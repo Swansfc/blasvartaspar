@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08T17:06:22+00:00",
+  "updated": "2026-11-08T21:14:07+00:00",
   "matches": [
     {
       "matchId": "5888114",
@@ -78,9 +78,10 @@
       "kickoff": "17:00",
       "home": "Lillestrøm",
       "away": "Aalesund",
-      "scoreHome": 1,
+      "scoreHome": 3,
       "scoreAway": 2,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
@@ -100,9 +101,10 @@
       "kickoff": "16:45",
       "home": "AZ Alkmaar",
       "away": "FC Groningen",
-      "scoreHome": 2,
+      "scoreHome": 4,
       "scoreAway": 3,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
@@ -260,15 +262,15 @@
       "scoreHome": 2,
       "scoreAway": 1,
       "status": "Slut",
-      "rating": 7.3,
+      "rating": 7.2,
       "mins": 90,
       "goals": 0,
       "ass": 0,
-      "passes": "36/44",
+      "passes": "39/47",
       "chances": 6,
       "matchUrl": "https://www.fotmob.com/matches/seattle-sounders-fc-vs-los-angeles-fc/6cmoo9g7#5071499",
       "shotsTarget": 0,
-      "touches": 70
+      "touches": 73
     },
     {
       "matchId": "1000017779",
