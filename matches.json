@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-09T08:01:04+00:00",
+  "updated": "2026-11-09T18:51:07+00:00",
   "matches": [
     {
       "matchId": "5888114",
@@ -56,9 +56,9 @@
       "kickoff": "19:00",
       "home": "Hvidovre",
       "away": "Aarhus Fremad",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 2,
+      "scoreAway": 0,
+      "status": "Pågår",
       "rating": null,
       "mins": null,
       "goals": null,
