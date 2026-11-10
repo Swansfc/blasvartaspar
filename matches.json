@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-10T09:53:30+00:00",
+  "updated": "2026-11-10T17:52:23+00:00",
   "matches": [
     {
       "matchId": "5888114",
@@ -58,15 +58,15 @@
       "scoreHome": 3,
       "scoreAway": 0,
       "status": "Slut",
-      "rating": 7.5,
+      "rating": 7.3,
       "mins": 90,
       "goals": 0,
       "ass": 0,
-      "passes": "50/60",
+      "passes": "49/59",
       "chances": 2,
       "matchUrl": "https://www.fotmob.com/matches/aarhus-fremad-vs-hvidovre/2s8jjs#5764526",
       "shotsTarget": 1,
-      "touches": 91
+      "touches": 93
     },
     {
       "matchId": "5105044",
@@ -808,29 +808,6 @@
       "matchUrl": "https://www.fotmob.com/matches/cardiff-city-vs-west-ham-united/2e0rwz#5836919",
       "shotsTarget": 1,
       "touches": 25
-    },
-    {
-      "matchId": "1000022915",
-      "player": "Tashreeq Matthews",
-      "team": "Mamelodi Sundowns FC",
-      "playerId": "982336",
-      "track": "utland",
-      "league": "League Cup",
-      "matchDate": "2026-11-03",
-      "kickoff": "18:00",
-      "home": "Mamelodi Sundowns FC",
-      "away": "Lamontville Golden Arrows",
-      "scoreHome": 1,
-      "scoreAway": 0,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/mamelodi-sundowns-fc-vs-lamontville-golden-arrows/2m0j794#1000022915"
     },
     {
       "matchId": "5836915",
