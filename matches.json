@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11T15:14:13+00:00",
+  "updated": "2026-11-11T22:01:34+00:00",
   "matches": [
     {
       "matchId": "5888114",
@@ -514,11 +514,11 @@
       "mins": 78,
       "goals": 0,
       "ass": 0,
-      "passes": "14/23",
+      "passes": "14/24",
       "chances": 1,
       "matchUrl": "https://www.fotmob.com/matches/degerfors-vs-gais/1tkr5q#5107658",
       "shotsTarget": 0,
-      "touches": 41
+      "touches": 42
     },
     {
       "matchId": "5975443",
@@ -739,52 +739,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/duhok-vs-al-mosul/ncgb0co4#6028610"
-    },
-    {
-      "matchId": "5811786",
-      "player": "Jamie Roche",
-      "team": "Kortrijk",
-      "playerId": "1129082",
-      "track": "utland",
-      "league": "Belgian Pro League",
-      "matchDate": "2026-11-04",
-      "kickoff": "20:30",
-      "home": "Kortrijk",
-      "away": "KV Mechelen",
-      "scoreHome": 1,
-      "scoreAway": 3,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/kv-mechelen-vs-kortrijk/2brp74#5811786"
-    },
-    {
-      "matchId": "6019577",
-      "player": "Moustafa Zeidan",
-      "team": "Al Masry SC",
-      "playerId": "767777",
-      "track": "utland",
-      "league": "League Cup Grp. D",
-      "matchDate": "2026-11-04",
-      "kickoff": "19:00",
-      "home": "Al Masry SC",
-      "away": "Petrojet-Suez",
-      "scoreHome": 0,
-      "scoreAway": 0,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/al-masry-sc-vs-petrojet-suez/9mrgojf#6019577"
     },
     {
       "matchId": "5836919",
