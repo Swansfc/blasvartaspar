@@ -1,6 +1,28 @@
 {
-  "updated": "2026-11-12T11:11:45+00:00",
+  "updated": "2026-11-12T18:58:10+00:00",
   "matches": [
+    {
+      "matchId": "5764470",
+      "player": "Andreas Pyndt",
+      "team": "Fredericia",
+      "playerId": "1215994",
+      "track": "lane",
+      "league": "1. Division",
+      "matchDate": "2026-11-19",
+      "kickoff": "19:00",
+      "home": "Fredericia",
+      "away": "Hillerød",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/fredericia-vs-hillerod/2sqavn#5764470"
+    },
     {
       "matchId": "5888114",
       "player": "Jakob Tånnander",
@@ -491,11 +513,11 @@
       "mins": 90,
       "goals": 0,
       "ass": 0,
-      "passes": "26/31",
+      "passes": "25/30",
       "chances": 1,
       "matchUrl": "https://www.fotmob.com/matches/dukla-banska-bystrica-vs-spartak-trnava/dw8ri#5772218",
       "shotsTarget": 1,
-      "touches": 46
+      "touches": 45
     },
     {
       "matchId": "5107658",
@@ -716,29 +738,6 @@
       "matchUrl": "https://www.fotmob.com/matches/vejle-boldklub-vs-fredericia/2avs7l#5764527",
       "shotsTarget": 0,
       "touches": 21
-    },
-    {
-      "matchId": "6028610",
-      "player": "André Alsanati",
-      "team": "Al-Mosul",
-      "playerId": "1022484",
-      "track": "utland",
-      "league": "Stars League",
-      "matchDate": "2026-11-05",
-      "kickoff": "16:30",
-      "home": "Al-Mosul",
-      "away": "Duhok",
-      "scoreHome": 0,
-      "scoreAway": 1,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/duhok-vs-al-mosul/ncgb0co4#6028610"
     }
   ],
   "players": {}
