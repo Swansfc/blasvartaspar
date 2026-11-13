@@ -1,6 +1,28 @@
 {
-  "updated": "2026-11-13T16:26:26+00:00",
+  "updated": "2026-11-13T22:40:03+00:00",
   "matches": [
+    {
+      "matchId": "5764472",
+      "player": "Magnus Kaastrup",
+      "team": "Aarhus Fremad",
+      "playerId": "839970",
+      "track": "utland",
+      "league": "1. Division",
+      "matchDate": "2026-11-20",
+      "kickoff": "19:00",
+      "home": "Aarhus Fremad",
+      "away": "Hobro",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/aarhus-fremad-vs-hobro/2p3ffk#5764472"
+    },
     {
       "matchId": "5764470",
       "player": "Andreas Pyndt",
@@ -66,6 +88,28 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/spartak-trnava-vs-fk-cadca/5v8qzai#6486790"
+    },
+    {
+      "matchId": "6040252",
+      "player": "Tashreeq Matthews",
+      "team": "Mamelodi Sundowns FC",
+      "playerId": "982336",
+      "track": "utland",
+      "league": "Africa Cup of Nations Qualification",
+      "matchDate": "2026-11-13",
+      "home": "South Africa",
+      "away": "Kenya",
+      "scoreHome": 2,
+      "scoreAway": 2,
+      "status": "Slut",
+      "rating": null,
+      "mins": 7,
+      "goals": 0,
+      "ass": 0,
+      "passes": "2/3",
+      "chances": 0,
+      "matchUrl": "https://www.fotmob.com/matches/kenya-vs-south-africa/18bcf4#6040252",
+      "touches": 4
     },
     {
       "matchId": "5181902",
