@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T03:17:35+00:00",
+  "updated": "2026-11-14T11:30:06+00:00",
   "matches": [
     {
       "matchId": "1000023201",
@@ -66,6 +66,28 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/fredericia-vs-hillerod/2sqavn#5764470"
+    },
+    {
+      "matchId": "6622717",
+      "player": "Moustafa Zeidan",
+      "team": "Al Masry SC",
+      "playerId": "767777",
+      "track": "utland",
+      "league": "Cup",
+      "matchDate": "2026-11-19",
+      "kickoff": "16:00",
+      "home": "Al Masry SC",
+      "away": "Asyut Petroleum",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/al-masry-sc-vs-asyut-petroleum/ddfgtii#6622717"
     },
     {
       "matchId": "5888114",
