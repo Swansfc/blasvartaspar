@@ -1,6 +1,28 @@
 {
-  "updated": "2026-11-16T22:03:25+00:00",
+  "updated": "2026-11-17T04:30:51+00:00",
   "matches": [
+    {
+      "matchId": "6580840",
+      "player": "Leo Walta",
+      "team": "Los Angeles FC",
+      "playerId": "1276686",
+      "track": "utland",
+      "league": "Major League Soccer Playoff",
+      "matchDate": "2026-11-24",
+      "kickoff": "02:00",
+      "home": "St. Louis City",
+      "away": "LAFC",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/los-angeles-fc-vs-st-louis-city/xm2qlfzm#6580840"
+    },
     {
       "matchId": "5853558",
       "player": "Joeri de Kamps",
@@ -705,29 +727,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/gambia-vs-ivory-coast/1bxim5#6040240"
-    },
-    {
-      "matchId": "5764526",
-      "player": "Magnus Kaastrup",
-      "team": "Aarhus Fremad",
-      "playerId": "839970",
-      "track": "utland",
-      "league": "1. Division",
-      "matchDate": "2026-11-09",
-      "home": "Hvidovre",
-      "away": "Aarhus Fremad",
-      "scoreHome": 3,
-      "scoreAway": 0,
-      "status": "Slut",
-      "rating": 7.3,
-      "mins": 90,
-      "goals": 0,
-      "ass": 0,
-      "passes": "49/59",
-      "chances": 2,
-      "matchUrl": "https://www.fotmob.com/matches/aarhus-fremad-vs-hvidovre/2s8jjs#5764526",
-      "shotsTarget": 1,
-      "touches": 93
     }
   ],
   "players": {}
