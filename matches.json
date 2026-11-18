@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T22:54:28+00:00",
+  "updated": "2026-11-18T04:22:35+00:00",
   "matches": [
     {
       "matchId": "5836947",
@@ -618,6 +618,28 @@
       "matchUrl": "https://www.fotmob.com/matches/al-masry-sc-vs-asyut-petroleum/ddfgtii#6622717"
     },
     {
+      "matchId": "6391964",
+      "player": "Patrick Nwadike",
+      "team": "Spartak Trnava",
+      "playerId": "1109472",
+      "track": "utland",
+      "league": "Concacaf Nations League",
+      "matchDate": "2026-11-18",
+      "home": "USA",
+      "away": "Haiti",
+      "scoreHome": 2,
+      "scoreAway": 0,
+      "status": "Slut",
+      "rating": 6.3,
+      "mins": 81,
+      "goals": 0,
+      "ass": 0,
+      "passes": "15/18",
+      "chances": 0,
+      "matchUrl": "https://www.fotmob.com/matches/haiti-vs-usa/1bmdut#6391964",
+      "touches": 30
+    },
+    {
       "matchId": "6040241",
       "player": "Joseph Colley",
       "team": "KF Tirana",
@@ -723,9 +745,10 @@
       "mins": 90,
       "goals": 0,
       "ass": 0,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/haiti-vs-usa/1bmdut#6391963"
+      "passes": "15/18",
+      "chances": 0,
+      "matchUrl": "https://www.fotmob.com/matches/haiti-vs-usa/1bmdut#6391963",
+      "touches": 30
     },
     {
       "matchId": "5181846",
