@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-18T04:22:35+00:00",
+  "updated": "2026-11-18T14:00:21+00:00",
   "matches": [
     {
       "matchId": "5836947",
@@ -638,6 +638,27 @@
       "chances": 0,
       "matchUrl": "https://www.fotmob.com/matches/haiti-vs-usa/1bmdut#6391964",
       "touches": 30
+    },
+    {
+      "matchId": "6040254",
+      "player": "Tashreeq Matthews",
+      "team": "Mamelodi Sundowns FC",
+      "playerId": "982336",
+      "track": "utland",
+      "league": "Africa Cup of Nations Qualification",
+      "matchDate": "2026-11-17",
+      "home": "Kenya",
+      "away": "South Africa",
+      "scoreHome": 1,
+      "scoreAway": 2,
+      "status": "Slut (bänken)",
+      "rating": null,
+      "mins": 0,
+      "goals": 0,
+      "ass": 0,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/kenya-vs-south-africa/18bcf4#6040254"
     },
     {
       "matchId": "6040241",
