@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T13:08:52+00:00",
+  "updated": "2026-11-19T21:36:38+00:00",
   "matches": [
     {
       "matchId": "5836955",
@@ -640,28 +640,6 @@
       "matchUrl": "https://www.fotmob.com/matches/aarhus-fremad-vs-hobro/2p3ffk#5764472"
     },
     {
-      "matchId": "5764470",
-      "player": "Andreas Pyndt",
-      "team": "Fredericia",
-      "playerId": "1215994",
-      "track": "lane",
-      "league": "1. Division",
-      "matchDate": "2026-11-19",
-      "kickoff": "19:00",
-      "home": "Fredericia",
-      "away": "Hillerød",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/fredericia-vs-hillerod/2sqavn#5764470"
-    },
-    {
       "matchId": "6622717",
       "player": "Moustafa Zeidan",
       "team": "Al Masry SC",
@@ -672,9 +650,10 @@
       "kickoff": "16:00",
       "home": "Al Masry SC",
       "away": "Asyut Petroleum",
-      "scoreHome": null,
-      "scoreAway": null,
-      "status": "Kommande",
+      "scoreHome": 3,
+      "scoreAway": 0,
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
@@ -682,6 +661,28 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/al-masry-sc-vs-asyut-petroleum/ddfgtii#6622717"
+    },
+    {
+      "matchId": "5764470",
+      "player": "Andreas Pyndt",
+      "team": "Fredericia",
+      "playerId": "1215994",
+      "track": "lane",
+      "league": "1. Division",
+      "matchDate": "2026-11-19",
+      "home": "Fredericia",
+      "away": "Hillerød",
+      "scoreHome": 4,
+      "scoreAway": 1,
+      "status": "Slut",
+      "rating": 7.1,
+      "mins": 26,
+      "goals": 0,
+      "ass": 0,
+      "passes": "33/38",
+      "chances": 0,
+      "matchUrl": "https://www.fotmob.com/matches/fredericia-vs-hillerod/2sqavn#5764470",
+      "touches": 44
     },
     {
       "matchId": "6391964",
