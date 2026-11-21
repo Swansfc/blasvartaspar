@@ -1,6 +1,28 @@
 {
-  "updated": "2026-11-20T21:07:50+00:00",
+  "updated": "2026-11-21T02:16:44+00:00",
   "matches": [
+    {
+      "matchId": "6580842",
+      "player": "Wessam Abou Ali",
+      "team": "Columbus Crew",
+      "playerId": "919036",
+      "track": "utland",
+      "league": "Major League Soccer Playoff",
+      "matchDate": "2026-11-28",
+      "kickoff": "02:00",
+      "home": "Columbus",
+      "away": "Inter Miami CF",
+      "scoreHome": null,
+      "scoreAway": null,
+      "status": "Kommande",
+      "rating": null,
+      "mins": null,
+      "goals": null,
+      "ass": null,
+      "passes": null,
+      "chances": null,
+      "matchUrl": "https://www.fotmob.com/matches/columbus-crew-vs-inter-miami-cf/5ynw6fqp#6580842"
+    },
     {
       "matchId": "5811821",
       "player": "Jamie Roche",
@@ -808,14 +830,14 @@
       "scoreHome": 4,
       "scoreAway": 1,
       "status": "Slut",
-      "rating": 7.1,
+      "rating": 7.0,
       "mins": 26,
       "goals": 0,
       "ass": 0,
       "passes": "33/38",
       "chances": 0,
       "matchUrl": "https://www.fotmob.com/matches/fredericia-vs-hillerod/2sqavn#5764470",
-      "touches": 44
+      "touches": 43
     },
     {
       "matchId": "6391964",
@@ -991,27 +1013,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/sweden-vs-bosnia-herzegovina/2vabe3#5181846"
-    },
-    {
-      "matchId": "6040252",
-      "player": "Tashreeq Matthews",
-      "team": "Mamelodi Sundowns FC",
-      "playerId": "982336",
-      "track": "utland",
-      "league": "Africa Cup of Nations Qualification",
-      "matchDate": "2026-11-13",
-      "home": "South Africa",
-      "away": "Kenya",
-      "scoreHome": 2,
-      "scoreAway": 2,
-      "status": "Slut",
-      "rating": null,
-      "mins": 7,
-      "goals": 0,
-      "ass": 0,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/kenya-vs-south-africa/18bcf4#6040252"
     }
   ],
   "players": {}
