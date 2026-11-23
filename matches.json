@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-22T21:48:24+00:00",
+  "updated": "2026-11-23T02:48:06+00:00",
   "matches": [
     {
       "matchId": "5868149",
@@ -1327,30 +1327,6 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/sweden-vs-poland/2exnfc#5181848"
-    },
-    {
-      "matchId": "5181905",
-      "player": "Leo Walta",
-      "team": "Los Angeles FC",
-      "playerId": "1276686",
-      "track": "utland",
-      "league": "UEFA Nations League C",
-      "matchDate": "2026-11-15",
-      "home": "Finland",
-      "away": "San Marino",
-      "scoreHome": 7,
-      "scoreAway": 2,
-      "status": "Slut",
-      "rating": 8.4,
-      "mins": 45,
-      "goals": 1,
-      "ass": 1,
-      "passes": "21/21",
-      "chances": 1,
-      "matchUrl": "https://www.fotmob.com/matches/san-marino-vs-finland/1lkop6#5181905",
-      "bigChances": 1,
-      "shotsTarget": 1,
-      "touches": 29
     }
   ],
   "players": {}
