@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23T02:48:06+00:00",
+  "updated": "2026-11-23T12:42:34+00:00",
   "matches": [
     {
       "matchId": "5868149",
@@ -796,29 +796,6 @@
       "matchUrl": "https://www.fotmob.com/matches/fatima-vs-farense/16terk#6506257"
     },
     {
-      "matchId": "1000023201",
-      "player": "Tashreeq Matthews",
-      "team": "Mamelodi Sundowns FC",
-      "playerId": "982336",
-      "track": "utland",
-      "league": "League Cup",
-      "matchDate": "2026-11-22",
-      "kickoff": "14:30",
-      "home": "Mamelodi Sundowns FC",
-      "away": "Kaizer Chiefs",
-      "scoreHome": 1,
-      "scoreAway": 2,
-      "status": "Slut",
-      "teamOnly": true,
-      "rating": null,
-      "mins": null,
-      "goals": null,
-      "ass": null,
-      "passes": null,
-      "chances": null,
-      "matchUrl": "https://www.fotmob.com/matches/mamelodi-sundowns-fc-vs-kaizer-chiefs/ysc1o#1000023201"
-    },
-    {
       "matchId": "5944217",
       "player": "Joseph Colley",
       "team": "KF Tirana",
@@ -863,6 +840,28 @@
       "passes": null,
       "chances": null,
       "matchUrl": "https://www.fotmob.com/matches/columbus-crew-vs-inter-miami-cf/5ynw6fqp#6580837"
+    },
+    {
+      "matchId": "1000023201",
+      "player": "Tashreeq Matthews",
+      "team": "Mamelodi Sundowns FC",
+      "playerId": "982336",
+      "track": "utland",
+      "league": "League Cup",
+      "matchDate": "2026-11-22",
+      "home": "Mamelodi Sundowns FC",
+      "away": "Kaizer Chiefs",
+      "scoreHome": 1,
+      "scoreAway": 2,
+      "status": "Slut",
+      "rating": null,
+      "mins": 47,
+      "goals": 0,
+      "ass": 0,
+      "passes": "9/14",
+      "chances": 0,
+      "matchUrl": "https://www.fotmob.com/matches/mamelodi-sundowns-fc-vs-kaizer-chiefs/ysc1o#1000023201",
+      "touches": 0
     },
     {
       "matchId": "5975453",
