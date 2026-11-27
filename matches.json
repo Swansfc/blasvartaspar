@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T19:02:44+00:00",
+  "updated": "2026-11-27T02:12:46+00:00",
   "matches": [
     {
       "matchId": "1000024652",
@@ -1307,28 +1307,6 @@
       "matchUrl": "https://www.fotmob.com/matches/aarhus-fremad-vs-hobro/2p3ffk#5764472",
       "shotsTarget": 0,
       "touches": 57
-    },
-    {
-      "matchId": "5764470",
-      "player": "Andreas Pyndt",
-      "team": "Fredericia",
-      "playerId": "1215994",
-      "track": "lane",
-      "league": "1. Division",
-      "matchDate": "2026-11-19",
-      "home": "Fredericia",
-      "away": "Hillerød",
-      "scoreHome": 4,
-      "scoreAway": 1,
-      "status": "Slut",
-      "rating": 7.0,
-      "mins": 26,
-      "goals": 0,
-      "ass": 0,
-      "passes": "33/38",
-      "chances": 0,
-      "matchUrl": "https://www.fotmob.com/matches/fredericia-vs-hillerod/2sqavn#5764470",
-      "touches": 43
     }
   ],
   "players": {}
