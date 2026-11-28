@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-28T02:43:02+00:00",
+  "updated": "2026-11-28T11:47:48+00:00",
   "matches": [
     {
       "matchId": "5781826",
@@ -584,9 +584,10 @@
       "kickoff": "02:00",
       "home": "Columbus",
       "away": "Inter Miami CF",
-      "scoreHome": 0,
+      "scoreHome": 1,
       "scoreAway": 0,
-      "status": "Pågår",
+      "status": "Slut",
+      "teamOnly": true,
       "rating": null,
       "mins": null,
       "goals": null,
